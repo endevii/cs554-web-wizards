@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.form-group {
+  text-align: left;
+}
+
+.link {
+  padding: 0.4rem 0.8rem;
+	background-color: rgb(0, 0, 0);
+	border-radius: 3px;
+	color: #ffffff;
+	margin: 5px;
+}
+
+.img {
+  width: 10%;
+}
