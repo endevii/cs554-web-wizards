@@ -6,6 +6,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Account from './components/Account';
 import PrivateRoute from './components/PrivateRoute';
+import SignedInRoute from './components/SignedInRoute';
 
 function App() {
   return (
@@ -14,8 +15,12 @@ function App() {
         
           <Routes>
             <Route path='/' element={<Home />} /> 
-            <Route path='/signin' element={<SignIn />} />
-            <Route path='/signup' element={<SignUp />} />
+            <Route path='/signin' element={<SignedInRoute/>}>
+              <Route path='/signin' element={<SignIn />} />
+            </Route>
+            <Route path='/signup' element={<SignedInRoute/>}>
+              <Route path='/signup' element={<SignUp />} />
+            </Route>
             <Route path='/account' element={<PrivateRoute />}>
               <Route path='/account' element={<Account />} />
             </Route>
