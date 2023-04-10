@@ -52,3 +52,15 @@
 .img {
   width: 10%;
 }
+
+#navbar-custom {
+ background-color: #c24646;
+}
+
+#link-txt {
+  color: #f8f9fa;
+}
+
+#link-txt:hover{
+  color: #414c57;
+}
