@@ -312,6 +312,21 @@ function validAge(str) {
   return str.trim();
 }
 
+function validRating(str) {
+  if (!str) throw "ERROR: RATING IS REQUIRED";
+  if (typeof str !== "string") throw "ERROR: RATING MUST BE A STRING";
+  if (str.trim().length === 0) throw "ERROR: RATING CAN'T BE EMPTY STRING";
+
+  if (isNaN(parseInt(str.trim()))) throw "ERROR: RATING MUST BE A NUMBER";
+
+  if (parseInt(str.trim()) < 0) throw "ERROR: RATING MUST BE A POSITIVE NUMBER";
+
+  if (parseInt(str.trim()) > 5)
+    throw "ERROR: RATING MUST BE A NUMBER BETWEEN 0 AND 5";
+
+  return str.trim();
+}
+
 module.exports = {
   validObjectID,
   validString,
@@ -324,4 +339,5 @@ module.exports = {
   validDays,
   validWebsite,
   validAge,
+  validRating,
 };
