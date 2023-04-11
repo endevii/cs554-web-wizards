@@ -281,6 +281,37 @@ function validDays(str) {
   return str.trim();
 }
 
+function isValidURL(str) {
+  try {
+    new URL(str);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+function validWebsite(str) {
+  if (!str) throw "ERROR: WEBSITE IS REQUIRED";
+  if (typeof str !== "string") throw "ERROR: WEBSITE MUST BE A STRING";
+  if (str.trim().length === 0) throw "ERROR: WEBSITE CAN'T BE EMPTY STRING";
+
+  if (!isValidURL(str.trim())) throw "ERROR: WEBSITE MUST BE A VALID URL";
+
+  return str.trim();
+}
+
+function validAge(str) {
+  if (!str) throw "ERROR: AGE IS REQUIRED";
+  if (typeof str !== "string") throw "ERROR: AGE MUST BE A STRING";
+  if (str.trim().length === 0) throw "ERROR: AGE CAN'T BE EMPTY STRING";
+
+  if (isNaN(parseInt(str.trim()))) throw "ERROR: AGE MUST BE A NUMBER";
+
+  if (parseInt(str.trim()) < 0) throw "ERROR: AGE MUST BE A POSITIVE NUMBER";
+
+  return str.trim();
+}
+
 module.exports = {
   validObjectID,
   validString,
@@ -291,4 +322,6 @@ module.exports = {
   validState,
   validZipcode,
   validDays,
+  validWebsite,
+  validAge,
 };
