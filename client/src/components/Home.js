@@ -10,7 +10,7 @@ function Home() {
         <p>
           Let us make it easier for you to decide where to go in your upcoming
           trip. Take a look at our historical sites map and create your own
-          itenerary! Sign in to join chats for specific places and leave a
+          itinerary! Sign in to join chats for specific places and leave a
           review.
         </p>
       </div>
