@@ -8,7 +8,7 @@ import Account from './components/Account';
 import PrivateRoute from './components/PrivateRoute';
 import SignedInRoute from './components/SignedInRoute';
 import NavigationBar from './components/NavigationBar';
-
+import Map from './components/Map';
 function App() {
   return (
     <Router>
@@ -26,6 +26,7 @@ function App() {
             <Route path='/account' element={<PrivateRoute />}>
               <Route path='/account' element={<Account />} />
             </Route>
+            <Route path='/map' element={<Map/>}></Route>
           </Routes>
         </div>
       </Router>

@@ -42,6 +42,7 @@ const createSite = async (
       city: locCity,
       state: locState,
       zip: locZip,
+      coordinates: location.coordinates
     },
     hours: {
       day: timeDay,
