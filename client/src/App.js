@@ -7,11 +7,13 @@ import SignUp from './components/SignUp';
 import Account from './components/Account';
 import PrivateRoute from './components/PrivateRoute';
 import SignedInRoute from './components/SignedInRoute';
+import NavigationBar from './components/NavigationBar';
 
 function App() {
   return (
     <Router>
         <div className="App">
+          <NavigationBar/>
         
           <Routes>
             <Route path='/' element={<Home />} /> 
