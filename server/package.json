@@ -4,7 +4,9 @@
   "description": "Server for cs554 project.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "seed": "node tasks/seed.js"
   },
   "author": "Web Wizards",
   "license": "ISC",
