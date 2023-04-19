@@ -94,7 +94,7 @@ const getSiteById = async (id) => {
 
   const siteCollection = await sites();
 
-  const site = await siteCollection.findOne({ _id: new ObjectId(id) });
+  const site = await siteCollection.findOne({ _id: id });
   if (!site) throw "ERROR: COULD NOT FIND SITE";
 
   site._id = site._id.toString();

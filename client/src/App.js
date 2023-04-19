@@ -12,7 +12,7 @@ import NavigationBar from './components/NavigationBar';
 import SiteList from './components/SiteList';
 import Map from './components/Map';
 import Chat from './components/Chat';
-
+import IndividualSite from './components/IndividualSite';
 function App() {
   return (
     <Router>
@@ -37,6 +37,7 @@ function App() {
           />
           <Route path='/*' element={<Home />} />
           <Route path='/map' element={<Map />} />
+          <Route path='/site/:id' element={<IndividualSite />} />
         </Routes>
       </div>
     </Router>
