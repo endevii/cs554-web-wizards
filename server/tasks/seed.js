@@ -1,5 +1,6 @@
 const dbConnection = require('../config/mongoConnection');
 const mongoCollections = require('../config/mongoCollections');
+const { ObjectId } = require('mongodb');
 
 const sites = mongoCollections.sites;
 
@@ -10,6 +11,7 @@ const main = async () => {
 
     await siteCollection.insertMany([
         {
+            _id: new ObjectId().toString(),
             name: "Federal Hall",
             description: [
                 "Site where George Washington took his oath as the first president of the United States ", 
@@ -31,9 +33,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1842,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Federal_Hall_%2848126566178%29.jpg/1200px-Federal_Hall_%2848126566178%29.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Fraunces Tavern",
             description: [
                 "One of the oldest historical bars in NYC (built in 1719)",
@@ -57,9 +61,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1719,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/7a/35/5a/facciata.jpg?w=1200&h=-1&s=1'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Empire State Building",
             description: [
                 "Was once the tallest building in the world (1931 - 1970)",
@@ -81,9 +87,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1930,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://media.timeout.com/images/101705309/image.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "The Metropolitan Museum of Art",
             description: [
                 "Largest art museum in the country, founded in 1870",
@@ -106,9 +114,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1870,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://cdn.sanity.io/images/cctd4ker/production/c47d68fbeb2ac1df1c97065fc4c9576314114ac2-2100x1150.jpg?rect=539,36,1011,1074&w=3840&q=75&fit=clip&auto=format'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Trinity Church",
             description: [
                 "Opened in 1846, Gothic Revival Architecture",
@@ -130,9 +140,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1846,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://www.tclf.org/sites/default/files/thumbnails/image/NY_NewYork_TrinityChurch_byRussellLovrin_2019_001_sig.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Tenement Museum",
             description: [
                 "Thousands of immigrant families lived here from 1860 to 1980",
@@ -155,9 +167,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1988,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/5/50/97_Orchard_Street_Front.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "9/11 Memorial and Museum",
             description: [
                 "Memorial for each of the twin towers with the names of the people who died engraved into them",
@@ -180,9 +194,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 2014,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://assets.simpleviewinc.com/simpleview/image/upload/crm/newyorkstate/9-11-memorial-03-marley-white_08304459-fd51-e9bc-1df612407cbe64fb.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Bowling Green Park",
             description: [
                 "NYC’s oldest public park, once inhabited by Native American",
@@ -204,9 +220,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1733,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/d1/36/5e/bowling-green.jpg?w=1200&h=1200&s=1'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Hamilton Grange National Memorial",
             description: [
                 "Provides a history of Alexander Hamilton",
@@ -228,9 +246,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1962,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Hamilton_Grange_National_Memorial_-_Patio_%2848170423177%29.jpg/1200px-Hamilton_Grange_National_Memorial_-_Patio_%2848170423177%29.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Fort Tryon Park",
             description: [
                 "Inhabited for Native Americans for centuries before European colonization (called Chquaesgeck by the Lenape tribe, the Wiechquaesgeck), land was taken by the Dutch in 1715",
@@ -251,9 +271,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1935,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://untappedcities.com/wp-content/uploads/2014/06/NYC-Arch-Mansion-Fort-Tyron.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "New York Historical Society Museum",
             description: [
                 "Oldest museum in NYC",
@@ -275,9 +297,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1804,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://assets.simpleviewinc.com/simpleview/image/upload/crm/newyorkstate/newyorkhistoricalsociety_jonwallen_s5j4500_4d2ff372-9290-0e6e-c88713f55a019f8b.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "African Burial Ground",
             description: [
                 "Contains the remains of more than 400 African men, women, and children buried there in the late 17th and 18th centuries",
@@ -299,9 +323,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1991,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://www.nps.gov/common/uploads/stories/images/nri/20161031/articles/0EDCCBA8-1DD8-B71B-0BA41C53933CF102/0EDCCBA8-1DD8-B71B-0BA41C53933CF102.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "The American Museum of Natural History",
             description: [
                 "Founded in 1869, one of the oldest natural history museums in the world",
@@ -324,9 +350,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1869,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/images/join-and-support/join-support-redesign/plan-your-visit/plan-your-visit-revisions/amnh-plan-your-visit-dino-1024-512/2756409-2-eng-US/amnh-plan-your-visit-dino-1024-512.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Grand Central Station",
             description: [
                 "Aka Grand Central Terminal, train station in manhattan",
@@ -350,9 +378,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1854,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://www.travelandleisure.com/thmb/oLbiA4Xhiojvg5O5KF3YBGijO7E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/grand-central-TRAIN1215-8d13e5cd042943bdbaa3d400b4d0abbf.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "General Grant National Memorial",
             description: [
                 "Tomb of President Ulysses s. Grant and his Wife Julia Grant",
@@ -374,9 +404,11 @@ const main = async () => {
             borough: "Manhattan",
             founded: 1897,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://cdn.britannica.com/46/145046-050-554E30A7/General-Grant-National-Memorial-New-York-City.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "The Old Stone House",
             description: [
                 "Replica of original stone house which was a Dutch stone farmhouse that was built in 1699",
@@ -398,9 +430,11 @@ const main = async () => {
             borough: "Brooklyn",
             founded: 1935,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/Old-stone-house-brooklyn.JPG'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Green-Wood Cemetery",
             description: [
                 "National historic landmark, founded in 1838",
@@ -423,9 +457,11 @@ const main = async () => {
             borough: "Brooklyn",
             founded: 1838,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Green-Wood_Cemetery_gate_%2853784p%29_cropped.jpg/1200px-Green-Wood_Cemetery_gate_%2853784p%29_cropped.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Fort Greene Park",
             description: [
                 "Prison Ship Martyrs Monument, monument built in honor of 12,000 men and women captured and held captive on a ship by the British after the Battle of Brooklyn",
@@ -446,9 +482,11 @@ const main = async () => {
             borough: "Brooklyn",
             founded: 1850,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/Detroit_Photographic_Company_%280684%29.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Brooklyn Bridge",
             description: [
                 "Historic suspension bridge connecting Manhattan and Brooklyn, built in 1883",
@@ -472,9 +510,11 @@ const main = async () => {
             borough: "Brooklyn",
             founded: 1883,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Brooklyn_Bridge_Manhattan.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "John Paul Jones Park",
             description: [
                 "Names after John Paul Jones who was a leader in the American Revolutionary War and became known as “the father of the navy”",
@@ -496,9 +536,11 @@ const main = async () => {
             borough: "Brooklyn",
             founded: 1895,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://www.nycgovparks.org/photo_gallery/full_size/19050.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Barkaloo Cemetery",
             description: [
                 "Brooklyn's smallest cemetery",
@@ -520,9 +562,11 @@ const main = async () => {
             borough: "Brooklyn",
             founded: 1895,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://img.atlasobscura.com/sJ56hwlJrcrpWgo3yNswRAR4aSi71eNVAGpKYphIhQ8/rt:fit/w:600/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy85ODQ4/OTEyZDkwMmY0YTdj/OGFfSU1HXzc1MTku/SlBH.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Fort Wadsworth",
             description: [
                 "One of the oldest military forts in the U.S.",
@@ -544,9 +588,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1663,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/e/e3/Fort_Wadsworth_01.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "The Conference House",
             description: [
                 "Built around 1680",
@@ -568,9 +614,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1680,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Conference-house-staten-island.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "The Alice Austen House and Museum",
             description: [
                 "National designated site of LGBTQ+ history",
@@ -593,9 +641,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1690,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://i0.wp.com/aliceausten.org/wp-content/uploads/2019/03/aliceaustenhouse_flotowarner_01__x_large.jpg?fit=1200%2C800&ssl=1&w=640'
         },
         {
+            _id: new ObjectId().toString(),
             name: "National Lighthouse Museum",
             description: [
                 "In 1799, the current lighthouse museum was the location of theNew York Marine Hospital, aka The Quarantine, a hospital which was largely used for immigrant borne infectious diseases like smallpox, cholera, typhus, and yellow fever, mob burnt the hospital down in the 1850’s ",
@@ -616,9 +666,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1862,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/11/ef/8a/this-is-it.jpg?w=1200&h=-1&s=1'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Staten Island Borough Hall",
             description: [
                 "Building finished in 1906, designated New York City landmark",
@@ -639,9 +691,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1906,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/SI_Boro_Hall_jeh.JPG'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Historic Richmond Town ",
             description: [
                 "Collection of historic houses, artifacts, and photographs from different time periods",
@@ -664,9 +718,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1945,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://untappedcities.com/wp-content/uploads/2021/05/Historic-Richmond-Town-General-Store-Staten-Island-NYC.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Jacques Marchais Museum of Tibetan Art",
             description: [
                 "Built in 1945, has a Jacques Marchais large collection of Tibetan Art",
@@ -688,9 +744,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1945,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://static.wixstatic.com/media/0180b1_12afec3704154de5909d6381df6d42f3~mv2.jpg/v1/fill/w_1960,h_736,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/0180b1_12afec3704154de5909d6381df6d42f3~mv2.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Staten Island Museum",
             description: [
                 "14 naturalists combined their collections in 1881 to create the start of the museum",
@@ -713,9 +771,11 @@ const main = async () => {
             borough: "Staten Island",
             founded: 1908,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://www.statenislandmuseum.org/wp-content/uploads/2020/06/699.jpg'
         },
         {
+            _id: new ObjectId().toString(),
             name: "Postcards Memorial",
             description: [
                 "Sculpture built in 2004 as a memorial to September 11, 2001",
@@ -733,11 +793,12 @@ const main = async () => {
                 days: "Mon-Sun",
                 time: "12AM-12AM"
             },
-            website: "https://www.911memorial.org/connect/blog/sharing-memorials-registry-postcards-2004-staten-island-ny",
+            website: "",
             borough: "Staten Island",
             founded: 2004,
             rating: 0,
-            reviews: []
+            reviews: [],
+            image: 'https://www.ny1.com/content/dam/News/2020/09/11/091120_NYC_Staten_Island_Postcards_Memorial_III.jpeg'
         },
     ]);
 
