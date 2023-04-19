@@ -145,3 +145,31 @@
   margin: 15px;
   top: 80%;
 }
+
+.map-container {
+  height: 400px;
+}
+
+.marker {
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.map-popup h1{
+ color: #c24646;
+ font-size: 14px;
+ margin-top: 15px;
+}
+
+.map-container {
+  width: 65%;
+}
+.map{
+  display: flex;
+  justify-content: center;
+  height: 80%;
+  margin-top: 20px;
+}

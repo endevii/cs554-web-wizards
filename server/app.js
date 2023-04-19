@@ -20,5 +20,5 @@ app.use(
 configRoutes(app);
 
 app.listen(3001, function () {
-  logger.info("Server Started on http://localhost:3001");
+  console.log("Server Started on http://localhost:3001");
 });
