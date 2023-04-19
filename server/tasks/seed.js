@@ -13,7 +13,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Federal Hall",
-            descrpition: [
+            description: [
                 "Site where George Washington took his oath as the first president of the United States ", 
                 "Location of the first congress and supreme court ",
                 "Includes multiple exhibits and visitors can take walking tours found on their website"
@@ -38,7 +38,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Fraunces Tavern",
-            descrpition: [
+            description: [
                 "One of the oldest historical bars in NYC (built in 1719)",
                 "Was once a popular place for founding fathers to visit",
                 "George Washington gave a farewell speech to some of his officers in the tavern",
@@ -65,7 +65,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Empire State Building",
-            descrpition: [
+            description: [
                 "Was once the tallest building in the world (1931 - 1970)",
                 "Observation deck to see views of the city ",
                 "Fee for each of the two decks"
@@ -90,7 +90,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "The Metropolitan Museum of Art",
-            descrpition: [
+            description: [
                 "Largest art museum in the country, founded in 1870",
                 "Permanent collection contains over 2 million pieces of art",
                 "Famous pieces: “Washington Crossing the Delaware” by Emanuel Leutze, “Self Portrait with a Straw Hat” by Vincent van Gogh, “Bridge Over a Pond of Water Lilies” by Clause Monet, and more",
@@ -116,7 +116,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Trinity Church",
-            descrpition: [
+            description: [
                 "Opened in 1846, Gothic Revival Architecture",
                 "Burial place of multiple historical figures, including Alexander Hamilton, Eliza Hamilton, and Angelica Schueler ",
                 "Graveyard has the oldest carved gravestone in NYC (a child names Richard Churcher who dies in 1681)"
@@ -141,7 +141,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Tenement Museum",
-            descrpition: [
+            description: [
                 "Thousands of immigrant families lived here from 1860 to 1980",
                 "Abandoned for over 50 years but has since been restored",
                 "Offers guided tours of the buildings and walking tours of the neighborhood",
@@ -167,7 +167,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "9/11 Memorial and Museum",
-            descrpition: [
+            description: [
                 "Memorial for each of the twin towers with the names of the people who died engraved into them",
                 "Photos, videos, and artifacts from the buildings, exhibits on what happened",
                 "Stories from survivors as well as tributes to victims",
@@ -193,7 +193,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Bowling Green Park",
-            descrpition: [
+            description: [
                 "NYC’s oldest public park, once inhabited by Native American",
                 "Site of the sale of Manhattan to Peter Minuit, 3rd Director of the Dutch North American Colony",
                 "Once had a statue of King George III which was toppled on July 9, 1776 after the first public reading of the Declaration of Independence (statue was later melted down and made into bullets for the revolutionary war)."
@@ -218,7 +218,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Hamilton Grange National Memorial",
-            descrpition: [
+            description: [
                 "Provides a history of Alexander Hamilton",
                 "Hamilton’s house, which was completed in 1802 and names “The Grange” (only his house for two years)",
                 "Designed by architect John McComb Jr and was meant to be a federal style country home"
@@ -243,7 +243,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Fort Tryon Park",
-            descrpition: [
+            description: [
                 "Inhabited for Native Americans for centuries before European colonization (called Chquaesgeck by the Lenape tribe, the Wiechquaesgeck), land was taken by the Dutch in 1715",
                 "Known as Mount Washington during the revolutionary war, battle site during the war, part of the Battle of Fort Washington"
             ],
@@ -267,7 +267,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "New York Historical Society Museum",
-            descrpition: [
+            description: [
                 "Oldest museum in NYC",
                 "Lots of artifacts, including paintings of George Washington and his inauguration chair",
                 "Rotating exhibits focusing on anything from the revolution to the civil war to Native American history"
@@ -292,7 +292,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "African Burial Ground",
-            descrpition: [
+            description: [
                 "Contains the remains of more than 400 African men, women, and children buried there in the late 17th and 18th centuries",
                 "Largest and oldest excavated burial ground in North America for both free and enslaved Africans",
                 "National Historic Landmark"
@@ -317,7 +317,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "The American Museum of Natural History",
-            descrpition: [
+            description: [
                 "Founded in 1869, one of the oldest natural history museums in the world",
                 "Permanent exhibits covering from anthropology, biology, geology, and paleontology",
                 "Over 33 million specimens and artifacts",
@@ -343,7 +343,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Grand Central Station",
-            descrpition: [
+            description: [
                 "Aka Grand Central Terminal, train station in manhattan",
                 "Dates back to mid 19th century, train depot built in 1854 by New York and Harlem Railroad",
                 "Train depot replaced by Grand Central Depot in 1871",
@@ -370,7 +370,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "General Grant national Memorial",
-            descrpition: [
+            description: [
                 "Tomb of President Ulysses s. Grant and his Wife Julia Grant",
                 "Largest mausoleum in North America",
                 "Grant was the commanding general of the Union Army during the civil war"
@@ -395,7 +395,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "The Old Stone House",
-            descrpition: [
+            description: [
                 "Replica of original stone house which was a Dutch stone farmhouse that was built in 1699",
                 "Site of the 1776 Battle of Brooklyn, the first military engagement after the Declaration of Independence",
                 "Displays clothes, uniforms, and ammunition from the revolutionary period"
@@ -420,7 +420,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Green-Wood Cemetery",
-            descrpition: [
+            description: [
                 "National historic landmark, founded in 1838",
                 "Revolutionary war historic site, the Battle of Long Island was fought on same land",
                 "Also a designated site on the Civil War Discovery Trail",
@@ -446,7 +446,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Fort Greene Park",
-            descrpition: [
+            description: [
                 "Prison Ship Martyrs Monument, monument built in honor of 12,000 men and women captured and held captive on a ship by the British after the Battle of Brooklyn",
                 "First designated park by the City of Brooklyn in 1847"
             ],
@@ -470,7 +470,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Brooklyn Bridge",
-            descrpition: [
+            description: [
                 "Historic suspension bridge connecting Manhattan and Brooklyn, built in 1883",
                 "First suspension bridge to use steel for is cable wire",
                 "Longest suspension bridge in the world when it was built (1,595 feet)",
@@ -497,7 +497,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "John Paul Jones Park",
-            descrpition: [
+            description: [
                 "Names after John Paul Jones who was a leader in the American Revolutionary War and became known as “the father of the navy”",
                 "Launching point for the british to attack during Revolutionary War",
                 "Park has a Civil War Memorial, Parrott cannon, Revolutionary War Memorial, the Dover Patrol Naval War Memorial, and the 70 foot tall flagpole which was once on a Navy destroyer "
@@ -522,7 +522,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Barkaloo Cemetery",
-            descrpition: [
+            description: [
                 "Brooklyn's smallest cemetery",
                 "Resting place of two soldiers from the Revolutionary War, Simon Cortelyou and Harmans Barkaloo",
                 "Cemetery dates to 1725"
@@ -547,7 +547,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Fort Wadsworth",
-            descrpition: [
+            description: [
                 "One of the oldest military forts in the U.S.",
                 "Never part of a battle but capture by British during revolutionary war",
                 "Dates back to Dutch colonization, built in 1663 "
@@ -572,7 +572,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "The Conference House",
-            descrpition: [
+            description: [
                 "Built around 1680",
                 "Started as a wheat farm",
                 "Site of the peace conference on September 11, 1776 which attempted to end the revolutionary war"
@@ -597,7 +597,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "The Alice Austen House and Museum",
-            descrpition: [
+            description: [
                 "National designated site of LGBTQ+ history",
                 "Alice Austen’s house, she was a photographer and made major contributions to photographing the history of New york, including photographs of immigrant populations, Victorian women, nature, and architecture",
                 "Austen, born in 1866 and passed away in 1952, lived in the home with her partner Gertrude Tate for 30 years",
@@ -623,7 +623,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "National Lighthouse Museum",
-            descrpition: [
+            description: [
                 "In 1799, the current lighthouse museum was the location of theNew York Marine Hospital, aka The Quarantine, a hospital which was largely used for immigrant borne infectious diseases like smallpox, cholera, typhus, and yellow fever, mob burnt the hospital down in the 1850’s ",
                 "Staten Island Lighthouse Depot built in the same spot in 1862, then became United States Lighthouse Sevice’s (USLHS) General Depot, headquarters and distribution center for all lighthouses in the USLHS from 1864 to 1939"
             ],
@@ -647,7 +647,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Staten Island Borough Hall",
-            descrpition: [
+            description: [
                 "Building finished in 1906, designated New York City landmark",
                 "Inside people can see murals painted in 1940 which illustrate historic events in Staten Island"
             ],
@@ -671,7 +671,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Historic Richmond Town ",
-            descrpition: [
+            description: [
                 "Collection of historic houses, artifacts, and photographs from different time periods",
                 "More than 100,000 artifacts, some dating back to the 17th century",
                 "Has the oldest known surviving schoolhouse in America",
@@ -697,7 +697,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Jacques Marchais Museum of Tibetan Art",
-            descrpition: [
+            description: [
                 "Built in 1945, has a Jacques Marchais large collection of Tibetan Art",
                 "Art primarily from Tibet, Mongolia, and northern China dating back to the fifteenth century",
                 "First example of Himalayan architecture in the United States"
@@ -722,7 +722,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Staten Island Museum",
-            descrpition: [
+            description: [
                 "14 naturalists combined their collections in 1881 to create the start of the museum",
                 "Public museum created in 1908",
                 "Contains specimens, photos, field notes, and  records of changing biology in the region, all spanning more than 150 years",
@@ -748,7 +748,7 @@ const main = async () => {
         {
             _id: new ObjectId().toString(),
             name: "Postcards Memorial",
-            descrpition: [
+            description: [
                 "Sculpture built in 2004 as a memorial to September 11, 2001",
                 "Honors the 263 Staten Island residents who dies in the terrorist attack",
                 "Meant to be two enlarged postcards “symbolizing personal communications between loved ones”"
