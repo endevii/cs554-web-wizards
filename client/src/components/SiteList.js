@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function SiteList() {
     const [allSites, setAllSites] = useState([]);
@@ -43,6 +44,7 @@ function SiteList() {
                 <br/>
                 {allSites.map((site) => {
                     return (
+                        <Link to={'/site/' + site._id}>
                         <div className="card" key={site._id}>
                             {site.image
                                 ?<img src={site.image} className='card-img-top' alt='location' />
@@ -53,6 +55,7 @@ function SiteList() {
                                 <p>Address: {site.location.address}, {site.location.city}, {site.location.state}, {site.location.zipCode}</p>
                             </div>
                         </div>
+                        </Link>
                     )
                 })}
             </div>
