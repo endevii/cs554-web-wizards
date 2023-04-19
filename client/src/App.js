@@ -10,6 +10,7 @@ import SignedInRoute from './components/SignedInRoute';
 import NavigationBar from './components/NavigationBar';
 import SiteList from './components/SiteList';
 import Map from './components/Map';
+import IndividualSite from './components/IndividualSite';
 function App() {
   return (
     <Router>
@@ -29,7 +30,8 @@ function App() {
           </Route>
           <Route path='/sites' element={<SiteList />} />
           <Route path='/*' element={<Home />} />
-            <Route path='/map' element={<Map/>}></Route>
+          <Route path='/map' element={<Map/>}></Route>
+          <Route path='/site/:id' element={<IndividualSite />} />
         </Routes>
       </div>
     </Router>
