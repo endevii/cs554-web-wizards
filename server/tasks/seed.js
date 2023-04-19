@@ -22,7 +22,8 @@ const main = async () => {
                 address: "26 Wall St",
                 city: "New York",
                 state: "New York",
-                zipCode: "10005"
+                zipCode: "10005",
+                coordinates: [-74.0102, 40.7074]
             },
             hours: {
                 days: "Mon-Fri",
@@ -49,7 +50,8 @@ const main = async () => {
                 address: "​54 Pearl Street",
                 city: "New York",
                 state: "New York",
-                zipCode: "10004"
+                zipCode: "10004",
+                coordinates: [-74.011677, 40.703653]
             },
             hours: {
                 days: "Mon-Sun",
@@ -74,7 +76,8 @@ const main = async () => {
                 address: "​​20 W 34th St",
                 city: "New York",
                 state: "New York",
-                zipCode: "10001"
+                zipCode: "10001",
+                coordinates: [-73.9857, 40.7484]
             },
             hours: {
                 days: "Mon-Sun",
@@ -100,7 +103,8 @@ const main = async () => {
                 address: "1000 5th Ave",
                 city: "New York",
                 state: "New York",
-                zipCode: "10028"
+                zipCode: "10028",
+                coordinates: [-73.9632, 40.7794]
             },
             hours: {
                 days: "Thur-Tues",
@@ -125,7 +129,8 @@ const main = async () => {
                 address: "89 Broadway",
                 city: "New York",
                 state: "New York",
-                zipCode: "10006"
+                zipCode: "10006",
+                coordinates: [-74.0116, 40.7081]
             },
             hours: {
                 days: "Mon-Sun",
@@ -151,7 +156,8 @@ const main = async () => {
                 address: "103 Orchard St",
                 city: "New York",
                 state: "New York",
-                zipCode: "10002"
+                zipCode: "10002",
+                coordinates: [-73.990, 40.7188]
             },
             hours: {
                 days: "Mon-Sun",
@@ -177,7 +183,8 @@ const main = async () => {
                 address: "180 Greenwich St",
                 city: "New York",
                 state: "New York",
-                zipCode: "10072"
+                zipCode: "10072",
+                coordinates: [-74.0124, 40.7115]
             },
             hours: {
                 days: "Mon-Sun",
@@ -202,7 +209,8 @@ const main = async () => {
                 address: "Southern end of broadway",
                 city: "New York",
                 state: "New York",
-                zipCode: "10004"
+                zipCode: "10004",
+                coordinates: [-74.013611, 40.705]
             },
             hours: {
                 days: "Mon-Sun",
@@ -227,7 +235,8 @@ const main = async () => {
                 address: "414 W 141st St",
                 city: "New York",
                 state: "New York",
-                zipCode: "10031"
+                zipCode: "10031",
+                coordinates: [-73.947222, 40.821389]
             },
             hours: {
                 days: "Fri-Sun",
@@ -251,7 +260,8 @@ const main = async () => {
                 address: "Riverside Dr To Broadway",
                 city: "New York",
                 state: "New York",
-                zipCode: "10040"
+                zipCode: "10040",
+                coordinates: [-73.9313, 40.8626]
             },
             hours: {
                 days: "Mon-Sun",
@@ -276,7 +286,8 @@ const main = async () => {
                 address: "170 Central Park West",
                 city: "New York",
                 state: "New York",
-                zipCode: "10024"
+                zipCode: "10024",
+                coordinates: [-73.9739, 40.7793]
             },
             hours: {
                 days: "Tue-Sun",
@@ -301,7 +312,8 @@ const main = async () => {
                 address: "290 Broadway",
                 city: "New York",
                 state: "New York",
-                zipCode: "10007"
+                zipCode: "10007",
+                coordinates: [-74.0045, 40.7145]
             },
             hours: {
                 days: "Tue-Sat",
@@ -327,7 +339,8 @@ const main = async () => {
                 address: "200 Central Park West",
                 city: "New York",
                 state: "New York",
-                zipCode: "10024"
+                zipCode: "10024",
+                coordinates: [-73.9740, 40.7813]
             },
             hours: {
                 days: "Mon-Sun",
@@ -354,7 +367,8 @@ const main = async () => {
                 address: "89 E 42nd St",
                 city: "New York",
                 state: "New York",
-                zipCode: "10017"
+                zipCode: "10017",
+                coordinates: [-73.9772, 40.7527]
             },
             hours: {
                 days: "Mon-Sun",
@@ -369,7 +383,7 @@ const main = async () => {
         },
         {
             _id: new ObjectId().toString(),
-            name: "General Grant national Memorial",
+            name: "General Grant National Memorial",
             description: [
                 "Tomb of President Ulysses s. Grant and his Wife Julia Grant",
                 "Largest mausoleum in North America",
@@ -379,7 +393,8 @@ const main = async () => {
                 address: "W 122nd St &, Riverside Dr",
                 city: "New York",
                 state: "New York",
-                zipCode: "10027"
+                zipCode: "10027",
+                coordinates: [-73.963, 40.8134]
             },
             hours: {
                 days: "Wed-Sun",
@@ -404,7 +419,8 @@ const main = async () => {
                 address: "336 3rd St.",
                 city: "Brooklyn",
                 state: "New York",
-                zipCode: "11215"
+                zipCode: "11215",
+                coordinates: [-73.9846, 40.6730]
             },
             hours: {
                 days: "Fri-Sun",
@@ -430,7 +446,8 @@ const main = async () => {
                 address: "500 25th St",
                 city: "Brooklyn",
                 state: "New York",
-                zipCode: "11232"
+                zipCode: "11232",
+                coordinates: [-73.9941, 40.6580]
             },
             hours: {
                 days: "Mon-Sun",
@@ -454,7 +471,8 @@ const main = async () => {
                 address: "Dekalb Avenue &, S Portland Ave",
                 city: "Brooklyn",
                 state: "New York",
-                zipCode: "11205"
+                zipCode: "11205",
+                coordinates: [-73.9752, 40.6914]
             },
             hours: {
                 days: "Mon-Sun",
@@ -481,7 +499,8 @@ const main = async () => {
                 address: "Between manhattan and brooklyn",
                 city: "Brooklyn",
                 state: "New York",
-                zipCode: "10038"
+                zipCode: "10038",
+                coordinates: [-73.9969, 40.7061]
             },
             hours: {
                 days: "Mon-Sun",
@@ -506,7 +525,8 @@ const main = async () => {
                 address: "Shore Parkway 101st Street",
                 city: "Brooklyn",
                 state: "New York",
-                zipCode: "11209"
+                zipCode: "11209",
+                coordinates: [-74.0341, 40.6108]
             },
             hours: {
                 days: "Mon-Sun",
@@ -531,7 +551,8 @@ const main = async () => {
                 address: "34 MacKay Pl",
                 city: "Brooklyn",
                 state: "New York",
-                zipCode: "11209"
+                zipCode: "11209",
+                coordinates: [-74.0346, 40.6368]
             },
             hours: {
                 days: "Mon-Sun",
@@ -556,7 +577,8 @@ const main = async () => {
                 address: "120 New York Ave.",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "11209"
+                zipCode: "11209",
+                coordinates: [-74.0567, 40.6050]
             },
             hours: {
                 days: "Mon-Sun",
@@ -581,7 +603,8 @@ const main = async () => {
                 address: "7455 Hylan Blvd",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10307"
+                zipCode: "10307",
+                coordinates: [-74.2533, 40.5031]
             },
             hours: {
                 days: "Sat-Sun",
@@ -607,7 +630,8 @@ const main = async () => {
                 address: "2 Hylan Blvd",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10305"
+                zipCode: "10305",
+                coordinates: [-74.063611, 40.614917]
             },
             hours: {
                 days: "Tue-Thu",
@@ -631,7 +655,8 @@ const main = async () => {
                 address: "200 The Promenade at Lighthouse Point",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10301"
+                zipCode: "10301",
+                coordinates: [-74.0735, 40.6407]
             },
             hours: {
                 days: "Wed-Sun",
@@ -655,7 +680,8 @@ const main = async () => {
                 address: "10 Richmond Terrace",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10301"
+                zipCode: "10301",
+                coordinates: [-74.0761, 40.6424]
             },
             hours: {
                 days: "Mon-Fri",
@@ -681,7 +707,8 @@ const main = async () => {
                 address: "441 Clarke Ave",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10306"
+                zipCode: "10306",
+                coordinates: [-74.1456, 40.5709]
             },
             hours: {
                 days: "Thur-Sun",
@@ -706,7 +733,8 @@ const main = async () => {
                 address: "338 Lighthouse Ave,",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10306"
+                zipCode: "10306",
+                coordinates: [-74.1381, 40.5763]
             },
             hours: {
                 days: "Wed-Sun",
@@ -732,7 +760,8 @@ const main = async () => {
                 address: "1000 Richmond Terrace",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10301"
+                zipCode: "10301",
+                coordinates: [-74.1028, 40.6445]
             },
             hours: {
                 days: "Wed-Sun",
@@ -757,7 +786,8 @@ const main = async () => {
                 address: "Bank St",
                 city: "Staten Island",
                 state: "New York",
-                zipCode: "10301"
+                zipCode: "10301",
+                coordinates: [-74.0765, 40.6468]
             },
             hours: {
                 days: "Mon-Sun",

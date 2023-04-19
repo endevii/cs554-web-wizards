@@ -20,7 +20,7 @@ function NavigationBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#" id="link-txt">
+              <Link className="nav-link" to="/map" id="link-txt">
                 Map
               </Link>
             </li>

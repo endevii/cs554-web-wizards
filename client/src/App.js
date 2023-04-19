@@ -9,7 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 import SignedInRoute from './components/SignedInRoute';
 import NavigationBar from './components/NavigationBar';
 import SiteList from './components/SiteList';
-
+import Map from './components/Map';
 function App() {
   return (
     <Router>
@@ -29,6 +29,7 @@ function App() {
           </Route>
           <Route path='/sites' element={<SiteList />} />
           <Route path='/*' element={<Home />} />
+            <Route path='/map' element={<Map/>}></Route>
         </Routes>
       </div>
     </Router>
