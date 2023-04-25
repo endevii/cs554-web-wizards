@@ -110,6 +110,34 @@ const getSitesByLocation = async (location) => {};
 
 const getSitesByHours = async (hours) => {};
 
+const sortSitesByAge = async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>a.founded - b.founded)
+}
+
+const sortSitesByBorough = async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>a.borough - b.borough)
+}
+const sortSitesByRatingHighToLow = async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>b.rating - a.rating)
+}
+const sortSitesByRatingLowToHigh= async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>a.rating - b.rating)
+}
+const searchSites = async(searchTerm) => {
+  const allSites = await getAllSites();
+  let filteredSites = [];
+  for(let site of allSites){
+    if(site.name.toLowerCase().includes(searchTerm.toLowerCase())){
+      filteredSites.push(site)
+    }
+  }
+  return filteredSites;
+}
+
 const updateSite = async (id, updatedSite) => {
   if (!id) throw "ERROR: ID IS REQUIRED";
 
@@ -325,4 +353,9 @@ module.exports = {
   getSiteById,
   updateSite,
   deleteSite,
+  sortSitesByAge,
+  sortSitesByBorough,
+  sortSitesByRatingHighToLow,
+  sortSitesByRatingLowToHigh,
+  searchSites
 };
