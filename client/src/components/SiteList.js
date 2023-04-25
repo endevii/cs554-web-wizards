@@ -10,6 +10,7 @@ function SiteList() {
     const [searchData, setSearchData] = useState([]);
     const [sortedData, setSortedData] = useState([])
     const [loading, setLoading] = useState(true)
+    const [clearInput, setClearInput] = useState(false)
     let card = null;
     const searchValue = async (value) => {
         setSearchTerm(value);
@@ -79,11 +80,19 @@ function SiteList() {
             });
             setSortedData(sites);
         };
-
+        setClearInput(true);
+        setSearchTerm("")
+        setSearchData([])
         if(sortBy){
             getSortedSites();
         }else{
             setSortedData([])
+        }
+    }, [sortBy])
+
+    useEffect(()=>{
+        if(clearInput){
+            document.getElementById('searchForm').reset();
         }
     }, [sortBy])
 
