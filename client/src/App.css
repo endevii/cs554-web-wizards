@@ -146,6 +146,80 @@
   top: 80%;
 }
 
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 50%;
+  margin: 0 auto 20px;
+}
+
+h1 {
+  font-size: xx-large;
+}
+
+h2 {
+  font-size: x-large;
+}
+
+li {
+  font-size: large;
+}
+
+p {
+  font-size: medium;
+}
+
+.wrapper {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid-item {
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+
+.title {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+  text-align: left;
+  font-size: xxx-large;
+}
+
+.image {
+  grid-column: 1 / span 3;
+  grid-row: 2 / span 6;
+}
+
+.reviews {
+  grid-column: 1 / span 3;
+  grid-row: 8 / span 3;
+}
+
+.chat {
+  grid-column: 4 / span 2;
+  grid-row: 8 / span 3;
+}
+
+.address {
+  grid-column: 4 / span 2;
+  grid-row: 2 / span 1;
+  text-align: left;
+}
+
+.facts {
+  text-align: left;
+  grid-column: 4 / span 2;
+  grid-row: 3 / span 2;
+}
+
+.description {
+  text-align: left;
+  grid-column: 4 / span 2;
+  grid-row: 5 / span 3;
+}
+
 .map-container {
   height: 400px;
 }
@@ -172,4 +246,14 @@
   justify-content: center;
   height: 80%;
   margin-top: 20px;
+}
+
+.button {
+  padding: 0.4rem 0.8rem;
+	background-color: #c24646;
+	border-radius: 3px;
+	color: #ffff;
+	text-decoration: none !important;
+	margin: 5px;
+  font-size: large;
 }

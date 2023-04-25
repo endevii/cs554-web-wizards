@@ -9,8 +9,13 @@ function NavigationBar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+              <Link className="nav-link" to="/" id="link-txt">
+                Home
+              </Link>
+            </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#" id="link-txt">
+              <Link className="nav-link" to="/sites" id="link-txt">
                 Sites
               </Link>
             </li>

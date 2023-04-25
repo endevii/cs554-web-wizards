@@ -8,28 +8,33 @@ import Account from './components/Account';
 import PrivateRoute from './components/PrivateRoute';
 import SignedInRoute from './components/SignedInRoute';
 import NavigationBar from './components/NavigationBar';
+import SiteList from './components/SiteList';
 import Map from './components/Map';
+import IndividualSite from './components/IndividualSite';
 function App() {
   return (
     <Router>
-        <div className="App">
-          <NavigationBar/>
-        
-          <Routes>
-            <Route path='/' element={<Home />} /> 
-            <Route path='/signin' element={<SignedInRoute/>}>
-              <Route path='/signin' element={<SignIn />} />
-            </Route>
-            <Route path='/signup' element={<SignedInRoute/>}>
-              <Route path='/signup' element={<SignUp />} />
-            </Route>
-            <Route path='/account' element={<PrivateRoute />}>
-              <Route path='/account' element={<Account />} />
-            </Route>
-            <Route path='/map' element={<Map/>}></Route>
-          </Routes>
-        </div>
-      </Router>
+      <div className="App">
+        <NavigationBar/>
+      
+        <Routes>
+          <Route path='/' element={<Home />} /> 
+          <Route path='/signin' element={<SignedInRoute/>}>
+            <Route path='/signin' element={<SignIn />} />
+          </Route>
+          <Route path='/signup' element={<SignedInRoute/>}>
+            <Route path='/signup' element={<SignUp />} />
+          </Route>
+          <Route path='/account' element={<PrivateRoute />}>
+            <Route path='/account' element={<Account />} />
+          </Route>
+          <Route path='/sites' element={<SiteList />} />
+          <Route path='/*' element={<Home />} />
+          <Route path='/map' element={<Map/>}></Route>
+          <Route path='/site/:id' element={<IndividualSite />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
