@@ -16,7 +16,7 @@ const createReview = async (
   review = helpers.validString(review);
   title = helpers.validTitle(title);
 
-  userId = helpers.validObjectID(userId);
+  userId = helpers.validString(userId);
   userName = helpers.validString(userName);
 
   const siteCollection = await sites();
@@ -132,7 +132,7 @@ const updateReview = async (
 ) => {
   siteId = helpers.validObjectID(siteId);
   reviewId = helpers.validObjectID(reviewId);
-  userId = helpers.validObjectID(userId);
+  userId = helpers.validString(userId);
   if (rating != null) {
     rating = helpers.validRating(rating.toString());
   }
