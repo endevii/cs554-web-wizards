@@ -1,6 +1,6 @@
 const routesAPI = require("./routesAPI");
 const mapRoutes = require("./map");
-const reviewRoutes = require("./review");
+const reviewRoutes = require("./reviews");
 
 const constructorMethod = (app) => {
   app.use("/", routesAPI);
@@ -8,7 +8,7 @@ const constructorMethod = (app) => {
   app.use("/reviews", reviewRoutes);
 
   app.use("*", (req, res) => {
-    res.json({ error: "Route nto valid" });
+    res.json({ error: "Route not valid" });
   });
 };
 

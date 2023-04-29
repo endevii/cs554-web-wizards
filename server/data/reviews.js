@@ -20,8 +20,14 @@ const createReview = async (
   userName = helpers.validString(userName);
 
   const siteCollection = await sites();
-  const site = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  const site = await siteCollection.findOne({ _id: siteId });
   if (!site) throw "ERROR: SITE NOT FOUND";
+
+  for (let i = 0; i < site.reviews.length; i++) {
+    if (site.reviews[i].userId === userId) {
+      throw "ERROR: USER HAS ALREADY REVIEWED THIS SITE";
+    }
+  }
 
   rating = parseInt(rating);
 
@@ -32,7 +38,7 @@ const createReview = async (
   let dateString = month + "/" + day + "/" + year;
 
   let newReview = {
-    _id: new ObjectId(),
+    _id: new ObjectId().toString(),
     userId: userId,
     userName: userName,
     title: title,
@@ -43,7 +49,7 @@ const createReview = async (
   };
 
   const updateInfo = await siteCollection.updateOne(
-    { _id: new ObjectId(siteId) },
+    { _id: siteId },
     { $push: { reviews: newReview } }
   );
   if (updateInfo.modifiedCount === 0) {
@@ -66,14 +72,14 @@ const createReview = async (
 
   // update the site's rating
   const updateRating = await siteCollection.updateOne(
-    { _id: new ObjectId(siteId) },
+    { _id: siteId },
     { $set: { rating: newRating } }
   );
   if (updateRating.modifiedCount === 0) {
     throw "ERROR: COULD NOT UPDATE RATING";
   }
 
-  let updatedSite = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  let updatedSite = await siteCollection.findOne({ _id: siteId });
   if (!updatedSite) throw "ERROR: SITE NOT FOUND";
 
   // convert each review id to a string
@@ -91,7 +97,7 @@ const getReviewById = async (siteId, reviewId) => {
   reviewId = helpers.validObjectID(reviewId);
 
   const siteCollection = await sites();
-  const site = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  const site = await siteCollection.findOne({ _id: siteId });
   if (!site) throw "ERROR: SITE NOT FOUND";
 
   const reviews = site.reviews;
@@ -110,10 +116,12 @@ const getAllReviews = async (siteId) => {
   siteId = helpers.validObjectID(siteId);
 
   const siteCollection = await sites();
-  const site = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  const site = await siteCollection.findOne({ _id: siteId });
   if (!site) throw "ERROR: SITE NOT FOUND";
 
   let reviews = site.reviews;
+
+  if (reviews.length === 0) throw "ERROR: NO REVIEWS FOUND";
 
   for (let i = 0; i < reviews.length; i++) {
     reviews[i]._id = reviews[i]._id.toString();
@@ -122,31 +130,25 @@ const getAllReviews = async (siteId) => {
   return reviews;
 };
 
-const updateReview = async (
-  userId,
-  siteId,
-  reviewId,
-  title,
-  review,
-  rating
-) => {
+const updateReview = async (userId, siteId, reviewId, reviewObj) => {
+  let { rating, review, title } = reviewObj;
   siteId = helpers.validObjectID(siteId);
   reviewId = helpers.validObjectID(reviewId);
   userId = helpers.validString(userId);
   if (rating != null) {
     rating = helpers.validRating(rating.toString());
   }
-  if (review != null) {
+  if (review) {
     review = helpers.validString(review);
   }
-  if (title != null) {
+  if (title) {
     title = helpers.validTitle(title);
   }
 
   rating = parseInt(rating);
 
   const siteCollection = await sites();
-  const site = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  const site = await siteCollection.findOne({ _id: siteId });
   if (!site) throw "ERROR: SITE NOT FOUND";
 
   const reviews = site.reviews;
@@ -162,40 +164,51 @@ const updateReview = async (
   if (reviewToUpdate.userId.toString() !== userId)
     throw "ERROR: NOT AUTHORIZED";
 
+  reviewToUpdate.rating = parseInt(reviewToUpdate.rating);
+
   let updatedReview = {
-    _id: new ObjectId(reviewId),
+    _id: reviewId,
     userId: userId,
     userName: reviewToUpdate.userName,
-    title: title,
-    review: review,
-    rating: rating,
     date: reviewToUpdate.date,
     edited: true,
   };
 
   let updatedCount = 0;
+  let updatedRating = false;
+
   if (title) {
-    if (reviewToUpdate.title != updatedReview.title) {
+    if (reviewToUpdate.title != title) {
+      updatedReview.title = title;
       updatedCount++;
     } else {
       updatedReview.title = reviewToUpdate.title;
     }
+  } else {
+    updatedReview.title = reviewToUpdate.title;
   }
 
   if (review) {
-    if (reviewToUpdate.review != updatedReview.review) {
+    if (reviewToUpdate.review != review) {
+      updatedReview.review = review;
       updatedCount++;
     } else {
       updatedReview.review = reviewToUpdate.review;
     }
+  } else {
+    updatedReview.review = reviewToUpdate.review;
   }
 
   if (rating) {
-    if (reviewToUpdate.rating != updatedReview.rating) {
+    if (reviewToUpdate.rating != rating) {
+      updatedRating = true;
+      updatedReview.rating = rating;
       updatedCount++;
     } else {
       updatedReview.rating = reviewToUpdate.rating;
     }
+  } else {
+    updatedReview.rating = reviewToUpdate.rating;
   }
 
   if (updatedCount === 0) {
@@ -203,42 +216,44 @@ const updateReview = async (
   }
 
   const updateInfo = await siteCollection.updateOne(
-    { _id: new ObjectId(siteId), "reviews._id": new ObjectId(reviewId) },
+    { _id: siteId, "reviews._id": reviewId },
     { $set: { "reviews.$": updatedReview } }
   );
   if (updateInfo.modifiedCount === 0) {
     throw "ERROR: COULD NOT UPDATE REVIEW";
   }
 
-  // get all of the reviews for the site
-  const allReviews = site.reviews;
+  if (updatedRating) {
+    // get all of the reviews for the site
+    const allReviews = site.reviews;
 
-  // update the review in the array
-  for (let i = 0; i < allReviews.length; i++) {
-    if (allReviews[i]._id.toString() === reviewId) {
-      allReviews[i] = updatedReview;
-      break;
+    // update the review in the array
+    for (let i = 0; i < allReviews.length; i++) {
+      if (allReviews[i]._id.toString() === reviewId) {
+        allReviews[i] = updatedReview;
+        break;
+      }
+    }
+
+    // calculate the new average rating
+    let totalRating = 0;
+    for (let i = 0; i < allReviews.length; i++) {
+      totalRating += allReviews[i].rating;
+    }
+
+    const newRating = totalRating / allReviews.length;
+
+    // update the site's rating
+    const updateRating = await siteCollection.updateOne(
+      { _id: siteId },
+      { $set: { rating: newRating } }
+    );
+    if (updateRating.modifiedCount === 0) {
+      throw "ERROR: COULD NOT UPDATE RATING";
     }
   }
-
-  // calculate the new average rating
-  let totalRating = 0;
-  for (let i = 0; i < allReviews.length; i++) {
-    totalRating += allReviews[i].rating;
-  }
-
-  const newRating = totalRating / allReviews.length;
-
-  // update the site's rating
-  const updateRating = await siteCollection.updateOne(
-    { _id: new ObjectId(siteId) },
-    { $set: { rating: newRating } }
-  );
-  if (updateRating.modifiedCount === 0) {
-    throw "ERROR: COULD NOT UPDATE RATING";
-  }
-
-  let updatedSite = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  // get the updated site
+  let updatedSite = await siteCollection.findOne({ _id: siteId });
   if (!updatedSite) throw "ERROR: SITE NOT FOUND";
 
   // convert each review id to a string
@@ -255,10 +270,10 @@ const deleteReview = async (userId, siteId, reviewId) => {
   // console.log(userId, siteId, reviewId);
   siteId = helpers.validObjectID(siteId);
   reviewId = helpers.validObjectID(reviewId);
-  userId = helpers.validObjectID(userId);
+  userId = helpers.validString(userId);
 
   const siteCollection = await sites();
-  const site = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  const site = await siteCollection.findOne({ _id: siteId });
   if (!site) throw "ERROR: SITE NOT FOUND";
 
   const reviews = site.reviews;
@@ -274,8 +289,8 @@ const deleteReview = async (userId, siteId, reviewId) => {
   if (review.userId.toString() !== userId) throw "ERROR: NOT AUTHORIZED";
 
   const updateInfo = await siteCollection.updateOne(
-    { _id: new ObjectId(siteId) },
-    { $pull: { reviews: { _id: new ObjectId(reviewId) } } }
+    { _id: siteId },
+    { $pull: { reviews: { _id: reviewId } } }
   );
   if (updateInfo.modifiedCount === 0) {
     throw "ERROR: COULD NOT DELETE REVIEW";
@@ -294,18 +309,26 @@ const deleteReview = async (userId, siteId, reviewId) => {
 
   let newRating = totalRating / updatedReviews.length;
 
-  // update the site's rating
-
-  const updateRating = await siteCollection.updateOne(
-    { _id: new ObjectId(siteId) },
-    { $set: { rating: newRating } }
-  );
-
-  if (updateRating.modifiedCount === 0) {
-    throw "ERROR: COULD NOT UPDATE RATING";
+  if (isNaN(newRating)) {
+    newRating = 0;
   }
 
-  let updatedSite = await siteCollection.findOne({ _id: new ObjectId(siteId) });
+  if (newRating === null) {
+    newRating = 0;
+  }
+
+  // update the site's rating
+  if (newRating !== site.rating) {
+    const updateRating = await siteCollection.updateOne(
+      { _id: siteId },
+      { $set: { rating: newRating } }
+    );
+
+    if (updateRating.modifiedCount === 0) {
+      throw "ERROR: COULD NOT UPDATE RATING";
+    }
+  }
+  let updatedSite = await siteCollection.findOne({ _id: siteId });
   if (!updatedSite) throw "ERROR: SITE NOT FOUND";
 
   // convert each review id to a string
