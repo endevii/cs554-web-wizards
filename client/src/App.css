@@ -132,7 +132,7 @@
   width: 60px;
   color: white;
   background-color: #414c57a6;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .welcome-msg {
@@ -229,16 +229,16 @@ p {
   cursor: pointer;
 }
 
-.map-popup h1{
- color: #c24646;
- font-size: 14px;
- margin-top: 15px;
+.map-popup h1 {
+  color: #c24646;
+  font-size: 14px;
+  margin-top: 15px;
 }
 
 .map-container {
   width: 65%;
 }
-.map{
+.map {
   display: flex;
   justify-content: center;
   height: 80%;
@@ -247,11 +247,11 @@ p {
 
 .button {
   padding: 0.4rem 0.8rem;
-	background-color: #c24646;
-	border-radius: 3px;
-	color: #ffff;
-	text-decoration: none !important;
-	margin: 5px;
+  background-color: #c24646;
+  border-radius: 3px;
+  color: #ffff;
+  text-decoration: none !important;
+  margin: 5px;
   font-size: large;
 }
 
