@@ -69,16 +69,24 @@ const createReview = async (
   }
 
   const newRating = totalRating / reviews.length;
-
-  // update the site's rating
-  const updateRating = await siteCollection.updateOne(
-    { _id: siteId },
-    { $set: { rating: newRating } }
-  );
-  if (updateRating.modifiedCount === 0) {
-    throw "ERROR: COULD NOT UPDATE RATING";
+  if (isNaN(newRating)) {
+    newRating = 0;
   }
 
+  if (newRating == null) {
+    newRating = 0;
+  }
+
+  if (newRating !== site.rating) {
+    // update the site's rating
+    const updateRating = await siteCollection.updateOne(
+      { _id: siteId },
+      { $set: { rating: newRating } }
+    );
+    if (updateRating.modifiedCount === 0) {
+      throw "ERROR: COULD NOT UPDATE RATING";
+    }
+  }
   let updatedSite = await siteCollection.findOne({ _id: siteId });
   if (!updatedSite) throw "ERROR: SITE NOT FOUND";
 
