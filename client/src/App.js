@@ -11,6 +11,7 @@ import NavigationBar from './components/NavigationBar';
 import SiteList from './components/SiteList';
 import Map from './components/Map';
 import IndividualSite from './components/IndividualSite';
+import PopularItineraries from './components/PopularItineraries';
 function App() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function App() {
           <Route path='/*' element={<Home />} />
           <Route path='/map' element={<Map/>}></Route>
           <Route path='/site/:id' element={<IndividualSite />} />
+          <Route path='/itineraries' element={<PopularItineraries />} />
         </Routes>
       </div>
     </Router>
