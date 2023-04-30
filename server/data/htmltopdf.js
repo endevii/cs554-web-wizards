@@ -22,10 +22,11 @@ const cssRules = {
   "itinerary-stop-title":
     " grid-column: 1 / span 15;grid-row: 1;text-align: left;font-size: x-large;padding: 1%;",
   itinerary: " background-color: #ffdcdc;",
-  "grid-item step-description": "text-align: center;padding: 20px;font-size: 30px; grid-column: 2 / span 6;grid-row: 1 / span 27;font-size: large;",
-  "grid-item step-description-two": "text-align: center;padding: 20px;font-size: 30px;  grid-column: 7 / span 6; grid-row: 2 / span 27; font-size: large;"
+  "grid-item step-description":
+    "text-align: center;padding: 20px;font-size: 30px; grid-column: 2 / span 6;grid-row: 1 / span 27;font-size: large;",
+  "grid-item step-description-two":
+    "text-align: center;padding: 20px;font-size: 30px;  grid-column: 7 / span 6; grid-row: 2 / span 27; font-size: large;",
 };
-
 
 const classNames = [
   "stepImageOne",
@@ -45,7 +46,7 @@ const classNames = [
   "itinerary-stop-title",
   "itinerary",
   "grid-item step-description",
-  "grid-item step-description-two"
+  "grid-item step-description-two",
 ];
 const setStyling = (htmlInput, className) => {
   return htmlInput.replaceAll(
@@ -64,15 +65,17 @@ const generatePdf = (input, name) => {
     }
   }
 
-  for(let key of classNames){
-    htmlString = setStyling(htmlString, key)
-   }
+  for (let key of classNames) {
+    htmlString = setStyling(htmlString, key);
+  }
 
   htmlString =
     "<!doctype html>" +
     "<html lang='en'>" +
     "<head>" +
-    "<title>'Our Funky HTML Page'</title> <meta  charset='utf-8'>" +
+    "<title>" +
+    name +
+    "</title> <meta  charset='utf-8'>" +
     " </head>" +
     "<body>" +
     htmlString +

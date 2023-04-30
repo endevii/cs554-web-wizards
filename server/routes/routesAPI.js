@@ -27,6 +27,7 @@ router.route("/generatedpdf/:name").get(async (req, res) => {
     return res.status(404).json({error: "pdf not found"})
   }
 });
+
 router.route("/sites").get(async (req, res) => {
   let sites;
   try {
