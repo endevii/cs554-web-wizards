@@ -11,7 +11,7 @@ function validObjectID(id) {
 }
 
 function validString(str, type) {
-  console.log(`validating ${str} of type ${type}...`);
+  // console.log(`validating ${str} of type ${type}...`);
   if (!str) throw `ERROR: STRING '${type}' IS REQUIRED`;
   if (typeof str !== "string") throw `ERROR: STRING '${type}' MUST BE A STRING`;
   if (str.trim().length === 0) throw `ERROR: STRING '${type}' CAN'T BE EMPTY`;

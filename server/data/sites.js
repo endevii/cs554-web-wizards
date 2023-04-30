@@ -22,22 +22,20 @@ const createSite = async (
     locState = helpers.validState(location.state);
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
-    console.log("here1");
+
     timeDay = helpers.validDays(hours.days);
     timeOpen = helpers.validHours(hours.time);
-    console.log("here1.5");
+
     website = helpers.validWebsite(website);
-    console.log("here2");
 
     if (category && category.length === 0) {
       category = "Other";
     } else if (!category) {
       category = "Other";
     }
-    console.log("here2.5");
+
     category = helpers.validString(category, "CATEGORY");
 
-    console.log("here3");
     borough = helpers.validBorough(borough);
     age = helpers.validAge(age.toString());
 
@@ -48,13 +46,11 @@ const createSite = async (
     throw e;
   }
   const siteCollection = await sites();
-  console.log("here");
   let newSite = {
     _id: new ObjectId().toString(),
     name: name,
     description: description,
     location: {
-      name: locName,
       address: locAddress,
       city: locCity,
       state: locState,
@@ -68,8 +64,8 @@ const createSite = async (
     website: website,
     category: category,
     borough: borough,
-    rating: 0,
     founded: age,
+    rating: 0,
     reviews: [],
     image: image,
   };
@@ -77,14 +73,7 @@ const createSite = async (
   const insertInfo = await siteCollection.insertOne(newSite);
   if (insertInfo.insertedCount === 0) throw "ERROR: COULD NOT ADD SITE";
 
-  const newId = insertInfo.insertedId;
-
-  const site = await siteCollection.findOne({ _id: id });
-  if (!site) throw "ERROR: COULD NOT FIND SITE";
-
-  site._id = site._id.toString();
-
-  return site;
+  return newSite;
 };
 
 const getAllSites = async () => {
