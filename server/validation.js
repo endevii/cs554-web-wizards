@@ -28,8 +28,8 @@ function validSiteName(str) {
   const words = str.trim().split(" ");
   for (let i = 0; i < words.length; i++) {
     if (words[i].length === 0) throw "ERROR: SITE NAME CAN'T HAVE EMPTY WORDS";
-    if (words[i][0] !== words[i][0].toUpperCase())
-      throw "ERROR: SITE NAME MUST HAVE CAPITALIZED WORDS";
+    // if (words[i][0] !== words[i][0].toUpperCase())
+    //   words[i] = words[i][0].toUpperCase() + words[i].slice(1);
   }
 
   return str.trim();
@@ -342,6 +342,20 @@ function validRating(str) {
   return str.trim();
 }
 
+function validTitle(str) {
+  if (!str) throw "ERROR: TITLE IS REQUIRED";
+  if (typeof str !== "string") throw "ERROR: TITLE MUST BE A STRING";
+  if (str.trim().length === 0) throw "ERROR: TITLE CAN'T BE EMPTY STRING";
+  str = str.trim();
+  if (str.length > 100) throw "ERROR: TITLE MUST BE LESS THAN 100 CHARACTERS";
+
+  if (str[0] !== str[0].toUpperCase()) {
+    str[0] = str[0].toUpperCase();
+  }
+
+  return str;
+}
+
 module.exports = {
   validObjectID,
   validString,
@@ -355,4 +369,5 @@ module.exports = {
   validWebsite,
   validAge,
   validRating,
+  validTitle,
 };

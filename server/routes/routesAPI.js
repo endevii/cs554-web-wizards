@@ -28,4 +28,59 @@ router
         return res.status(200).send(site)
     })
 
+router 
+    .route('/sites/sort/age')
+    .get(async (req, res)=> {
+        try {
+            const sites = await sitesData.sortSitesByAge();
+            return res.json(sites)
+        }catch(e) {
+            return res.status(404).json({error: "no historic data found"})
+        }
+    })
+
+router 
+    .route('/sites/sort/borough')
+    .get(async (req, res)=> {
+        try {
+            const sites = await sitesData.sortSitesByBorough();
+            return res.json(sites)
+        }catch(e) {
+            return res.status(404).json({error: "no historic data found"})
+        }
+    })
+
+router 
+    .route('/sites/sort/ratingHighToLow')
+    .get(async (req, res)=> {
+        try {
+            const sites = await sitesData.sortSitesByRatingHighToLow();
+            return res.json(sites)
+        }catch(e) {
+            return res.status(404).json({error: "no historic data found"})
+        }
+    })
+
+router 
+    .route('/sites/sort/ratingLowToHigh')
+    .get(async (req, res)=> {
+        try {
+            const sites = await sitesData.sortSitesByRatingLowToHigh();
+            return res.json(sites)
+        }catch(e) {
+            return res.status(404).json({error: "no historic data found"})
+        }
+    })
+
+router
+    .route('/sites/search/:searchTerm')
+    .get(async (req, res) => {
+        let searchTerm = req.params.searchTerm;
+        try {
+            const sites = await sitesData.searchSites(searchTerm);
+            return res.json(sites)
+        }catch(e) {
+            return res.status(404).json({error: e})
+        }
+    })
 module.exports = router;

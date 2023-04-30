@@ -19,16 +19,16 @@ const createSite = async (
   locAddress = helpers.validString(location.address);
   locCity = helpers.validString(location.city);
   locState = helpers.validState(location.state);
-  locZip = helpers.validZipcode(location.zip);
+  locZip = helpers.validZipcode(location.zipCode);
 
-  timeDay = helpers.validDays(hours.day);
+  timeDay = helpers.validDays(hours.days);
   timeOpen = helpers.validHours(hours.time);
 
   website = helpers.validWebsite(website);
 
   category = helpers.validString(category);
   borough = helpers.validBorough(borough);
-  age = helpers.validAge(age);
+  age = helpers.validAge(age.toString());
 
   age = parseInt(age);
   const siteCollection = await sites();
@@ -41,8 +41,8 @@ const createSite = async (
       address: locAddress,
       city: locCity,
       state: locState,
-      zip: locZip,
-      coordinates: location.coordinates
+      zipCode: locZip,
+      coordinates: location.coordinates,
     },
     hours: {
       day: timeDay,
@@ -52,7 +52,7 @@ const createSite = async (
     category: category,
     borough: borough,
     rating: 0,
-    age: age,
+    founded: age,
     reviews: [],
   };
 
@@ -109,6 +109,34 @@ const getSitesByCategory = async (category) => {};
 const getSitesByLocation = async (location) => {};
 
 const getSitesByHours = async (hours) => {};
+
+const sortSitesByAge = async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>a.founded - b.founded)
+}
+
+const sortSitesByBorough = async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>a.borough - b.borough)
+}
+const sortSitesByRatingHighToLow = async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>b.rating - a.rating)
+}
+const sortSitesByRatingLowToHigh= async () => {
+  const unsortedSites = await getAllSites();
+  return unsortedSites.sort((a,b)=>a.rating - b.rating)
+}
+const searchSites = async(searchTerm) => {
+  const allSites = await getAllSites();
+  let filteredSites = [];
+  for(let site of allSites){
+    if(site.name.toLowerCase().includes(searchTerm.toLowerCase())){
+      filteredSites.push(site)
+    }
+  }
+  return filteredSites;
+}
 
 const updateSite = async (id, updatedSite) => {
   if (!id) throw "ERROR: ID IS REQUIRED";
@@ -203,15 +231,15 @@ const updateSite = async (id, updatedSite) => {
       updatedSiteData["location.state"] = newSite.location.state;
     }
 
-    if (updatedSite.location.zip) {
-      if (updatedSite.location.zip !== newSite.location.zip) {
+    if (updatedSite.location.zipCode) {
+      if (updatedSite.location.zipCode !== newSite.location.zipCode) {
         updatedCount += 1;
       }
-      updatedSiteData["location.zip"] = helpers.validZipcode(
-        updatedSite.location.zip
+      updatedSiteData["location.zipCode"] = helpers.validZipcode(
+        updatedSite.location.zipCode
       );
     } else {
-      updatedSiteData["location.zip"] = newSite.location.zip;
+      updatedSiteData["location.zipCode"] = newSite.location.zipCode;
     }
   } else {
     updatedSiteData.location = newSite.location;
@@ -268,13 +296,14 @@ const updateSite = async (id, updatedSite) => {
     updatedSiteData.borough = newSite.borough;
   }
 
-  if (updatedSite.age) {
-    if (updatedSite.age !== newSite.age) {
+  if (updatedSite.founded) {
+    if (updatedSite.founded !== newSite.founded) {
       updatedCount += 1;
     }
-    updatedSiteData.age = helpers.validAge(updatedSite.age);
+    updatedSiteData.founded = helpers.validAge(updatedSite.founded.toString());
+    updateSiteData.founded = parseInt(updatedSiteData.founded);
   } else {
-    updatedSiteData.age = newSite.age;
+    updatedSiteData.founded = newSite.founded;
   }
 
   if (updatedCount === 0) throw "ERROR: NO UPDATES WERE MADE";
@@ -324,4 +353,9 @@ module.exports = {
   getSiteById,
   updateSite,
   deleteSite,
+  sortSitesByAge,
+  sortSitesByBorough,
+  sortSitesByRatingHighToLow,
+  sortSitesByRatingLowToHigh,
+  searchSites
 };
