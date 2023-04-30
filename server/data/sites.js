@@ -50,6 +50,7 @@ const createSite = async (
   const siteCollection = await sites();
   console.log("here");
   let newSite = {
+    _id: new ObjectId().toString(),
     name: name,
     description: description,
     location: {
@@ -78,7 +79,7 @@ const createSite = async (
 
   const newId = insertInfo.insertedId;
 
-  const site = await siteCollection.findOne({ _id: new ObjectId(newId) });
+  const site = await siteCollection.findOne({ _id: id });
   if (!site) throw "ERROR: COULD NOT FIND SITE";
 
   site._id = site._id.toString();
@@ -178,7 +179,7 @@ const updateSite = async (id, updatedSite) => {
 
   const updatedSiteData = {};
 
-  let newSite = await siteCollection.findOne({ _id: new ObjectId(id) });
+  let newSite = await siteCollection.findOne({ _id: id });
   if (!newSite) throw "ERROR: COULD NOT FIND SITE";
 
   try {
@@ -188,13 +189,13 @@ const updateSite = async (id, updatedSite) => {
   }
 
   const updatedInfo = await siteCollection.updateOne(
-    { _id: new ObjectId(id) },
+    { _id: id },
     { $set: updatedSiteData }
   );
   if (updatedInfo.modifiedCount === 0) throw "ERROR: COULD NOT UPDATE SITE";
 
   const updatedSiteFinal = await siteCollection.findOne({
-    _id: new ObjectId(id),
+    _id: id,
   });
   updatedSiteFinal._id = updatedSiteFinal._id.toString();
 
@@ -215,12 +216,12 @@ const deleteSite = async (id) => {
   const siteCollection = await sites();
 
   const deletionInfo = await siteCollection.deleteOne({
-    _id: new ObjectId(id),
+    _id: id,
   });
   if (deletionInfo.deletedCount === 0)
     throw `ERROR: COULD NOT DELETE SITE WITH ID OF ${id}`;
 
-  const site = await siteCollection.findOne({ _id: new ObjectId(id) });
+  const site = await siteCollection.findOne({ _id: id });
   if (site) throw `ERROR: SITE WITH ID OF ${id} WAS NOT DELETED`;
 
   return { deleted: true, data: deletionInfo };

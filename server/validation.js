@@ -371,6 +371,14 @@ function validCoordinates(arr) {
   return arr;
 }
 
+function validArray(arr) {
+  if (!arr) throw "ERROR: ARRAY IS REQUIRED";
+  if (!Array.isArray(arr)) throw "ERROR: ARRAY MUST BE AN ARRAY";
+  if (arr.length === 0) throw "ERROR: ARRAY CAN'T BE EMPTY";
+
+  return arr;
+}
+
 function validImage(str) {
   if (!str) throw "ERROR: IMAGE IS REQUIRED";
   if (typeof str !== "string") throw "ERROR: IMAGE MUST BE A STRING";
@@ -712,4 +720,5 @@ module.exports = {
   validSite,
   siteChanges,
   checkToBeUpdated,
+  validArray,
 };
