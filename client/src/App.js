@@ -13,6 +13,7 @@ import SiteList from './components/SiteList';
 import Map from './components/Map';
 import Chat from './components/Chat';
 import IndividualSite from './components/IndividualSite';
+import PopularItineraries from './components/PopularItineraries';
 function App() {
   return (
     <Router>
@@ -38,6 +39,7 @@ function App() {
           <Route path='/*' element={<Home />} />
           <Route path='/map' element={<Map />} />
           <Route path='/site/:id' element={<IndividualSite />} />
+          <Route path='/itineraries' element={<PopularItineraries />} />
         </Routes>
       </div>
     </Router>

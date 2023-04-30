@@ -24,6 +24,11 @@ function NavigationBar() {
                 Map
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/itineraries" id="link-txt">
+                Itineraries
+              </Link>
+            </li>
           </ul>
           <Link to="/signin">
             <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
