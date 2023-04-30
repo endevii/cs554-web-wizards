@@ -10,10 +10,11 @@ function validObjectID(id) {
   return id.trim();
 }
 
-function validString(str) {
-  if (!str) throw "ERROR: STRING IS REQUIRED";
-  if (typeof str !== "string") throw "ERROR: STRING MUST BE A STRING";
-  if (str.trim().length === 0) throw "ERROR: STRING CAN'T BE EMPTY STRING";
+function validString(str, type) {
+  console.log(`validating ${str} of type ${type}...`);
+  if (!str) throw `ERROR: STRING '${type}' IS REQUIRED`;
+  if (typeof str !== "string") throw `ERROR: STRING '${type}' MUST BE A STRING`;
+  if (str.trim().length === 0) throw `ERROR: STRING '${type}' CAN'T BE EMPTY`;
 
   return str.trim();
 }
@@ -356,6 +357,342 @@ function validTitle(str) {
   return str;
 }
 
+function validCoordinates(arr) {
+  if (!arr) throw "ERROR: COORDINATES IS REQUIRED";
+  if (!Array.isArray(arr)) throw "ERROR: COORDINATES MUST BE AN ARRAY";
+  if (arr.length !== 2) throw "ERROR: COORDINATES MUST BE AN ARRAY OF LENGTH 2";
+  if (isNaN(arr[0]) || isNaN(arr[1]))
+    throw "ERROR: COORDINATES MUST BE NUMBERS";
+  if (arr[0] < -90 || arr[0] > 90)
+    throw "ERROR: COORDINATES MUST BE BETWEEN -90 AND 90";
+  if (arr[1] < -180 || arr[1] > 180)
+    throw "ERROR: COORDINATES MUST BE BETWEEN -180 AND 180";
+
+  return arr;
+}
+
+function validImage(str) {
+  if (!str) throw "ERROR: IMAGE IS REQUIRED";
+  if (typeof str !== "string") throw "ERROR: IMAGE MUST BE A STRING";
+  if (str.trim().length === 0) throw "ERROR: IMAGE CAN'T BE EMPTY STRING";
+
+  if (!isValidURL(str.trim())) throw "ERROR: IMAGE MUST BE A VALID URL";
+
+  return str.trim();
+}
+
+function validSite(site) {
+  if (!site) throw "ERROR: SITE IS REQUIRED";
+  let errors = [];
+
+  try {
+    site.name = validSiteName(site.name);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.description = validSiteDescription(site.description);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.location.address = validString(site.location.address, "ADDRESS");
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.location.city = validString(site.location.city, "CITY");
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.location.state = validState(site.location.state);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.location.zipCode = validZipcode(site.location.zipCode);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.location.coordinates = validCoordinates(site.location.coordinates);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.hours.days = validDays(site.hours.days);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.hours.time = validHours(site.hours.time);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.website = validWebsite(site.website);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.category = validString(site.category, "CATEGORY");
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.borough = validBorough(site.borough);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.founded = validAge(site.founded.toString());
+  } catch (e) {
+    errors.push(e);
+  }
+
+  try {
+    site.image = validImage(site.image);
+  } catch (e) {
+    errors.push(e);
+  }
+
+  if (errors.length > 0) throw errors;
+
+  return site;
+}
+
+function siteChanges(newSite, updatedSite) {
+  if (!site) throw "ERROR: SITE IS REQUIRED";
+  if (!changes) throw "ERROR: CHANGES IS REQUIRED";
+
+  let updatedSiteData = {};
+
+  let updatedCount = 0;
+
+  if (updatedSite.name) {
+    if (updatedSite.name !== newSite.name) {
+      updatedCount += 1;
+    }
+    updatedSiteData.name = validSiteName(updatedSite.name);
+  } else {
+    updatedSiteData.name = newSite.name;
+  }
+
+  if (updatedSite.description) {
+    if (updatedSite.description !== newSite.description) {
+      updatedCount += 1;
+    }
+    updatedSiteData.description = validSiteDescription(updatedSite.description);
+  } else {
+    updatedSiteData.description = newSite.description;
+  }
+
+  if (updatedSite.location) {
+    if (updatedSite.location.address) {
+      if (updatedSite.location.address !== newSite.location.address) {
+        updatedCount += 1;
+      }
+      updatedSiteData["location.address"] = validString(
+        updatedSite.location.addres,
+        "ADDRESS"
+      );
+    } else {
+      updatedSiteData["location.address"] = newSite.location.address;
+    }
+
+    if (updatedSite.location.city) {
+      if (updatedSite.location.city !== newSite.location.city) {
+        updatedCount += 1;
+      }
+      updatedSiteData["location.city"] = validString(
+        updatedSite.location.city,
+        "CITY"
+      );
+    } else {
+      updatedSiteData["location.city"] = newSite.location.city;
+    }
+
+    if (updatedSite.location.state) {
+      if (updatedSite.location.state !== newSite.location.state) {
+        updatedCount += 1;
+      }
+      updatedSiteData["location.state"] = validState(
+        updatedSite.location.state
+      );
+    } else {
+      updatedSiteData["location.state"] = newSite.location.state;
+    }
+
+    if (updatedSite.location.zipCode) {
+      if (updatedSite.location.zipCode !== newSite.location.zipCode) {
+        updatedCount += 1;
+      }
+      updatedSiteData["location.zipCode"] = validZipcode(
+        updatedSite.location.zipCode
+      );
+    } else {
+      updatedSiteData["location.zipCode"] = newSite.location.zipCode;
+    }
+  } else {
+    updatedSiteData.location = newSite.location;
+  }
+
+  if (updatedSite.hours) {
+    if (updatedSite.hours.day) {
+      if (updatedSite.hours.day !== newSite.hours.day) {
+        updatedCount += 1;
+      }
+      updatedSiteData["hours.day"] = validDays(updatedSite.hours.day);
+    } else {
+      updatedSiteData["hours.day"] = newSite.hours.day;
+    }
+
+    if (updatedSite.hours.time) {
+      if (updatedSite.hours.time !== newSite.hours.time) {
+        updatedCount += 1;
+      }
+      updatedSiteData["hours.time"] = validHours(updatedSite.hours.time);
+    } else {
+      updatedSiteData["hours.time"] = newSite.hours.time;
+    }
+  } else {
+    updatedSiteData.hours = newSite.hours;
+  }
+
+  if (updatedSite.website) {
+    if (updatedSite.website !== newSite.website) {
+      updatedCount += 1;
+    }
+    updatedSiteData.website = validWebsite(updatedSite.website);
+  } else {
+    updatedSiteData.website = newSite.website;
+  }
+
+  if (updatedSite.category) {
+    if (updatedSite.category !== newSite.category) {
+      updatedCount += 1;
+    }
+    updatedSiteData.category = validString(updatedSite.category, "CATEGORY");
+  } else {
+    updatedSiteData.category = newSite.category;
+  }
+
+  if (updatedSite.borough) {
+    if (updatedSite.borough !== newSite.borough) {
+      updatedCount += 1;
+    }
+    updatedSiteData.borough = validBorough(updatedSite.borough);
+  } else {
+    updatedSiteData.borough = newSite.borough;
+  }
+
+  if (updatedSite.founded) {
+    if (updatedSite.founded !== newSite.founded) {
+      updatedCount += 1;
+    }
+    updatedSiteData.founded = validAge(updatedSite.founded.toString());
+    updateSiteData.founded = parseInt(updatedSiteData.founded);
+  } else {
+    updatedSiteData.founded = newSite.founded;
+  }
+
+  if (updatedSite.image) {
+    if (updatedSite.image !== newSite.image) {
+      updatedCount += 1;
+    }
+    updatedSiteData.image = validImage(updatedSite.image);
+  } else {
+    updatedSiteData.image = newSite.image;
+  }
+
+  if (updatedCount === 0) throw "ERROR: NO UPDATES WERE MADE";
+
+  return updatedSiteData;
+}
+
+function checkToBeUpdated(site) {
+  if (!site) throw "ERROR: SITE IS REQUIRED";
+
+  let updatedSiteData = {};
+
+  if (site.name) {
+    updatedSiteData.name = validSiteName(site.name);
+  }
+
+  if (site.description) {
+    updatedSiteData.description = validSiteDescription(site.description);
+  }
+
+  if (site.location) {
+    if (site.location.address) {
+      updatedSiteData["location.address"] = validString(
+        site.location.address,
+        "ADDRESS"
+      );
+    }
+
+    if (site.location.city) {
+      updatedSiteData["location.city"] = validString(
+        site.location.city,
+        "CITY"
+      );
+    }
+
+    if (site.location.state) {
+      updatedSiteData["location.state"] = validState(site.location.state);
+    }
+
+    if (site.location.zipCode) {
+      updatedSiteData["location.zipCode"] = validZipcode(site.location.zipCode);
+    }
+  }
+
+  if (site.hours) {
+    if (site.hours.day) {
+      updatedSiteData["hours.day"] = validDays(site.hours.day);
+    }
+
+    if (site.hours.time) {
+      updatedSiteData["hours.time"] = validHours(site.hours.time);
+    }
+  }
+
+  if (site.website) {
+    updatedSiteData.website = validWebsite(site.website);
+  }
+
+  if (site.category) {
+    updatedSiteData.category = validString(site.category, "CATEGORY");
+  }
+
+  if (site.borough) {
+    updatedSiteData.borough = validBorough(site.borough);
+  }
+
+  if (site.founded) {
+    updatedSiteData.founded = validAge(site.founded.toString());
+  }
+
+  if (site.image) {
+    updatedSiteData.image = validImage(site.image);
+  }
+
+  return updatedSiteData;
+}
+
 module.exports = {
   validObjectID,
   validString,
@@ -370,4 +707,9 @@ module.exports = {
   validAge,
   validRating,
   validTitle,
+  validCoordinates,
+  validImage,
+  validSite,
+  siteChanges,
+  checkToBeUpdated,
 };
