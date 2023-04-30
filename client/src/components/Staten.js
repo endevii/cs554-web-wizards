@@ -1,16 +1,16 @@
 function Staten() {
     return (
-        <div className="revolution">
+        <div className='revolution'>
             <hr/>
-            <h1 className="itinerary-stop-title">Stop 1: Staten Island Museum</h1>
-            <div className="itinerary-container">
-                <div className="stepImageOne">
-                    <img className="resize-image" src="https://gluckman-tang.s3.amazonaws.com/media/CACHE/images/StatenIslandMuseum_PhotoBruceDamonte_02/a4a74cc5c9a8bf00ec3827fb7b7b1fbe.jpg" alt="federal hall"/>
+            <h1 className='itinerary-stop-title'>Stop 1: Staten Island Museum</h1>
+            <div className='itinerary-container'>
+                <div className='stepImageOne'>
+                    <img className='resize-image' src='https://gluckman-tang.s3.amazonaws.com/media/CACHE/images/StatenIslandMuseum_PhotoBruceDamonte_02/a4a74cc5c9a8bf00ec3827fb7b7b1fbe.jpg' alt='federal hall'/>
                 </div>
-                <div className="stepImageTwo">
-                    <img className="resize-image" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/d0/82/e6/opening-the-treasure.jpg?w=1200&h=-1&s=1" alt="federal hall"/>
+                <div className='stepImageTwo'>
+                    <img className='resize-image' src='https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/d0/82/e6/opening-the-treasure.jpg?w=1200&h=-1&s=1' alt='federal hall'/>
                 </div>
-                <div className="grid-item step-description">
+                <div className='grid-item step-description'>
                 Our first stop will be at the Staten Island Museum, which contains specimens, 
                 photos, field notes, and  records of changing biology in the region, all 
                 spanning more than 150 years. They have a number of exhibitions which explore 
@@ -22,15 +22,15 @@ function Staten() {
                 </div>
             </div>
             <hr/>
-            <h1 className="itinerary-stop-title">Stop 2: Staten Island Borough Hall</h1>
-            <div className="itinerary-container">
-                <div className="stepImageThree">
-                    <img className="resize-image" src="https://statenislandfyi.files.wordpress.com/2015/02/f0eceed1-3048-64e8-40aaaacd79bb7c62.jpg" alt="federal hall"/>
+            <h1 className='itinerary-stop-title'>Stop 2: Staten Island Borough Hall</h1>
+            <div className='itinerary-container'>
+                <div className='stepImageThree'>
+                    <img className='resize-image' src='https://statenislandfyi.files.wordpress.com/2015/02/f0eceed1-3048-64e8-40aaaacd79bb7c62.jpg' alt='federal hall'/>
                 </div>
-                <div className="stepImageFour">
-                    <img className="resize-image" src="https://www.nycgo.com/images/venues/6043/newborohall__large.jpg" alt="federal hall"/>
+                <div className='stepImageFour'>
+                    <img className='resize-image' src='https://www.nycgo.com/images/venues/6043/newborohall__large.jpg' alt='federal hall'/>
                 </div>
-                <div className="grid-item step-description-two">
+                <div className='grid-item step-description-two'>
                 Next up we have Staten Island Borough Hall, a designated New York City landmark. 
                 This building was completed in 1906 after Staten Island became one of the five 
                 boroughs of New York City and its government buildings moved to be closed to the 
@@ -41,15 +41,15 @@ function Staten() {
                 </div>
             </div>
             <hr/>
-            <h1 className="itinerary-stop-title">Stop 3: Historic Richmond Town </h1>
-            <div className="itinerary-container">
-                <div className="stepImageOne">
-                    <img className="resize-image" src="https://www.nyc-arts.org/wp-content/uploads/2011/01/IMG_2112.jpg" alt="federal hall"/>
+            <h1 className='itinerary-stop-title'>Stop 3: Historic Richmond Town </h1>
+            <div className='itinerary-container'>
+                <div className='stepImageOne'>
+                    <img className='resize-image' src='https://www.nyc-arts.org/wp-content/uploads/2011/01/IMG_2112.jpg' alt='federal hall'/>
                 </div>
-                <div className="stepImageTwo">
-                    <img className="resize-image" src="https://www.silive.com/resizer/tFOs3qp2OZLTO5tKJAGR7S7cqaI=/arc-anglerfish-arc2-prod-advancelocal/public/S56Z43PJMJDBRH5WLNMCEDNGPM.jpg" alt="federal hall"/>
+                <div className='stepImageTwo'>
+                    <img className='resize-image' src='https://www.silive.com/resizer/tFOs3qp2OZLTO5tKJAGR7S7cqaI=/arc-anglerfish-arc2-prod-advancelocal/public/S56Z43PJMJDBRH5WLNMCEDNGPM.jpg' alt='federal hall'/>
                 </div>
-                <div className="grid-item step-description">
+                <div className='grid-item step-description'>
                 The final stop for this tour will be Historic Richmond Town. Historic Richmond Town 
                 is Staten Island’s largest and oldest historic institution. For almost two centuries, 
                 prior to Staten Island becoming one of the five boroughs of New York City, the 
