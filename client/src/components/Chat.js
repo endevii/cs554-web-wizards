@@ -72,7 +72,7 @@ export default function Chat({ thisRoom }) {
   return (
     <div>
       {state.name && room && (
-        <div className='card'>
+        <div className='chat-card'>
           <div className='render-chat'>
             <h1>Chat Log for Room {room}</h1>
             {renderChat()}
