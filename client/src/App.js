@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-//import io from 'socket.io-client';
-import io from 'socket.io-client';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
@@ -22,12 +20,9 @@ function App() {
       <div className='App'>
         <NavigationBar />
 
-      <div className='App'>
-        <NavigationBar />
-
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/signin' element={<SignedInRoute />}>
+          <Route path='/signin' element={<SignedInRoute />}/>
           <Route path='/' element={<Home />} />
           <Route path='/signin' element={<SignedInRoute />}>
             <Route path='/signin' element={<SignIn />} />
