@@ -2,10 +2,29 @@ import { useState } from "react";
 import Revolution from "./Revolution";
 import Staten from "./Staten";
 import { Link } from "react-router-dom";
+import ReactDOMServer from 'react-dom/server'
+import axios from "axios";
 
 function PopularItineraries() {
     const [revolution, setRevolution] = useState(false);
     const [staten, setStaten] = useState(false);
+    const [htmlString, sethtmlString] = useState( ReactDOMServer.renderToString(<Revolution />))
+    const [pdfReady, setPdfReady] = useState({revolution: false, staten: false})
+    const generatePdf = async (component, name) => {
+        try{
+            await axios.post('http://localhost:3001/generatepdf',{input: component, name:name});
+            setPdfReady(prev => ({
+                ...prev,
+                ...{[name]: true}
+              }))
+        }catch(e){
+            console.log(e)
+            setPdfReady(prev => ({
+                ...prev,
+                ...{[name]: false}
+              }))
+        }
+    }
     return (
         <div>
             <br/>
@@ -32,8 +51,15 @@ function PopularItineraries() {
             </div>
             {!revolution
                 ? <button onClick={()=>{setRevolution(true)}}>More Information</button>
-                : <button onClick={()=>{setRevolution(false)}}>Less Information</button>
+                : <button onClick={()=>{
+                    setRevolution(false);
+                    setPdfReady(prev => ({
+                    ...prev,
+                    ...{revolution: false}
+                  }))}}>Less Information</button>
             }
+            {revolution && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Revolution />), "revolution")}>Generate PDF</button>}
+            {pdfReady.revolution && <a href='http://localhost:3001/generatedpdf/revolution' target="_blank">Pdf ready to print/donwload</a>}
             {revolution && <Revolution />}
             <hr className="hr-custom"/>
             <div className="itinerary-container">
@@ -57,8 +83,15 @@ function PopularItineraries() {
             </div>
             {!staten
                 ? <button onClick={()=>{setStaten(true)}}>More Information</button>
-                : <button onClick={()=>{setStaten(false)}}>Less Information</button>
+                : <button onClick={()=>{
+                    setStaten(false);
+                    setPdfReady(prev => ({
+                    ...prev,
+                    ...{staten: false}
+                  }))}}>Less Information</button>
             }
+            {staten && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Staten />), "staten")}>Generate PDF</button>}
+            {pdfReady.staten && <a href='http://localhost:3001/generatedpdf/staten' target="_blank">Pdf ready to print/download</a>}
             {staten && <Staten />}
             <hr className="hr-custom"/>
         </div>
