@@ -5,6 +5,29 @@ const sitesData = data.sites;
 
 const path = require("path");
 
+ router
+  .route('/siteBorough/:borough')
+  .get(async (req, res) => {
+      let borough = req.params.borough;
+      let site;
+      try{
+          site = await sitesData.getSitesByBorough(borough);
+      } catch (e) {
+          return res.status(404).json({error: "no historic site found with that bororugh"});
+      }
+      return res.status(200).send(site)
+  })
+
+router 
+    .route('/sites/sort/age')
+    .get(async (req, res)=> {
+        try {
+            const sites = await sitesData.sortSitesByAge();
+            return res.json(sites)
+        }catch(e) {
+            return res.status(404).json({error: "no historic data found"})
+        }
+    })
 router
   .route("/generatepdf")
   .post(async (req, res) => {
@@ -36,7 +59,7 @@ router.route("/sites").get(async (req, res) => {
     return res.status(404).json({ error: "no historic sites found" });
   }
   return res.status(200).send(sites);
-});
+}); 
 
 router.route("/site/:id").get(async (req, res) => {
   let id = req.params.id;

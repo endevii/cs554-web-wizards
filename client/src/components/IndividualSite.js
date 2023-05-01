@@ -83,7 +83,7 @@ function IndividualSite() {
           <h2>Description</h2>
           <ul id='description-list'>
             {siteData.description.map((line) => (
-              <li>{line}</li>
+              <li key={line}>{line}</li>
             ))}
           </ul>
         </div>
