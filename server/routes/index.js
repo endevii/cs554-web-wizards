@@ -6,7 +6,7 @@ const constructorMethod = (app) => {
     app.use('/map', mapRoutes);
 
   app.use('*', (req, res) => {
-    res.json({error: 'Route nto valid'});
+    res.json({error: 'Route not valid'});
   });
 };
 

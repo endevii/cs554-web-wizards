@@ -15,7 +15,7 @@ router
         return res.status(200).send(sites)
     })
 
-router
+    router
     .route('/site/:id')
     .get(async (req, res) => {
         let id = req.params.id;
@@ -24,6 +24,19 @@ router
             site = await sitesData.getSiteById(id);
         } catch (e) {
             return res.status(404).json({error: "no historic site found with that id"});
+        }
+        return res.status(200).send(site)
+    })
+
+    router
+    .route('/siteBorough/:borough')
+    .get(async (req, res) => {
+        let borough = req.params.borough;
+        let site;
+        try{
+            site = await sitesData.getSitesByBorough(borough);
+        } catch (e) {
+            return res.status(404).json({error: "no historic site found with that bororugh"});
         }
         return res.status(200).send(site)
     })

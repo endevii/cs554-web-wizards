@@ -132,7 +132,7 @@
   width: 60px;
   color: white;
   background-color: #414c57a6;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .welcome-msg {
@@ -229,16 +229,16 @@ p {
   cursor: pointer;
 }
 
-.map-popup h1{
- color: #c24646;
- font-size: 14px;
- margin-top: 15px;
+.map-popup h1 {
+  color: #c24646;
+  font-size: 14px;
+  margin-top: 15px;
 }
 
 .map-container {
   width: 65%;
 }
-.map{
+.map {
   display: flex;
   justify-content: center;
   height: 80%;
@@ -247,11 +247,11 @@ p {
 
 .button {
   padding: 0.4rem 0.8rem;
-	background-color: #c24646;
-	border-radius: 3px;
-	color: #ffff;
-	text-decoration: none !important;
-	margin: 5px;
+  background-color: #c24646;
+  border-radius: 3px;
+  color: #ffff;
+  text-decoration: none !important;
+  margin: 5px;
   font-size: large;
 }
 
@@ -277,6 +277,11 @@ p {
 
 .itinerary {
   background-color: #ffdcdc;
+}
+
+.customImageItinerary{
+  grid-column: 10 / span 3;
+  grid-row: 2 / span 20;
 }
 
 .imageOne{
@@ -335,6 +340,7 @@ p {
   grid-column: 2 / span 6;
   grid-row: 1 / span 27;
   font-size: large;
+  text-align: left;
 }
 
 .step-description-two {
@@ -359,5 +365,20 @@ p {
 
 .revolution {
   width: 70%;
+  margin: auto;
+}
+
+.form-checks {
+  text-align: left;
+  width: 15%;
+  margin-left: 47%;
+}
+
+.description-list {
+  text-align: left;
+}
+
+.create-itinerary-paragraph {
+  width: 50%;
   margin: auto;
 }

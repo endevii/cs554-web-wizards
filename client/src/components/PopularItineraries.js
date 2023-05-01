@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Revolution from "./Revolution";
 import Staten from "./Staten";
+import { Link } from "react-router-dom";
 
 function PopularItineraries() {
     const [revolution, setRevolution] = useState(false);
@@ -9,6 +10,7 @@ function PopularItineraries() {
         <div>
             <br/>
             <h1 className="itinerary-title">Popular Itineraries</h1>
+            <p>Create your own itinerary <Link to="/createItinerary">here</Link></p>
             <hr className="hr-custom"/>
             <div className="itinerary-container">
                 <div className="imageOne">
