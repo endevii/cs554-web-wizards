@@ -37,7 +37,6 @@ function CustomItineraryMap(props) {
 
   if (markerData.length > 1) {
     for (let i = 0; i < markerData.length; i++) {
-      console.log(markerData[i]);
       const el = document.createElement("div");
       el.className = "marker";
       new mapboxgl.Marker()

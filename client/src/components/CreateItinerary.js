@@ -128,7 +128,7 @@ function CreateItinerary() {
                     <div className='grid-item step-description'>
                     <ul id='description-list'>
                         {site.description.map((line) => (
-                        <li>{line}</li>
+                        <li key={line}>{line}</li>
                         ))}
                     </ul> 
                     </div>
@@ -172,19 +172,23 @@ function CreateItinerary() {
                         setLoadingItinerary(false)
                     }}
                     >Load Itinerary</button>
-                </form>
 
-                <br/>
-                <br/>
-                
-                {!loadingItinerary && <h2>Your Itinerary Stops</h2>}
-                <br/>
-                {!loadingItinerary && <div>{card}</div>}
-                {!loadingItinerary && <div className='revolution'><hr/></div>} 
-                {!loadingItinerary &&
-                    <CustomItineraryMap key="map" data={itinerary} />
-                }
-                <br/> 
+                    <br/>
+                    <br/>
+                    {itinerary.length > 1
+                        ?<div>
+                            {!loadingItinerary && <h2>Your Itinerary Stops</h2>}
+                            <br/>
+                            {!loadingItinerary && <div>{card}</div>}
+                            {!loadingItinerary && <div className='revolution'><hr/></div>} 
+                            {!loadingItinerary &&
+                                <CustomItineraryMap key="map" data={itinerary} />
+                            }
+                        </div>
+                        :<div>{!loadingItinerary && <p>Add at least two stopes to your itinerary!</p>}</div>
+                    }
+                    <br/> 
+                </form>
             </div>
         )
     }     
