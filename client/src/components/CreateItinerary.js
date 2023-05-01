@@ -185,7 +185,7 @@ function CreateItinerary() {
                                 <CustomItineraryMap key="map" data={itinerary} />
                             }
                         </div>
-                        :<div>{!loadingItinerary && <p>Add at least two stopes to your itinerary!</p>}</div>
+                        :<div>{!loadingItinerary && <p>Add at least two stops to your itinerary!</p>}</div>
                     }
                     <br/> 
                 </form>
