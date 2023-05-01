@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const sitesData = data.sites;
-
+const fs = require("fs");
 const path = require("path");
 
  router
@@ -35,8 +35,8 @@ router
         return res.status(400).json({error: "invalid input"})
     }
     try {
-      data.htmltopdf.generatePdf(req.body.input, req.body.name);
-      return res.json({ msg: "Pdf generated successfully" });
+      let result = data.htmltopdf.generatePdf(req.body.input, req.body.name);
+      return res.json({ msg: result });
     } catch (e) {
       return res.status(500).json({error: e});
     }
@@ -44,10 +44,16 @@ router
 
 router.route("/generatedpdf/:name").get(async (req, res) => {
   let name = req.params.name;
+  let pdfFile = path.resolve("generatedPdfs/"+name+".pdf")
+  
   try {
-    return res.sendFile(path.resolve("generatedPdfs/" + name + ".pdf"));
+    if(fs.existsSync(pdfFile)){
+        return res.sendFile(pdfFile);
+    }else{
+        return res.status(404).send("Pdf not found, try reloading again")
+    }
   } catch (e) {
-    return res.status(404).json({error: "pdf not found"})
+    return res.status(404).json({error: "pdf not found, try again"})
   }
 });
 

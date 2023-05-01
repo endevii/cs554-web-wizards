@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const wkhtmltopdf = require("wkhtmltopdf");
 const cssRules = {
   stepImageOne: "grid-column: 10 / span 3; grid-row: 13 / span 20;",
@@ -84,7 +87,13 @@ const generatePdf = (input, name) => {
     output: `generatedPdfs/${name}.pdf`,
     pageSize: "letter",
   });
-  return file;
+  
+  let pdfFile = path.resolve("generatedPdfs/"+name+".pdf")
+  if(fs.existsSync(pdfFile)){
+    return "success"
+  }else{
+    return "error"
+  }
 };
 module.exports = {
   generatePdf,
