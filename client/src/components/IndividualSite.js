@@ -54,7 +54,7 @@ function IndividualSite() {
           <ul>
             <li>Borough: {siteData.borough}</li>
             <li>
-              Address: {siteData.address}, {siteData.location.city},{' '}
+              Address: {siteData.location.address}, {siteData.location.city},{' '}
               {siteData.location.state}, {siteData.location.zipCode}
             </li>
           </ul>
