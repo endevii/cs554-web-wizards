@@ -3,6 +3,8 @@ import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import CustomItineraryMap from './CustomItineraryMap';
+import ItineraryList from './ItineraryList';
+import ReactDOMServer from 'react-dom/server'
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function CreateItinerary() {
@@ -14,6 +16,8 @@ function CreateItinerary() {
     const [bronx, setBronx] = useState([]);
     const [brooklyn, setBrooklyn] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [pdfReady, setPdfReady] = useState(false);
+    const [btnClicked, setBtnClicked] = useState(false);
     let checkManhattan = null;
     let checkStaten = null;
     let checkBrooklyn = null;
@@ -91,6 +95,7 @@ function CreateItinerary() {
                             setItinerary(itinerary)
                         }
                         setLoadingItinerary(true)
+                        setBtnClicked(false)
                     }}/>
                 <label className='form-check-label'>
                     {site.name} 
@@ -142,6 +147,23 @@ function CreateItinerary() {
         return buildSiteCard(site)
     }) 
 
+    const generatePdf = async (component, name) => {
+        setBtnClicked(true)
+        try{
+            let {data} = await axios.post('http://localhost:3001/generatepdf',{input: component, name:name});
+            console.log(data.msg)
+            if(data.msg==="success"){
+                setPdfReady(true)
+            }else{
+                setPdfReady(false)
+            }
+          
+        }catch(e){
+            console.log(e)
+            setPdfReady(false)
+        }
+    }
+
     if(loading){
         return <div>Loading...</div>
     } else {
@@ -169,7 +191,8 @@ function CreateItinerary() {
                     <br/>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setLoadingItinerary(false)
+                        setLoadingItinerary(false);
+                        setBtnClicked(false)
                     }}
                     >Load Itinerary</button>
 
@@ -179,6 +202,13 @@ function CreateItinerary() {
                         ?<div>
                             {!loadingItinerary && <h2>Your Itinerary Stops</h2>}
                             <br/>
+                            {!loadingItinerary && 
+                                <button 
+                                    onClick={(e)=>{e.preventDefault();generatePdf(ReactDOMServer.renderToString(<ItineraryList itinerary={itinerary} />), "itinerary")}}>
+                                    Generate Pdf
+                                </button>}
+                            {btnClicked && pdfReady && <div><br/><a href='http://localhost:3001/generatepdf/itinerary' target="_blank" rel="noreferrer">Pdf is ready to print/download</a></div>}
+                            {btnClicked && !pdfReady && <p>Please try again</p>}
                             {!loadingItinerary && <div>{card}</div>}
                             {!loadingItinerary && <div className='revolution'><hr/></div>} 
                             {!loadingItinerary &&

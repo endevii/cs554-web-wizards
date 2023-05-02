@@ -3,8 +3,6 @@ const router = express.Router();
 const data = require("../data");
 const sitesData = data.sites;
 
-const path = require("path");
-
  router
   .route('/siteBorough/:borough')
   .get(async (req, res) => {
@@ -28,28 +26,6 @@ router
             return res.status(404).json({error: "no historic data found"})
         }
     })
-router
-  .route("/generatepdf")
-  .post(async (req, res) => {
-    if(!req.body.input || !req.body.name){
-        return res.status(400).json({error: "invalid input"})
-    }
-    try {
-      data.htmltopdf.generatePdf(req.body.input, req.body.name);
-      return res.json({ msg: "Pdf generated successfully" });
-    } catch (e) {
-      return res.status(500).json({error: e});
-    }
-  });
-
-router.route("/generatedpdf/:name").get(async (req, res) => {
-  let name = req.params.name;
-  try {
-    return res.sendFile(path.resolve("generatedPdfs/" + name + ".pdf"));
-  } catch (e) {
-    return res.status(404).json({error: "pdf not found"})
-  }
-});
 
 router.route("/sites").get(async (req, res) => {
   let sites;
