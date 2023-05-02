@@ -67,7 +67,7 @@ function PopularItineraries() {
                   }))}}>Less Information</button>
             }
             {revolution && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Revolution />), "revolution")}>Generate PDF</button>}
-            {pdfReady.revolution === "Pdf is ready to print/download" ? <a href='http://localhost:3001/generatedpdf/revolution' target="_blank">{pdfReady.revolution}</a> : <p>{pdfReady.revolution}</p>}
+            {pdfReady.revolution === "Pdf is ready to print/download" ? <a href='http://localhost:3001/generatepdf/revolution' target="_blank">{pdfReady.revolution}</a> : <p>{pdfReady.revolution}</p>}
             {revolution && <Revolution />}
             <hr className="hr-custom"/>
             <div className="itinerary-container">
@@ -99,7 +99,7 @@ function PopularItineraries() {
                   }))}}>Less Information</button>
             }
             {staten && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Staten />), "staten")}>Generate PDF</button>}
-            {pdfReady.staten === "Pdf is ready to print/download"? <a href='http://localhost:3001/generatedpdf/staten' target="_blank">Pdf ready to print/download</a>:<p>{pdfReady.staten}</p>}
+            {pdfReady.staten === "Pdf is ready to print/download"? <a href='http://localhost:3001/generatepdf/staten' target="_blank">Pdf ready to print/download</a>:<p>{pdfReady.staten}</p>}
             {staten && <Staten />}
             <hr className="hr-custom"/>
         </div>
