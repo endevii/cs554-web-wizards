@@ -1,5 +1,24 @@
 import { Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React , {useState, useEffect} from 'react';
+
 function NavigationBar() {
+  const [userExists, setUserExists] = useState(false);
+  const [loading, setLoading] = useState(true);
+  let auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if(user){  
+                setUserExists(true);
+                setLoading(false);
+            } else {
+              setUserExists(false);
+                setLoading(false);
+            }
+        });
+  }, [auth])
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light" id="navbar-custom">
@@ -30,11 +49,26 @@ function NavigationBar() {
               </Link>
             </li>
           </ul>
-          <Link to="/signin">
-            <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
-              Login
-            </button>
-          </Link>
+          {!loading &&
+            <div>
+            {!userExists
+              ?<div>
+                <Link to="/signin">
+                  <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
+                    Login
+                  </button>
+                </Link>
+              </div>
+              : <div>
+                <Link to="/account">
+                  <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
+                    Account
+                  </button>
+                </Link>
+              </div>
+            }
+            </div>
+          }
         </div>
       </nav>
     </>

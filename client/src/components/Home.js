@@ -6,6 +6,8 @@ function Home() {
       <h1>Welcome!</h1>
       <SlideShow />
       <div className="welcome-msg">
+        <br/>
+        <br/>
         <h3>Ready to explore the rich history of NYC?</h3>
         <p>
           Let us make it easier for you to decide where to go in your upcoming

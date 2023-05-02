@@ -62,6 +62,10 @@
   color: #414c57;
 }
 
+.img {
+  width: 10%;
+}
+
 .slide-show-div {
   width: 55%;
   height: 100%;
@@ -286,12 +290,12 @@ p {
 
 .imageOne{
   grid-column: 10 / span 3;
-  grid-row: 7 / span 20;
+  grid-row: 11 / span 20;
 }
 
 .imageTwo {
   grid-column: 13 / span 3;
-  grid-row: 4 / span 20;
+  grid-row: 2 / span 20;
 }
 
 .imageThree{
@@ -306,7 +310,7 @@ p {
 
 .stepImageOne{
   grid-column: 10 / span 3;
-  grid-row: 13 / span 20;
+  grid-row: 10 / span 20;
 }
 
 .stepImageTwo {
@@ -328,25 +332,28 @@ p {
   grid-column: 2 / span 6;
   grid-row: 2 / span 27;
   font-size: x-large;
+  text-align: justify;
 }
 
 .itinerary-description-two {
   grid-column: 7 / span 6;
   grid-row: 2 / span 27;
   font-size: x-large;
+  text-align: justify;
 }
 
 .step-description {
   grid-column: 2 / span 6;
   grid-row: 1 / span 27;
   font-size: large;
-  text-align: left;
+  text-align: justify;
 }
 
 .step-description-two {
   grid-column: 7 / span 6;
   grid-row: 2 / span 27;
   font-size: large;
+  text-align: justify;
 }
 
 .hr-custom{
@@ -381,4 +388,8 @@ p {
 .create-itinerary-paragraph {
   width: 50%;
   margin: auto;
+}
+
+.link-itinerary {
+  color: #c24646;
 }
