@@ -10,7 +10,6 @@ function PopularItineraries() {
     const [revolution, setRevolution] = useState(false);
     const [staten, setStaten] = useState(false);
     const [battle, setBattle] = useState(false);
-    //const [htmlString, sethtmlString] = useState( ReactDOMServer.renderToString(<Revolution />))
     const [pdfReady, setPdfReady] = useState({revolution: false, staten: false})
     const generatePdf = async (component, name) => {
         try{
