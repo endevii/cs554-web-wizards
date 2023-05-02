@@ -121,6 +121,24 @@ const getSitesByBorough = async (borough) => {
   return siteList;
 };
 
+const getSitesByName = async (name) => {
+  if(!name) throw "ERROR: NAME IS REQUIRED";
+
+  if(typeof name !== "string") throw "ERROR: NAME MUST BE A STRING";
+
+  if (name.trim().length === 0) throw "ERROR: NAME CAN'T BE EMPTY STRING";
+
+  name = helpers.validSiteName(name);
+
+  const siteCollection = await sites();
+
+  const siteList = await siteCollection.find({name: name}).toArray();
+
+  if (!siteList) throw "ERROR: COULD NOT FIND SITES";
+
+  return siteList;
+};
+
 const getSitesByCategory = async (category) => {};
 
 const getSitesByLocation = async (location) => {};
@@ -375,5 +393,6 @@ module.exports = {
   sortSitesByRatingHighToLow,
   sortSitesByRatingLowToHigh,
   searchSites,
-  getSitesByBorough
+  getSitesByBorough,
+  getSitesByName
 };

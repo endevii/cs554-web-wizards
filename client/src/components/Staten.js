@@ -1,4 +1,30 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import CustomItineraryMap from './CustomItineraryMap';
+
 function Staten() {
+    const [sites, setSites] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const getSite = async (name) => {
+            const getSite = async () => {
+                const { data } = await axios.get(
+                  `http://localhost:3001/sites/name/${name}`
+                );
+                if(sites.filter(e => e.name === data[0].name).length === 0){
+                    sites.push(data[0]);
+                    setSites(sites);
+                }
+                setLoading(false);
+              };
+              getSite();
+        };
+        getSite("Staten Island Museum");
+        getSite("Staten Island Borough Hall");
+        getSite("Historic Richmond Town");
+    }, [sites]);
+
     return (
         <div className='revolution'>
             <hr/>
@@ -63,6 +89,10 @@ function Staten() {
                 kids 5 and under. Tickets can be bought online on their website, which can be found here. 
                 </div>
             </div>
+            <hr/>
+            {!loading &&
+                <CustomItineraryMap key="map" data={sites} />
+            }
         </div>
     )
 }
