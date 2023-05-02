@@ -16,7 +16,7 @@ function PopularItineraries() {
         try{
             let {data} = await axios.post('http://localhost:3001/generatepdf',{input: component, name:name});
             console.log(data.msg)
-            if(data.msg=="success"){
+            if(data.msg==="success"){
                 setPdfReady(prev => ({
                     ...prev,
                     ...{[name]: "Pdf is ready to print/download"}

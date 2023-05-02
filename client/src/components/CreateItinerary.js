@@ -207,7 +207,7 @@ function CreateItinerary() {
                                     onClick={(e)=>{e.preventDefault();generatePdf(ReactDOMServer.renderToString(<ItineraryList itinerary={itinerary} />), "itinerary")}}>
                                     Generate Pdf
                                 </button>}
-                            {btnClicked && pdfReady && <a href='http://localhost:3001/generatepdf/itinerary' target="_blank" rel="noreferrer">Pdf is ready to print/download</a>}
+                            {btnClicked && pdfReady && <div><br/><a href='http://localhost:3001/generatepdf/itinerary' target="_blank" rel="noreferrer">Pdf is ready to print/download</a></div>}
                             {btnClicked && !pdfReady && <p>Please try again</p>}
                             {!loadingItinerary && <div>{card}</div>}
                             {!loadingItinerary && <div className='revolution'><hr/></div>} 
