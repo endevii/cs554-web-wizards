@@ -95,4 +95,14 @@ router.route("/sites/search/:searchTerm").get(async (req, res) => {
     return res.status(404).json({ error: e });
   }
 });
+
+router.route("/sites/name/:name").get(async (req, res) => {
+  let name = req.params.name;
+  try {
+    const sites = await sitesData.getSitesByName(name);
+    return res.json(sites);
+  } catch (e) {
+    return res.status(404).json({ error: e });
+  }
+});
 module.exports = router;
