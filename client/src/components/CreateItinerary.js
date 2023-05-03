@@ -198,7 +198,7 @@ function CreateItinerary() {
 
                     <br/>
                     <br/>
-                    {itinerary.length > 1
+                    {itinerary.length > 1 && itinerary.length < 13
                         ?<div>
                             {!loadingItinerary && <h2>Your Itinerary Stops</h2>}
                             <br/>
@@ -215,7 +215,7 @@ function CreateItinerary() {
                                 <CustomItineraryMap key="map" data={itinerary} />
                             }
                         </div>
-                        :<div>{!loadingItinerary && <p>Add at least two stops to your itinerary!</p>}</div>
+                        :<div>{!loadingItinerary  && <p>{itinerary.length<2?"Add at least two stops to your itinerary!":"Only up to 12 stops can be added to your itinerary"}</p>}</div>
                     }
                     <br/> 
                 </form>

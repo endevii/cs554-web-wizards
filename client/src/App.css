@@ -244,9 +244,10 @@ p {
 }
 .map {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 80%;
   margin-top: 20px;
+  flex-direction: row;
 }
 
 .button {
@@ -392,4 +393,25 @@ p {
 
 .link-itinerary {
   color: #c24646;
+}
+
+#instructions {
+  position: relative;
+  width: 25%;
+  top: 0;
+  bottom: 20%;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+
+.hidden {
+  display:none;
+}
+
+.dir-btn {
+  height: 40px;
+
+  width: auto;
 }
