@@ -1,29 +1,35 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import axios from "axios";
+import "../App.css";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
+
 function CustomItineraryMap(props) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng] = useState(-74.006);
   const [lat] = useState(40.740121);
   const [zoom] = useState(9);
-  const [data, setData] = useState([]);
+  const [siteData, setSiteData] = useState([]);
   const [markerData, setMarkerData] = useState([]);
+  const [geojson, setGeojson] = useState(null);
+  const [routeAvailable, setRouteAvailable] = useState(true);
+  const [showDirections, setShowDirections] = useState(false);
 
   useEffect(() => {
-    setData(props.data)
+    setSiteData(props.data);
     let siteArr = [];
-      data.map((site) => { 
-        let siteInfo = {};
-        siteInfo.coordinates = site.location.coordinates;
-        siteInfo.name = site.name;
-        siteInfo.address = site.location.address;
-        siteArr.push(siteInfo);
-        return siteInfo
-      });
-      setMarkerData(siteArr);
-  }, [data, props.data])
+    siteData.map((site) => {
+      let siteInfo = {};
+      siteInfo.coordinates = site.location.coordinates;
+      siteInfo.name = site.name;
+      siteInfo.address = site.location.address;
+      siteArr.push(siteInfo);
+      return siteInfo;
+    });
+    setMarkerData(siteArr);
+  }, [siteData, props.data]);
 
   useEffect(() => {
     if (map.current) return;
@@ -33,30 +39,129 @@ function CustomItineraryMap(props) {
       center: [lng, lat],
       zoom: zoom,
     });
-  }); 
+  });
 
-  if (markerData.length > 1) {
-    for (let i = 0; i < markerData.length; i++) {
-      const el = document.createElement("div");
-      el.className = "marker";
-      new mapboxgl.Marker()
-        .setLngLat(markerData[i].coordinates)
-        .setPopup(
-          new mapboxgl.Popup()
-            .addClassName("map-popup")
-            .setHTML(
-              `<h1>${markerData[i].name}</h1><p>${markerData[i].address}</p>`
-            )
-        )
-        .addTo(map.current);
+  useEffect(() => {
+    if (geojson) {
+      if (map.current.getSource("route")) {
+        map.current.getSource("route").setData(geojson);
+      } else {
+        map.current.addLayer({
+          id: "route",
+          type: "line",
+          source: {
+            type: "geojson",
+            data: geojson,
+          },
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#3887be",
+            "line-width": 5,
+            "line-opacity": 0.75,
+          },
+        });
+      }
     }
-  }
+  }, [geojson]);
+
+  const getRoute = async (coordinates, mode) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.mapbox.com/optimized-trips/v1/mapbox/walking/${coordinates}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
+      );
+      if (data.trips) {
+        const instructions = document.getElementById("instructions");
+        let steps = [];
+        data.trips[0].legs.map((leg) => {
+          steps = [...steps, ...leg.steps];
+        });
+        let tripInstructions = "";
+        for (const step of steps) {
+          tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+        }
+        instructions.innerHTML = `<h4>Round Trip Duration: ${Math.floor(
+          data.trips[0].duration / 60
+        )} min 🚶 </h4><ol>${tripInstructions}</ol>`;
+        return data.trips[0].geometry.coordinates;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    const addMarkers = async () => {
+      if (markerData.length > 1) {
+        for (let i = 0; i < markerData.length; i++) {
+          const el = document.createElement("div");
+          el.className = "marker";
+          new mapboxgl.Marker()
+            .setLngLat(markerData[i].coordinates)
+            .setPopup(
+              new mapboxgl.Popup()
+                .addClassName("map-popup")
+                .setHTML(
+                  `<h1>${markerData[i].name}</h1><p>${markerData[i].address}</p>`
+                )
+            )
+            .addTo(map.current);
+        }
+        let allCoordinates = "";
+        markerData.map((site) => {
+          allCoordinates =
+            allCoordinates +
+            `${site.coordinates[0]},` +
+            `${site.coordinates[1]};`;
+        });
+        allCoordinates = allCoordinates.substring(0, allCoordinates.length - 1);
+
+        let route = await getRoute(allCoordinates);
+        if (route) {
+          setGeojson({
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: route,
+            },
+          });
+        } else {
+          setRouteAvailable(false);
+        }
+      }
+    };
+    if (markerData.length > 0) addMarkers();
+  }, [markerData]);
+
+  useEffect(() => {
+    const instructionsDivv = document.getElementById("instructions");
+    if (showDirections) {
+      instructionsDivv.classList.remove("hidden");
+    } else {
+      instructionsDivv.classList.add("hidden");
+    }
+  }, [showDirections]);
 
   return (
     <>
       <h2>Map Of Your Itinerray Stops</h2>
       <div className="map">
         <div ref={mapContainer} className="map-container" />
+        <button
+          className="dir-btn"
+          onClick={(e) => {
+            e.preventDefault();
+            setShowDirections(!showDirections);
+          }}
+        >
+          {!showDirections ? "Show directions" : "Hide directions"}
+        </button>
+        <div id="instructions" className="hidden">
+          {!routeAvailable && <p>No route available</p>}
+        </div>
       </div>
     </>
   );
