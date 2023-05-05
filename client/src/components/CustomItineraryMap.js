@@ -73,7 +73,7 @@ function CustomItineraryMap(props) {
         `https://api.mapbox.com/optimized-trips/v1/mapbox/walking/${coordinates}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
       );
       if (data.trips) {
-        const instructions = document.getElementById("instructions");
+        const instructions = document.getElementById(`instructions${props.id}`);
         let steps = [];
         data.trips[0].legs.map((leg) => {
           steps = [...steps, ...leg.steps];
@@ -137,7 +137,7 @@ function CustomItineraryMap(props) {
   }, [markerData]);
 
   useEffect(() => {
-    const instructionsDivv = document.getElementById("instructions");
+    const instructionsDivv = document.getElementById(`instructions${props.id}`);
     if (showDirections) {
       instructionsDivv.classList.remove("hidden");
     } else {
@@ -159,7 +159,7 @@ function CustomItineraryMap(props) {
         >
           {!showDirections ? "Show directions" : "Hide directions"}
         </button>
-        <div id="instructions" className="hidden">
+        <div id={`instructions${props.id}`} className="hidden">
           {!routeAvailable && <p>No route available</p>}
         </div>
       </div>
