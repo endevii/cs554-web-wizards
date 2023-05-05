@@ -171,14 +171,12 @@ function CustomItineraryMap(props) {
           {!showDirections ? "Show directions" : "Hide directions"}
         </button>
        <div>
-       <form>
           <label htmlFor="transportMode">Transportation Mode:</label>
           <select name="transportMode" onChange={(e)=>changeHandler(e.target.value)}>
             <option value="walking">Walking</option>
             <option value="cycling">Cycling</option>
             <option value="driving">Driving</option>
           </select>
-        </form>
        </div>
         <div id={`instructions${props.id}`} className="hidden">
         
