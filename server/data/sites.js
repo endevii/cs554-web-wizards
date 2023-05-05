@@ -146,6 +146,7 @@ const searchSites = async (searchTerm) => {
 };
 
 const updateSite = async (id, updatedSite) => {
+  console.log("updateSite");
   if (!id) throw "ERROR: ID IS REQUIRED";
 
   if (typeof id !== "string") throw "ERROR: ID MUST BE A STRING";
@@ -164,18 +165,27 @@ const updateSite = async (id, updatedSite) => {
   if (Object.keys(updatedSite).length === 0)
     throw "ERROR: UPDATED SITE CAN'T BE EMPTY";
 
+  // console.log(id, ": ", updatedSite);
   const siteCollection = await sites();
 
-  const updatedSiteData = {};
+  let updatedSiteData = {};
 
   let newSite = await siteCollection.findOne({ _id: id });
   if (!newSite) throw "ERROR: COULD NOT FIND SITE";
-
+  console.log("before");
   try {
     updatedSiteData = helpers.siteChanges(newSite, updatedSite);
+    console.log("updatedSiteData: ", updatedSiteData);
   } catch (e) {
+    console.log(e);
     throw e;
   }
+  console.log("after");
+  updatedSiteData._id = id;
+  updatedSiteData.rating = newSite.rating;
+  updatedSiteData.reviews = newSite.reviews;
+  updatedSiteData.founded = parseInt(updatedSiteData.founded);
+  console.log("updatedSiteData: ", updatedSiteData);
 
   const updatedInfo = await siteCollection.updateOne(
     { _id: id },

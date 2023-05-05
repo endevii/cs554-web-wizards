@@ -83,6 +83,7 @@ router.route("/sites/:id").patch(async (req, res) => {
   }
 
   let updatedSite = req.body;
+
   let site;
 
   try {

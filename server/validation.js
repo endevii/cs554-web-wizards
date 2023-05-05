@@ -325,7 +325,7 @@ function validAge(str) {
 
   if (parseInt(str.trim()) < 0) throw "ERROR: AGE MUST BE A POSITIVE NUMBER";
 
-  return str.trim();
+  return parseInt(str.trim());
 }
 
 function validRating(str) {
@@ -482,16 +482,34 @@ function validSite(site) {
   return site;
 }
 
+function compareArrays(arr1, arr2) {
+  if (!arr1) throw "ERROR: FIRST ARRAY IS REQUIRED";
+  if (!arr2) throw "ERROR: SECOND ARRAY IS REQUIRED";
+  if (!Array.isArray(arr1)) throw "ERROR: FIRST ARRAY MUST BE AN ARRAY";
+  if (!Array.isArray(arr2)) throw "ERROR: SECOND ARRAY MUST BE AN ARRAY";
+
+  if (arr1.length !== arr2.length) return false;
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) return false;
+  }
+
+  return true;
+}
+
 function siteChanges(newSite, updatedSite) {
-  if (!site) throw "ERROR: SITE IS REQUIRED";
-  if (!changes) throw "ERROR: CHANGES IS REQUIRED";
+  if (!newSite) throw "ERROR: SITE IS REQUIRED";
+  if (!updatedSite) throw "ERROR: CHANGES IS REQUIRED";
 
   let updatedSiteData = {};
+  let updatedLocation = {};
+  let updatedHours = {};
 
   let updatedCount = 0;
 
   if (updatedSite.name) {
     if (updatedSite.name !== newSite.name) {
+      console.log("name");
       updatedCount += 1;
     }
     updatedSiteData.name = validSiteName(updatedSite.name);
@@ -500,7 +518,8 @@ function siteChanges(newSite, updatedSite) {
   }
 
   if (updatedSite.description) {
-    if (updatedSite.description !== newSite.description) {
+    if (compareArrays(updatedSite.description, newSite.description) === false) {
+      console.log("description");
       updatedCount += 1;
     }
     updatedSiteData.description = validSiteDescription(updatedSite.description);
@@ -511,77 +530,94 @@ function siteChanges(newSite, updatedSite) {
   if (updatedSite.location) {
     if (updatedSite.location.address) {
       if (updatedSite.location.address !== newSite.location.address) {
+        console.log("address");
         updatedCount += 1;
       }
-      updatedSiteData["location.address"] = validString(
-        updatedSite.location.addres,
+      updatedLocation.address = validString(
+        updatedSite.location.address,
         "ADDRESS"
       );
     } else {
-      updatedSiteData["location.address"] = newSite.location.address;
+      updatedLocation.address = newSite.location.address;
     }
 
     if (updatedSite.location.city) {
       if (updatedSite.location.city !== newSite.location.city) {
+        console.log("city");
         updatedCount += 1;
       }
-      updatedSiteData["location.city"] = validString(
-        updatedSite.location.city,
-        "CITY"
-      );
+      updatedLocation.city = validString(updatedSite.location.city, "CITY");
     } else {
-      updatedSiteData["location.city"] = newSite.location.city;
+      updatedLocation.city = newSite.location.city;
     }
 
     if (updatedSite.location.state) {
       if (updatedSite.location.state !== newSite.location.state) {
+        console.log("state");
         updatedCount += 1;
       }
-      updatedSiteData["location.state"] = validState(
-        updatedSite.location.state
-      );
+      updatedLocation.state = validState(updatedSite.location.state);
     } else {
-      updatedSiteData["location.state"] = newSite.location.state;
+      updatedLocation.state = newSite.location.state;
     }
 
     if (updatedSite.location.zipCode) {
       if (updatedSite.location.zipCode !== newSite.location.zipCode) {
+        console.log("zipCode");
         updatedCount += 1;
       }
-      updatedSiteData["location.zipCode"] = validZipcode(
-        updatedSite.location.zipCode
+      updatedLocation.zipCode = validZipcode(updatedSite.location.zipCode);
+    } else {
+      updatedLocation.zipCode = newSite.location.zipCode;
+    }
+
+    if (updatedSite.location.coordinates) {
+      if (
+        compareArrays(
+          updatedSite.location.coordinates,
+          newSite.location.coordinates
+        ) === false
+      ) {
+        console.log("coordinates");
+        updatedCount += 1;
+      }
+      updatedLocation.coordinates = validCoordinates(
+        updatedSite.location.coordinates
       );
     } else {
-      updatedSiteData["location.zipCode"] = newSite.location.zipCode;
+      updatedLocation.coordinates = newSite.location.coordinates;
     }
   } else {
-    updatedSiteData.location = newSite.location;
+    updatedLocation = newSite.location;
   }
 
   if (updatedSite.hours) {
     if (updatedSite.hours.day) {
       if (updatedSite.hours.day !== newSite.hours.day) {
+        console.log("day");
         updatedCount += 1;
       }
-      updatedSiteData["hours.day"] = validDays(updatedSite.hours.day);
+      updatedHours.day = validDays(updatedSite.hours.day);
     } else {
-      updatedSiteData["hours.day"] = newSite.hours.day;
+      updatedHours.day = newSite.hours.day;
     }
 
     if (updatedSite.hours.time) {
       if (updatedSite.hours.time !== newSite.hours.time) {
+        console.log("time");
         updatedCount += 1;
       }
-      updatedSiteData["hours.time"] = validHours(updatedSite.hours.time);
+      updatedHours.time = validHours(updatedSite.hours.time);
     } else {
-      updatedSiteData["hours.time"] = newSite.hours.time;
+      updatedHours.time = newSite.hours.time;
     }
   } else {
-    updatedSiteData.hours = newSite.hours;
+    updatedHours = newSite.hours;
   }
 
   if (updatedSite.website) {
     if (updatedSite.website !== newSite.website) {
+      console.log("website");
       updatedCount += 1;
     }
     updatedSiteData.website = validWebsite(updatedSite.website);
@@ -591,6 +627,7 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.category) {
     if (updatedSite.category !== newSite.category) {
+      console.log("category");
       updatedCount += 1;
     }
     updatedSiteData.category = validString(updatedSite.category, "CATEGORY");
@@ -600,6 +637,7 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.borough) {
     if (updatedSite.borough !== newSite.borough) {
+      console.log("borough");
       updatedCount += 1;
     }
     updatedSiteData.borough = validBorough(updatedSite.borough);
@@ -609,16 +647,18 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.founded) {
     if (updatedSite.founded !== newSite.founded) {
+      console.log("founded");
       updatedCount += 1;
     }
     updatedSiteData.founded = validAge(updatedSite.founded.toString());
-    updateSiteData.founded = parseInt(updatedSiteData.founded);
+    updatedSiteData.founded = parseInt(updatedSiteData.founded);
   } else {
     updatedSiteData.founded = newSite.founded;
   }
 
   if (updatedSite.image) {
     if (updatedSite.image !== newSite.image) {
+      console.log("image");
       updatedCount += 1;
     }
     updatedSiteData.image = validImage(updatedSite.image);
@@ -626,8 +666,10 @@ function siteChanges(newSite, updatedSite) {
     updatedSiteData.image = newSite.image;
   }
 
-  if (updatedCount === 0) throw "ERROR: NO UPDATES WERE MADE";
+  updatedSiteData.location = updatedLocation;
+  updatedSiteData.hours = updatedHours;
 
+  if (updatedCount === 0) throw "ERROR: NO UPDATES WERE MADE";
   return updatedSiteData;
 }
 
@@ -635,6 +677,8 @@ function checkToBeUpdated(site) {
   if (!site) throw "ERROR: SITE IS REQUIRED";
 
   let updatedSiteData = {};
+  let updatedTime = {};
+  let updatedLocation = {};
 
   if (site.name) {
     updatedSiteData.name = validSiteName(site.name);
@@ -646,35 +690,33 @@ function checkToBeUpdated(site) {
 
   if (site.location) {
     if (site.location.address) {
-      updatedSiteData["location.address"] = validString(
-        site.location.address,
-        "ADDRESS"
-      );
+      updatedLocation.address = validString(site.location.address, "ADDRESS");
     }
 
     if (site.location.city) {
-      updatedSiteData["location.city"] = validString(
-        site.location.city,
-        "CITY"
-      );
+      updatedLocation.city = validString(site.location.city, "CITY");
     }
 
     if (site.location.state) {
-      updatedSiteData["location.state"] = validState(site.location.state);
+      updatedLocation.state = validState(site.location.state);
     }
 
     if (site.location.zipCode) {
-      updatedSiteData["location.zipCode"] = validZipcode(site.location.zipCode);
+      updatedLocation.zipCode = validZipcode(site.location.zipCode);
+    }
+
+    if (site.location.coordinates) {
+      updatedLocation.coordinates = validCoordinates(site.location.coordinates);
     }
   }
 
   if (site.hours) {
     if (site.hours.day) {
-      updatedSiteData["hours.day"] = validDays(site.hours.day);
+      updatedTime.day = validDays(site.hours.day);
     }
 
     if (site.hours.time) {
-      updatedSiteData["hours.time"] = validHours(site.hours.time);
+      updatedTime.time = validHours(site.hours.time);
     }
   }
 
@@ -697,6 +739,9 @@ function checkToBeUpdated(site) {
   if (site.image) {
     updatedSiteData.image = validImage(site.image);
   }
+
+  updatedSiteData.location = updatedLocation;
+  updatedSiteData.hours = updatedTime;
 
   return updatedSiteData;
 }
