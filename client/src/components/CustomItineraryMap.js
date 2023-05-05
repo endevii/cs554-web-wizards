@@ -8,15 +8,15 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 function CustomItineraryMap(props) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng] = useState(-74.006);
-  const [lat] = useState(40.740121);
-  const [zoom] = useState(9);
+  const [lng] = useState(props.data[0].location.coordinates[0]);
+  const [lat] = useState(props.data[0].location.coordinates[1]);
+  const [zoom] = useState(11);
   const [siteData, setSiteData] = useState([]);
   const [markerData, setMarkerData] = useState([]);
   const [geojson, setGeojson] = useState(null);
   const [routeAvailable, setRouteAvailable] = useState(true);
   const [showDirections, setShowDirections] = useState(false);
-
+  const [transportMode, setTransportMode] = useState("walking")
   useEffect(() => {
     setSiteData(props.data);
     let siteArr = [];
@@ -67,13 +67,13 @@ function CustomItineraryMap(props) {
     }
   }, [geojson]);
 
-  const getRoute = async (coordinates, mode) => {
+  const getRoute = async (coordinates) => {
     try {
       const { data } = await axios.get(
-        `https://api.mapbox.com/optimized-trips/v1/mapbox/walking/${coordinates}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
+        `https://api.mapbox.com/optimized-trips/v1/mapbox/${transportMode}/${coordinates}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
       );
       if (data.trips) {
-        const instructions = document.getElementById("instructions");
+        const instructions = document.getElementById(`instructions${props.id}`);
         let steps = [];
         data.trips[0].legs.map((leg) => {
           steps = [...steps, ...leg.steps];
@@ -82,9 +82,17 @@ function CustomItineraryMap(props) {
         for (const step of steps) {
           tripInstructions += `<li>${step.maneuver.instruction}</li>`;
         }
+        let transportEmoji;
+        if(transportMode==="walking"){
+            transportEmoji = "🚶"
+        }else if(transportMode==="cycling"){
+          transportEmoji = "🚴"
+        } else {
+          transportEmoji = "🚗"
+        }
         instructions.innerHTML = `<h4>Round Trip Duration: ${Math.floor(
           data.trips[0].duration / 60
-        )} min 🚶 </h4><ol>${tripInstructions}</ol>`;
+        )} min ${transportEmoji} </h4><ol>${tripInstructions}</ol>`;
         return data.trips[0].geometry.coordinates;
       }
     } catch (e) {
@@ -134,10 +142,10 @@ function CustomItineraryMap(props) {
       }
     };
     if (markerData.length > 0) addMarkers();
-  }, [markerData]);
+  }, [markerData, transportMode]);
 
   useEffect(() => {
-    const instructionsDivv = document.getElementById("instructions");
+    const instructionsDivv = document.getElementById(`instructions${props.id}`);
     if (showDirections) {
       instructionsDivv.classList.remove("hidden");
     } else {
@@ -145,6 +153,9 @@ function CustomItineraryMap(props) {
     }
   }, [showDirections]);
 
+  const changeHandler = (e) => {
+    setTransportMode(e)
+  }
   return (
     <>
       <h2>Map Of Your Itinerray Stops</h2>
@@ -159,7 +170,16 @@ function CustomItineraryMap(props) {
         >
           {!showDirections ? "Show directions" : "Hide directions"}
         </button>
-        <div id="instructions" className="hidden">
+       <div>
+          <label htmlFor="transportMode">Transportation Mode:</label>
+          <select name="transportMode" onChange={(e)=>changeHandler(e.target.value)}>
+            <option value="walking">Walking</option>
+            <option value="cycling">Cycling</option>
+            <option value="driving">Driving</option>
+          </select>
+       </div>
+        <div id={`instructions${props.id}`} className="hidden">
+        
           {!routeAvailable && <p>No route available</p>}
         </div>
       </div>

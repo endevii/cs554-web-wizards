@@ -212,7 +212,7 @@ function CreateItinerary() {
                             {!loadingItinerary && <div>{card}</div>}
                             {!loadingItinerary && <div className='revolution'><hr/></div>} 
                             {!loadingItinerary &&
-                                <CustomItineraryMap key="map" data={itinerary} />
+                                <CustomItineraryMap key="map" data={itinerary} id="Custom"/>
                             }
                         </div>
                         :<div>{!loadingItinerary  && <p>{itinerary.length<2?"Add at least two stops to your itinerary!":"Only up to 12 stops can be added to your itinerary"}</p>}</div>
