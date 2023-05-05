@@ -73,7 +73,7 @@ function Account() {
                 <h2>Itinerary</h2>
                 {itinerary.itinerary.map((site) => {
                     return (
-                        <div>
+                        <div key={site._id}>
                             {buildSiteCard(site)}
                         </div>
                     )

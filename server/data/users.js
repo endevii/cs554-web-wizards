@@ -25,42 +25,43 @@ const addItinerary = async (
 ) => {
     uid = helpers.validString(uid);
 
-    /*if(!itinerary){
-        throw "ERROR: ITINERARY MUST BE PROVIDED";
-    }
-
-    if(typeof itinerary !== Object){
-        throw "ERROR: ITINERARY MUST BE OBJECT"
-    }*/
-
     const userCollection = await users();
 
     const user = await userCollection.findOne({ uid: uid });
     if (!user) throw "ERROR: USER NOT FOUND";
 
     let index = -1;
-    
-    //let itinerary_list = itineraries.splice(index, 1);
-
-    let itineraryid = "";
-    itinerary.forEach(stop => {
-        itineraryid = itineraryid + stop._id;
-    })
 
     let itineraries = user.itineraries;
+
+    let id_array = [];
+    itinerary.forEach(stop => {
+        id_array.push(stop._id);
+    })
+    
+    let equal = false;
+
     for(let i = 0; i < itineraries.length; i++){
-        if(itineraries[i].id === itineraryid){
+        id_array.forEach(id => {
+            if(itineraries[i].ids.length === id_array.length && itineraries[i].ids.includes(id)){
+                equal = true;
+            } else {
+                equal = false;
+            }
+        })
+        if(equal === true){
+            console.log(i);
             index = i;
         }
     }
 
     if(index !== -1){
-        throw "ERROR: USER HAS ALREADY SAVED ITINERARY";
+        throw "ERROR: USER HAS SAVED ITINERARY";
     }
 
     const updateInfo = await userCollection.updateOne(
         { uid: uid },
-        { $push: { itineraries: {id: itineraryid, itinerary: itinerary }} }
+        { $push: { itineraries: {ids: id_array, itinerary: itinerary }} }
     );
     if (updateInfo.modifiedCount === 0) {
         throw "ERROR: COULD NOT ADD ITINERARY";
@@ -76,27 +77,27 @@ const deleteItinerary = async (
     let index = -1;
     uid = helpers.validString(uid);
 
-    /*if(!itinerary){
-        throw "ERROR: ITINERARY MUST BE PROVIDED";
-    }
-
-    if(typeof itinerary !== Object){
-        throw "ERROR: ITINERARY MUST BE OBJECT"
-    }*/
-
     const userCollection = await users();
 
     const user = await userCollection.findOne({ uid: uid });
     if (!user) throw "ERROR: USER NOT FOUND";
-    
+
     let itineraries = user.itineraries;
+    
+    let equal = false;
+
     for(let i = 0; i < itineraries.length; i++){
-        if(itineraries[i].id === itinerary.id){
+        itinerary.ids.forEach(id => {
+            if(itineraries[i].ids.length === itinerary.ids.length && itineraries[i].ids.includes(id)){
+                equal = true;
+            } else {
+                equal = false;
+            }
+        })
+        if(equal === true){
             index = i;
         }
     }
-    
-    //let itinerary_list = itineraries.splice(index, 1);
     if(index === -1){
         throw "ERROR: USER HAS NOT SAVED ITINERARY";
     }
@@ -131,16 +132,8 @@ const userHasItinerary = async (
     uid,
     itinerary
 ) => {
+    let index = -1;
     uid = helpers.validString(uid);
-
-    /*if(!itinerary){
-        throw "ERROR: ITINERARY MUST BE PROVIDED";
-    }
-
-    if(typeof itinerary !== Object){
-        throw "ERROR: ITINERARY MUST BE OBJECT"
-    }*/
-    console.log(itinerary)
 
     const userCollection = await users();
 
@@ -148,12 +141,26 @@ const userHasItinerary = async (
     if (!user) throw "ERROR: USER NOT FOUND";
 
     let itineraries = user.itineraries;
+    
+    let equal = false;
+
     for(let i = 0; i < itineraries.length; i++){
-        if(itineraries[i].id === itinerary.id){
-            return true;
+        itinerary.ids.forEach(id => {
+            if(itineraries[i].ids.includes(id)){
+                equal = true;
+            } else {
+                equal = false;
+            }
+        })
+        if(equal === true){
+            index = i;
         }
     }
-    return false;
+    if(index === -1){
+        return false;
+    } else {
+        return true;
+    }
 }
 
 module.exports = {

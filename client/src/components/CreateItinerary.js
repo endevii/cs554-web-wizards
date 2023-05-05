@@ -28,7 +28,7 @@ function CreateItinerary() {
 
     const [user, setUser] = useState(null);
     const [loadingUser, setLoadingUser] = useState(true);
-    const [mongoUser, setMongoUser] = useState(null);
+    //const [mongoUser, setMongoUser] = useState(null);
     const [name, setName] = useState("");
     let auth = getAuth();
 
@@ -96,6 +96,49 @@ function CreateItinerary() {
         getAllSites('Bronx');
         getAllSites('Queens');
     }, []);
+
+    const [saved, setSaved] = useState(false);
+    const [itineraries, setItineraries] = useState([]);
+    const [mongoUser, setMongoUser] = useState(null);
+    const [loadingMongo, setLoadingMongo] = useState(true);
+    useEffect(() => {
+        const getUser = async (uid) => {
+            const { data } = await axios.get("http://localhost:3001/user/"+uid);
+            setMongoUser(data);
+            setLoadingMongo(false);
+            mongoUser && setItineraries(user.itineraries);
+        };
+        if(!loadingUser){
+            getUser(user.uid);
+        }
+    }, [loadingUser, user, mongoUser]);
+
+    useEffect(() => {
+        const checkAdded = async(uid, itinerary) => {
+            try{
+                const { data } = await axios.get("http://localhost:3001/has/"+uid, {
+                    params: {
+                        itinerary: JSON.stringify(itinerary)
+                    }
+                })
+                setSaved(data);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        let id_array = [];
+        itinerary.forEach(site => {
+            id_array.push(site._id);
+        })
+        let temp = {
+            ids: id_array,
+            itinerary: itinerary
+        }
+        if(!loadingMongo){
+            checkAdded(user.uid, temp)
+        }
+
+    }, [itineraries, itinerary, loading, loadingMongo, user, loadingItinerary]);
 
     const buildSiteCheck = (site) => {
         return (
@@ -238,52 +281,54 @@ function CreateItinerary() {
                                 <CustomItineraryMap key="map" data={itinerary} />
                             }
                             <br/>
-            {!loading && !loadingUser &&
-                <button onClick={(async (e) => {
-                    e.preventDefault();
-                    //console.log(sites)
-                    try{
-                        const { data } = await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
-                            params: {
-                                itinerary: JSON.stringify(itinerary)
+                            {!saved
+                            ?<div>
+                                {!loading && !loadingUser && !loadingMongo && !loadingItinerary &&
+                                    <button onClick={(async (e) => {
+                                        e.preventDefault();
+                                        //console.log(sites)
+                                        try{
+                                            await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
+                                                params: {
+                                                    itinerary: JSON.stringify(itinerary)
+                                                }
+                                            })
+                                            alert("Itinerary saved");
+                                            setSaved(true);
+                                        }catch(e){
+                                            alert("Error: You already saved this itinerary");
+                                        }
+                                    })}>Save Itinerary</button>
+                                }
+                            </div>
+                            :<div>
+                                {!loading && !loadingUser && !loadingMongo && !loadingItinerary &&
+                                    <button onClick={(async (e) => {
+                                        e.preventDefault();
+                                        //console.log(sites)
+                                        let id_array = [];
+                                        itinerary.forEach(site => {
+                                            id_array.push(site._id)
+                                        })
+                                        let temp = {
+                                            ids: id_array,
+                                            itinerary: itinerary
+                                        }
+                                        try{
+                                            await axios.get("http://localhost:3001/deleteItinerary/"+user.uid, {
+                                                params: {
+                                                    itinerary: JSON.stringify(temp)
+                                                }
+                                            })
+                                            alert("Itinerary unsaved");
+                                            setSaved(false);
+                                        }catch(e) {
+                                            alert("Error: You have not saved this itinerary");
+                                        }
+                                    })}>Unsave Itinerary</button>
+                                }
+                            </div>
                             }
-                        })
-                        console.log(data)
-                        setMongoUser(data);
-                        alert("Itinerary saved");
-                    }catch(e){
-                        alert("Error: You already saved this itinerary");
-                    }
-                })}>Save Itinerary</button>
-            }
-            <br/>
-            <br/>
-            {!loading && !loadingUser &&
-                <button onClick={(async (e) => {
-                    e.preventDefault();
-                    //console.log(sites)
-                    let itineraryId = "";
-                    itinerary.forEach(site => {
-                        itineraryId = itineraryId + site._id;
-                    })
-                    let temp = {
-                        id: itineraryId,
-                        itinerary: itinerary
-                    }
-                    try{
-                        const { data } = await axios.get("http://localhost:3001/deleteItinerary/"+user.uid, {
-                            params: {
-                                itinerary: JSON.stringify(temp)
-                            }
-                        })
-                        console.log(data);
-                        setMongoUser(data);
-                        alert("Itinerary unsaved");
-                    }catch(e){
-                        alert("Error: you have not saved this itinerary");
-                    }
-                })}>Unsave Itinerary</button>
-            }
                         </div>
                         :<div>{!loadingItinerary  && <p>{itinerary.length<2?"Add at least two stops to your itinerary!":"Only up to 12 stops can be added to your itinerary"}</p>}</div>
                     }
