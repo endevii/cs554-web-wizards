@@ -174,7 +174,7 @@ function BrooklynBattles() {
             </div>
             <hr/>
             {!loading &&
-                <CustomItineraryMap key="map" data={sites} />
+                <CustomItineraryMap key="map" data={sites} id="Brooklyn"/>
             }
             <br/>
             {!saved

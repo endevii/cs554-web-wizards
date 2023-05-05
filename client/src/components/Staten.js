@@ -155,7 +155,7 @@ function Staten() {
             </div>
             <hr/>
             {!loading &&
-                <CustomItineraryMap key="map" data={sites} />
+                <CustomItineraryMap key="map" data={sites} id="Staten"/>
             }
             <br/>
             {!saved

@@ -214,7 +214,7 @@ function Revolution() {
             </div>
             <hr/>
             {!loading &&
-                <CustomItineraryMap key="map" data={sites} />
+                <CustomItineraryMap key="map" data={sites} id="Revolution"/>
             }
             <br/>
             {!saved

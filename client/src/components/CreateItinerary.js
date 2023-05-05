@@ -278,7 +278,7 @@ function CreateItinerary() {
                             {!loadingItinerary && <div>{card}</div>}
                             {!loadingItinerary && <div className='revolution'><hr/></div>} 
                             {!loadingItinerary &&
-                                <CustomItineraryMap key="map" data={itinerary} />
+                                <CustomItineraryMap key="map" data={itinerary} id="Custom"/>
                             }
                             <br/>
                             {!saved
