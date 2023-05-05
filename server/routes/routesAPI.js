@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const sitesData = data.sites;
+const usersData = data.users;
 
  router
   .route('/siteBorough/:borough')
@@ -105,4 +106,58 @@ router.route("/sites/name/:name").get(async (req, res) => {
     return res.status(404).json({ error: e });
   }
 });
+
+router.route("/user/:uid").get(async (req, res) => {
+  let uid = req.params.uid;
+  try {
+    const user = await usersData.getUserById(uid);
+    return res.json(user);
+  } catch (e) {
+    return res.status(404).json({ error: e });
+  }
+});
+
+router.route("/adduser/:uid").get(async (req, res) => {
+  let uid = req.params.uid;
+  try {
+    const user = await usersData.createUser(uid);
+    return res.json(user);
+  } catch (e) {
+    return res.status(404).json({ error: e });
+  }
+});
+
+router.route("/addItinerary/:uid").get(async (req, res) => {
+  let uid = req.params.uid;
+  let itinerary = JSON.parse(req.query.itinerary);
+  try {
+    const user = await usersData.addItinerary(uid, itinerary);
+    return res.json(user);
+  } catch (e) {
+    return res.status(404).json({ error: e });
+  }
+});
+
+router.route("/deleteItinerary/:uid").get(async (req, res) => {
+  let uid = req.params.uid;
+  let itinerary = JSON.parse(req.query.itinerary);
+  try {
+    const user = await usersData.deleteItinerary(uid, itinerary);
+    return res.json(user);
+  } catch (e) {
+    return res.status(404).json({ error: e });
+  }
+});
+
+router.route("/has/:uid").get(async (req, res) => {
+  let uid = req.params.uid;
+  let itinerary = JSON.parse(req.query.itinerary);
+  try {
+    const user = await usersData.userHasItinerary(uid, itinerary);
+    return res.json(user);
+  } catch (e) {
+    return res.status(404).json({ error: e });
+  }
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth";
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import '../App.css'
 import SocialSignIn from './SocialSignIn';
@@ -61,6 +62,7 @@ export default function Login () {
                 </div>
             </form>
             <br />
+            <Link to="/signup">Sign up</Link>
             <SocialSignIn />
         </div>
     );

@@ -4,7 +4,8 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import CustomItineraryMap from './CustomItineraryMap';
 import ItineraryList from './ItineraryList';
-import ReactDOMServer from 'react-dom/server'
+import ReactDOMServer from 'react-dom/server';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function CreateItinerary() {
@@ -24,6 +25,28 @@ function CreateItinerary() {
     let checkQueens = null;
     let checkBronx = null;
     let card = null;
+
+    const [user, setUser] = useState(null);
+    const [loadingUser, setLoadingUser] = useState(true);
+    const [mongoUser, setMongoUser] = useState(null);
+    const [name, setName] = useState("");
+    let auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if(user){  
+                setUser(user);
+                //le.log(user);
+                setName(user.displayName)
+                if(name !== ""){
+                    console.log(name); 
+                    setLoadingUser(false);
+                }
+            } else {
+                setLoadingUser(false);
+            }
+        });
+    }, [auth, name])
  
     useEffect(() => {
         const getAllSites = async (borough) => {
@@ -214,6 +237,53 @@ function CreateItinerary() {
                             {!loadingItinerary &&
                                 <CustomItineraryMap key="map" data={itinerary} />
                             }
+                            <br/>
+            {!loading && !loadingUser &&
+                <button onClick={(async (e) => {
+                    e.preventDefault();
+                    //console.log(sites)
+                    try{
+                        const { data } = await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
+                            params: {
+                                itinerary: JSON.stringify(itinerary)
+                            }
+                        })
+                        console.log(data)
+                        setMongoUser(data);
+                        alert("Itinerary saved");
+                    }catch(e){
+                        alert("Error: You already saved this itinerary");
+                    }
+                })}>Save Itinerary</button>
+            }
+            <br/>
+            <br/>
+            {!loading && !loadingUser &&
+                <button onClick={(async (e) => {
+                    e.preventDefault();
+                    //console.log(sites)
+                    let itineraryId = "";
+                    itinerary.forEach(site => {
+                        itineraryId = itineraryId + site._id;
+                    })
+                    let temp = {
+                        id: itineraryId,
+                        itinerary: itinerary
+                    }
+                    try{
+                        const { data } = await axios.get("http://localhost:3001/deleteItinerary/"+user.uid, {
+                            params: {
+                                itinerary: JSON.stringify(temp)
+                            }
+                        })
+                        console.log(data);
+                        setMongoUser(data);
+                        alert("Itinerary unsaved");
+                    }catch(e){
+                        alert("Error: you have not saved this itinerary");
+                    }
+                })}>Unsave Itinerary</button>
+            }
                         </div>
                         :<div>{!loadingItinerary  && <p>{itinerary.length<2?"Add at least two stops to your itinerary!":"Only up to 12 stops can be added to your itinerary"}</p>}</div>
                     }

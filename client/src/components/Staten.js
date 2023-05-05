@@ -1,10 +1,31 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CustomItineraryMap from './CustomItineraryMap';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function Staten() {
     const [sites, setSites] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+    const [loadingUser, setLoadingUser] = useState(true);
+    const [name, setName] = useState("");
+    let auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if(user){  
+                setUser(user);
+                //le.log(user);
+                setName(user.displayName)
+                if(name !== ""){
+                    console.log(name); 
+                    setLoadingUser(false);
+                }
+            } else {
+                setLoadingUser(false);
+            }
+        });
+    }, [auth, name])
 
     useEffect(() => {
         const getSite = async (name) => {
@@ -92,6 +113,47 @@ function Staten() {
             <hr/>
             {!loading &&
                 <CustomItineraryMap key="map" data={sites} />
+            }
+            <br/>
+            {!loading && !loadingUser && 
+                <button onClick={(async (e) => {
+                    //console.log(sites)
+                    try{
+                        const { data } = await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
+                            params: {
+                                itinerary: JSON.stringify(sites)
+                            }
+                        })
+                        alert("Itinerary saved");
+                    }catch(e){
+                        alert("Error: You already saved this itinerary");
+                    }
+                })}>Save Itinerary</button>
+            }
+            <br/>
+            <br/>
+            {!loading && !loadingUser && 
+                <button onClick={(async (e) => {
+                    //console.log(sites)
+                    let itineraryId = "";
+                    sites.forEach(site => {
+                        itineraryId = itineraryId + site._id;
+                    })
+                    let temp = {
+                        id: itineraryId,
+                        itinerary: sites
+                    }
+                    try{
+                        await axios.get("http://localhost:3001/deleteItinerary/"+user.uid, {
+                            params: {
+                                itinerary: JSON.stringify(temp)
+                            }
+                        })
+                        alert("Itinerary unsaved");
+                    }catch(e) {
+                        alert("Error: You have not saved this itinerary");
+                    }
+                })}>Unsave Itinerary</button>
             }
         </div>
     )
