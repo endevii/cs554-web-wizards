@@ -6,6 +6,7 @@ import CustomItineraryMap from './CustomItineraryMap';
 import ItineraryList from './ItineraryList';
 import ReactDOMServer from 'react-dom/server';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Link } from 'react-router-dom';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function CreateItinerary() {
@@ -109,7 +110,7 @@ function CreateItinerary() {
             mongoUser && setItineraries(user.itineraries);
         };
         if(!loadingUser){
-            getUser(user.uid);
+            user && getUser(user.uid);
         }
     }, [loadingUser, user, mongoUser]);
 
@@ -239,7 +240,8 @@ function CreateItinerary() {
                 <div className='create-itinerary-paragraph'>
                     <p>Select the sites which you would like to visit on your trip to NYC! Then click the Load Itinerary button to see your itinerary generated in the ordeer in which you selected your sites.</p>
                 </div>
-                <form>
+                {user
+                ?<div><form>
                     {manhattan.length !== 0 && <h3>Manhattan:</h3>}
                     {checkManhattan}
                     <br/>
@@ -283,7 +285,7 @@ function CreateItinerary() {
                             <br/>
                             {!saved
                             ?<div>
-                                {!loading && !loadingUser && !loadingMongo && !loadingItinerary &&
+                                {!loading && user && !loadingUser && !loadingMongo && !loadingItinerary &&
                                     <button onClick={(async (e) => {
                                         e.preventDefault();
                                         //console.log(sites)
@@ -334,6 +336,9 @@ function CreateItinerary() {
                     }
                     <br/> 
                 </form>
+                </div>
+                :<p><Link to="/signin">Login</Link> to create your own itinerary</p>
+                }
             </div>
         )
     }     

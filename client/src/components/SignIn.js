@@ -17,7 +17,7 @@ export default function Login () {
             .then((userCredential) => {
                 setEmail("");
                 setPassword("");
-                navigate("/account")
+                navigate("/")
             }).catch((error) => {
                 console.log(error);
             });
