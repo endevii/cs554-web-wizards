@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import io from 'socket.io-client';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
@@ -13,6 +12,8 @@ import SiteList from './components/SiteList';
 import Map from './components/Map';
 import Chat from './components/Chat';
 import IndividualSite from './components/IndividualSite';
+import PopularItineraries from './components/PopularItineraries';
+import CreateItinerary from './components/CreateItinerary';
 function App() {
   return (
     <Router>
@@ -38,6 +39,8 @@ function App() {
           <Route path='/*' element={<Home />} />
           <Route path='/map' element={<Map />} />
           <Route path='/site/:id' element={<IndividualSite />} />
+          <Route path='/itineraries' element={<PopularItineraries />} />
+          <Route path='/createItinerary' element={<CreateItinerary />} />
         </Routes>
       </div>
     </Router>

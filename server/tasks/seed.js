@@ -696,7 +696,7 @@ const main = async () => {
         },
         {
             _id: new ObjectId().toString(),
-            name: "Historic Richmond Town ",
+            name: "Historic Richmond Town",
             description: [
                 "Collection of historic houses, artifacts, and photographs from different time periods",
                 "More than 100,000 artifacts, some dating back to the 17th century",
@@ -799,6 +799,58 @@ const main = async () => {
             rating: 0,
             reviews: [],
             image: 'https://www.ny1.com/content/dam/News/2020/09/11/091120_NYC_Staten_Island_Postcards_Memorial_III.jpeg'
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Castle Clinton",
+            description: [
+                "One of more than 12 forts built to defend the New York Harbor during the War of 1812",
+                "It was originally called the Southwest Battery, now named after a late governor of New York",
+                "A piece of Battery Wall is on display here"
+            ],
+            location: {
+                address: "26 Wall Street",
+                city: "Manhattan",
+                state: "New York",
+                zipCode: "10005",
+                coordinates: [-74.0168, 40.7034]
+            },
+            hours: {
+                days: "Mon-Sun",
+                time: "7:45AM-5PM"
+            },
+            website: "https://www.nps.gov/cacl/planyourvisit/hours.htm",
+            borough: "Manhattan",
+            founded: 1808,
+            rating: 0,
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Castle_Clinton_aerial_view.jpg/220px-Castle_Clinton_aerial_view.jpg'
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "St. Paul's Chapel",
+            description: [
+                "George Washington was known to worship here",
+                "There is a pew on display which Geroge and Martha Washington were known to have worshipped",
+                "The chapel was also used as a place for first responders to rest during the recovery mission for 9/11"
+            ],
+            location: {
+                address: "209 Broadway",
+                city: "Manhattan",
+                state: "New York",
+                zipCode: "10007",
+                coordinates: [-74.0092, 40.7113]
+            },
+            hours: {
+                days: "Mon-Sun",
+                time: "7:30AM-6PM"
+            },
+            website: "https://trinitywallstreet.org/visit/st-pauls-chapel",
+            borough: "Manhattan",
+            founded: 1766,
+            rating: 0,
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/St._Paul%27s_Chapel_-_NYC_%2851522449420%29.jpg'
         },
     ]);
 

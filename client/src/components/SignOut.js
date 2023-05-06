@@ -29,11 +29,11 @@ const SignOutButton = () => {
         }
     }
 
-    if(!loading){
+    if(!loading && uid){
         return <button type='button' onClick={handleSignUp}>
             Sign Out
         </button>
-    }
+    } 
 };
 
 export default SignOutButton;

@@ -17,11 +17,12 @@ const SocialSignIn = () => {
     }
     return (
         <div>
+            <h2>Sign in using google</h2>
         <img
             onClick={() => socialSignOn('google')}
             alt='google signin'
             className='img'
-            src='https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1'
+            src='https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png'
         />
         </div>
   );
