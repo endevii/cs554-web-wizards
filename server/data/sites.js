@@ -11,39 +11,51 @@ const createSite = async (
   website,
   category,
   borough,
-  age
+  age,
+  image
 ) => {
-  name = helpers.validSiteName(name);
-  description = helpers.validSiteDescription(description);
-  locName = helpers.validString(location.name);
-  locAddress = helpers.validString(location.address);
-  locCity = helpers.validString(location.city);
-  locState = helpers.validState(location.state);
-  locZip = helpers.validZipcode(location.zipCode);
+  try {
+    name = helpers.validSiteName(name);
+    description = helpers.validSiteDescription(description);
+    locAddress = helpers.validString(location.address, "LOCATION ADDRESS");
+    locCity = helpers.validString(location.city, "LOCATION CITY");
+    locState = helpers.validState(location.state);
+    locZip = helpers.validZipcode(location.zipCode);
+    locCoords = helpers.validCoordinates(location.coordinates);
 
-  timeDay = helpers.validDays(hours.days);
-  timeOpen = helpers.validHours(hours.time);
+    timeDay = helpers.validDays(hours.days);
+    timeOpen = helpers.validHours(hours.time);
 
-  website = helpers.validWebsite(website);
+    website = helpers.validWebsite(website);
 
-  category = helpers.validString(category);
-  borough = helpers.validBorough(borough);
-  age = helpers.validAge(age.toString());
+    if (category && category.length === 0) {
+      category = "Other";
+    } else if (!category) {
+      category = "Other";
+    }
 
-  age = parseInt(age);
+    category = helpers.validString(category, "CATEGORY");
+
+    borough = helpers.validBorough(borough);
+    age = helpers.validAge(age.toString());
+
+    image = helpers.validImage(image);
+
+    age = parseInt(age);
+  } catch (e) {
+    throw e;
+  }
   const siteCollection = await sites();
-
   let newSite = {
     _id: new ObjectId().toString(),
     name: name,
     description: description,
     location: {
-      name: locName,
       address: locAddress,
       city: locCity,
       state: locState,
       zipCode: locZip,
-      coordinates: location.coordinates,
+      coordinates: locCoords,
     },
     hours: {
       day: timeDay,
@@ -52,22 +64,16 @@ const createSite = async (
     website: website,
     category: category,
     borough: borough,
-    rating: 0,
     founded: age,
+    rating: 0,
     reviews: [],
+    image: image,
   };
 
   const insertInfo = await siteCollection.insertOne(newSite);
   if (insertInfo.insertedCount === 0) throw "ERROR: COULD NOT ADD SITE";
 
-  const newId = insertInfo.insertedId;
-
-  const site = await siteCollection.findOne({ _id: id });
-  if (!site) throw "ERROR: COULD NOT FIND SITE";
-
-  site._id = site._id.toString();
-
-  return site;
+  return newSite;
 };
 
 const getAllSites = async () => {
@@ -104,9 +110,9 @@ const getSiteById = async (id) => {
 };
 
 const getSitesByBorough = async (borough) => {
-  if(!borough) throw "ERROR: BOROUGH IS REQUIRED";
+  if (!borough) throw "ERROR: BOROUGH IS REQUIRED";
 
-  if(typeof borough !== "string") throw "ERROR: BOROUGH MUST BE A STRING";
+  if (typeof borough !== "string") throw "ERROR: BOROUGH MUST BE A STRING";
 
   if (borough.trim().length === 0) throw "ERROR: BOROUGH CAN'T BE EMPTY STRING";
 
@@ -114,7 +120,7 @@ const getSitesByBorough = async (borough) => {
 
   const siteCollection = await sites();
 
-  const siteList = await siteCollection.find({borough: borough}).toArray();
+  const siteList = await siteCollection.find({ borough: borough }).toArray();
 
   if (!siteList) throw "ERROR: COULD NOT FIND SITES";
 
@@ -122,9 +128,9 @@ const getSitesByBorough = async (borough) => {
 };
 
 const getSitesByName = async (name) => {
-  if(!name) throw "ERROR: NAME IS REQUIRED";
+  if (!name) throw "ERROR: NAME IS REQUIRED";
 
-  if(typeof name !== "string") throw "ERROR: NAME MUST BE A STRING";
+  if (typeof name !== "string") throw "ERROR: NAME MUST BE A STRING";
 
   if (name.trim().length === 0) throw "ERROR: NAME CAN'T BE EMPTY STRING";
 
@@ -132,7 +138,7 @@ const getSitesByName = async (name) => {
 
   const siteCollection = await sites();
 
-  const siteList = await siteCollection.find({name: name}).toArray();
+  const siteList = await siteCollection.find({ name: name }).toArray();
 
   if (!siteList) throw "ERROR: COULD NOT FIND SITES";
 
@@ -147,33 +153,34 @@ const getSitesByHours = async (hours) => {};
 
 const sortSitesByAge = async () => {
   const unsortedSites = await getAllSites();
-  return unsortedSites.sort((a,b)=>a.founded - b.founded)
-}
+  return unsortedSites.sort((a, b) => a.founded - b.founded);
+};
 
 const sortSitesByBorough = async () => {
   const unsortedSites = await getAllSites();
-  return unsortedSites.sort((a,b)=>a.borough - b.borough)
-}
+  return unsortedSites.sort((a, b) => a.borough - b.borough);
+};
 const sortSitesByRatingHighToLow = async () => {
   const unsortedSites = await getAllSites();
-  return unsortedSites.sort((a,b)=>b.rating - a.rating)
-}
-const sortSitesByRatingLowToHigh= async () => {
+  return unsortedSites.sort((a, b) => b.rating - a.rating);
+};
+const sortSitesByRatingLowToHigh = async () => {
   const unsortedSites = await getAllSites();
-  return unsortedSites.sort((a,b)=>a.rating - b.rating)
-}
-const searchSites = async(searchTerm) => {
+  return unsortedSites.sort((a, b) => a.rating - b.rating);
+};
+const searchSites = async (searchTerm) => {
   const allSites = await getAllSites();
   let filteredSites = [];
-  for(let site of allSites){
-    if(site.name.toLowerCase().includes(searchTerm.toLowerCase())){
-      filteredSites.push(site)
+  for (let site of allSites) {
+    if (site.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+      filteredSites.push(site);
     }
   }
   return filteredSites;
-}
+};
 
 const updateSite = async (id, updatedSite) => {
+  console.log("updateSite");
   if (!id) throw "ERROR: ID IS REQUIRED";
 
   if (typeof id !== "string") throw "ERROR: ID MUST BE A STRING";
@@ -192,156 +199,27 @@ const updateSite = async (id, updatedSite) => {
   if (Object.keys(updatedSite).length === 0)
     throw "ERROR: UPDATED SITE CAN'T BE EMPTY";
 
+  // console.log(id, ": ", updatedSite);
   const siteCollection = await sites();
 
-  const updatedSiteData = {};
+  let updatedSiteData = {};
 
   let newSite = await siteCollection.findOne({ _id: id });
   if (!newSite) throw "ERROR: COULD NOT FIND SITE";
-
-  let updatedCount = 0;
-
-  if (updatedSite.name) {
-    if (updatedSite.name !== newSite.name) {
-      updatedCount += 1;
-    }
-    updatedSiteData.name = helpers.validSiteName(updatedSite.name);
-  } else {
-    updatedSiteData.name = newSite.name;
+  console.log("before");
+  try {
+    updatedSiteData = helpers.siteChanges(newSite, updatedSite);
+    console.log("updatedSiteData: ", updatedSiteData);
+  } catch (e) {
+    console.log(e);
+    throw e;
   }
-
-  if (updatedSite.description) {
-    if (updatedSite.description !== newSite.description) {
-      updatedCount += 1;
-    }
-    updatedSiteData.description = helpers.validSiteDescription(
-      updatedSite.description
-    );
-  } else {
-    updatedSiteData.description = newSite.description;
-  }
-
-  if (updatedSite.location) {
-    if (updatedSite.location.name) {
-      if (updatedSite.location.name !== newSite.location.name) {
-        updatedCount += 1;
-      }
-      updatedSiteData["location.name"] = helpers.validString(
-        updatedSite.location.name
-      );
-    } else {
-      updatedSiteData["location.name"] = newSite.location.name;
-    }
-
-    if (updatedSite.location.address) {
-      if (updatedSite.location.address !== newSite.location.address) {
-        updatedCount += 1;
-      }
-      updatedSiteData["location.address"] = helpers.validString(
-        updatedSite.location.address
-      );
-    } else {
-      updatedSiteData["location.address"] = newSite.location.address;
-    }
-
-    if (updatedSite.location.city) {
-      if (updatedSite.location.city !== newSite.location.city) {
-        updatedCount += 1;
-      }
-      updatedSiteData["location.city"] = helpers.validString(
-        updatedSite.location.city
-      );
-    } else {
-      updatedSiteData["location.city"] = newSite.location.city;
-    }
-
-    if (updatedSite.location.state) {
-      if (updatedSite.location.state !== newSite.location.state) {
-        updatedCount += 1;
-      }
-      updatedSiteData["location.state"] = helpers.validState(
-        updatedSite.location.state
-      );
-    } else {
-      updatedSiteData["location.state"] = newSite.location.state;
-    }
-
-    if (updatedSite.location.zipCode) {
-      if (updatedSite.location.zipCode !== newSite.location.zipCode) {
-        updatedCount += 1;
-      }
-      updatedSiteData["location.zipCode"] = helpers.validZipcode(
-        updatedSite.location.zipCode
-      );
-    } else {
-      updatedSiteData["location.zipCode"] = newSite.location.zipCode;
-    }
-  } else {
-    updatedSiteData.location = newSite.location;
-  }
-
-  if (updatedSite.hours) {
-    if (updatedSite.hours.day) {
-      if (updatedSite.hours.day !== newSite.hours.day) {
-        updatedCount += 1;
-      }
-      updatedSiteData["hours.day"] = helpers.validDays(updatedSite.hours.day);
-    } else {
-      updatedSiteData["hours.day"] = newSite.hours.day;
-    }
-
-    if (updatedSite.hours.time) {
-      if (updatedSite.hours.time !== newSite.hours.time) {
-        updatedCount += 1;
-      }
-      updatedSiteData["hours.time"] = helpers.validHours(
-        updatedSite.hours.time
-      );
-    } else {
-      updatedSiteData["hours.time"] = newSite.hours.time;
-    }
-  } else {
-    updatedSiteData.hours = newSite.hours;
-  }
-
-  if (updatedSite.website) {
-    if (updatedSite.website !== newSite.website) {
-      updatedCount += 1;
-    }
-    updatedSiteData.website = helpers.validWebsite(updatedSite.website);
-  } else {
-    updatedSiteData.website = newSite.website;
-  }
-
-  if (updatedSite.category) {
-    if (updatedSite.category !== newSite.category) {
-      updatedCount += 1;
-    }
-    updatedSiteData.category = helpers.validString(updatedSite.category);
-  } else {
-    updatedSiteData.category = newSite.category;
-  }
-
-  if (updatedSite.borough) {
-    if (updatedSite.borough !== newSite.borough) {
-      updatedCount += 1;
-    }
-    updatedSiteData.borough = helpers.validBorough(updatedSite.borough);
-  } else {
-    updatedSiteData.borough = newSite.borough;
-  }
-
-  if (updatedSite.founded) {
-    if (updatedSite.founded !== newSite.founded) {
-      updatedCount += 1;
-    }
-    updatedSiteData.founded = helpers.validAge(updatedSite.founded.toString());
-    updateSiteData.founded = parseInt(updatedSiteData.founded);
-  } else {
-    updatedSiteData.founded = newSite.founded;
-  }
-
-  if (updatedCount === 0) throw "ERROR: NO UPDATES WERE MADE";
+  console.log("after");
+  updatedSiteData._id = id;
+  updatedSiteData.rating = newSite.rating;
+  updatedSiteData.reviews = newSite.reviews;
+  updatedSiteData.founded = parseInt(updatedSiteData.founded);
+  console.log("updatedSiteData: ", updatedSiteData);
 
   const updatedInfo = await siteCollection.updateOne(
     { _id: id },
@@ -394,5 +272,5 @@ module.exports = {
   sortSitesByRatingLowToHigh,
   searchSites,
   getSitesByBorough,
-  getSitesByName
+  getSitesByName,
 };

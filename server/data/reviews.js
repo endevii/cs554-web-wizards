@@ -13,11 +13,11 @@ const createReview = async (
 ) => {
   siteId = helpers.validObjectID(siteId);
   rating = helpers.validRating(rating.toString());
-  review = helpers.validString(review);
+  review = helpers.validString(review, "REVIEW");
   title = helpers.validTitle(title);
 
-  userId = helpers.validString(userId);
-  userName = helpers.validString(userName);
+  userId = helpers.validString(userId, "USER ID");
+  userName = helpers.validString(userName, "USER NAME");
 
   const siteCollection = await sites();
   const site = await siteCollection.findOne({ _id: siteId });
@@ -142,12 +142,12 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
   let { rating, review, title } = reviewObj;
   siteId = helpers.validObjectID(siteId);
   reviewId = helpers.validObjectID(reviewId);
-  userId = helpers.validString(userId);
+  userId = helpers.validString(userId, "USER ID");
   if (rating != null) {
     rating = helpers.validRating(rating.toString());
   }
   if (review) {
-    review = helpers.validString(review);
+    review = helpers.validString(review, "REVIEW");
   }
   if (title) {
     title = helpers.validTitle(title);
@@ -278,7 +278,7 @@ const deleteReview = async (userId, siteId, reviewId) => {
   // console.log(userId, siteId, reviewId);
   siteId = helpers.validObjectID(siteId);
   reviewId = helpers.validObjectID(reviewId);
-  userId = helpers.validString(userId);
+  userId = helpers.validString(userId, "USER ID");
 
   const siteCollection = await sites();
   const site = await siteCollection.findOne({ _id: siteId });
