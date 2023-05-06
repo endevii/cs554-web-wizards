@@ -415,3 +415,11 @@ p {
 
   width: auto;
 }
+
+.saved-itinerary{
+  text-align: left;
+}
+
+.saved-itinerary-div{
+  width: 50%;
+}

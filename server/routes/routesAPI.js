@@ -2,7 +2,30 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const sitesData = data.sites;
+const usersData = data.users;
 const validation = require("../validation");
+
+router.route("/siteBorough/:borough").get(async (req, res) => {
+  let borough = req.params.borough;
+  let site;
+  try {
+    site = await sitesData.getSitesByBorough(borough);
+  } catch (e) {
+    return res
+      .status(404)
+      .json({ error: "no historic site found with that bororugh" });
+  }
+  return res.status(200).send(site);
+});
+
+router.route("/sites/sort/age").get(async (req, res) => {
+  try {
+    const sites = await sitesData.sortSitesByAge();
+    return res.json(sites);
+  } catch (e) {
+    return res.status(404).json({ error: "no historic data found" });
+  }
+});
 
 router.route("/sites").get(async (req, res) => {
   let sites;
