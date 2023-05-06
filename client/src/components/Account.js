@@ -60,16 +60,10 @@ function Account() {
             
         )
     }
-
-    mongoUser && mongoUser.itineraries && mongoUser.itineraries.length !== 0 && mongoUser.itineraries.forEach(itinerary => {
-        card = itinerary.itinerary.map((site) => {
-            return buildSiteCard(site);
-        })
-    });
-
+    
     card = mongoUser && mongoUser.itineraries && mongoUser.itineraries.map((itinerary) => {
         return (
-            <div key={itinerary.id}>
+            <div key={itinerary.ids}>
                 <h2>Itinerary</h2>
                 {itinerary.itinerary.map((site) => {
                     return (
@@ -114,12 +108,11 @@ function Account() {
                     <SignOutButton/>
                 </div> 
                 <br/>
+                <hr className='hr-custom'/>
                 <div>
                     {mongoUser && mongoUser.itineraries && mongoUser.itineraries.length !== 0
                         ?<div>
                             <h2>Your saved itineraries:</h2>
-                            <hr className="hr-custom"/>
-                            <hr className="hr-custom"/>
                             <div>{card}</div>
                         </div>
                         :<h2>You don't have any itineraries saved</h2>
