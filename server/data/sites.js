@@ -109,7 +109,41 @@ const getSiteById = async (id) => {
   return site;
 };
 
-const getSitesByBorough = async (borough) => {};
+const getSitesByBorough = async (borough) => {
+  if (!borough) throw "ERROR: BOROUGH IS REQUIRED";
+
+  if (typeof borough !== "string") throw "ERROR: BOROUGH MUST BE A STRING";
+
+  if (borough.trim().length === 0) throw "ERROR: BOROUGH CAN'T BE EMPTY STRING";
+
+  borough = helpers.validBorough(borough);
+
+  const siteCollection = await sites();
+
+  const siteList = await siteCollection.find({ borough: borough }).toArray();
+
+  if (!siteList) throw "ERROR: COULD NOT FIND SITES";
+
+  return siteList;
+};
+
+const getSitesByName = async (name) => {
+  if (!name) throw "ERROR: NAME IS REQUIRED";
+
+  if (typeof name !== "string") throw "ERROR: NAME MUST BE A STRING";
+
+  if (name.trim().length === 0) throw "ERROR: NAME CAN'T BE EMPTY STRING";
+
+  name = helpers.validSiteName(name);
+
+  const siteCollection = await sites();
+
+  const siteList = await siteCollection.find({ name: name }).toArray();
+
+  if (!siteList) throw "ERROR: COULD NOT FIND SITES";
+
+  return siteList;
+};
 
 const getSitesByCategory = async (category) => {};
 
@@ -237,4 +271,6 @@ module.exports = {
   sortSitesByRatingHighToLow,
   sortSitesByRatingLowToHigh,
   searchSites,
+  getSitesByBorough,
+  getSitesByName,
 };

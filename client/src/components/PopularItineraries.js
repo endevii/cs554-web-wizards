@@ -1,14 +1,45 @@
 import { useState } from "react";
 import Revolution from "./Revolution";
 import Staten from "./Staten";
+import BrooklynBattles from "./BrooklynBattles";
+import { Link } from "react-router-dom";
+import ReactDOMServer from 'react-dom/server'
+import axios from "axios";
 
 function PopularItineraries() {
     const [revolution, setRevolution] = useState(false);
     const [staten, setStaten] = useState(false);
+    const [battle, setBattle] = useState(false);
+    const [pdfReady, setPdfReady] = useState({revolution: false, staten: false})
+    const generatePdf = async (component, name) => {
+        try{
+            let {data} = await axios.post('http://localhost:3001/generatepdf',{input: component, name:name});
+            console.log(data.msg)
+            if(data.msg==="success"){
+                setPdfReady(prev => ({
+                    ...prev,
+                    ...{[name]: "Pdf is ready to print/download"}
+                  }))
+            }else{
+                setPdfReady(prev => ({
+                    ...prev,
+                    ...{[name]: "Please try again"}
+                  }))
+            }
+          
+        }catch(e){
+            console.log(e)
+            setPdfReady(prev => ({
+                ...prev,
+                ...{[name]: false}
+              }))
+        }
+    }
     return (
         <div>
             <br/>
             <h1 className="itinerary-title">Popular Itineraries</h1>
+            <p>Create your own itinerary <Link className='link-itinerary' to="/createItinerary">here</Link></p>
             <hr className="hr-custom"/>
             <div className="itinerary-container">
                 <div className="imageOne">
@@ -30,9 +61,18 @@ function PopularItineraries() {
             </div>
             {!revolution
                 ? <button onClick={()=>{setRevolution(true)}}>More Information</button>
-                : <button onClick={()=>{setRevolution(false)}}>Less Information</button>
+                : <button onClick={()=>{
+                    setRevolution(false);
+                    setPdfReady(prev => ({
+                    ...prev,
+                    ...{revolution: false}
+                  }))}}>Less Information</button>
             }
+            {revolution && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Revolution />), "revolution")}>Generate PDF</button>}
+            {pdfReady.revolution === "Pdf is ready to print/download" ? <div><br/><a href='http://localhost:3001/generatepdf/revolution' target="_blank" rel="noreferrer">{pdfReady.revolution}</a></div> : <p>{pdfReady.revolution}</p>}
             {revolution && <Revolution />}
+            <br/>
+            <br/>
             <hr className="hr-custom"/>
             <div className="itinerary-container">
                 <div className="imageThree">
@@ -55,9 +95,52 @@ function PopularItineraries() {
             </div>
             {!staten
                 ? <button onClick={()=>{setStaten(true)}}>More Information</button>
-                : <button onClick={()=>{setStaten(false)}}>Less Information</button>
+                : <button onClick={()=>{
+                    setStaten(false);
+                    setPdfReady(prev => ({
+                    ...prev,
+                    ...{staten: false}
+                  }))}}>Less Information</button>
             }
+            {staten && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Staten />), "staten")}>Generate PDF</button>}
+            {pdfReady.staten === "Pdf is ready to print/download"? <div><br/><a href='http://localhost:3001/generatepdf/staten' target="_blank" rel="noreferrer">Pdf ready to print/download</a></div>:<p>{pdfReady.staten}</p>}
             {staten && <Staten />}
+            <br/>
+            <br/>
+            <hr className="hr-custom"/>
+            <div className="itinerary-container">
+                <div className="imageOne">
+                    <img className="resize" src="https://www.nycgovparks.org/photo_gallery/full_size/10265.jpg" alt="federal hall"/>
+                </div>
+                <div className="imageTwo">
+                    <img className="resize" src="https://brooklyneagle.com/wp-content/uploads/2018/06/old-stone-house_1.jpg" alt="federal hall"/>
+                </div>
+                <div className="grid-item itinerary-description">
+                    <h2>War Sites in Brooklyn:</h2>
+                    On this tour, you’ll be exploring the history of battles that took place in brooklyn 
+                    throughout history. It will touch on battles from the American Revolutionary War as well 
+                    as the War of 1812. Learn about the battle of Brooklyn as well as Dutch colonization at 
+                    the Old Stone House. Find out about the war of 1812 and American soldiers whose lives were 
+                    lost at Fort Greene Park. Finally, learn about the Battle of Long Island, which took 
+                    place during the Revolutionary War, as well as other battles that took place between the 
+                    Continental Army and the British soldiers. On this tour, you learn about the rich history 
+                    of the battle fields in Brooklyn. 
+                </div>
+            </div>
+            {!battle
+                ? <button onClick={()=>{setBattle(true)}}>More Information</button>
+                : <button onClick={()=>{
+                    setBattle(false);
+                    setPdfReady(prev => ({
+                    ...prev,
+                    ...{battle: false}
+                  }))}}>Less Information</button>
+            }
+            {battle && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<BrooklynBattles />), "battle")}>Generate PDF</button>}
+            {pdfReady.battle && <div><br/><a href='http://localhost:3001/generatedpdf/battle' target="_blank" rel="noreferrer">Pdf ready to print/donwload</a></div>}
+            {battle && <BrooklynBattles />}
+            <br/>
+            <br/>
             <hr className="hr-custom"/>
         </div>
     )

@@ -1,4 +1,33 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import CustomItineraryMap from './CustomItineraryMap';
+
 function Revolution() {
+    const [sites, setSites] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const getSite = async (name) => {
+            const getSite = async () => {
+                const { data } = await axios.get(
+                  `http://localhost:3001/sites/name/${name}`
+                );
+                if(sites.filter(e => e.name === data[0].name).length === 0){
+                    sites.push(data[0]);
+                    setSites(sites);
+                }
+                setLoading(false);
+              };
+              getSite();
+        };
+        getSite("Castle Clinton");
+        getSite("Bowling Green Park");
+        getSite("Fraunces Tavern");
+        getSite("Trinity Church");
+        getSite("St. Paul's Chapel");
+        getSite("Federal Hall");
+    }, [sites]);
+
     return (
         <div className='revolution'>
             <hr/>
@@ -119,6 +148,10 @@ function Revolution() {
                 recovery operations after 9/11, which lasted for 9 months.  
                 </div>
             </div>
+            <hr/>
+            {!loading &&
+                <CustomItineraryMap key="map" data={sites} id="Revolution"/>
+            }
         </div>
     )
 }

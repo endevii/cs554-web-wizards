@@ -62,6 +62,10 @@
   color: #414c57;
 }
 
+.img {
+  width: 10%;
+}
+
 .slide-show-div {
   width: 55%;
   height: 100%;
@@ -240,9 +244,10 @@ p {
 }
 .map {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 80%;
   margin-top: 20px;
+  flex-direction: row;
 }
 
 .button {
@@ -279,14 +284,19 @@ p {
   background-color: #ffdcdc;
 }
 
+.customImageItinerary{
+  grid-column: 10 / span 3;
+  grid-row: 2 / span 20;
+}
+
 .imageOne{
   grid-column: 10 / span 3;
-  grid-row: 7 / span 20;
+  grid-row: 11 / span 20;
 }
 
 .imageTwo {
   grid-column: 13 / span 3;
-  grid-row: 4 / span 20;
+  grid-row: 2 / span 20;
 }
 
 .imageThree{
@@ -301,7 +311,7 @@ p {
 
 .stepImageOne{
   grid-column: 10 / span 3;
-  grid-row: 13 / span 20;
+  grid-row: 10 / span 20;
 }
 
 .stepImageTwo {
@@ -323,24 +333,28 @@ p {
   grid-column: 2 / span 6;
   grid-row: 2 / span 27;
   font-size: x-large;
+  text-align: justify;
 }
 
 .itinerary-description-two {
   grid-column: 7 / span 6;
   grid-row: 2 / span 27;
   font-size: x-large;
+  text-align: justify;
 }
 
 .step-description {
   grid-column: 2 / span 6;
   grid-row: 1 / span 27;
   font-size: large;
+  text-align: justify;
 }
 
 .step-description-two {
   grid-column: 7 / span 6;
   grid-row: 2 / span 27;
   font-size: large;
+  text-align: justify;
 }
 
 .hr-custom{
@@ -360,4 +374,44 @@ p {
 .revolution {
   width: 70%;
   margin: auto;
+}
+
+.form-checks {
+  text-align: left;
+  width: 15%;
+  margin-left: 45%;
+}
+
+.description-list {
+  text-align: left;
+}
+
+.create-itinerary-paragraph {
+  width: 50%;
+  margin: auto;
+}
+
+.link-itinerary {
+  color: #c24646;
+}
+
+#instructions {
+  position: relative;
+  width: 25%;
+  top: 0;
+  bottom: 20%;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+
+.hidden {
+  display:none;
+}
+
+.dir-btn {
+  height: 40px;
+
+  width: auto;
 }
