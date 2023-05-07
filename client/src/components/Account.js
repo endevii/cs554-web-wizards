@@ -129,6 +129,7 @@ function Account() {
                                 {mongoUser.reviews.map((review) => {
                                     return (
                                         <div key={review._id} className='div-class'>
+                                            <p>Site: {review.siteName}</p>
                                             <p>Title: {review.title}</p>
                                             <p>Review: {review.review}</p>
                                             <p>Rating: {review.rating}</p>

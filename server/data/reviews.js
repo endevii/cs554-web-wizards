@@ -3,6 +3,7 @@ const sites = mongoCollections.sites;
 const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
 const helpers = require("../validation");
+const siteFunctions = require('./sites');
 
 const createReview = async (
   siteId,
@@ -42,6 +43,10 @@ const createReview = async (
   let year = date.getFullYear();
   let dateString = month + "/" + day + "/" + year;
 
+  let site_temp = await siteFunctions.getSiteById(siteId);
+  console.log(site_temp);
+  let name = site_temp.name;
+
   let newReview = {
     _id: new ObjectId().toString(),
     userId: userId,
@@ -51,7 +56,8 @@ const createReview = async (
     rating: rating,
     date: dateString,
     edited: false,
-    siteid: siteId
+    siteid: siteId,
+    siteName: name
   };
 
   const updateInfo = await siteCollection.updateOne(
