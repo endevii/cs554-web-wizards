@@ -171,7 +171,7 @@ function PopularItineraries() {
             :<p><Link to="/signin" >Login</Link> to see more information</p>
             }
             {battle && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<BrooklynBattles />), "battle")}>Generate PDF</button>}
-            {pdfReady.battle && <div><br/><a href='http://localhost:3001/generatedpdf/battle' target="_blank" rel="noreferrer">Pdf ready to print/donwload</a></div>}
+            {pdfReady.battle && <div><br/><a href='http://localhost:3001/generatepdf/battle' target="_blank" rel="noreferrer">Pdf ready to print/donwload</a></div>}
             {battle && <BrooklynBattles />}
             <br/>
             <br/>
