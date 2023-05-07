@@ -236,7 +236,6 @@ router.patch("/:siteId/:userId/:reviewId", async (req, res) => {
   if (updates === 0) {
     return res.status(400).json({ error: "No updates provided" });
   }
-
   // now update review
   try {
     updatedReview = await reviewData.updateReview(
