@@ -18,7 +18,9 @@ function Account() {
   const [loadingUser, setLoadingUser] = useState(true);
   const [mongoUser, setMongoUser] = useState(null);
   const [name, setName] = useState("");
-  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [rating, setRating] = useState('');
+  const [review_text, setReview] = useState('');
   let card = null;
   let auth = getAuth();
 
@@ -168,6 +170,7 @@ function Account() {
                           </Link>
                         </CardActionArea>
                         <CardContent>
+                      <br/>
                           <button
                             onClick={async (e) => {
                               try {
@@ -187,6 +190,104 @@ function Account() {
                           >
                             Delete Review
                           </button>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <p>Update this review</p>
+                      <br/>
+                      <form onSubmit={async (e) => {
+                        e.preventDefault();
+                        let temp_title, temp_review, temp_rating = "";
+                        if(title === "" && review_text === "" && rating === ""){
+                            alert("Error: Nothing to update");
+                        } else if (title == review.title && rating == review.rating && review_text == review.review){
+                            alert("Error: Nothing to update")
+                        } else if (title == review.title && rating == "" && review_text == ""){
+                            alert("Error: Nothing to update")
+                        } else if (title == "" && rating == review.rating && review_text == ""){
+                            alert("Error: Nothing to update")
+                        } else if (title == "" && rating == "" && review_text == review.review){
+                            alert("Error: Nothing to update")
+                        } else if (review_text !== "" && review_text.trim().length === 0) {
+                            alert("Error: Review cannot be just spaces")
+                        } else if (title !== "" && title.trim().length === 0) {
+                            alert("Error: Title cannot be just spaces")
+                        } else if (rating !== "" && rating.trim().length === 0) {
+                            alert("Error: Rating cannot be just spaces")
+                        } else if (rating !== "" && isNaN(parseInt(rating))) {
+                            alert("Error: Rating must be a number")
+                        } else if(parseInt(rating) < 0 || parseInt(rating) > 5){
+                            alert("Error: Rating must be a number 0 to 5")
+                        } else {
+                        if(title !== ""){
+                            temp_title = title;
+                        } else {
+                            temp_title = review.title;
+                        }
+                        if(review_text !== ""){
+                            temp_review = review_text;
+                        } else {
+                            temp_review = review.review;
+                        }
+                        if(rating !== ""){
+                            temp_rating = rating;
+                        } else {
+                            temp_rating = review.rating;
+                        }
+
+                        let temp = {
+                            title: temp_title, 
+                            review: temp_review, 
+                            rating: temp_rating
+                        }
+
+                        try {
+                            await axios.patch(
+                              'http://localhost:3001/reviews/' +
+                                review.siteid +
+                                '/' +
+                                mongoUser.uid +
+                                '/' +
+                                review._id, temp);
+                            alert("Review updated");
+                          } catch (e) {
+                            alert(e);
+                          }
+                        window.location.reload();
+                        }
+                      }}>
+                        <label>
+                            Update Title: 
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Title"
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                        <label>
+                            Update Review: 
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Review"
+                            onChange={(e) => setReview(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                        <label>
+                            Update Rating: 
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Rating"
+                            onChange={(e) => setRating(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                        <button type='submit'>Update Review</button>
+                      </form>
                         </CardContent>
                       </Card>
                     </Grid>
