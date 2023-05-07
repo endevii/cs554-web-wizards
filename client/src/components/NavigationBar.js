@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import React , {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
 function NavigationBar() {
   const [userExists, setUserExists] = useState(false);
   const [loading, setLoading] = useState(true);
   let auth = getAuth();
 
-    useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
-            if(user){  
-                setUserExists(true);
-                setLoading(false);
-            } else {
-              setUserExists(false);
-                setLoading(false);
-            }
-        });
-  }, [auth])
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserExists(true);
+        setLoading(false);
+      } else {
+        setUserExists(false);
+        setLoading(false);
+      }
+    });
+  }, [auth]);
 
   return (
     <>
@@ -28,7 +28,7 @@ function NavigationBar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
+            <li className="nav-item">
               <Link className="nav-link" to="/" id="link-txt">
                 Home
               </Link>
@@ -48,27 +48,41 @@ function NavigationBar() {
                 Itineraries
               </Link>
             </li>
+            {!loading && userExists && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/requestSite" id="link-txt">
+                  Request Site
+                </Link>
+              </li>
+            )}
           </ul>
-          {!loading &&
+          {!loading && (
             <div>
-            {!userExists
-              ?<div>
-                <Link to="/signin">
-                  <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
-                    Login
-                  </button>
-                </Link>
-              </div>
-              : <div>
-                <Link to="/account">
-                  <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
-                    Account
-                  </button>
-                </Link>
-              </div>
-            }
+              {!userExists ? (
+                <div>
+                  <Link to="/signin">
+                    <button
+                      className="btn btn-outline-light my-2 my-sm-0"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <Link to="/account">
+                    <button
+                      className="btn btn-outline-light my-2 my-sm-0"
+                      type="submit"
+                    >
+                      Account
+                    </button>
+                  </Link>
+                </div>
+              )}
             </div>
-          }
+          )}
         </div>
       </nav>
     </>

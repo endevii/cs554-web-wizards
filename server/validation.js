@@ -428,7 +428,7 @@ function validSite(site) {
   } catch (e) {
     errors.push(e);
   }
-
+  // console.log(site.location.coordinates);
   try {
     site.location.coordinates = validCoordinates(site.location.coordinates);
   } catch (e) {

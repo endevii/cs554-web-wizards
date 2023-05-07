@@ -52,7 +52,7 @@ router.route("/siteBorough/:borough").get(async (req, res) => {
 
 router.route("/sites").post(async (req, res) => {
   let site = req.body;
-
+  let errors = [];
   try {
     if (site.category.length === 0) {
       site.category = "Other";
@@ -87,6 +87,7 @@ router.route("/sites").post(async (req, res) => {
 router.route("/sites/request/:user").post(async (req, res) => {
   let site = req.body;
   let user = req.params.user;
+  let errors = [];
   try {
     user = validation.validString(user);
   } catch (e) {

@@ -49,7 +49,6 @@
   margin: 5px;
 }
 
-
 #navbar-custom {
   background-color: #c24646;
 }
@@ -136,7 +135,7 @@
   width: 60px;
   color: white;
   background-color: #414c57a6;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 .welcome-msg {
@@ -284,12 +283,12 @@ p {
   background-color: #ffdcdc;
 }
 
-.customImageItinerary{
+.customImageItinerary {
   grid-column: 10 / span 3;
   grid-row: 2 / span 20;
 }
 
-.imageOne{
+.imageOne {
   grid-column: 10 / span 3;
   grid-row: 11 / span 20;
 }
@@ -299,17 +298,17 @@ p {
   grid-row: 2 / span 20;
 }
 
-.imageThree{
+.imageThree {
   grid-column: 1 / span 3;
   grid-row: 8 / span 20;
 }
 
-.imageFour{
+.imageFour {
   grid-column: 4 / span 3;
   grid-row: 3 / span 20;
 }
 
-.stepImageOne{
+.stepImageOne {
   grid-column: 10 / span 3;
   grid-row: 10 / span 20;
 }
@@ -357,16 +356,16 @@ p {
   text-align: justify;
 }
 
-.hr-custom{
+.hr-custom {
   background-color: #c24646;
 }
 
-.resize{
+.resize {
   width: 300px;
   height: auto;
 }
 
-.resize-image{
+.resize-image {
   width: 200px;
   height: auto;
 }
@@ -407,7 +406,7 @@ p {
 }
 
 .hidden {
-  display:none;
+  display: none;
 }
 
 .dir-btn {
@@ -416,25 +415,82 @@ p {
   width: auto;
 }
 
-.saved-itinerary{
+.saved-itinerary {
   text-align: left;
 }
 
-.saved-itinerary-div{
+.saved-itinerary-div {
   width: 50%;
 }
 
-.div-class{
+.div-class {
   margin: auto;
   width: 50%;
 }
 
-red-div{
+red-div {
   color: #c24646;
   background-color: #c24646;
 }
 
-title-account{
+title-account {
   font-size: xx-large;
   color: #c24646;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  min-width: 200px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.form-group input {
+  min-width: 200px;
+  max-width: 800px;
+  width: 100%;
+  margin: 0px 5px;
+}
+
+.form-group label {
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+.btn-group button {
+  margin: 0px 10px;
+}
+
+.form-rp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+.form-item-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+.request-site {
+  margin: 10px;
 }
