@@ -203,6 +203,31 @@ p {
   grid-row: 8 / span 3;
 }
 
+.join-btn, .chat-btn {
+  font-size: 20px;
+}
+
+.chat-msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.chat-name {
+  color: #c24646;
+}
+
+.chat-log{
+  margin-left: 15%;
+  text-align: left;
+}
+
+.render-chat{
+  overflow:scroll;
+  height: 143px;
+  background-color: #fff7f7;
+}
+
 .address {
   grid-column: 4 / span 2;
   grid-row: 2 / span 1;
