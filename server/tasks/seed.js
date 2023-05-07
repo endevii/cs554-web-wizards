@@ -15,8 +15,8 @@ const main = async () => {
             name: "Federal Hall",
             description: [
                 "Site where George Washington took his oath as the first president of the United States ", 
-                "Location of the first congress and supreme court ",
-                "Includes multiple exhibits and visitors can take walking tours found on their website"
+                "Location of the first Congress and Supreme Court ",
+                "Includes multiple exhibits and visitors can take walking tours (Found on their website)"
             ],
             location: {
                 address: "26 Wall St",
@@ -41,10 +41,10 @@ const main = async () => {
             name: "Fraunces Tavern",
             description: [
                 "One of the oldest historical bars in NYC (built in 1719)",
-                "Was once a popular place for founding fathers to visit",
+                "Was once a popular place for the Founding Fathers to visit",
                 "George Washington gave a farewell speech to some of his officers in the tavern",
                 "There is also a piano bar",
-                "Still a bar but also has a museum focusing on its history"
+                "Still a bar, but also has a museum focusing on its history"
             ],
             location: {
                 address: "​54 Pearl Street",
@@ -69,7 +69,7 @@ const main = async () => {
             name: "Empire State Building",
             description: [
                 "Was once the tallest building in the world (1931 - 1970)",
-                "Observation deck to see views of the city ",
+                "Observation deck to see views of the city",
                 "Fee for each of the two decks"
             ],
             location: {
@@ -123,7 +123,7 @@ const main = async () => {
             description: [
                 "Opened in 1846, Gothic Revival Architecture",
                 "Burial place of multiple historical figures, including Alexander Hamilton, Eliza Hamilton, and Angelica Schueler ",
-                "Graveyard has the oldest carved gravestone in NYC (a child names Richard Churcher who dies in 1681)"
+                "Graveyard has the oldest carved gravestone in NYC (a child names Richard Churcher who died in 1681)"
             ],
             location: {
                 address: "89 Broadway",
@@ -148,7 +148,7 @@ const main = async () => {
             name: "Tenement Museum",
             description: [
                 "Thousands of immigrant families lived here from 1860 to 1980",
-                "Abandoned for over 50 years but has since been restored",
+                "Abandoned for over 50 years, but has since been restored",
                 "Offers guided tours of the buildings and walking tours of the neighborhood",
                 "Entrance fee required"
             ],
@@ -174,7 +174,7 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "9/11 Memorial and Museum",
             description: [
-                "Memorial for each of the twin towers with the names of the people who died engraved into them",
+                "Memorial for each of the Twin Towers with the names of the people who died engraved into them",
                 "Photos, videos, and artifacts from the buildings, exhibits on what happened",
                 "Stories from survivors as well as tributes to victims",
                 "Entrance fee required"
@@ -201,12 +201,12 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "Bowling Green Park",
             description: [
-                "NYC’s oldest public park, once inhabited by Native American",
+                "Oldest public park in NYC, once inhabited by Native American",
                 "Site of the sale of Manhattan to Peter Minuit, 3rd Director of the Dutch North American Colony",
                 "Once had a statue of King George III which was toppled on July 9, 1776 after the first public reading of the Declaration of Independence (statue was later melted down and made into bullets for the revolutionary war)."
             ],
             location: {
-                address: "Southern end of broadway",
+                address: "Southern end of Broadway",
                 city: "New York",
                 state: "New York",
                 zipCode: "10004",
@@ -228,8 +228,8 @@ const main = async () => {
             name: "Hamilton Grange National Memorial",
             description: [
                 "Provides a history of Alexander Hamilton",
-                "Hamilton’s house, which was completed in 1802 and names “The Grange” (only his house for two years)",
-                "Designed by architect John McComb Jr and was meant to be a federal style country home"
+                "Hamilton’s house, which was completed in 1802 and named “The Grange” (only his house for two years)",
+                "Designed by architect John McComb Jr, was meant to be a federal style country home"
             ],
             location: {
                 address: "414 W 141st St",
@@ -254,7 +254,7 @@ const main = async () => {
             name: "Fort Tryon Park",
             description: [
                 "Inhabited for Native Americans for centuries before European colonization (called Chquaesgeck by the Lenape tribe, the Wiechquaesgeck), land was taken by the Dutch in 1715",
-                "Known as Mount Washington during the revolutionary war, battle site during the war, part of the Battle of Fort Washington"
+                "Known as Mount Washington during the revolutionary war, site of the Battle of Fort Washington"
             ],
             location: {
                 address: "Riverside Dr To Broadway",
@@ -279,8 +279,8 @@ const main = async () => {
             name: "New York Historical Society Museum",
             description: [
                 "Oldest museum in NYC",
-                "Lots of artifacts, including paintings of George Washington and his inauguration chair",
-                "Rotating exhibits focusing on anything from the revolution to the civil war to Native American history"
+                "Contains many artifacts, including paintings of George Washington and his inauguration chair",
+                "Rotating exhibits focusing on everything from the Revolution to the Civil War, as well as Native American history"
             ],
             location: {
                 address: "170 Central Park West",
@@ -357,10 +357,10 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "Grand Central Station",
             description: [
-                "Aka Grand Central Terminal, train station in manhattan",
-                "Dates back to mid 19th century, train depot built in 1854 by New York and Harlem Railroad",
+                "Aka Grand Central Terminal, train station in Manhattan",
+                "Dates back to the mid 19th century as a train depot built in 1854 by New York and Harlem Railroad",
                 "Train depot replaced by Grand Central Depot in 1871",
-                "Construction for Grand Central as we know it today began in 1903 and finished in 1913",
+                "Construction for Grand Central as it is known today began in 1903 and finished in 1913",
                 "Several restaurants and shops to visit"
             ],
             location: {
@@ -385,9 +385,9 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "General Grant National Memorial",
             description: [
-                "Tomb of President Ulysses s. Grant and his Wife Julia Grant",
+                "Tomb of Ulysses S. Grant and his wife Julia Grant",
                 "Largest mausoleum in North America",
-                "Grant was the commanding general of the Union Army during the civil war"
+                "Grant was the commanding general of the Union Army during the Civil War, as well as the 18th President"
             ],
             location: {
                 address: "W 122nd St &, Riverside Dr",
@@ -406,6 +406,84 @@ const main = async () => {
             rating: 0,
             reviews: [],
             image: 'https://cdn.britannica.com/46/145046-050-554E30A7/General-Grant-National-Memorial-New-York-City.jpg'
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Castle Clinton",
+            description: [
+                "One of more than 12 forts built to defend the New York Harbor during the War of 1812",
+                "It was originally called the Southwest Battery, now named after a late governor of New York",
+                "A piece of Battery Wall is on display here"
+            ],
+            location: {
+                address: "26 Wall Street",
+                city: "Manhattan",
+                state: "New York",
+                zipCode: "10005",
+                coordinates: [-74.0168, 40.7034]
+            },
+            hours: {
+                days: "Mon-Sun",
+                time: "7:45AM-5PM"
+            },
+            website: "https://www.nps.gov/cacl/planyourvisit/hours.htm",
+            borough: "Manhattan",
+            founded: 1808,
+            rating: 0,
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Castle_Clinton_aerial_view.jpg/220px-Castle_Clinton_aerial_view.jpg'
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "St. Paul's Chapel",
+            description: [
+                "George Washington was known to worship here",
+                "There is a pew on display where George and Martha Washington were known to have sat",
+                "The chapel was also used as a place for first responders to rest during the recovery mission for 9/11"
+            ],
+            location: {
+                address: "209 Broadway",
+                city: "Manhattan",
+                state: "New York",
+                zipCode: "10007",
+                coordinates: [-74.0092, 40.7113]
+            },
+            hours: {
+                days: "Mon-Sun",
+                time: "7:30AM-6PM"
+            },
+            website: "https://trinitywallstreet.org/visit/st-pauls-chapel",
+            borough: "Manhattan",
+            founded: 1766,
+            rating: 0,
+            reviews: [],
+            image: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/St._Paul%27s_Chapel_-_NYC_%2851522449420%29.jpg'
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Madison Square Garden",
+            description: [
+                "Oldest arena in the NBA and second-busiest music venue in the world",
+                "Opened on February 11th, 1968",
+                "Used for ice hockey, basketball, concerts, and other forms of sports and entertainment"
+            ],
+            location: {
+                address: "4 Pennsylvania Plaza",
+                city: "New York",
+                state: "New York",
+                zipCode: "10001",
+                coordinates: [-73.9936, 40.7505]
+            },
+            hours: {
+                day: "Mon-Sat",
+                time: "10AM-6PM"
+            },
+            website: "https://www.msg.com/madison-square-garden",
+            borough: "Manhattan",
+            founded: 1968,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Madison_Square_Garden_%28MSG%29_-_Full_%2848124330357%29.jpg"
         },
         {
             _id: new ObjectId().toString(),
@@ -464,7 +542,7 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "Fort Greene Park",
             description: [
-                "Prison Ship Martyrs Monument, monument built in honor of 12,000 men and women captured and held captive on a ship by the British after the Battle of Brooklyn",
+                "Contains the Prison Ship Martyrs' Monument, monument built in honor of 12,000 men and women held captive on a ship by the British after the Battle of Brooklyn",
                 "First designated park by the City of Brooklyn in 1847"
             ],
             location: {
@@ -492,11 +570,10 @@ const main = async () => {
                 "Historic suspension bridge connecting Manhattan and Brooklyn, built in 1883",
                 "First suspension bridge to use steel for is cable wire",
                 "Longest suspension bridge in the world when it was built (1,595 feet)",
-                "Designed by John A. Roebling",
-                "National Historic Landmark"
+                "Designed by John A. Roebling"
             ],
             location: {
-                address: "Between manhattan and brooklyn",
+                address: "Between Manhattan and Brooklyn",
                 city: "Brooklyn",
                 state: "New York",
                 zipCode: "10038",
@@ -517,9 +594,9 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "John Paul Jones Park",
             description: [
-                "Names after John Paul Jones who was a leader in the American Revolutionary War and became known as “the father of the navy”",
-                "Launching point for the british to attack during Revolutionary War",
-                "Park has a Civil War Memorial, Parrott cannon, Revolutionary War Memorial, the Dover Patrol Naval War Memorial, and the 70 foot tall flagpole which was once on a Navy destroyer "
+                "Names after John Paul Jones, who was a leader in the American Revolutionary War and became known as “the father of the navy”",
+                "Launching point for the British to attack during Revolutionary War",
+                "Park has a Civil War Memorial, Parrott cannon, Revolutionary War Memorial, the Dover Patrol Naval War Memorial, and the 70 foot tall flagpole which once flew on a Navy destroyer"
             ],
             location: {
                 address: "Shore Parkway 101st Street",
@@ -567,10 +644,215 @@ const main = async () => {
         },
         {
             _id: new ObjectId().toString(),
+            name: "Floyd Bennett Field",
+            description: [
+                "Former airport and hub for naval activities during World War II",
+                "Created by connecting several small islands to Brooklyn with sand from the bottom of Jamaica Bay",
+                "Dedicated in 1930, officially opened to commercial flights in 1931"
+            ],
+            location: {
+                address: "Flatbush Avenue",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11226",
+                coordinates: [-73.8906, 40.5910]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-9PM"
+            },
+            website: "https://www.nps.gov/gate/learn/historyculture/floyd-bennett-field.htm",
+            borough: "Brooklyn",
+            founded: 1930,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Bennettfield22121.JPG"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Soldiers' and Sailors' Arch",
+            description: [
+                "Built in 1892, dedicated to the 'Defenders of the Union' in the Civil War",
+                "Sculpture at the top features Abraham Lincoln and Ulysses S. Grant on horseback"
+            ],
+            location: {
+                address: "Grand Army Plaza",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11238",
+                coordinates: [-73.9698, 40.6729]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-1AM"
+            },
+            website: "http://www.nycgovparks.org/parks/grand-army-plaza/monuments/1463",
+            borough: "Brooklyn",
+            founded: 1892,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Soldiers%27_and_Sailors%27_Arch.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Prospect Park",
+            description: [
+                "Second largest public park in Brooklyn",
+                "Opened in 1867, laid out by the same designers as Central Park",
+                "Contains the Prospect Park Zoo, Concert Grove, and Brooklyn's only lake"
+            ],
+            location: {
+                address: "Prospect Park",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11215",
+                coordinates: [-73.9708, 40.6616]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-1AM"
+            },
+            website: "https://www.prospectpark.org/",
+            borough: "Brooklyn",
+            founded: 1867,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Prospect_Park_New_York_October_2015_003.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Coney Island",
+            description: [
+                "Seaside resort neighborhood featuring amusement parks and beaches",
+                "Nicknamed the 'Playground of the World'",
+                "Contains three rides with a landmark status: the Wonder Wheel, the B&B Carousell, and the Coney Island Cyclone"
+            ],
+            location: {
+                address: "Coney Island",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11224",
+                coordinates: [-73.9825, 40.5750]
+            },
+            hours: {
+                day: "Fri-Sun",
+                time: "11AM-10PM"
+            },
+            website: "https://www.coneyisland.com/",
+            borough: "Brooklyn",
+            founded: 1880,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Coney_Island_beach_and_amusement_parks_%28June_2016%29.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Verrazzano-Narrows Bridge",
+            description: [
+                "Suspension bridge connecting Staten Island and Brooklyn",
+                "Named for Giovanni da Verrazzano, first European explorer to enter the New York Harbor",
+                "Longest suspension bridge in the world until surpassed by the Humber Bridge in the U.K. in 1981"
+            ],
+            location: {
+                address: "Verrazzano-Narrows Bridge",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11209",
+                coordinates: [-74.0455, 40.6063]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "12AM-12AM"
+            },
+            website: "https://new.mta.info/bridges-and-tunnels/about/verrazzano-narrows-bridge",
+            borough: "Brooklyn",
+            founded: 1964,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/2/27/StatenIsland-13_%2836416067785%29.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Brooklyn Museum",
+            description: [
+                "Second-largest museum in NYC, with around 500,000 objects in its collection",
+                "Artists represented include Norman Rockwell, Winslow Homer, and Georgia O'Keefe",
+                "Also contains a large collection of Egyptian antiquities"
+            ],
+            location: {
+                address: "200 Eastern Parkway",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11238",
+                coordinates: [-73.9637, 40.6713]
+            },
+            hours: {
+                day: "Wed-Sun",
+                time: "11AM-6PM"
+            },
+            website: "https://www.brooklynmuseum.org/",
+            borough: "Brooklyn",
+            founded: 1898,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Brooklyn_Museum_-_Entrance_%2852302265063%29.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Brooklyn Children's Museum",
+            description: [
+                "The first children's museum in the United States",
+                "Intended to engage the minds of children at a young age"
+            ],
+            location: {
+                address: "145 Brooklyn Avenue",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11213",
+                coordinates: [-73.9439, 40.6744]
+            },
+            hours: {
+                day: "Wed-Sun",
+                time: "10AM-5PM"
+            },
+            website: "https://www.brooklynkids.org/",
+            borough: "Brooklyn",
+            founded: 1899,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/2/28/Brooklyn_Children%27s_Museum_%2852142426214%29.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Brooklyn Academy of Music",
+            description: [
+                "Performing arts center known as a center of progressive and avant-garde performance",
+                "Home of the Philharmonic Society of Brooklyn"
+            ],
+            location: {
+                address: "30 Lafayette Avenue",
+                city: "Brooklyn",
+                state: "New York",
+                zipCode: "11217",
+                coordinates: [-73.9780, 40.6863]
+            },
+            hours: {
+                day: "Tue-Sat",
+                time: "12PM-6PM"
+            },
+            website: "https://www.bam.org/",
+            borough: "Brooklyn",
+            founded: 1908,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Brooklyn_Academy_of_Music_%28BAM%29_%2848228024996%29.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
             name: "Fort Wadsworth",
             description: [
                 "One of the oldest military forts in the U.S.",
-                "Never part of a battle but capture by British during revolutionary war",
+                "Never part of a battle, but capture by British during the Revolutionary War",
                 "Dates back to Dutch colonization, built in 1663 "
             ],
             location: {
@@ -622,8 +904,8 @@ const main = async () => {
             name: "The Alice Austen House and Museum",
             description: [
                 "National designated site of LGBTQ+ history",
-                "Alice Austen’s house, she was a photographer and made major contributions to photographing the history of New york, including photographs of immigrant populations, Victorian women, nature, and architecture",
-                "Austen, born in 1866 and passed away in 1952, lived in the home with her partner Gertrude Tate for 30 years",
+                "Alice Austen’s house, a photographer who made major contributions to photographing the history of New York, including photographs of immigrant populations, Victorian women, nature, and architecture",
+                "Austen was born in 1866 and passed away in 1952, and she lived in the home with her partner Gertrude Tate for 30 years",
                 "Entrance fee required"
             ],
             location: {
@@ -648,8 +930,9 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "National Lighthouse Museum",
             description: [
-                "In 1799, the current lighthouse museum was the location of theNew York Marine Hospital, aka The Quarantine, a hospital which was largely used for immigrant borne infectious diseases like smallpox, cholera, typhus, and yellow fever, mob burnt the hospital down in the 1850’s ",
-                "Staten Island Lighthouse Depot built in the same spot in 1862, then became United States Lighthouse Sevice’s (USLHS) General Depot, headquarters and distribution center for all lighthouses in the USLHS from 1864 to 1939"
+                "In 1799, the current lighthouse museum was the location of the New York Marine Hospital, aka The Quarantine, a hospital which was largely used for immigrant-borne infectious diseases like smallpox, cholera, typhus, and yellow fever", 
+                "A mob burnt the hospital down in the 1850’s ",
+                "Staten Island Lighthouse Depot was built in the same spot in 1862, then became United States Lighthouse Sevice’s (USLHS) General Depot, headquarters and distribution center for all lighthouses in the USLHS from 1864 to 1939"
             ],
             location: {
                 address: "200 The Promenade at Lighthouse Point",
@@ -674,7 +957,7 @@ const main = async () => {
             name: "Staten Island Borough Hall",
             description: [
                 "Building finished in 1906, designated New York City landmark",
-                "Inside people can see murals painted in 1940 which illustrate historic events in Staten Island"
+                "Inside are murals painted in 1940 which illustrate historic events in Staten Island"
             ],
             location: {
                 address: "10 Richmond Terrace",
@@ -725,12 +1008,12 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "Jacques Marchais Museum of Tibetan Art",
             description: [
-                "Built in 1945, has a Jacques Marchais large collection of Tibetan Art",
+                "Built in 1945, contains Jacques Marchais' large collection of Tibetan Art",
                 "Art primarily from Tibet, Mongolia, and northern China dating back to the fifteenth century",
                 "First example of Himalayan architecture in the United States"
             ],
             location: {
-                address: "338 Lighthouse Ave,",
+                address: "338 Lighthouse Ave",
                 city: "Staten Island",
                 state: "New York",
                 zipCode: "10306",
@@ -751,9 +1034,9 @@ const main = async () => {
             _id: new ObjectId().toString(),
             name: "Staten Island Museum",
             description: [
-                "14 naturalists combined their collections in 1881 to create the start of the museum",
+                "14 naturalists combined their collections in 1881 to create the museum",
                 "Public museum created in 1908",
-                "Contains specimens, photos, field notes, and  records of changing biology in the region, all spanning more than 150 years",
+                "Contains specimens, photos, field notes, and records of changing biology in the region, spanning over 150 years",
                 "Entrance fee required"
             ],
             location: {
@@ -779,8 +1062,8 @@ const main = async () => {
             name: "Postcards Memorial",
             description: [
                 "Sculpture built in 2004 as a memorial to September 11, 2001",
-                "Honors the 263 Staten Island residents who dies in the terrorist attack",
-                "Meant to be two enlarged postcards “symbolizing personal communications between loved ones”"
+                "Honors the 263 Staten Island residents who died in the terrorist attack",
+                "Designed as two enlarged postcards “symbolizing personal communications between loved ones”"
             ],
             location: {
                 address: "Bank St",
@@ -802,55 +1085,540 @@ const main = async () => {
         },
         {
             _id: new ObjectId().toString(),
-            name: "Castle Clinton",
+            name: "Yankee Stadium",
             description: [
-                "One of more than 12 forts built to defend the New York Harbor during the War of 1812",
-                "It was originally called the Southwest Battery, now named after a late governor of New York",
-                "A piece of Battery Wall is on display here"
+                "The original Yankee Stadium operated from 1923 until 2008 when it was demolished and replaced with the current stadium",
+                "Known as 'The House that Ruth Built' in memory of superstar player Babe Ruth",
+                "Hosted 6,581 Yankees games in its 85 year history"
             ],
             location: {
-                address: "26 Wall Street",
-                city: "Manhattan",
+                address: "East 161st Street",
+                city: "The Bronx",
                 state: "New York",
-                zipCode: "10005",
-                coordinates: [-74.0168, 40.7034]
+                zipCode: "10451",
+                coordinates: [-73.9280, 40.8269]
             },
             hours: {
-                days: "Mon-Sun",
-                time: "7:45AM-5PM"
+                day: "Mon-Sun",
+                time: ""
             },
-            website: "https://www.nps.gov/cacl/planyourvisit/hours.htm",
-            borough: "Manhattan",
-            founded: 1808,
+            website: "https://www.mlb.com/yankees/ballpark",
+            borough: "The Bronx",
+            founded: 1923,
             rating: 0,
             reviews: [],
-            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Castle_Clinton_aerial_view.jpg/220px-Castle_Clinton_aerial_view.jpg'
+            image: "https://upload.wikimedia.org/wikipedia/commons/5/5f/YankeeStadium-9-21-22-1.jpg"
         },
         {
             _id: new ObjectId().toString(),
-            name: "St. Paul's Chapel",
+            name: "New York Botanical Garden",
             description: [
-                "George Washington was known to worship here",
-                "There is a pew on display which Geroge and Martha Washington were known to have worshipped",
-                "The chapel was also used as a place for first responders to rest during the recovery mission for 9/11"
+                "Landscape containing over one million living plants",
+                "Also features the LuEsther T. Mertz Library, featuring one of the largest collections of botanical texts in the world"
             ],
             location: {
-                address: "209 Broadway",
-                city: "Manhattan",
+                address: "Southern and Bedford Park Boulevards",
+                city: "The Bronx",
                 state: "New York",
-                zipCode: "10007",
-                coordinates: [-74.0092, 40.7113]
+                zipCode: "10458",
+                coordinates: [-73.8783, 40.8636]
             },
             hours: {
-                days: "Mon-Sun",
-                time: "7:30AM-6PM"
+                day: "Tue-Sun",
+                time: "10AM-6PM"
             },
-            website: "https://trinitywallstreet.org/visit/st-pauls-chapel",
-            borough: "Manhattan",
-            founded: 1766,
+            website: "https://www.nybg.org/",
+            borough: "The Bronx",
+            founded: 1891,
             rating: 0,
             reviews: [],
-            image: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/St._Paul%27s_Chapel_-_NYC_%2851522449420%29.jpg'
+            image: "https://upload.wikimedia.org/wikipedia/commons/8/8a/The_New_York_Botanical_Garden_Visitor_Center.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Pelham Bay Park",
+            description: [
+                "The largest public park in NYC",
+                "Over three times the size of Central Park in Manhattan",
+                "Includes Orchard Beach, the only public beach in the Bronx"
+            ],
+            location: {
+                address: "Pelham Bay Park",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10461",
+                coordinates: [-73.8083, 40.8655]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-10PM"
+            },
+            website: "https://www.nycgovparks.org/parks/pelham-bay-park",
+            borough: "The Bronx",
+            founded: 1888,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/7/73/Pelhambay1.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Woodlawn Cemetery",
+            description: [
+                "One of the largest cemeteries in NYC",
+                "Opened in 1863 during the Civil War",
+                "Burial site of Charles Evan Hughes, Herman Melville, Miles Davis and Duke Ellington"
+            ],
+            location: {
+                address: "Woodlawn",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10470",
+                coordinates: [-73.8733, 40.8891]
+            },
+            hours: {
+                day: "Mon-Sat",
+                time: "8:30AM-4:30PM"
+            },
+            website: "https://www.woodlawn.org/",
+            borough: "The Bronx",
+            founded: 1863,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Woodlawn_north_gate_jeh.JPG"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Van Cortlandt Park",
+            description: [
+                "Third largest park in NYC",
+                "Contains the Van Cortlandt House Museum, the oldest surviving building in the Bronx",
+                "Also has the largest freshwater lake in the Bronx, and the oldest golf course in the United States"
+            ],
+            location: {
+                address: "Van Cortlandt Park",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10463",
+                coordinates: [-73.8838, 40.8977]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-10PM"
+            },
+            website: "https://www.nycgovparks.org/parks/VanCortlandtPark",
+            borough: "The Bronx",
+            founded: 1888,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Entrance_To_Van_Cortlandt_Park_2012.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Bronx Zoo",
+            description: [
+                "Largest urban zoo in the United States",
+                "Spearheaded conservation efforts for many animals like the American bison and Chinese alligator"
+            ],
+            location: {
+                address: "2300 Southern Boulevard, Bronx Park",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10460",
+                coordinates: [-73.8783, 40.8502]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "10AM-5PM"
+            },
+            website: "https://bronxzoo.com/",
+            borough: "The Bronx",
+            founded: 1899,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Bronx_Zoo_001.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Wave Hill",
+            description: [
+                "Estate dating back to 1843",
+                "Now includes public horticultural gardens and a cultural center",
+                "Concerts take place some Sunday afternoons at Armor Hall"
+            ],
+            location: {
+                address: "4900 Independence Avenue",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10471",
+                coordinates: [-73.9130, 40.8986]
+            },
+            hours: {
+                day: "Tues-Sun",
+                time: "10AM-5:30PM"
+            },
+            website: "https://www.wavehill.org/",
+            borough: "The Bronx",
+            founded: 1843,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Wave_hill_house%2C_August_2019.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Edgar Allan Poe Cottage",
+            description: [
+                "Residence of famous poet Edgar Allan Poe",
+                "Poe wrote poems such as 'Annabel Lee' and 'Ulalume' in this house",
+                "Built in 1812, designmated as a Bronx landmark in 1962"
+            ],
+            location: {
+                address: "2640 Grand Concourse",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10468",
+                coordinates: [-73.8944, 40.8652]
+            },
+            hours: {
+                day: "Thurs-Sun",
+                time: "10AM-3PM"
+            },
+            website: "https://bronxhistoricalsociety.org/poe-cottage/",
+            borough: "The Bronx",
+            founded: 1812,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Edgar_Allan_Poe%27s_house_in_the_Bronx.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "1520 Sedgwick Avenue",
+            description: [
+                "Apartment building in Morris Heights known as the 'birthplace of hip-hop'",
+                "Clive Campbell, aka DJ Kool Herc, held parties and house concerts in the rec room",
+                "Some of the first rappers and MCs were in attendance"
+            ],
+            location: {
+                address: "1520 Sedgwick Avenue",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10453",
+                coordinates: [-73.9244, 40.8472]
+            },
+            hours: {
+                day: "",
+                time: ""
+            },
+            website: "",
+            borough: "The Bronx",
+            founded: 1967,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/1520_Sedwick_Ave.%2C_Bronx%2C_New_York1.JPG"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Lorelei Fountain",
+            description: [
+                "Also known as the Heinrich Heine Memorial, a Jewish-German poet to whom the sculpture is dedicated",
+                "Was meant to be placed in Dusseldorf, Germany, but antisemitism led to it being placed in the Bronx"
+            ],
+            location: {
+                address: "Joyce Kilmer Park",
+                city: "The Bronx",
+                state: "New York",
+                zipCode: "10452",
+                coordinates: [-73.9231, 40.8275]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-10PM"
+            },
+            website: "https://www.nycgovparks.org/parks/joyce-kilmer-park/monuments/700",
+            borough: "The Bronx",
+            founded: 1899,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Heine_Bronx_1.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Flushing Meadows",
+            description: [
+                "Public park created as the site of the 1939 World Fair",
+                "Includes the Unisphere monument, the New York State Pavilion, and the home of the New York Mets (formerly Shea Stadium, now Citi Field)"
+            ],
+            location: {
+                address: "Flushing Meadows-Corona Park",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11368",
+                coordinates: [-73.8447, 40.7458]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-9PM"
+            },
+            website: "https://www.nycgovparks.org/parks/flushing-meadows-corona-park/",
+            borough: "Queens",
+            founded: 1939,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Flushing_Meadows%E2%80%93Corona_Park.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Silvercup Studios",
+            description: [
+                "One of the largest film and television production facilities in NYC",
+                "Noteworthy media filmed there includes 'The Sopranos', 'Highlander', and '30 Rock'"
+            ],
+            location: {
+                address: "42-22 22nd St",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11101",
+                coordinates: [-73.9438, 40.7511]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "12AM-12AM"
+            },
+            website: "https://www.silvercupstudios.com/",
+            borough: "Queens",
+            founded: 1983,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/1/13/Silvercup_sign_20190519_130130.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Kaufman Astoria Studios",
+            description: [
+                "One of the oldest film studios in the United States",
+                "The location where the first Marx Brothers film was made, as well as Goodfellas, Sesame Street, and Orange is the New Black",
+                "Also home to the only backlot in NYC"
+            ],
+            location: {
+                address: "35th Avenue, Astoria",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11106",
+                coordinates: [-73.9238, 40.7577]
+            },
+            hours: {
+                day: "Mon-Fri",
+                time: "9AM-5PM"
+            },
+            website: "https://www.kaufmanastoria.com/",
+            borough: "ueens",
+            founded: 1921,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Kaufman_Studio_35_Av_35_St_sun_jeh.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Aqueduct Racetrack",
+            description: [
+                "Horse racing facility, and the only racetrack in NYC",
+                "Also contains a casino called Resorts World New York City, the only casino in the five boroughs"
+            ],
+            location: {
+                address: "South Ozone Park",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11420",
+                coordinates: [-73.8297, 40.6722]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "9AM-5PM"
+            },
+            website: "https://www.nyra.com/aqueduct/",
+            borough: "Queens",
+            founded: 1894,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/d/da/Aqueduct_Racetrack.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Fort Tilden",
+            description: [
+                "Decommissioned U.S. Army fort established during World War 1",
+                "Also used as a missile site during the Cold War",
+                "One of the old batteries has been repurposed into a viewing platform"
+            ],
+            location: {
+                address: "Rockaway Beach Blvd",
+                city: "New York",
+                state: "New York",
+                zipCode: "11693",
+                coordinates: [-73.8833, 40.5666]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-9PM"
+            },
+            website: "https://www.nps.gov/gate/learn/historyculture/fort-tilden.htm",
+            borough: "Queens",
+            founded: 1917,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Fort_Tilden.jpg"
+        },  
+        {
+            _id: new ObjectId().toString(),
+            name: "Afrikan Poetry Theatre",
+            description: [
+                "Celebrates black and African art, poetry and music",
+                "Program includes jazz, funk, African rhythms, and poetry"
+            ],
+            location: {
+                address: "17603 Jamaica Ave",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11432",
+                coordinates: [-73.7841, 40.7081]
+            },
+            hours: {
+                day: "Thur-Sun",
+                time: "2PM-8PM"
+            },
+            website: "https://www.theafrikanpoetrytheatre.org/",
+            borough: "Queens",
+            founded: 1976,
+            rating: 0,
+            reviews: [],
+            image: "https://images.nycgo.com/image/fetch/q_auto:eco,c_fill,f_auto,w_780,g_north/https://www.nycgo.com/images/venues/12661/_afrikanpoetrytheatre-donnafaceto-01.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Queens Museum",
+            description: [
+                "Art museum located in Flushing Meadows",
+                "Includes among its exhibits the 'Panorama of the City of New York, a scale model of NYC built for the 1964 World's Fair"
+            ],
+            location: {
+                address: "Flushing Meadows-Corona Park",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11368",
+                coordinates: [-73.8466, 40.7458]
+            },
+            hours: {
+                day: "Wed-Sun",
+                time: "12PM-5PM"
+            },
+            website: "https://queensmuseum.org/",
+            borough: "Queens",
+            founded: 1972,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/c/c8/Queens_Museum-1.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "John Bowne House",
+            description: [
+                "Colonial-era house known for its role in establishing religious tolerance in the United States",
+                "Was the location of a Quaker meeting resulting in the arrest of its owner, John Bowne",
+                "Bowne successfully appealed his arrest, establishing legal precedent for the Constitutional rights of religion, speech and assembly"
+            ],
+            location: {
+                address: "37-01 Bowne St",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11354",
+                coordinates: [-73.8249, 40.7628]
+            },
+            hours: {
+                day: "Wed-Wed",
+                time: "1PM-4PM"
+            },
+            website: "https://www.bownehouse.org/",
+            borough: "Queens",
+            founded: 1661,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Bowne_House_2018.JPG"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "King Manor",
+            description: [
+                "Home of Founding Father Rufus King",
+                "Now contains a museum and a library with books and senate records belonging to the King family"
+            ],
+            location: {
+                address: "150th St & Jamaica Ave",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11432",
+                coordinates: [-73.8038, 40.7030]
+            },
+            hours: {
+                day: "Mon-Sat",
+                time: "11AM-3PM"
+            },
+            website: "https://www.kingmanor.org/",
+            borough: "Queens",
+            founded: 1806,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Rufus-king-house.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "MoMA PS1",
+            description: [
+                "Contemporary art institution partnered with the Museum of Modern Art",
+                "Exhibits feature the works of Janet Cardiff, David Hammons, Dennis Oppenheim, and others",
+                "Free admission for all New York residents"
+            ],
+            location: {
+                address: "22-25 Jackson Ave",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11101",
+                coordinates: [-73.9479, 40.7453]
+            },
+            hours: {
+                day: "Thur-Mon",
+                time: "12PM-6PM"
+            },
+            website: "https://www.momaps1.org/",
+            borough: "Queens",
+            founded: 1971,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/en/a/a3/MoMA_PS1_FFP.jpg"
+        },
+        {
+            _id: new ObjectId().toString(),
+            name: "Jacob Riis Park",
+            description: [
+                "Seaside park named after social journalist Jacob Riis",
+                "Former site of the Rockaway Naval Air Station, the launching point of the first transatlantic flight",
+                "Features a boardwalk, mall, golf course, and Moorish-style bathhouse"
+            ],
+            location: {
+                address: "157 Rockaway Beach Blvd",
+                city: "Queens",
+                state: "New York",
+                zipCode: "11697",
+                coordinates: [-73.8733, 40.5675]
+            },
+            hours: {
+                day: "Mon-Sun",
+                time: "6AM-10PM"
+            },
+            website: "https://nyharborparks.org/visit-parks/#tab-id-9",
+            borough: "Queens",
+            founded: 1937,
+            rating: 0,
+            reviews: [],
+            image: "https://upload.wikimedia.org/wikipedia/commons/2/21/Jacob_Riis_Park.jpg"
         },
     ]);
 

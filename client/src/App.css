@@ -222,7 +222,7 @@ p {
 }
 
 .map-container {
-  height: 400px;
+  height: 700px;
 }
 
 .marker {
@@ -422,4 +422,19 @@ p {
 
 .saved-itinerary-div{
   width: 50%;
+}
+
+.div-class{
+  margin: auto;
+  width: 50%;
+}
+
+red-div{
+  color: #c24646;
+  background-color: #c24646;
+}
+
+title-account{
+  font-size: xx-large;
+  color: #c24646;
 }

@@ -115,7 +115,7 @@ router.delete("/:siteId/:userId/:reviewId", async (req, res) => {
   } catch (e) {
     errors.push(e);
   }
-
+  
   try {
     reviewId = validation.validObjectID(reviewId);
   } catch (e) {
