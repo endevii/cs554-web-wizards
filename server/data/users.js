@@ -11,7 +11,8 @@ const createUser = async (
 
     let newUser = {
         uid: uid,
-        itineraries: []
+        itineraries: [],
+        reviews: []
     };
 
     const insertInfo = await userCollection.insertOne(newUser);
