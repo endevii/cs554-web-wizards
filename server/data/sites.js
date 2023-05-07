@@ -1,5 +1,6 @@
 const mongoCollections = require("../config/mongoCollections");
 const sites = mongoCollections.sites;
+const waitingSites = mongoCollections.waitingSites;
 const { ObjectId } = require("mongodb");
 const helpers = require("../validation");
 
@@ -74,6 +75,186 @@ const createSite = async (
   if (insertInfo.insertedCount === 0) throw "ERROR: COULD NOT ADD SITE";
 
   return newSite;
+};
+
+const createSiteToBeApproved = async (
+  name,
+  description,
+  location,
+  hours,
+  website,
+  category,
+  borough,
+  age,
+  image
+) => {
+  try {
+    name = helpers.validSiteName(name);
+    description = helpers.validSiteDescription(description);
+    locAddress = helpers.validString(location.address, "LOCATION ADDRESS");
+    locCity = helpers.validString(location.city, "LOCATION CITY");
+    locState = helpers.validState(location.state);
+    locZip = helpers.validZipcode(location.zipCode);
+    locCoords = helpers.validCoordinates(location.coordinates);
+
+    timeDay = helpers.validDays(hours.days);
+    timeOpen = helpers.validHours(hours.time);
+
+    website = helpers.validWebsite(website);
+
+    if (category && category.length === 0) {
+      category = "Other";
+    } else if (!category) {
+      category = "Other";
+    }
+
+    category = helpers.validString(category, "CATEGORY");
+
+    borough = helpers.validBorough(borough);
+    age = helpers.validAge(age.toString());
+
+    image = helpers.validImage(image);
+
+    age = parseInt(age);
+  } catch (e) {
+    throw e;
+  }
+
+  const waitingCollection = await waitingSites();
+
+  let newSite = {
+    _id: new ObjectId().toString(),
+    name: name,
+    description: description,
+    location: {
+      address: locAddress,
+      city: locCity,
+      state: locState,
+      zipCode: locZip,
+      coordinates: locCoords,
+    },
+    hours: {
+      day: timeDay,
+      time: timeOpen,
+    },
+    website: website,
+    category: category,
+    borough: borough,
+    founded: age,
+    image: image,
+  };
+
+  const insertInfo = await waitingCollection.insertOne(newSite);
+  if (insertInfo.insertedCount === 0) throw "ERROR: COULD NOT ADD SITE";
+
+  return newSite;
+};
+
+const getAllWaitingSites = async () => {
+  const waitingCollection = await waitingSites();
+
+  const waitingList = await waitingCollection.find({}).toArray();
+
+  for (let i = 0; i < waitingList.length; i++) {
+    waitingList[i]._id = waitingList[i]._id.toString();
+  }
+
+  return waitingList;
+};
+
+const getWaitingSiteById = async (id) => {
+  if (!id) throw "ERROR: ID IS REQUIRED";
+
+  if (typeof id !== "string") throw "ERROR: ID MUST BE A STRING";
+
+  if (id.trim().length === 0) throw "ERROR: ID CAN'T BE EMPTY STRING";
+
+  id = helpers.validObjectID(id);
+
+  if (!ObjectId.isValid(id)) throw "ERROR: ID IS NOT VALID";
+
+  const waitingCollection = await waitingSites();
+
+  const waiting = await waitingCollection({ _id: id });
+  if (!waiting) throw "ERROR: COULD NOT FIND SITE";
+
+  waiting._id = waiting._id.toString();
+
+  return waiting;
+};
+
+const removeWaitingSite = async (id) => {
+  if (!id) throw "ERROR: ID IS REQUIRED";
+
+  if (typeof id !== "string") throw "ERROR: ID MUST BE A STRING";
+
+  if (id.trim().length === 0) throw "ERROR: ID CAN'T BE EMPTY STRING";
+
+  id = helpers.validObjectID(id);
+
+  if (!ObjectId.isValid(id)) throw "ERROR: ID IS NOT VALID";
+
+  const waitingCollection = await waitingSites();
+
+  const waiting = await waitingCollection.findOne({ _id: id });
+  if (!waiting) throw "ERROR: COULD NOT FIND SITE";
+
+  const deletedSite = await waitingCollection.deleteOne({ _id: id });
+  if (deletedSite.deletedCount === 0) throw "ERROR: COULD NOT DELETE SITE";
+
+  return true;
+};
+
+const updateWaitingSite = async (id, updatedSite) => {
+  if (!id) throw "ERROR: ID IS REQUIRED";
+
+  if (typeof id !== "string") throw "ERROR: ID MUST BE A STRING";
+
+  if (id.trim().length === 0) throw "ERROR: ID CAN'T BE EMPTY STRING";
+
+  id = helpers.validObjectID(id);
+
+  if (!ObjectId.isValid(id)) throw "ERROR: ID IS NOT VALID";
+
+  if (!updatedSite) throw "ERROR: UPDATED SITE IS REQUIRED";
+
+  if (typeof updatedSite !== "object")
+    throw "ERROR: UPDATED SITE MUST BE AN OBJECT";
+
+  if (Object.keys(updatedSite).length === 0)
+    throw "ERROR: UPDATED SITE CAN'T BE EMPTY";
+
+  const waitingCollection = await sites();
+
+  let updatedSiteData = {};
+
+  let newSite = await waitingCollection.findOne({ _id: id });
+  if (!newSite) throw "ERROR: COULD NOT FIND SITE";
+
+  try {
+    updatedSiteData = helpers.siteChanges(newSite, updatedSite);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+
+  updatedSiteData._id = id;
+  updatedSiteData.rating = newSite.rating;
+  updatedSiteData.reviews = newSite.reviews;
+  updatedSiteData.founded = parseInt(updatedSiteData.founded);
+
+  const updatedInfo = await waitingCollection.updateOne(
+    { _id: id },
+    { $set: updatedSiteData }
+  );
+  if (updatedInfo.modifiedCount === 0) throw "ERROR: COULD NOT UPDATE SITE";
+
+  const updatedSiteFinal = await waitingCollection.findOne({
+    _id: id,
+  });
+  updatedSiteFinal._id = updatedSiteFinal._id.toString();
+
+  return updatedSiteFinal;
 };
 
 const getAllSites = async () => {
@@ -180,7 +361,6 @@ const searchSites = async (searchTerm) => {
 };
 
 const updateSite = async (id, updatedSite) => {
-  console.log("updateSite");
   if (!id) throw "ERROR: ID IS REQUIRED";
 
   if (typeof id !== "string") throw "ERROR: ID MUST BE A STRING";
@@ -199,27 +379,24 @@ const updateSite = async (id, updatedSite) => {
   if (Object.keys(updatedSite).length === 0)
     throw "ERROR: UPDATED SITE CAN'T BE EMPTY";
 
-  // console.log(id, ": ", updatedSite);
   const siteCollection = await sites();
 
   let updatedSiteData = {};
 
   let newSite = await siteCollection.findOne({ _id: id });
   if (!newSite) throw "ERROR: COULD NOT FIND SITE";
-  console.log("before");
+
   try {
     updatedSiteData = helpers.siteChanges(newSite, updatedSite);
-    console.log("updatedSiteData: ", updatedSiteData);
   } catch (e) {
     console.log(e);
     throw e;
   }
-  console.log("after");
+
   updatedSiteData._id = id;
   updatedSiteData.rating = newSite.rating;
   updatedSiteData.reviews = newSite.reviews;
   updatedSiteData.founded = parseInt(updatedSiteData.founded);
-  console.log("updatedSiteData: ", updatedSiteData);
 
   const updatedInfo = await siteCollection.updateOne(
     { _id: id },
@@ -273,4 +450,9 @@ module.exports = {
   searchSites,
   getSitesByBorough,
   getSitesByName,
+  createSiteToBeApproved,
+  getAllWaitingSites,
+  getWaitingSiteById,
+  removeWaitingSite,
+  updateWaitingSite,
 };
