@@ -4,7 +4,7 @@ import {signInWithEmailAndPassword} from "firebase/auth";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import '../App.css'
-import SocialSignIn from './SocialSignIn';
+//import SocialSignIn from './SocialSignIn';
 
 export default function Login () {
     const [email, setEmail] = useState("");
@@ -62,8 +62,7 @@ export default function Login () {
                 </div>
             </form>
             <br />
-            <Link to="/signup">Sign up</Link>
-            <SocialSignIn />
+            <p>Don't have an account? Sign up <Link to="/signup">here</Link></p>
         </div>
     );
 };

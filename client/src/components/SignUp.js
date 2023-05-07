@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Link } from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from '../firebase.js';
-import SocialSignIn from "./SocialSignIn.js";
+//import SocialSignUp from "./SocialSignUp.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -116,8 +116,9 @@ function SignUp() {
                 </div>
                 <button>Sign Up</button>
             </form>
+            <br/>
+            <p>Already have an account? Sign in <Link to="/signin">here</Link></p>
             <br />
-            <SocialSignIn />
         </div>
     )
 };
