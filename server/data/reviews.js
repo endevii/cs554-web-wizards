@@ -295,7 +295,7 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
     user_reviews[index].title = updatedReview.title;
     user_reviews[index].rating = updatedReview.rating;
     user_reviews[index].review = updatedReview.review;
-    console.log(user_reviews)
+    user_reviews[index].edited = updatedReview.edited;
 
     const updateUser = await userCollection.updateOne(
       { uid: userId },
