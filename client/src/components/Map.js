@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "mapbox-gl/dist/mapbox-gl.css";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 function Map() {
@@ -8,7 +9,7 @@ function Map() {
   const map = useRef(null);
   const [lng, setLng] = useState(-74.006);
   const [lat, setLat] = useState(40.740121);
-  const [zoom, setZoom] = useState(9);
+  const [zoom, setZoom] = useState(10);
   const [markerData, setMarkerData] = useState([]);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function Map() {
         siteInfo.coordinates = site.location.coordinates;
         siteInfo.name = site.name;
         siteInfo.address = site.location.address;
+        siteInfo.id = site._id;
         siteArr.push(siteInfo);
       });
       setMarkerData(siteArr);
@@ -39,7 +41,6 @@ function Map() {
 
   if (markerData.length > 1) {
     for (let i = 0; i < markerData.length; i++) {
-      console.log(markerData[i]);
       const el = document.createElement("div");
       el.className = "marker";
       const marker = new mapboxgl.Marker()
@@ -48,7 +49,7 @@ function Map() {
           new mapboxgl.Popup()
             .addClassName("map-popup")
             .setHTML(
-              `<h1>${markerData[i].name}</h1><p>${markerData[i].address}</p>`
+              `<a href='${'/site/'+markerData[i].id}'> ${markerData[i].name}</a><p>${markerData[i].address}</p>`
             )
         )
         .addTo(map.current);
@@ -61,6 +62,7 @@ function Map() {
       <div className="map">
         <div ref={mapContainer} className="map-container" />
       </div>
+      <p>Create your own itinerary <Link className='link-itinerary' to="/createItinerary">here</Link></p>
     </>
   );
 }
