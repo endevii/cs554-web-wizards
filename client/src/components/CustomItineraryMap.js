@@ -25,6 +25,7 @@ function CustomItineraryMap(props) {
       siteInfo.coordinates = site.location.coordinates;
       siteInfo.name = site.name;
       siteInfo.address = site.location.address;
+      siteInfo.id = site._id;
       siteArr.push(siteInfo);
       return siteInfo;
     });
@@ -112,7 +113,7 @@ function CustomItineraryMap(props) {
               new mapboxgl.Popup()
                 .addClassName("map-popup")
                 .setHTML(
-                  `<h1>${markerData[i].name}</h1><p>${markerData[i].address}</p>`
+                  `<a href='${'/site/'+markerData[i].id}'>${markerData[i].name}</a><p>${markerData[i].address}</p>`
                 )
             )
             .addTo(map.current);
