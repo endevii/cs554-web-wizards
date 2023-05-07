@@ -15,6 +15,7 @@ import IndividualSite from "./components/IndividualSite";
 import PopularItineraries from "./components/PopularItineraries";
 import CreateItinerary from "./components/CreateItinerary";
 import RequestSite from "./components/RequestSite";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/itineraries" element={<PopularItineraries />} />
           <Route path="/createItinerary" element={<CreateItinerary />} />
           <Route path="/requestSite" element={<RequestSite />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
     </Router>

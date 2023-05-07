@@ -415,6 +415,19 @@ p {
   width: auto;
 }
 
+.btn-link {
+  background-color: #c24646;
+  border-radius: 3px;
+  color: #ffff;
+  text-decoration: none !important;
+  margin: 5px;
+  font-size: large;
+}
+
+.btn-link:hover {
+  color: #282c34;
+}
+
 .saved-itinerary {
   text-align: left;
 }
@@ -493,4 +506,55 @@ title-account {
 
 .request-site {
   margin: 10px;
+}
+
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+  justify-content: left;
+  margin: 10px;
+}
+
+.popup-edit {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  text-align: left;
+  align-items: center;
+  justify-content: left;
+  background-color: white;
+  border: 1px solid black;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  margin: 10px;
+}
+
+.btn-close {
+  background-color: #c24646;
+  color: #f8f9fa;
+  margin: 10px;
+}
+
+.btn-close:hover {
+  background-color: #c24646;
+  color: #282c34;
+}
+
+.add-admin label {
+  width: fit-content;
+  white-space: nowrap;
+  margin-left: 5px;
 }
