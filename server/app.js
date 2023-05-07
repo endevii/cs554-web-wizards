@@ -6,6 +6,8 @@ const configRoutes = require("./routes");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const validation = require("./validation");
+const data = require("./data");
+const usersData = data.users;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,14 +30,14 @@ app.use("/admin/:uid", async (req, res, next) => {
   } catch (e) {
     return res.status(400).json({ error: e });
   }
-  let user;
+  let isAdmin;
   try {
-    user = await usersData.getUserById(uid);
+    isAdmin = await usersData.checkIfAdmin(uid);
   } catch (e) {
-    return res.status(404).json({ error: e });
+    return res.status(400).json({ error: e });
   }
 
-  if (user.permissions.includes("admin") === false) {
+  if (isAdmin === false) {
     return res
       .status(403)
       .json({ error: "You do not have permission to access this page." });

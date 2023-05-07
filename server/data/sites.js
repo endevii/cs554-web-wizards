@@ -24,7 +24,7 @@ const createSite = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.days);
+    timeDay = helpers.validDays(hours.day);
     timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
@@ -86,7 +86,8 @@ const createSiteToBeApproved = async (
   category,
   borough,
   age,
-  image
+  image,
+  user
 ) => {
   try {
     name = helpers.validSiteName(name);
@@ -97,7 +98,7 @@ const createSiteToBeApproved = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.days);
+    timeDay = helpers.validDays(hours.day);
     timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
@@ -116,6 +117,8 @@ const createSiteToBeApproved = async (
     image = helpers.validImage(image);
 
     age = parseInt(age);
+
+    user = helpers.validString(user, "USER");
   } catch (e) {
     throw e;
   }
@@ -142,6 +145,7 @@ const createSiteToBeApproved = async (
     borough: borough,
     founded: age,
     image: image,
+    user: user,
   };
 
   const insertInfo = await waitingCollection.insertOne(newSite);
@@ -175,7 +179,7 @@ const getWaitingSiteById = async (id) => {
 
   const waitingCollection = await waitingSites();
 
-  const waiting = await waitingCollection({ _id: id });
+  const waiting = await waitingCollection.findOne({ _id: id });
   if (!waiting) throw "ERROR: COULD NOT FIND SITE";
 
   waiting._id = waiting._id.toString();
@@ -224,7 +228,7 @@ const updateWaitingSite = async (id, updatedSite) => {
   if (Object.keys(updatedSite).length === 0)
     throw "ERROR: UPDATED SITE CAN'T BE EMPTY";
 
-  const waitingCollection = await sites();
+  const waitingCollection = await waitingSites();
 
   let updatedSiteData = {};
 
@@ -237,11 +241,13 @@ const updateWaitingSite = async (id, updatedSite) => {
     console.log(e);
     throw e;
   }
-
+  // console.log(newSite);
   updatedSiteData._id = id;
   updatedSiteData.rating = newSite.rating;
   updatedSiteData.reviews = newSite.reviews;
   updatedSiteData.founded = parseInt(updatedSiteData.founded);
+  updatedSiteData.user = newSite.user;
+  // console.log("why", updatedSiteData.user);
 
   const updatedInfo = await waitingCollection.updateOne(
     { _id: id },

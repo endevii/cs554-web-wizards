@@ -222,7 +222,7 @@ const userHasItinerary = async (uid, itinerary) => {
 
 const getAllUsers = async () => {
   const userCollection = await users();
-  const allUsers = await userCollection.find({}).toArray();
+  let allUsers = await userCollection.find({}).toArray();
 
   if (allUsers.length === 0) throw "ERROR: NO USERS FOUND";
 
@@ -234,6 +234,7 @@ const getAllUsers = async () => {
     return temp;
   });
 
+  // console.log(allUsers);
   return allUsers;
 };
 

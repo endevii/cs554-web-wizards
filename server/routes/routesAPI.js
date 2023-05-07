@@ -84,9 +84,14 @@ router.route("/sites").post(async (req, res) => {
   return res.status(200).send(site);
 });
 
-router.route("/sites/request/:id").post(async (req, res) => {
+router.route("/sites/request/:user").post(async (req, res) => {
   let site = req.body;
-
+  let user = req.params.user;
+  try {
+    user = validation.validString(user);
+  } catch (e) {
+    return res.status(400).json({ error: e });
+  }
   try {
     if (site.category.length === 0) {
       site.category = "Other";
@@ -110,7 +115,8 @@ router.route("/sites/request/:id").post(async (req, res) => {
       site.category,
       site.borough,
       site.founded,
-      site.image
+      site.image,
+      user
     );
   } catch (e) {
     return res.status(400).json({ error: e });

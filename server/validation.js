@@ -250,8 +250,8 @@ function validState(str) {
   if (!isValidStateInput(str.trim()))
     throw "ERROR: STATE MUST BE A VALID STATE";
 
-  if (str.trim().length > 2)
-    throw "ERROR: STATE MUST BE A VALID STATE ABBREVIATION";
+  // if (str.trim().length > 2)
+  //   throw "ERROR: STATE MUST BE A VALID STATE ABBREVIATION";
 
   return str.trim();
 }
@@ -436,7 +436,7 @@ function validSite(site) {
   }
 
   try {
-    site.hours.days = validDays(site.hours.days);
+    site.hours.day = validDays(site.hours.day);
   } catch (e) {
     errors.push(e);
   }
@@ -746,6 +746,20 @@ function checkToBeUpdated(site) {
   return updatedSiteData;
 }
 
+function validPermission(permission) {
+  if (!permission) throw "ERROR: PERMISSION IS REQUIRED";
+  if (typeof permission !== "string")
+    throw "ERROR: PERMISSION MUST BE A STRING";
+  if (permission.trim().length === 0) throw "ERROR: PERMISSION CANNOT BE EMPTY";
+
+  permission = permission.trim().toLowerCase();
+
+  let perms = ["admin", "user", "moderator"];
+  if (!perms.includes(permission))
+    throw "ERROR: PERMISSION MUST BE ADMIN, USER, OR MODERATOR";
+  return permission;
+}
+
 module.exports = {
   validObjectID,
   validString,
@@ -766,4 +780,5 @@ module.exports = {
   siteChanges,
   checkToBeUpdated,
   validArray,
+  validPermission,
 };
