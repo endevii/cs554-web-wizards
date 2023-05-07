@@ -179,6 +179,10 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
   const site = await siteCollection.findOne({ _id: siteId });
   if (!site) throw "ERROR: SITE NOT FOUND";
 
+  const userCollection = await users();
+  const user = await userCollection.findOne({uid: userId});
+  if(!user) throw "ERROR: USER NOT FOUND";
+
   const reviews = site.reviews;
   let reviewToUpdate = null;
   for (let i = 0; i < reviews.length; i++) {
@@ -278,6 +282,27 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
     );
     if (updateRating.modifiedCount === 0) {
       throw "ERROR: COULD NOT UPDATE RATING";
+    }
+
+    let user_reviews = user.reviews;
+    let index = -1;
+    for(let i =0; i < user_reviews.length; i++){
+      if(user_reviews[i]._id === reviewId){
+        index = i;
+      }
+    }
+
+    user_reviews[index].title = updatedReview.title;
+    user_reviews[index].rating = updatedReview.rating;
+    user_reviews[index].review = updatedReview.review;
+    user_reviews[index].edited = updatedReview.edited;
+
+    const updateUser = await userCollection.updateOne(
+      { uid: userId },
+      { $set: { reviews: user_reviews } }
+    );
+    if (updateUser.modifiedCount === 0) {
+      throw "ERROR: COULD NOT ADD REVIEW TO USER";
     }
   }
   // get the updated site
