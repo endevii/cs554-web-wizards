@@ -8,8 +8,8 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 function CustomItineraryMap(props) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng] = useState(-74.006);
-  const [lat] = useState(40.740121);
+  const [lng] = useState(props.data[0].location.coordinates[0]);
+  const [lat] = useState(props.data[0].location.coordinates[1]);
   const [zoom] = useState(11);
   const [siteData, setSiteData] = useState([]);
   const [markerData, setMarkerData] = useState([]);
