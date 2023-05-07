@@ -187,6 +187,16 @@ function Account() {
                             alert("Error: Nothing to update")
                         } else if (title == "" && rating == "" && review_text == review.review){
                             alert("Error: Nothing to update")
+                        } else if (review_text !== "" && review_text.trim().length === 0) {
+                            alert("Error: Review cannot be just spaces")
+                        } else if (title !== "" && title.trim().length === 0) {
+                            alert("Error: Title cannot be just spaces")
+                        } else if (rating !== "" && rating.trim().length === 0) {
+                            alert("Error: Rating cannot be just spaces")
+                        } else if (rating !== "" && isNaN(parseInt(rating))) {
+                            alert("Error: Rating must be a number")
+                        } else if(parseInt(rating) < 0 || parseInt(rating) > 5){
+                            alert("Error: Rating must be a number 0 to 5")
                         } else {
                         if(title !== ""){
                             temp_title = title;
