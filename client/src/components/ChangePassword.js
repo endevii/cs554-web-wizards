@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import {
   updatePassword,
@@ -12,6 +13,7 @@ function ChangePassword() {
   const [email, setEmail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [matchPassword, setMatchPassword] = useState('');
+  const navigate = useNavigate();
   let auth = getAuth();
 
   let user = auth.currentUser;
@@ -29,23 +31,27 @@ function ChangePassword() {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-    const { currentPassword, newPasswordOne, newPasswordTwo } =
-      event.target.elements;
+    const currentPassword = document.getElementById('currentPassword').value;
     console.log(currentPassword);
+    const newPasswordOne = document.getElementById('newPasswordOne').value;
+    const newPasswordTwo = document.getElementById('newPasswordTwo').value;
 
-    if (newPasswordOne.value !== newPasswordTwo.value) {
+    if (newPasswordOne !== newPasswordTwo) {
       setMatchPassword('Passwords do not match!');
       return false;
     }
-
     let credential = EmailAuthProvider.credential(email, currentPassword);
 
     try {
-      await reauthenticateWithCredential(auth, credential);
-      await updatePassword(newPasswordOne);
+      await reauthenticateWithCredential(user, credential);
+      await updatePassword(user, newPasswordOne);
+      console.log('after update password');
       signOut(auth);
       alert('Password has been changed, you will be logged out');
+      //Redirect to login page
+      navigate('/signin');
     } catch (error) {
+      console.log(error);
       alert(error);
     }
   };
