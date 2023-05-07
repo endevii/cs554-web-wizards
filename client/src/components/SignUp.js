@@ -37,7 +37,7 @@ function SignUp() {
                 }).then (async () => {
                     const { data } = await axios.get("http://localhost:3001/adduser/" + userCredential.user.uid);
                     console.log(data)
-                    navigate("/account")
+                    navigate("/")
                 })
             }).catch((error) => {
                 console.log(error);

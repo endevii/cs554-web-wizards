@@ -60,7 +60,7 @@ function Account() {
             
         )
     }
-    
+
     card = mongoUser && mongoUser.itineraries && mongoUser.itineraries.map((itinerary) => {
         return (
             <div key={itinerary.ids}>
@@ -118,6 +118,42 @@ function Account() {
                         :<h2>You don't have any itineraries saved</h2>
                     }
                 </div> 
+                <br/>
+                <hr className='hr-custom'/>
+                <hr className='hr-custom'/>
+                <div>
+                    {mongoUser && mongoUser.reviews && mongoUser.reviews.length !== 0
+                        ?<div>
+                            <h2 className='title-account'>Your Reviews</h2>
+                            <ul>
+                                {mongoUser.reviews.map((review) => {
+                                    return (
+                                        <div key={review._id} className='div-class'>
+                                            <p>Title: {review.title}</p>
+                                            <p>Review: {review.review}</p>
+                                            <p>Rating: {review.rating}</p>
+                                            <p>Date: {review.date}</p>
+                                            <button onClick={async (e) => {
+                                                try{
+                                                    await axios.delete("http://localhost:3001/reviews/" + review.siteid + "/" + mongoUser.uid + "/" + review._id);
+                                                }catch(e) {
+                                                    alert("Error: Unable to delete review");
+                                                }
+                                                window.location.reload();
+                                            }}>
+                                                Delete Review
+                                            </button>
+                                        </div>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                        :<h2 className='title-account'>You do not have any reviews</h2>
+                    }
+                </div>
+                <br/>
+                <hr className='hr-custom'/>
+                <hr className='hr-custom'/>
             </div>
         );
     } else if (loading) {
