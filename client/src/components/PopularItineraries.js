@@ -1,16 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Revolution from "./Revolution";
 import Staten from "./Staten";
 import BrooklynBattles from "./BrooklynBattles";
 import { Link } from "react-router-dom";
 import ReactDOMServer from 'react-dom/server'
 import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function PopularItineraries() {
     const [revolution, setRevolution] = useState(false);
     const [staten, setStaten] = useState(false);
     const [battle, setBattle] = useState(false);
     const [pdfReady, setPdfReady] = useState({revolution: false, staten: false})
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [name, setName] = useState("");
+    let auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if(user){  
+                setUser(user);
+                //le.log(user);
+                setName(user.displayName);
+                setLoading(false);
+            } else {
+                setLoading(false);
+            }
+        });
+    }, [auth, name])
+
     const generatePdf = async (component, name) => {
         try{
             let {data} = await axios.post('http://localhost:3001/generatepdf',{input: component, name:name});
@@ -59,14 +78,19 @@ function PopularItineraries() {
                     on the Manhattan Revolutionary Tour. 
                 </div>
             </div>
-            {!revolution
-                ? <button onClick={()=>{setRevolution(true)}}>More Information</button>
-                : <button onClick={()=>{
-                    setRevolution(false);
-                    setPdfReady(prev => ({
-                    ...prev,
-                    ...{revolution: false}
-                  }))}}>Less Information</button>
+            {!loading && user
+            ? <div>
+                {!revolution
+                    ? <button onClick={()=>{setRevolution(true)}}>More Information</button>
+                    : <button onClick={()=>{
+                        setRevolution(false);
+                        setPdfReady(prev => ({
+                        ...prev,
+                        ...{revolution: false}
+                    }))}}>Less Information</button>
+                }
+            </div>
+            :<p><Link to="/signin" >Login</Link> to see more information</p>
             }
             {revolution && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Revolution />), "revolution")}>Generate PDF</button>}
             {pdfReady.revolution === "Pdf is ready to print/download" ? <div><br/><a href='http://localhost:3001/generatepdf/revolution' target="_blank" rel="noreferrer">{pdfReady.revolution}</a></div> : <p>{pdfReady.revolution}</p>}
@@ -93,14 +117,19 @@ function PopularItineraries() {
                     fees. 
                 </div>
             </div>
-            {!staten
-                ? <button onClick={()=>{setStaten(true)}}>More Information</button>
-                : <button onClick={()=>{
-                    setStaten(false);
-                    setPdfReady(prev => ({
-                    ...prev,
-                    ...{staten: false}
-                  }))}}>Less Information</button>
+            {!loading && user
+            ? <div>
+                {!staten
+                    ? <button onClick={()=>{setStaten(true)}}>More Information</button>
+                    : <button onClick={()=>{
+                        setStaten(false);
+                        setPdfReady(prev => ({
+                        ...prev,
+                        ...{staten: false}
+                    }))}}>Less Information</button>
+                }
+            </div>
+            :<p><Link to="/signin" >Login</Link> to see more information</p>
             }
             {staten && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<Staten />), "staten")}>Generate PDF</button>}
             {pdfReady.staten === "Pdf is ready to print/download"? <div><br/><a href='http://localhost:3001/generatepdf/staten' target="_blank" rel="noreferrer">Pdf ready to print/download</a></div>:<p>{pdfReady.staten}</p>}
@@ -127,14 +156,19 @@ function PopularItineraries() {
                     of the battle fields in Brooklyn. 
                 </div>
             </div>
-            {!battle
-                ? <button onClick={()=>{setBattle(true)}}>More Information</button>
-                : <button onClick={()=>{
-                    setBattle(false);
-                    setPdfReady(prev => ({
-                    ...prev,
-                    ...{battle: false}
-                  }))}}>Less Information</button>
+            {!loading && user
+            ? <div>
+                {!battle
+                    ? <button onClick={()=>{setBattle(true)}}>More Information</button>
+                    : <button onClick={()=>{
+                        setBattle(false);
+                        setPdfReady(prev => ({
+                        ...prev,
+                        ...{battle: false}
+                    }))}}>Less Information</button>
+                }
+            </div>
+            :<p><Link to="/signin" >Login</Link> to see more information</p>
             }
             {battle && <button onClick={()=>generatePdf(ReactDOMServer.renderToString(<BrooklynBattles />), "battle")}>Generate PDF</button>}
             {pdfReady.battle && <div><br/><a href='http://localhost:3001/generatedpdf/battle' target="_blank" rel="noreferrer">Pdf ready to print/donwload</a></div>}

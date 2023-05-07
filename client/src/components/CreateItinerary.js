@@ -4,7 +4,9 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import CustomItineraryMap from './CustomItineraryMap';
 import ItineraryList from './ItineraryList';
-import ReactDOMServer from 'react-dom/server'
+import ReactDOMServer from 'react-dom/server';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Link } from 'react-router-dom';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function CreateItinerary() {
@@ -24,6 +26,28 @@ function CreateItinerary() {
     let checkQueens = null;
     let checkBronx = null;
     let card = null;
+
+    const [user, setUser] = useState(null);
+    const [loadingUser, setLoadingUser] = useState(true);
+    //const [mongoUser, setMongoUser] = useState(null);
+    const [name, setName] = useState("");
+    let auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if(user){  
+                setUser(user);
+                //le.log(user);
+                setName(user.displayName)
+                if(name !== ""){
+                    console.log(name); 
+                    setLoadingUser(false);
+                }
+            } else {
+                setLoadingUser(false);
+            }
+        });
+    }, [auth, name])
  
     useEffect(() => {
         const getAllSites = async (borough) => {
@@ -73,6 +97,49 @@ function CreateItinerary() {
         getAllSites('Bronx');
         getAllSites('Queens');
     }, []);
+
+    const [saved, setSaved] = useState(false);
+    const [itineraries, setItineraries] = useState([]);
+    const [mongoUser, setMongoUser] = useState(null);
+    const [loadingMongo, setLoadingMongo] = useState(true);
+    useEffect(() => {
+        const getUser = async (uid) => {
+            const { data } = await axios.get("http://localhost:3001/user/"+uid);
+            setMongoUser(data);
+            setLoadingMongo(false);
+            mongoUser && setItineraries(user.itineraries);
+        };
+        if(!loadingUser){
+            user && getUser(user.uid);
+        }
+    }, [loadingUser, user, mongoUser]);
+
+    useEffect(() => {
+        const checkAdded = async(uid, itinerary) => {
+            try{
+                const { data } = await axios.get("http://localhost:3001/has/"+uid, {
+                    params: {
+                        itinerary: JSON.stringify(itinerary)
+                    }
+                })
+                setSaved(data);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        let id_array = [];
+        itinerary.forEach(site => {
+            id_array.push(site._id);
+        })
+        let temp = {
+            ids: id_array,
+            itinerary: itinerary
+        }
+        if(!loadingMongo){
+            checkAdded(user.uid, temp)
+        }
+
+    }, [itineraries, itinerary, loading, loadingMongo, user, loadingItinerary]);
 
     const buildSiteCheck = (site) => {
         return (
@@ -173,7 +240,8 @@ function CreateItinerary() {
                 <div className='create-itinerary-paragraph'>
                     <p>Select the sites which you would like to visit on your trip to NYC! Then click the Load Itinerary button to see your itinerary generated in the ordeer in which you selected your sites.</p>
                 </div>
-                <form>
+                {user
+                ?<div><form>
                     {manhattan.length !== 0 && <h3>Manhattan:</h3>}
                     {checkManhattan}
                     <br/>
@@ -214,11 +282,63 @@ function CreateItinerary() {
                             {!loadingItinerary &&
                                 <CustomItineraryMap key="map" data={itinerary} id="Custom"/>
                             }
+                            <br/>
+                            {!saved
+                            ?<div>
+                                {!loading && user && !loadingUser && !loadingMongo && !loadingItinerary &&
+                                    <button onClick={(async (e) => {
+                                        e.preventDefault();
+                                        //console.log(sites)
+                                        try{
+                                            await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
+                                                params: {
+                                                    itinerary: JSON.stringify(itinerary)
+                                                }
+                                            })
+                                            alert("Itinerary saved");
+                                            setSaved(true);
+                                        }catch(e){
+                                            alert("Error: You already saved this itinerary");
+                                        }
+                                    })}>Save Itinerary</button>
+                                }
+                            </div>
+                            :<div>
+                                {!loading && !loadingUser && !loadingMongo && !loadingItinerary &&
+                                    <button onClick={(async (e) => {
+                                        e.preventDefault();
+                                        //console.log(sites)
+                                        let id_array = [];
+                                        itinerary.forEach(site => {
+                                            id_array.push(site._id)
+                                        })
+                                        let temp = {
+                                            ids: id_array,
+                                            itinerary: itinerary
+                                        }
+                                        try{
+                                            await axios.get("http://localhost:3001/deleteItinerary/"+user.uid, {
+                                                params: {
+                                                    itinerary: JSON.stringify(temp)
+                                                }
+                                            })
+                                            alert("Itinerary unsaved");
+                                            setSaved(false);
+                                        }catch(e) {
+                                            alert("Error: You have not saved this itinerary");
+                                        }
+                                    })}>Unsave Itinerary</button>
+                                }
+                            </div>
+                            }
                         </div>
                         :<div>{!loadingItinerary  && <p>{itinerary.length<2?"Add at least two stops to your itinerary!":"Only up to 12 stops can be added to your itinerary"}</p>}</div>
                     }
                     <br/> 
                 </form>
+                </div>
+                :<p><Link to="/signin">Login</Link> to create your own itinerary</p>
+                }
             </div>
         )
     }     

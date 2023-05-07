@@ -35,13 +35,13 @@ router.post("/:siteId/:userId", async (req, res) => {
     errors.push(e);
   }
   try {
-    userId = validation.validString(userId);
+    userId = validation.validString(userId, "USER ID");
   } catch (e) {
     errors.push(e);
   }
 
   try {
-    userName = validation.validString(userName);
+    userName = validation.validString(userName, "USER NAME");
   } catch (e) {
     errors.push(e);
   }
@@ -51,7 +51,7 @@ router.post("/:siteId/:userId", async (req, res) => {
     errors.push(e);
   }
   try {
-    review = validation.validString(review);
+    review = validation.validString(review, "REVIEW");
   } catch (e) {
     errors.push(e);
   }
@@ -111,11 +111,11 @@ router.delete("/:siteId/:userId/:reviewId", async (req, res) => {
   }
 
   try {
-    userId = validation.validString(userId);
+    userId = validation.validString(userId, "USER ID");
   } catch (e) {
     errors.push(e);
   }
-
+  
   try {
     reviewId = validation.validObjectID(reviewId);
   } catch (e) {
@@ -167,7 +167,7 @@ router.patch("/:siteId/:userId/:reviewId", async (req, res) => {
   }
 
   try {
-    userId = validation.validString(userId);
+    userId = validation.validString(userId, "USER ID");
   } catch (e) {
     errors.push(e);
   }
@@ -206,7 +206,7 @@ router.patch("/:siteId/:userId/:reviewId", async (req, res) => {
 
   if (review) {
     try {
-      review = validation.validString(review);
+      review = validation.validString(review, "REVIEW");
       if (review !== oldReview.review) {
         updateObj.review = review;
         updates += 1;

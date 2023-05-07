@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth";
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import '../App.css'
-import SocialSignIn from './SocialSignIn';
+//import SocialSignIn from './SocialSignIn';
 
 export default function Login () {
     const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ export default function Login () {
             .then((userCredential) => {
                 setEmail("");
                 setPassword("");
-                navigate("/account")
+                navigate("/")
             }).catch((error) => {
                 console.log(error);
             });
@@ -61,7 +62,7 @@ export default function Login () {
                 </div>
             </form>
             <br />
-            <SocialSignIn />
+            <p>Don't have an account? Sign up <Link to="/signup">here</Link></p>
         </div>
     );
 };

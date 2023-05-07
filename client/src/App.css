@@ -415,3 +415,26 @@ p {
 
   width: auto;
 }
+
+.saved-itinerary{
+  text-align: left;
+}
+
+.saved-itinerary-div{
+  width: 50%;
+}
+
+.div-class{
+  margin: auto;
+  width: 50%;
+}
+
+red-div{
+  color: #c24646;
+  background-color: #c24646;
+}
+
+title-account{
+  font-size: xx-large;
+  color: #c24646;
+}

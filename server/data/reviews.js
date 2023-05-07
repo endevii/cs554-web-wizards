@@ -1,7 +1,9 @@
 const mongoCollections = require("../config/mongoCollections");
 const sites = mongoCollections.sites;
+const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
 const helpers = require("../validation");
+const siteFunctions = require('./sites');
 
 const createReview = async (
   siteId,
@@ -9,15 +11,19 @@ const createReview = async (
   userName,
   title,
   review,
-  rating
+  rating,
 ) => {
   siteId = helpers.validObjectID(siteId);
   rating = helpers.validRating(rating.toString());
-  review = helpers.validString(review);
+  review = helpers.validString(review, "REVIEW");
   title = helpers.validTitle(title);
 
-  userId = helpers.validString(userId);
-  userName = helpers.validString(userName);
+  userId = helpers.validString(userId, "USER ID");
+  userName = helpers.validString(userName, "USER NAME");
+
+  const userCollection = await users();
+  const user = await userCollection.findOne({uid: userId});
+  if(!user) throw "ERROR: USER NOT FOUND";
 
   const siteCollection = await sites();
   const site = await siteCollection.findOne({ _id: siteId });
@@ -37,6 +43,10 @@ const createReview = async (
   let year = date.getFullYear();
   let dateString = month + "/" + day + "/" + year;
 
+  let site_temp = await siteFunctions.getSiteById(siteId);
+  console.log(site_temp);
+  let name = site_temp.name;
+
   let newReview = {
     _id: new ObjectId().toString(),
     userId: userId,
@@ -46,6 +56,8 @@ const createReview = async (
     rating: rating,
     date: dateString,
     edited: false,
+    siteid: siteId,
+    siteName: name
   };
 
   const updateInfo = await siteCollection.updateOne(
@@ -54,6 +66,14 @@ const createReview = async (
   );
   if (updateInfo.modifiedCount === 0) {
     throw "ERROR: COULD NOT ADD REVIEW";
+  }
+
+  const updateUser = await userCollection.updateOne(
+    { uid: userId },
+    { $push: { reviews: newReview } }
+  );
+  if (updateUser.modifiedCount === 0) {
+    throw "ERROR: COULD NOT ADD REVIEW TO USER";
   }
 
   // get all of the reviews for the site
@@ -142,12 +162,12 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
   let { rating, review, title } = reviewObj;
   siteId = helpers.validObjectID(siteId);
   reviewId = helpers.validObjectID(reviewId);
-  userId = helpers.validString(userId);
+  userId = helpers.validString(userId, "USER ID");
   if (rating != null) {
     rating = helpers.validRating(rating.toString());
   }
   if (review) {
-    review = helpers.validString(review);
+    review = helpers.validString(review, "REVIEW");
   }
   if (title) {
     title = helpers.validTitle(title);
@@ -275,14 +295,32 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
 };
 
 const deleteReview = async (userId, siteId, reviewId) => {
-  // console.log(userId, siteId, reviewId);
   siteId = helpers.validObjectID(siteId);
   reviewId = helpers.validObjectID(reviewId);
-  userId = helpers.validString(userId);
+  userId = helpers.validString(userId, "USER ID");
 
   const siteCollection = await sites();
   const site = await siteCollection.findOne({ _id: siteId });
   if (!site) throw "ERROR: SITE NOT FOUND";
+
+  const userCollection = await users();
+  const user = await userCollection.findOne({uid: userId});
+  if(!user) throw "ERROR: USER NOT FOUND";
+
+  let user_reviews = user.reviews;
+  let index = -1;
+
+  for(let i = 0; i < user_reviews.length; i++){
+    if(user_reviews[i]._id === reviewId){
+      index = i;
+    }
+  }
+  
+  if(index === -1){
+    throw "ERROR: USER HAS NOT SAVED REVIEW";
+  }
+
+  user_reviews.splice(index, 1);
 
   const reviews = site.reviews;
   let review = null;
@@ -302,6 +340,14 @@ const deleteReview = async (userId, siteId, reviewId) => {
   );
   if (updateInfo.modifiedCount === 0) {
     throw "ERROR: COULD NOT DELETE REVIEW";
+  }
+
+  const updateUser = await userCollection.updateOne(
+    { uid: userId },
+    { $set: { reviews: user_reviews } }
+  );
+  if (updateUser.modifiedCount === 0) {
+    throw "ERROR: COULD NOT DELETE REVIEW USER";
   }
 
   // get all of the reviews for the site

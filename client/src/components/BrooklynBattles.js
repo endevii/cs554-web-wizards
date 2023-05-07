@@ -1,10 +1,31 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CustomItineraryMap from './CustomItineraryMap';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function BrooklynBattles() {
     const [sites, setSites] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+    const [loadingUser, setLoadingUser] = useState(true);
+    const [name, setName] = useState("");
+    let auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if(user){  
+                setUser(user);
+                //le.log(user);
+                setName(user.displayName)
+                if(name !== ""){
+                    console.log(name); 
+                    setLoadingUser(false);
+                }
+            } else {
+                setLoadingUser(false);
+            }
+        });
+    }, [auth, name])
 
     useEffect(() => {
         const getSite = async (name) => {
@@ -25,6 +46,49 @@ function BrooklynBattles() {
         getSite("Green-Wood Cemetery");
         getSite("John Paul Jones Park");
     }, [sites]);
+    
+    const [saved, setSaved] = useState(false);
+    const [itineraries, setItineraries] = useState([]);
+    const [mongoUser, setMongoUser] = useState(null);
+    const [loadingMongo, setLoadingMongo] = useState(true);
+    useEffect(() => {
+        const getUser = async (uid) => {
+            const { data } = await axios.get("http://localhost:3001/user/"+uid);
+            setMongoUser(data);
+            setLoadingMongo(false);
+            mongoUser && setItineraries(user.itineraries);
+        };
+        if(!loading){
+            getUser(user.uid);
+        }
+    }, [loading, user, mongoUser]);
+
+    useEffect(() => {
+        const checkAdded = async(uid, itinerary) => {
+            try{
+                const { data } = await axios.get("http://localhost:3001/has/"+uid, {
+                    params: {
+                        itinerary: JSON.stringify(itinerary)
+                    }
+                })
+                setSaved(data);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        let id_array = [];
+        sites.forEach(site => {
+            id_array.push(site._id);
+        })
+        let temp = {
+            ids: id_array,
+            itinerary: sites
+        }
+        if(!loadingMongo){
+            checkAdded(user.uid, temp)
+        }
+
+    }, [itineraries, sites, loading, loadingMongo, user]);
 
     return (
         <div className='revolution'>
@@ -111,6 +175,53 @@ function BrooklynBattles() {
             <hr/>
             {!loading &&
                 <CustomItineraryMap key="map" data={sites} id="Brooklyn"/>
+            }
+            <br/>
+            {!saved
+            ?<div>
+                {!loading && !loadingUser && 
+                    <button onClick={(async (e) => {
+                        //console.log(sites)
+                        try{
+                            await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
+                                params: {
+                                    itinerary: JSON.stringify(sites)
+                                }
+                            })
+                            alert("Itinerary saved");
+                            setSaved(true);
+                        }catch(e){
+                            alert("Error: You already saved this itinerary");
+                        }
+                    })}>Save Itinerary</button>
+                }
+            </div>
+            :<div>
+                {!loading && !loadingUser && 
+                    <button onClick={(async (e) => {
+                        //console.log(sites)
+                        let id_array = [];
+                        sites.forEach(site => {
+                            id_array.push(site._id)
+                        })
+                        let temp = {
+                            ids: id_array,
+                            itinerary: sites
+                        }
+                        try{
+                            await axios.get("http://localhost:3001/deleteItinerary/"+user.uid, {
+                                params: {
+                                    itinerary: JSON.stringify(temp)
+                                }
+                            })
+                            alert("Itinerary unsaved");
+                            setSaved(false);
+                        }catch(e) {
+                            alert("Error: You have not saved this itinerary");
+                        }
+                    })}>Unsave Itinerary</button>
+                }
+            </div>
             }
         </div>
     )

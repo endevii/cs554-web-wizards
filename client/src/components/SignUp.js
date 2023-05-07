@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import { Link } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../firebase.js'
-import SocialSignIn from "./SocialSignIn.js";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {auth} from '../firebase.js';
+//import SocialSignUp from "./SocialSignUp.js";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignUp() {
     const [matchPassword, setMatchPassword] = useState('');
@@ -31,7 +32,13 @@ function SignUp() {
         try {
             await createUserWithEmailAndPassword(auth, email.value, passwordOne.value, displayName)
             .then((userCredential) => {
-                navigate("/account")
+                updateProfile(auth.currentUser, {
+                    displayName: displayName.value
+                }).then (async () => {
+                    const { data } = await axios.get("http://localhost:3001/adduser/" + userCredential.user.uid);
+                    console.log(data)
+                    navigate("/")
+                })
             }).catch((error) => {
                 console.log(error);
             });
@@ -54,9 +61,9 @@ function SignUp() {
                         <input
                             className='form-control'
                             required
-                            name="full_name"
+                            name="displayName"
                             type="text"
-                            id="full_name"
+                            id="displayName"
                             onChange={event => setFullName(event.target.value)}
                             value={fullName}
                         />
@@ -109,8 +116,9 @@ function SignUp() {
                 </div>
                 <button>Sign Up</button>
             </form>
+            <br/>
+            <p>Already have an account? Sign in <Link to="/signin">here</Link></p>
             <br />
-            <SocialSignIn />
         </div>
     )
 };
