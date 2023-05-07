@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import SignOutButton from "./SignOut";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 function Account() {
   //const [uid, setUid] = useState(null);
@@ -11,6 +11,7 @@ function Account() {
   const [loadingUser, setLoadingUser] = useState(true);
   const [mongoUser, setMongoUser] = useState(null);
   const [name, setName] = useState("");
+  const navigate = useNavigate();
   let card = null;
   //const [file, setFile] = useState(null);
   //const [upload, setUpload] = useState("https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436191.jpg?size=626&ext=jpg&ga=GA1.1.55329923.1683053289&semt=robertav1_2_sidr");
@@ -120,6 +121,9 @@ function Account() {
         </div>
         <div className="account-signout">
           <SignOutButton />
+          <form action="/changepassword">
+            <button type="submit">Change Password</button>
+          </form>
         </div>
         <br />
         <hr className="hr-custom" />

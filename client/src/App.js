@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import ChangePassword from "./components/ChangePassword";
 import Account from "./components/Account";
 import PrivateRoute from "./components/PrivateRoute";
 import SignedInRoute from "./components/SignedInRoute";
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/account" element={<PrivateRoute />}>
             <Route path="/account" element={<Account />} />
+          </Route>
+          <Route path="/changepassword" element={<PrivateRoute />}>
+            <Route path="/changepassword" element={<ChangePassword />} />
           </Route>
           <Route path="/sites" element={<SiteList />} />
           <Route

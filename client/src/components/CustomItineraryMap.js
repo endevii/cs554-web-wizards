@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
-import axios from "axios";
-import "../App.css";
+import React, { useRef, useEffect, useState } from 'react';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import axios from 'axios';
+import '../App.css';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function CustomItineraryMap(props) {
@@ -16,7 +16,7 @@ function CustomItineraryMap(props) {
   const [geojson, setGeojson] = useState(null);
   const [routeAvailable, setRouteAvailable] = useState(true);
   const [showDirections, setShowDirections] = useState(false);
-  const [transportMode, setTransportMode] = useState("walking")
+  const [transportMode, setTransportMode] = useState('walking');
   useEffect(() => {
     setSiteData(props.data);
     let siteArr = [];
@@ -25,6 +25,7 @@ function CustomItineraryMap(props) {
       siteInfo.coordinates = site.location.coordinates;
       siteInfo.name = site.name;
       siteInfo.address = site.location.address;
+      siteInfo.id = site._id;
       siteArr.push(siteInfo);
       return siteInfo;
     });
@@ -35,7 +36,7 @@ function CustomItineraryMap(props) {
     if (map.current) return;
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v12",
+      style: 'mapbox://styles/mapbox/streets-v12',
       center: [lng, lat],
       zoom: zoom,
     });
@@ -43,24 +44,24 @@ function CustomItineraryMap(props) {
 
   useEffect(() => {
     if (geojson) {
-      if (map.current.getSource("route")) {
-        map.current.getSource("route").setData(geojson);
+      if (map.current.getSource('route')) {
+        map.current.getSource('route').setData(geojson);
       } else {
         map.current.addLayer({
-          id: "route",
-          type: "line",
+          id: 'route',
+          type: 'line',
           source: {
-            type: "geojson",
+            type: 'geojson',
             data: geojson,
           },
           layout: {
-            "line-join": "round",
-            "line-cap": "round",
+            'line-join': 'round',
+            'line-cap': 'round',
           },
           paint: {
-            "line-color": "#3887be",
-            "line-width": 5,
-            "line-opacity": 0.75,
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75,
           },
         });
       }
@@ -78,17 +79,17 @@ function CustomItineraryMap(props) {
         data.trips[0].legs.map((leg) => {
           steps = [...steps, ...leg.steps];
         });
-        let tripInstructions = "";
+        let tripInstructions = '';
         for (const step of steps) {
           tripInstructions += `<li>${step.maneuver.instruction}</li>`;
         }
         let transportEmoji;
-        if(transportMode==="walking"){
-            transportEmoji = "🚶"
-        }else if(transportMode==="cycling"){
-          transportEmoji = "🚴"
+        if (transportMode === 'walking') {
+          transportEmoji = '🚶';
+        } else if (transportMode === 'cycling') {
+          transportEmoji = '🚴';
         } else {
-          transportEmoji = "🚗"
+          transportEmoji = '🚗';
         }
         instructions.innerHTML = `<h4>Round Trip Duration: ${Math.floor(
           data.trips[0].duration / 60
@@ -104,20 +105,20 @@ function CustomItineraryMap(props) {
     const addMarkers = async () => {
       if (markerData.length > 1) {
         for (let i = 0; i < markerData.length; i++) {
-          const el = document.createElement("div");
-          el.className = "marker";
+          const el = document.createElement('div');
+          el.className = 'marker';
           new mapboxgl.Marker()
             .setLngLat(markerData[i].coordinates)
             .setPopup(
               new mapboxgl.Popup()
-                .addClassName("map-popup")
+                .addClassName('map-popup')
                 .setHTML(
-                  `<h1>${markerData[i].name}</h1><p>${markerData[i].address}</p>`
+                  `<a href='${'/site/'+markerData[i].id}'>${markerData[i].name}</a><p>${markerData[i].address}</p>`
                 )
             )
             .addTo(map.current);
         }
-        let allCoordinates = "";
+        let allCoordinates = '';
         markerData.map((site) => {
           allCoordinates =
             allCoordinates +
@@ -129,10 +130,10 @@ function CustomItineraryMap(props) {
         let route = await getRoute(allCoordinates);
         if (route) {
           setGeojson({
-            type: "Feature",
+            type: 'Feature',
             properties: {},
             geometry: {
-              type: "LineString",
+              type: 'LineString',
               coordinates: route,
             },
           });
@@ -147,39 +148,39 @@ function CustomItineraryMap(props) {
   useEffect(() => {
     const instructionsDivv = document.getElementById(`instructions${props.id}`);
     if (showDirections) {
-      instructionsDivv.classList.remove("hidden");
+      instructionsDivv.classList.remove('hidden');
     } else {
-      instructionsDivv.classList.add("hidden");
+      instructionsDivv.classList.add('hidden');
     }
   }, [showDirections]);
 
   const changeHandler = (e) => {
-    setTransportMode(e)
-  }
+    setTransportMode(e);
+  };
   return (
     <>
       <h2>Map Of Your Itinerray Stops</h2>
-      <div className="map">
-        <div ref={mapContainer} className="map-container" />
+      <div className='map'>
+        <div ref={mapContainer} className='map-container' />
         <button
-          className="dir-btn"
+          className='dir-btn'
           onClick={(e) => {
             e.preventDefault();
             setShowDirections(!showDirections);
-          }}
-        >
-          {!showDirections ? "Show directions" : "Hide directions"}
+          }}>
+          {!showDirections ? 'Show directions' : 'Hide directions'}
         </button>
-       <div>
-          <label htmlFor="transportMode">Transportation Mode:</label>
-          <select name="transportMode" onChange={(e)=>changeHandler(e.target.value)}>
-            <option value="walking">Walking</option>
-            <option value="cycling">Cycling</option>
-            <option value="driving">Driving</option>
+        <div>
+          <label htmlFor='transportMode'>Transportation Mode:</label>
+          <select
+            name='transportMode'
+            onChange={(e) => changeHandler(e.target.value)}>
+            <option value='walking'>Walking</option>
+            <option value='cycling'>Cycling</option>
+            <option value='driving'>Driving</option>
           </select>
-       </div>
-        <div id={`instructions${props.id}`} className="hidden">
-        
+        </div>
+        <div id={`instructions${props.id}`} className='hidden'>
           {!routeAvailable && <p>No route available</p>}
         </div>
       </div>

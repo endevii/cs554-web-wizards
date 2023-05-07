@@ -23,7 +23,7 @@ function NavigationBar() {
     <>
       <nav className="navbar navbar-expand-lg navbar-light" id="navbar-custom">
         <a className="navbar-brand" href="/">
-          NYC Histrocial Sites
+          NYC Historical Sites
         </a>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
