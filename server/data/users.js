@@ -112,7 +112,6 @@ const addItinerary = async (uid, itinerary) => {
       }
     });
     if (equal === true) {
-      console.log(i);
       index = i;
     }
   }
@@ -164,8 +163,6 @@ const deleteItinerary = async (uid, itinerary) => {
     throw "ERROR: USER HAS NOT SAVED ITINERARY";
   }
   let temp = itineraries.splice(index, 1);
-  console.log(itineraries);
-  console.log(temp);
   const updateInfo = await userCollection.updateOne(
     { uid: uid },
     { $set: { itineraries: itineraries } }
@@ -234,7 +231,6 @@ const getAllUsers = async () => {
     return temp;
   });
 
-  // console.log(allUsers);
   return allUsers;
 };
 

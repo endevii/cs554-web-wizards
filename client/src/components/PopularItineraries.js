@@ -39,7 +39,6 @@ function PopularItineraries() {
         input: component,
         name: name,
       });
-      console.log(data.msg);
       if (data.msg === 'success') {
         setPdfReady((prev) => ({
           ...prev,

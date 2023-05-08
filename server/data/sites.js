@@ -238,16 +238,13 @@ const updateWaitingSite = async (id, updatedSite) => {
   try {
     updatedSiteData = helpers.siteChanges(newSite, updatedSite);
   } catch (e) {
-    console.log(e);
     throw e;
   }
-  // console.log(newSite);
   updatedSiteData._id = id;
   updatedSiteData.rating = newSite.rating;
   updatedSiteData.reviews = newSite.reviews;
   updatedSiteData.founded = parseInt(updatedSiteData.founded);
   updatedSiteData.user = newSite.user;
-  // console.log("why", updatedSiteData.user);
 
   const updatedInfo = await waitingCollection.updateOne(
     { _id: id },
@@ -395,7 +392,6 @@ const updateSite = async (id, updatedSite) => {
   try {
     updatedSiteData = helpers.siteChanges(newSite, updatedSite);
   } catch (e) {
-    console.log(e);
     throw e;
   }
 

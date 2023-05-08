@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import '../App.css';
-//import SocialSignIn from './SocialSignIn';
+import { useNavigate } from "react-router-dom";
+import '../App.css'
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -27,8 +26,7 @@ export default function Login() {
         } else {
           let err = document.getElementById('error-message');
           err.innerHTML = 'Incorrect Email or Password';
-        }
-        console.log(error.code);
+        }   
       });
   };
 

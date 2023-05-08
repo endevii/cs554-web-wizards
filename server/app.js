@@ -54,10 +54,8 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("new client connected", socket.id);
 
   socket.on("user_join", (name, room) => {
-    console.log("A user joined their name is " + name);
     socket.join("room" + room);
     socket.roomID = room;
     socket.userName = name;
@@ -65,12 +63,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", ({ name, message, room }) => {
-    console.log(name, message, socket.id);
     io.to("room" + room).emit("message", { name, message });
   });
 
   socket.on("disconnect", () => {
-    console.log("Disconnect Fired");
     io.to("room" + socket.roomID).emit("user_disconnect", socket.userName);
   });
 });

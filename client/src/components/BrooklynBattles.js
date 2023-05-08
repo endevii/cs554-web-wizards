@@ -15,7 +15,6 @@ function BrooklynBattles() {
         onAuthStateChanged(auth, (user) => {
             if(user){  
                 setUser(user);
-                //le.log(user);
                 setName(user.displayName)
                 if(name !== ""){
                     console.log(name); 
@@ -96,10 +95,10 @@ function BrooklynBattles() {
             <h1 className='itinerary-stop-title'>Stop 1: Fort Greene Park</h1>
             <div className='itinerary-container'>
                 <div className='stepImageOne'>
-                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/10265.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/10265.jpg' alt='Fort Greene Park'/>
                 </div>
                 <div className='stepImageTwo'>
-                    <img className='resize-image' src='https://untappedcities.com/wp-content/uploads/2018/07/Fort-Greene-Untapped-Cities-Fort-Greene-Park-Prison-Ship-Martyrs-Monument.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://untappedcities.com/wp-content/uploads/2018/07/Fort-Greene-Untapped-Cities-Fort-Greene-Park-Prison-Ship-Martyrs-Monument.jpg' alt='Fort Greene Park'/>
                 </div>
                 <div className='grid-item step-description'>
                 The first stop on this tour will be Fort Greene Park. Forte Green Park marks 
@@ -117,10 +116,10 @@ function BrooklynBattles() {
             <h1 className='itinerary-stop-title'>Stop 2: The Old Stone House</h1>
             <div className='itinerary-container'>
                 <div className='stepImageThree'>
-                    <img className='resize-image' src='https://brooklyneagle.com/wp-content/uploads/2018/06/old-stone-house_1.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://brooklyneagle.com/wp-content/uploads/2018/06/old-stone-house_1.jpg' alt='The Old Stone House'/>
                 </div>
                 <div className='stepImageFour'>
-                    <img className='resize-image' src='https://historichousetrust.org/wp-content/uploads/2021/01/OSH-inline-2-1024x671.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://historichousetrust.org/wp-content/uploads/2021/01/OSH-inline-2-1024x671.jpg' alt='The Old Stone House'/>
                 </div>
                 <div className='grid-item step-description-two'>
                 Our second stop will be The Old Stone House which is a reconstruction of a 
@@ -137,10 +136,10 @@ function BrooklynBattles() {
             <h1 className='itinerary-stop-title'>Stop 3: Green Wood Cemetery</h1>
             <div className='itinerary-container'>
                 <div className='stepImageOne'>
-                    <img className='resize-image' src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Green-Wood_Cemetery_gate_%2853784p%29_cropped.jpg/1200px-Green-Wood_Cemetery_gate_%2853784p%29_cropped.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Green-Wood_Cemetery_gate_%2853784p%29_cropped.jpg/1200px-Green-Wood_Cemetery_gate_%2853784p%29_cropped.jpg' alt='Green Wood Cemetery'/>
                 </div>
                 <div className='stepImageTwo'>
-                    <img className='resize-image' src='https://www.brownstoner.com/wp-content/uploads/2020/07/greenwood-cemetery-brooklyn-architecture-arts-2019-2.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.brownstoner.com/wp-content/uploads/2020/07/greenwood-cemetery-brooklyn-architecture-arts-2019-2.jpg' alt='Green Wood Cemetery'/>
                 </div>
                 <div className='grid-item step-description'>
                 Green Wood Cemetery will be our third stop and it is packed with American 
@@ -157,10 +156,10 @@ function BrooklynBattles() {
             <h1 className='itinerary-stop-title'>Stop 4: John Paul Jones Park</h1>
             <div className='itinerary-container'>
                 <div className='stepImageThree'>
-                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/19050.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/19050.jpg' alt='John Paul Jones Park'/>
                 </div>
                 <div className='stepImageFour'>
-                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/19048.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/19048.jpg' alt='John Paul Jones Park'/>
                 </div>
                 <div className='grid-item step-description-two'>
                 The fourth and final stop will be in John Paul Jones Park. This park was named 
@@ -181,7 +180,6 @@ function BrooklynBattles() {
             ?<div>
                 {!loading && !loadingUser && 
                     <button onClick={(async (e) => {
-                        //console.log(sites)
                         try{
                             await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
                                 params: {
@@ -199,7 +197,6 @@ function BrooklynBattles() {
             :<div>
                 {!loading && !loadingUser && 
                     <button onClick={(async (e) => {
-                        //console.log(sites)
                         let id_array = [];
                         sites.forEach(site => {
                             id_array.push(site._id)

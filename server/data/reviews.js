@@ -44,7 +44,6 @@ const createReview = async (
   let dateString = month + "/" + day + "/" + year;
 
   let site_temp = await siteFunctions.getSiteById(siteId);
-  console.log(site_temp);
   let name = site_temp.name;
 
   let newReview = {

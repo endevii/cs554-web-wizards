@@ -32,7 +32,6 @@ function ChangePassword() {
   const handleSubmitForm = async (event) => {
     event.preventDefault();
     const currentPassword = document.getElementById('currentPassword').value;
-    console.log(currentPassword);
     const newPasswordOne = document.getElementById('newPasswordOne').value;
     const newPasswordTwo = document.getElementById('newPasswordTwo').value;
 
@@ -45,13 +44,11 @@ function ChangePassword() {
     try {
       await reauthenticateWithCredential(user, credential);
       await updatePassword(user, newPasswordOne);
-      console.log('after update password');
       signOut(auth);
       alert('Password has been changed, you will be logged out');
       //Redirect to login page
       navigate('/signin');
     } catch (error) {
-      console.log(error);
       alert(error);
     }
   };

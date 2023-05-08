@@ -15,7 +15,6 @@ function Staten() {
         onAuthStateChanged(auth, (user) => {
             if(user){  
                 setUser(user);
-                //le.log(user);
                 setName(user.displayName)
                 if(name !== ""){
                     console.log(name); 
@@ -95,10 +94,10 @@ function Staten() {
             <h1 className='itinerary-stop-title'>Stop 1: Staten Island Museum</h1>
             <div className='itinerary-container'>
                 <div className='stepImageOne'>
-                    <img className='resize-image' src='https://gluckman-tang.s3.amazonaws.com/media/CACHE/images/StatenIslandMuseum_PhotoBruceDamonte_02/a4a74cc5c9a8bf00ec3827fb7b7b1fbe.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://gluckman-tang.s3.amazonaws.com/media/CACHE/images/StatenIslandMuseum_PhotoBruceDamonte_02/a4a74cc5c9a8bf00ec3827fb7b7b1fbe.jpg' alt='Staten Island Museum'/>
                 </div>
                 <div className='stepImageTwo'>
-                    <img className='resize-image' src='https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/d0/82/e6/opening-the-treasure.jpg?w=1200&h=-1&s=1' alt='federal hall'/>
+                    <img className='resize-image' src='https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/d0/82/e6/opening-the-treasure.jpg?w=1200&h=-1&s=1' alt='Staten Island Museum'/>
                 </div>
                 <div className='grid-item step-description'>
                 Our first stop will be at the Staten Island Museum, which contains specimens, 
@@ -115,10 +114,10 @@ function Staten() {
             <h1 className='itinerary-stop-title'>Stop 2: Staten Island Borough Hall</h1>
             <div className='itinerary-container'>
                 <div className='stepImageThree'>
-                    <img className='resize-image' src='https://statenislandfyi.files.wordpress.com/2015/02/f0eceed1-3048-64e8-40aaaacd79bb7c62.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://statenislandfyi.files.wordpress.com/2015/02/f0eceed1-3048-64e8-40aaaacd79bb7c62.jpg' alt='Staten Island Borough Hall'/>
                 </div>
                 <div className='stepImageFour'>
-                    <img className='resize-image' src='https://www.nycgo.com/images/venues/6043/newborohall__large.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.nycgo.com/images/venues/6043/newborohall__large.jpg' alt='Staten Island Borough Hall'/>
                 </div>
                 <div className='grid-item step-description-two'>
                 Next up we have Staten Island Borough Hall, a designated New York City landmark. 
@@ -134,10 +133,10 @@ function Staten() {
             <h1 className='itinerary-stop-title'>Stop 3: Historic Richmond Town </h1>
             <div className='itinerary-container'>
                 <div className='stepImageOne'>
-                    <img className='resize-image' src='https://www.nyc-arts.org/wp-content/uploads/2011/01/IMG_2112.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.nyc-arts.org/wp-content/uploads/2011/01/IMG_2112.jpg' alt='Historic Richmond Town'/>
                 </div>
                 <div className='stepImageTwo'>
-                    <img className='resize-image' src='https://www.silive.com/resizer/tFOs3qp2OZLTO5tKJAGR7S7cqaI=/arc-anglerfish-arc2-prod-advancelocal/public/S56Z43PJMJDBRH5WLNMCEDNGPM.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.silive.com/resizer/tFOs3qp2OZLTO5tKJAGR7S7cqaI=/arc-anglerfish-arc2-prod-advancelocal/public/S56Z43PJMJDBRH5WLNMCEDNGPM.jpg' alt='Historic Richmond Town'/>
                 </div>
                 <div className='grid-item step-description'>
                 The final stop for this tour will be Historic Richmond Town. Historic Richmond Town 
@@ -162,7 +161,6 @@ function Staten() {
             ?<div>
                 {!loading && !loadingUser && 
                     <button onClick={(async (e) => {
-                        //console.log(sites)
                         try{
                             await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
                                 params: {
@@ -180,7 +178,6 @@ function Staten() {
             :<div>
                 {!loading && !loadingUser && 
                     <button onClick={(async (e) => {
-                        //console.log(sites)
                         let id_array = [];
                         sites.forEach(site => {
                             id_array.push(site._id)

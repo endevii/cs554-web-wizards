@@ -100,30 +100,31 @@ function SiteList() {
         const getFilteredSites = async() =>{
             const { data } = await axios.get(`http://localhost:3001/sites/search/${searchTerm}`);
             let sites = [];
-            data.map((site) => {
-                let siteInfo = {
-                    _id: site._id,
-                    name: site.name,
-                    description: site.description,
-                    location: {
-                        address: site.location.address,
-                        city: site.location.city,
-                        state: site.location.state,
-                        zipCode: site.location.zipCode
-                    },
-                    hours: {
-                        days: site.hours.days,
-                        time: site.hours.time
-                    },
-                    website: site.website,
-                    borough: site.borough,
-                    founded: site.founded,
-                    rating: site.rating,
-                    reviews: site.reviews,
-                    image: site.image
-                };
-                sites.push(siteInfo);
-            });
+            if(data && data.length>0)
+                data.map((site) => {
+                    let siteInfo = {
+                        _id: site._id,
+                        name: site.name,
+                        description: site.description,
+                        location: {
+                            address: site.location.address,
+                            city: site.location.city,
+                            state: site.location.state,
+                            zipCode: site.location.zipCode
+                        },
+                        hours: {
+                            days: site.hours.days,
+                            time: site.hours.time
+                        },
+                        website: site.website,
+                        borough: site.borough,
+                        founded: site.founded,
+                        rating: site.rating,
+                        reviews: site.reviews,
+                        image: site.image
+                    };
+                    sites.push(siteInfo);
+                });
             setSearchData(sites)
         }
         if(searchTerm){
@@ -139,7 +140,7 @@ function SiteList() {
             <Link to={'/site/' + site._id} >
                         <div className="card" key={site._id}>
                             {site.image
-                                ?<img src={site.image} className='card-img-top' alt='location' />
+                                ?<img src={site.image} className='card-img-top' alt={site.name} />
                                 :<img src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930" className='card-img-top' alt='nothing available' />
                             }
                             <div className="card-body">
@@ -154,7 +155,7 @@ function SiteList() {
     }
     
     if(searchTerm){
-        card = searchData && searchData.map((site) => {
+        card = searchData.length!==0 && searchData.map((site) => {
         return buildSiteCard(site);
       });
     } else if(sortBy){
@@ -190,7 +191,7 @@ function SiteList() {
                         <option value="ratingLowToHigh">Rating (low to high)</option>
                     </select>
                  </label>
-                {card}
+                {card ? card: <p>404: No Sites Found</p>}
             </div>
         )
     } 

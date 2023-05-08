@@ -37,10 +37,8 @@ function CreateItinerary() {
         onAuthStateChanged(auth, (user) => {
             if(user){  
                 setUser(user);
-                //le.log(user);
                 setName(user.displayName)
                 if(name !== ""){
-                    console.log(name); 
                     setLoadingUser(false);
                 }
             } else {
@@ -218,7 +216,6 @@ function CreateItinerary() {
         setBtnClicked(true)
         try{
             let {data} = await axios.post('http://localhost:3001/generatepdf',{input: component, name:name});
-            console.log(data.msg)
             if(data.msg==="success"){
                 setPdfReady(true)
             }else{
@@ -288,7 +285,6 @@ function CreateItinerary() {
                                 {!loading && user && !loadingUser && !loadingMongo && !loadingItinerary &&
                                     <button onClick={(async (e) => {
                                         e.preventDefault();
-                                        //console.log(sites)
                                         try{
                                             await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
                                                 params: {
@@ -307,7 +303,6 @@ function CreateItinerary() {
                                 {!loading && !loadingUser && !loadingMongo && !loadingItinerary &&
                                     <button onClick={(async (e) => {
                                         e.preventDefault();
-                                        //console.log(sites)
                                         let id_array = [];
                                         itinerary.forEach(site => {
                                             id_array.push(site._id)

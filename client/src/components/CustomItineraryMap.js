@@ -159,7 +159,7 @@ function CustomItineraryMap(props) {
   };
   return (
     <>
-      <h2>Map Of Your Itinerray Stops</h2>
+      <h2>Map of Your Itinerary Stops</h2>
       <div className='map'>
         <div ref={mapContainer} className='map-container' />
         <button

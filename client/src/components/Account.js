@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import SignOutButton from "./SignOut";
 import axios from "axios";
@@ -213,7 +213,7 @@ function Account() {
                               window.location.reload();
                             }}
                           >
-                            Delete Review
+                            Delete
                           </button>
                           <button className="btn-out-red"
                             onClick={(e) => {
@@ -221,7 +221,7 @@ function Account() {
                               clickHandler(review);
                             }}
                           >
-                            Update review
+                            Edit
                           </button>
                           <br />
                         </CardContent>
@@ -355,7 +355,7 @@ function Account() {
                               />
                               <br />
                               <br />
-                              <button className="btn-out-red" type="submit">Submit</button>
+                              <button className="btn-out-red" type="submit">Update</button>
                             </form>
                           </CardContent>
                         </Collapse>
