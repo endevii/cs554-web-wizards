@@ -291,8 +291,8 @@ function validDays(str) {
   if (!daysOfWeek.includes(daysArr[1]))
     throw "ERROR: DAYS MUST USE THE FOLLOWING: Mon, Tue, Wed, Thu, Fri, Sat, Sun";
 
-  if (daysOfWeek.indexOf(daysArr[0]) > daysOfWeek.indexOf(daysArr[1]))
-    throw "ERROR: DAYS MUST FOLLOW ONE AFTER THE OTHER";
+  // if (daysOfWeek.indexOf(daysArr[0]) > daysOfWeek.indexOf(daysArr[1]))
+  //   throw "ERROR: DAYS MUST FOLLOW ONE AFTER THE OTHER";
 
   return str.trim();
 }

@@ -353,6 +353,7 @@ const EditSiteForm = (props) => {
         } else {
           alert("Update request submitted successfully!");
           handleSoftReset();
+          window.location.reload();
           setSiteRequestSuccess(true);
         }
       } catch (err) {
