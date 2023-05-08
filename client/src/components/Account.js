@@ -80,7 +80,7 @@ function Account() {
             return <div key={site._id}>{buildSiteCard(site)}</div>;
           })}
           {!loading && !loadingUser && (
-            <button
+            <button className="btn-out-red"
               onClick={async (e) => {
                 try {
                   const { data } = await axios.get(
@@ -138,7 +138,7 @@ function Account() {
               </Link>
             )}
             <form action="/changepassword">
-              <button type="submit">Change Password</button>
+              <button className="btn-out-red" type="submit">Change Password</button>
             </form>
           </div>
         <br />
@@ -196,7 +196,7 @@ function Account() {
                         </CardActionArea>
                         <CardContent>
                           <br />
-                          <button
+                          <button className="btn-out-red"
                             onClick={async (e) => {
                               try {
                                 await axios.delete(
@@ -215,7 +215,7 @@ function Account() {
                           >
                             Delete Review
                           </button>
-                          <button
+                          <button className="btn-out-red"
                             onClick={(e) => {
                               e.preventDefault();
                               clickHandler(review);
@@ -355,7 +355,7 @@ function Account() {
                               />
                               <br />
                               <br />
-                              <button type="submit">Submit</button>
+                              <button className="btn-out-red" type="submit">Submit</button>
                             </form>
                           </CardContent>
                         </Collapse>

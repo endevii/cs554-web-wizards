@@ -32,7 +32,7 @@ const SignOutButton = () => {
     if(!loading && uid){
         return (
         <div className="account-signout">
-            <button type='button' onClick={handleSignUp}>
+            <button className="btn-out-red" type='button' onClick={handleSignUp}>
                 Sign Out
             </button>
         </div>)
