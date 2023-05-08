@@ -17,6 +17,7 @@ import PopularItineraries from "./components/PopularItineraries";
 import CreateItinerary from "./components/CreateItinerary";
 import RequestSite from "./components/RequestSite";
 import Admin from "./components/Admin";
+import SignedUpRoute from "./components/SignedUpRoute";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
           <Route path="/signin" element={<SignedInRoute />}>
             <Route path="/signin" element={<SignIn />} />
           </Route>
-          <Route path="/signup" element={<SignedInRoute />}>
+          <Route path="/signup" element={<SignedUpRoute />}>
             <Route path="/signup" element={<SignUp />} />
           </Route>
           <Route path="/account" element={<PrivateRoute />}>

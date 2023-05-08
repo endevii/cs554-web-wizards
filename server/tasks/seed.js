@@ -1093,7 +1093,7 @@ const main = async () => {
             ],
             location: {
                 address: "East 161st Street",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10451",
                 coordinates: [-73.9280, 40.8269]
@@ -1103,7 +1103,7 @@ const main = async () => {
                 time: ""
             },
             website: "https://www.mlb.com/yankees/ballpark",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1923,
             rating: 0,
             reviews: [],
@@ -1118,7 +1118,7 @@ const main = async () => {
             ],
             location: {
                 address: "Southern and Bedford Park Boulevards",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10458",
                 coordinates: [-73.8783, 40.8636]
@@ -1128,7 +1128,7 @@ const main = async () => {
                 time: "10AM-6PM"
             },
             website: "https://www.nybg.org/",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1891,
             rating: 0,
             reviews: [],
@@ -1144,7 +1144,7 @@ const main = async () => {
             ],
             location: {
                 address: "Pelham Bay Park",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10461",
                 coordinates: [-73.8083, 40.8655]
@@ -1154,7 +1154,7 @@ const main = async () => {
                 time: "6AM-10PM"
             },
             website: "https://www.nycgovparks.org/parks/pelham-bay-park",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1888,
             rating: 0,
             reviews: [],
@@ -1170,7 +1170,7 @@ const main = async () => {
             ],
             location: {
                 address: "Woodlawn",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10470",
                 coordinates: [-73.8733, 40.8891]
@@ -1180,7 +1180,7 @@ const main = async () => {
                 time: "8:30AM-4:30PM"
             },
             website: "https://www.woodlawn.org/",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1863,
             rating: 0,
             reviews: [],
@@ -1196,7 +1196,7 @@ const main = async () => {
             ],
             location: {
                 address: "Van Cortlandt Park",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10463",
                 coordinates: [-73.8838, 40.8977]
@@ -1206,7 +1206,7 @@ const main = async () => {
                 time: "6AM-10PM"
             },
             website: "https://www.nycgovparks.org/parks/VanCortlandtPark",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1888,
             rating: 0,
             reviews: [],
@@ -1221,7 +1221,7 @@ const main = async () => {
             ],
             location: {
                 address: "2300 Southern Boulevard, Bronx Park",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10460",
                 coordinates: [-73.8783, 40.8502]
@@ -1231,7 +1231,7 @@ const main = async () => {
                 time: "10AM-5PM"
             },
             website: "https://bronxzoo.com/",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1899,
             rating: 0,
             reviews: [],
@@ -1247,7 +1247,7 @@ const main = async () => {
             ],
             location: {
                 address: "4900 Independence Avenue",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10471",
                 coordinates: [-73.9130, 40.8986]
@@ -1257,7 +1257,7 @@ const main = async () => {
                 time: "10AM-5:30PM"
             },
             website: "https://www.wavehill.org/",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1843,
             rating: 0,
             reviews: [],
@@ -1273,7 +1273,7 @@ const main = async () => {
             ],
             location: {
                 address: "2640 Grand Concourse",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10468",
                 coordinates: [-73.8944, 40.8652]
@@ -1283,7 +1283,7 @@ const main = async () => {
                 time: "10AM-3PM"
             },
             website: "https://bronxhistoricalsociety.org/poe-cottage/",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1812,
             rating: 0,
             reviews: [],
@@ -1299,7 +1299,7 @@ const main = async () => {
             ],
             location: {
                 address: "1520 Sedgwick Avenue",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10453",
                 coordinates: [-73.9244, 40.8472]
@@ -1309,7 +1309,7 @@ const main = async () => {
                 time: ""
             },
             website: "",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1967,
             rating: 0,
             reviews: [],
@@ -1324,7 +1324,7 @@ const main = async () => {
             ],
             location: {
                 address: "Joyce Kilmer Park",
-                city: "The Bronx",
+                city: "Bronx",
                 state: "New York",
                 zipCode: "10452",
                 coordinates: [-73.9231, 40.8275]
@@ -1334,7 +1334,7 @@ const main = async () => {
                 time: "6AM-10PM"
             },
             website: "https://www.nycgovparks.org/parks/joyce-kilmer-park/monuments/700",
-            borough: "The Bronx",
+            borough: "Bronx",
             founded: 1899,
             rating: 0,
             reviews: [],

@@ -294,7 +294,7 @@ const RequestSite = () => {
   };
   if (uidLoading) return <div>Loading...</div>;
 
-  if (!uidLoading && !userName) return <Navigate to="/login" replace />;
+  if (!uidLoading && !userName) return <Navigate to="/signin" replace />;
   return (
     <div className="request-site">
       <h1>Request Site</h1>
