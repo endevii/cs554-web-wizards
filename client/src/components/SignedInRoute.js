@@ -22,7 +22,7 @@ const SignedInRoute = () => {
         if(uid === null){
             return  <Outlet/>
         } else if(!loading){
-            return <Navigate to='/accout' />
+            return <Navigate to='/account' />
         }
     }
 };
