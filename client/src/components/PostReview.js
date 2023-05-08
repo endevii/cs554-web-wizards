@@ -26,6 +26,14 @@ function PostReview(props) {
   };
 
   const newReview = async () => {
+    if (!formData.title || formData.title.length === 0) {
+        alert("Missing title");
+        return;
+    }
+    if (!formData.review || formData.review.length === 0) {
+        alert("Missing review");
+        return;
+    }
     let body = {
         userName: name,
         title: formData.title,
