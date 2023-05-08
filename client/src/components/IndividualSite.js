@@ -3,12 +3,14 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Chat from './Chat';
+import PostReview from './PostReview';
 
 function IndividualSite() {
   let { id } = useParams();
   const [currentSiteId] = useState(id);
   const [siteData, setSiteData] = useState(undefined);
   const [loading, setLoading] = useState(true);
+  const [buttonToggle, setButtonToggle] = useState(false);
 
   useEffect(() => {
     const getSite = async () => {
@@ -66,7 +68,7 @@ function IndividualSite() {
               {siteData.name} is open {siteData.hours.days} from{' '}
               {siteData.hours.time}
             </li>
-            {!siteData.reveiws ? (
+            {!siteData.reviews ? (
               <li>This location has yet to be reviewed by anyone</li>
             ) : (
               <li>
@@ -90,7 +92,13 @@ function IndividualSite() {
         {uid ? (
           <div className='grid-item reviews'>
             <h2>Reviews</h2>
-            <ul id='reviewList'></ul>
+            <ul id='reviewList'>
+              {siteData.reviews.map((review) => (
+                <li key={review._id}>{review.userName} posted: {review.title} - {review.review} ({review.rating}/5)</li>
+              ))}
+            </ul>
+            <button onClick={() => setButtonToggle(!buttonToggle)}>Post your own review</button>
+            {buttonToggle && <PostReview site={siteData} />}
           </div>
         ) : (
           <div className='grid-item reviews'>Login to see reviews</div>
