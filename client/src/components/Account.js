@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import SignOutButton from './SignOut';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import SignOutButton from "./SignOut";
+import axios from "axios";
 
 function Account() {
   //const [uid, setUid] = useState(null);
@@ -10,10 +10,10 @@ function Account() {
   const [loading, setLoading] = useState(true);
   const [loadingUser, setLoadingUser] = useState(true);
   const [mongoUser, setMongoUser] = useState(null);
-  const [name, setName] = useState('');
-  const [title, setTitle] = useState('');
-  const [rating, setRating] = useState('');
-  const [review_text, setReview] = useState('');
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [rating, setRating] = useState("");
+  const [review_text, setReview] = useState("");
   let card = null;
   //const [file, setFile] = useState(null);
   //const [upload, setUpload] = useState("https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436191.jpg?size=626&ext=jpg&ga=GA1.1.55329923.1683053289&semt=robertav1_2_sidr");
@@ -34,7 +34,7 @@ function Account() {
 
   useEffect(() => {
     const getUser = async (uid) => {
-      const { data } = await axios.get('http://localhost:3001/user/' + uid);
+      const { data } = await axios.get("http://localhost:3001/user/" + uid);
       setMongoUser(data);
       setLoadingUser(false);
     };
@@ -45,15 +45,15 @@ function Account() {
 
   const buildSiteCard = (site) => {
     return (
-      <div key={'div' + site._id} className='revolution'>
+      <div key={"div" + site._id} className="revolution">
         <hr />
-        <h1 className='itinerary-stop-title'>{site.name}</h1>
-        <div className='itinerary-container'>
-          <div className='customImageItinerary'>
-            <img className='resize-image' src={site.image} alt='federal hall' />
+        <h1 className="itinerary-stop-title">{site.name}</h1>
+        <div className="itinerary-container">
+          <div className="customImageItinerary">
+            <img className="resize-image" src={site.image} alt="federal hall" />
           </div>
-          <div className='grid-item step-description'>
-            <ul id='description-list'>
+          <div className="grid-item step-description">
+            <ul id="description-list">
               {site.description.map((line) => (
                 <li key={line}>{line}</li>
               ))}
@@ -80,7 +80,7 @@ function Account() {
                 //console.log(sites)
                 try {
                   const { data } = await axios.get(
-                    'http://localhost:3001/deleteItinerary/' + user.uid,
+                    "http://localhost:3001/deleteItinerary/" + user.uid,
                     {
                       params: {
                         itinerary: JSON.stringify(itinerary),
@@ -89,17 +89,18 @@ function Account() {
                   );
                   //console.log(data);
                   setMongoUser(data);
-                  alert('Itinerary unsaved');
+                  alert("Itinerary unsaved");
                   window.location.reload();
                 } catch (e) {
-                  alert('Error: You have not saved this itinerary');
+                  alert("Error: You have not saved this itinerary");
                 }
-              }}>
+              }}
+            >
               Unsave Itinerary
             </button>
           )}
-          <hr className='hr-custom' />
-          <hr className='hr-custom' />
+          <hr className="hr-custom" />
+          <hr className="hr-custom" />
           <br />
         </div>
       );
@@ -107,21 +108,30 @@ function Account() {
 
   if (!loading && user.displayName && !loadingUser) {
     return (
-      <div className='account-wrapper'>
-        <h1 className='grid-item account-title'>
-          {user.displayName}'s Account
-        </h1>
-        <div className='account-signout'>
+      <div className="account-wrapper">
+        <div className="account-header">
+          <h1 className="grid-item account-title">
+            {user.displayName}'s Account
+          </h1>
+          {mongoUser &&
+            mongoUser.permissions &&
+            mongoUser.permissions.includes("admin") === true && (
+              <Link className="btn btn-link" to="/admin">
+                Admin Page
+              </Link>
+            )}
+        </div>
+        <div className="account-signout">
           <SignOutButton />
-          <br/>
-          <br/>
-          <form action='/changepassword'>
-            <button type='submit'>Change Password</button>
+          <br />
+          <br />
+          <form action="/changepassword">
+            <button type="submit">Change Password</button>
           </form>
         </div>
         <br />
-        <hr className='hr-custom' />
-        <hr className='hr-custom' />
+        <hr className="hr-custom" />
+        <hr className="hr-custom" />
         <div>
           {mongoUser &&
           mongoUser.itineraries &&
@@ -135,137 +145,170 @@ function Account() {
           )}
         </div>
         <br />
-        <hr className='hr-custom' />
-        <hr className='hr-custom' />
+        <hr className="hr-custom" />
+        <hr className="hr-custom" />
         <div>
           {mongoUser && mongoUser.reviews && mongoUser.reviews.length !== 0 ? (
             <div>
-              <h2 className='title-account'>Your Reviews</h2>
+              <h2 className="title-account">Your Reviews</h2>
               <ul>
                 {mongoUser.reviews.map((review) => {
                   return (
-                    <div key={review._id} className='div-class'>
+                    <div key={review._id} className="div-class">
                       <p>Site: {review.siteName}</p>
                       <p>Title: {review.title}</p>
                       <p>Review: {review.review}</p>
                       <p>Rating: {review.rating}</p>
                       <p>Date: {review.date}</p>
-                      <br/>
+                      <br />
                       <button
                         onClick={async (e) => {
                           try {
                             await axios.delete(
-                              'http://localhost:3001/reviews/' +
+                              "http://localhost:3001/reviews/" +
                                 review.siteid +
-                                '/' +
+                                "/" +
                                 mongoUser.uid +
-                                '/' +
+                                "/" +
                                 review._id
                             );
                           } catch (e) {
-                            alert('Error: Unable to delete review');
+                            alert("Error: Unable to delete review");
                           }
                           window.location.reload();
-                        }}>
+                        }}
+                      >
                         Delete Review
                       </button>
-                      <br/>
-                      <br/>
-                      <br/>
+                      <br />
+                      <br />
+                      <br />
                       <p>Update this review</p>
-                      <br/>
-                      <form onSubmit={async (e) => {
-                        e.preventDefault();
-                        let temp_title, temp_review, temp_rating = "";
-                        if(title === "" && review_text === "" && rating === ""){
+                      <br />
+                      <form
+                        onSubmit={async (e) => {
+                          e.preventDefault();
+                          let temp_title,
+                            temp_review,
+                            temp_rating = "";
+                          if (
+                            title === "" &&
+                            review_text === "" &&
+                            rating === ""
+                          ) {
                             alert("Error: Nothing to update");
-                        } else if (title == review.title && rating == review.rating && review_text == review.review){
-                            alert("Error: Nothing to update")
-                        } else if (title == review.title && rating == "" && review_text == ""){
-                            alert("Error: Nothing to update")
-                        } else if (title == "" && rating == review.rating && review_text == ""){
-                            alert("Error: Nothing to update")
-                        } else if (title == "" && rating == "" && review_text == review.review){
-                            alert("Error: Nothing to update")
-                        } else if (review_text !== "" && review_text.trim().length === 0) {
-                            alert("Error: Review cannot be just spaces")
-                        } else if (title !== "" && title.trim().length === 0) {
-                            alert("Error: Title cannot be just spaces")
-                        } else if (rating !== "" && rating.trim().length === 0) {
-                            alert("Error: Rating cannot be just spaces")
-                        } else if (rating !== "" && isNaN(parseInt(rating))) {
-                            alert("Error: Rating must be a number")
-                        } else if(parseInt(rating) < 0 || parseInt(rating) > 5){
-                            alert("Error: Rating must be a number 0 to 5")
-                        } else {
-                        if(title !== ""){
-                            temp_title = title;
-                        } else {
-                            temp_title = review.title;
-                        }
-                        if(review_text !== ""){
-                            temp_review = review_text;
-                        } else {
-                            temp_review = review.review;
-                        }
-                        if(rating !== ""){
-                            temp_rating = rating;
-                        } else {
-                            temp_rating = review.rating;
-                        }
+                          } else if (
+                            title == review.title &&
+                            rating == review.rating &&
+                            review_text == review.review
+                          ) {
+                            alert("Error: Nothing to update");
+                          } else if (
+                            title == review.title &&
+                            rating == "" &&
+                            review_text == ""
+                          ) {
+                            alert("Error: Nothing to update");
+                          } else if (
+                            title == "" &&
+                            rating == review.rating &&
+                            review_text == ""
+                          ) {
+                            alert("Error: Nothing to update");
+                          } else if (
+                            title == "" &&
+                            rating == "" &&
+                            review_text == review.review
+                          ) {
+                            alert("Error: Nothing to update");
+                          } else if (
+                            review_text !== "" &&
+                            review_text.trim().length === 0
+                          ) {
+                            alert("Error: Review cannot be just spaces");
+                          } else if (
+                            title !== "" &&
+                            title.trim().length === 0
+                          ) {
+                            alert("Error: Title cannot be just spaces");
+                          } else if (
+                            rating !== "" &&
+                            rating.trim().length === 0
+                          ) {
+                            alert("Error: Rating cannot be just spaces");
+                          } else if (rating !== "" && isNaN(parseInt(rating))) {
+                            alert("Error: Rating must be a number");
+                          } else if (
+                            parseInt(rating) < 0 ||
+                            parseInt(rating) > 5
+                          ) {
+                            alert("Error: Rating must be a number 0 to 5");
+                          } else {
+                            if (title !== "") {
+                              temp_title = title;
+                            } else {
+                              temp_title = review.title;
+                            }
+                            if (review_text !== "") {
+                              temp_review = review_text;
+                            } else {
+                              temp_review = review.review;
+                            }
+                            if (rating !== "") {
+                              temp_rating = rating;
+                            } else {
+                              temp_rating = review.rating;
+                            }
 
-                        let temp = {
-                            title: temp_title, 
-                            review: temp_review, 
-                            rating: temp_rating
-                        }
+                            let temp = {
+                              title: temp_title,
+                              review: temp_review,
+                              rating: temp_rating,
+                            };
 
-                        try {
-                            await axios.patch(
-                              'http://localhost:3001/reviews/' +
-                                review.siteid +
-                                '/' +
-                                mongoUser.uid +
-                                '/' +
-                                review._id, temp);
-                            alert("Review updated");
-                          } catch (e) {
-                            alert(e);
+                            try {
+                              await axios.patch(
+                                "http://localhost:3001/reviews/" +
+                                  review.siteid +
+                                  "/" +
+                                  mongoUser.uid +
+                                  "/" +
+                                  review._id,
+                                temp
+                              );
+                              alert("Review updated");
+                            } catch (e) {
+                              alert(e);
+                            }
+                            window.location.reload();
                           }
-                        window.location.reload();
-                        }
-                      }}>
-                        <label>
-                            Update Title: 
-                        </label>
+                        }}
+                      >
+                        <label>Update Title:</label>
                         <input
-                            type="text"
-                            placeholder="Title"
-                            onChange={(e) => setTitle(e.target.value)}
+                          type="text"
+                          placeholder="Title"
+                          onChange={(e) => setTitle(e.target.value)}
                         />
-                        <br/>
-                        <br/>
-                        <label>
-                            Update Review: 
-                        </label>
+                        <br />
+                        <br />
+                        <label>Update Review:</label>
                         <input
-                            type="text"
-                            placeholder="Review"
-                            onChange={(e) => setReview(e.target.value)}
+                          type="text"
+                          placeholder="Review"
+                          onChange={(e) => setReview(e.target.value)}
                         />
-                        <br/>
-                        <br/>
-                        <label>
-                            Update Rating: 
-                        </label>
+                        <br />
+                        <br />
+                        <label>Update Rating:</label>
                         <input
-                            type="text"
-                            placeholder="Rating"
-                            onChange={(e) => setRating(e.target.value)}
+                          type="text"
+                          placeholder="Rating"
+                          onChange={(e) => setRating(e.target.value)}
                         />
-                        <br/>
-                        <br/>
-                        <button type='submit'>Update Review</button>
+                        <br />
+                        <br />
+                        <button type="submit">Update Review</button>
                       </form>
                     </div>
                   );
@@ -273,12 +316,12 @@ function Account() {
               </ul>
             </div>
           ) : (
-            <h2 className='title-account'>You do not have any reviews</h2>
+            <h2 className="title-account">You do not have any reviews</h2>
           )}
         </div>
         <br />
-        <hr className='hr-custom' />
-        <hr className='hr-custom' />
+        <hr className="hr-custom" />
+        <hr className="hr-custom" />
       </div>
     );
   } else if (loading) {
