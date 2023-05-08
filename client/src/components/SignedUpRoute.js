@@ -2,7 +2,7 @@ import {Navigate, Outlet} from 'react-router-dom';
 import React , {useState, useEffect} from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const SignedInRoute = () => {
+const SignedUpRoute = () => {
     const [uid, setUid] = useState(null);
     const [loading, setLoading] = useState(true);
     let auth = getAuth();
@@ -22,9 +22,9 @@ const SignedInRoute = () => {
         if(uid === null){
             return  <Outlet/>
         } else if(!loading){
-            return <Navigate to='/accout' />
+            return <Navigate to='/' />
         }
     }
 };
 
-export default SignedInRoute;
+export default SignedUpRoute;
