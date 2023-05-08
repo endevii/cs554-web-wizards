@@ -126,6 +126,10 @@ function Account() {
           <h1 className="grid-item account-title">
             {user.displayName}'s Account
           </h1>
+          <SignOutButton />
+          
+        </div>
+        <div className="account-settings">
           {mongoUser &&
             mongoUser.permissions &&
             mongoUser.permissions.includes("admin") === true && (
@@ -133,20 +137,17 @@ function Account() {
                 Admin Page
               </Link>
             )}
-        </div>
-        <div className="account-signout">
-          <SignOutButton />
-          <form action="/changepassword">
-            <button type="submit">Change Password</button>
-          </form>
-        </div>
+            <form action="/changepassword">
+              <button type="submit">Change Password</button>
+            </form>
+          </div>
         <br />
         <div>
           {mongoUser &&
           mongoUser.itineraries &&
           mongoUser.itineraries.length !== 0 ? (
             <div className="itineraries">
-              <h2>Your saved itineraries</h2>
+              <h2 className="itineraries-title">Your saved itineraries</h2>
               <div>{card}</div>
             </div>
           ) : (
@@ -363,8 +364,8 @@ function Account() {
                   );
                 })}
               </Grid>
-              <br/>
-              <br/>
+              <br />
+              <br />
             </div>
           ) : (
             <h2 className="title-account">You do not have any reviews</h2>

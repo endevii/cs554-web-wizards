@@ -30,9 +30,13 @@ const SignOutButton = () => {
     }
 
     if(!loading && uid){
-        return <button type='button' onClick={handleSignUp}>
-            Sign Out
-        </button>
+        return (
+        <div className="account-signout">
+            <button type='button' onClick={handleSignUp}>
+                Sign Out
+            </button>
+        </div>)
+        
     } 
 };
 
