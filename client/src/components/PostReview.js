@@ -34,6 +34,10 @@ function PostReview(props) {
         alert("Missing review");
         return;
     }
+    if (!formData.rating || formData.rating === "0") {
+      alert("Missing rating");
+      return;
+    }
     let body = {
         userName: name,
         title: formData.title,
@@ -78,6 +82,7 @@ function PostReview(props) {
           </label>
           <label>Rating:</label>
           <select onChange={(e) => handleChange(e)} id="rating" name="rating">
+          <option value="0">-</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
