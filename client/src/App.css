@@ -151,7 +151,23 @@
   width: 50%;
   margin: 0 auto 20px;
 }
+.btn-out-red {
+  background-color: #ffffff;
+  border-radius: 3px;
+  color: #c24646;
+  border: solid;
+  border-color: #c24646;
+  padding: 5px;
+}
 
+.btn-out-red:hover{
+  background-color: #c24646;
+  border-radius: 3px;
+  color: #ffffff;
+  border: solid;
+  border-color: #c24646;
+  padding: 5px;
+}
 h1 {
   font-size: xx-large;
 }
@@ -307,7 +323,11 @@ p {
 .itinerary {
   background-color: #ffdcdc;
 }
-
+.itineraries-title {
+  color: #c24646;
+  text-align: left;
+  margin-left: 15%;
+}
 .customImageItinerary {
   grid-column: 10 / span 3;
   grid-row: 2 / span 20;
@@ -383,6 +403,16 @@ p {
 
 .hr-custom {
   background-color: #c24646;
+  width: 75%;
+}
+
+.itinerary-title{
+  text-align: left;
+  margin-left: 15%;
+}
+
+.review-txt{
+  color:#282c34;
 }
 
 .resize {
@@ -476,6 +506,24 @@ title-account {
   color: #c24646;
 }
 
+.account-header {
+  display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.account-settings {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.account-signout {
+  margin-left: auto;
+  margin-right: 1%;
+}
 .form-group {
   display: flex;
   flex-direction: column;
