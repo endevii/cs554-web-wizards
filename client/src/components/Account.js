@@ -122,9 +122,18 @@ function Account() {
   if (!loading && user.displayName && !loadingUser) {
     return (
       <div className="account-wrapper">
-        <h1 className="grid-item account-title">
-          {user.displayName}'s Account
-        </h1>
+        <div className="account-header">
+          <h1 className="grid-item account-title">
+            {user.displayName}'s Account
+          </h1>
+          {mongoUser &&
+            mongoUser.permissions &&
+            mongoUser.permissions.includes("admin") === true && (
+              <Link className="btn btn-link" to="/admin">
+                Admin Page
+              </Link>
+            )}
+        </div>
         <div className="account-signout">
           <SignOutButton />
           <form action="/changepassword">

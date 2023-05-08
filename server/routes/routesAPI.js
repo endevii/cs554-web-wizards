@@ -52,7 +52,7 @@ router.route("/siteBorough/:borough").get(async (req, res) => {
 
 router.route("/sites").post(async (req, res) => {
   let site = req.body;
-
+  let errors = [];
   try {
     if (site.category.length === 0) {
       site.category = "Other";
@@ -77,6 +77,47 @@ router.route("/sites").post(async (req, res) => {
       site.borough,
       site.founded,
       site.image
+    );
+  } catch (e) {
+    return res.status(400).json({ error: e });
+  }
+  return res.status(200).send(site);
+});
+
+router.route("/sites/request/:user").post(async (req, res) => {
+  let site = req.body;
+  let user = req.params.user;
+  let errors = [];
+  try {
+    user = validation.validString(user);
+  } catch (e) {
+    return res.status(400).json({ error: e });
+  }
+  try {
+    if (site.category.length === 0) {
+      site.category = "Other";
+    }
+    site = validation.validSite(site);
+  } catch (e) {
+    errors = e;
+  }
+  if (errors.length > 0) {
+    return res.status(400).json({ error: errors });
+  }
+  // name, description, location, hours, website, category, borough, age, image;
+
+  try {
+    site = await sitesData.createSiteToBeApproved(
+      site.name,
+      site.description,
+      site.location,
+      site.hours,
+      site.website,
+      site.category,
+      site.borough,
+      site.founded,
+      site.image,
+      user
     );
   } catch (e) {
     return res.status(400).json({ error: e });
