@@ -4,7 +4,6 @@ import {signInWithEmailAndPassword} from "firebase/auth";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import '../App.css'
-//import SocialSignIn from './SocialSignIn';
 
 export default function Login () {
     const [email, setEmail] = useState("");

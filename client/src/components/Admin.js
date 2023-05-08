@@ -5,7 +5,6 @@ import axios from "axios";
 import EditSiteForm from "./EditSiteForm";
 
 const Admin = (props) => {
-  //const [uid, setUid] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadingUser, setLoadingUser] = useState(true);
@@ -15,16 +14,12 @@ const Admin = (props) => {
   const [displayEdit, setDisplayEdit] = useState(false);
   const [changeSite, setChangeSite] = useState(null);
 
-  let card = null;
-  //const [file, setFile] = useState(null);
-  //const [upload, setUpload] = useState("https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436191.jpg?size=626&ext=jpg&ga=GA1.1.55329923.1683053289&semt=robertav1_2_sidr");
   let auth = getAuth();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        // console.log(user);
         setName(user.displayName);
         setLoading(false);
       } else {
@@ -170,7 +165,6 @@ const Admin = (props) => {
           userId +
           "/admin"
       );
-      // console.log(res);
       alert("Made admin");
     } catch (err) {
       let error = err.response.data.error;
@@ -178,7 +172,6 @@ const Admin = (props) => {
         alert("User is already an admin.");
         return;
       }
-      // console.log(err);
       alert(err.response.data.error);
     }
   };
@@ -198,7 +191,6 @@ const Admin = (props) => {
           userId +
           "/admin"
       );
-      // console.log(res);
       alert("Removed admin");
     } catch (err) {
       alert(err.response.data.error);
