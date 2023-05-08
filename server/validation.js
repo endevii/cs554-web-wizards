@@ -11,7 +11,6 @@ function validObjectID(id) {
 }
 
 function validString(str, type) {
-  // console.log(`validating ${str} of type ${type}...`);
   if (!str) throw `ERROR: STRING '${type}' IS REQUIRED`;
   if (typeof str !== "string") throw `ERROR: STRING '${type}' MUST BE A STRING`;
   if (str.trim().length === 0) throw `ERROR: STRING '${type}' CAN'T BE EMPTY`;
@@ -428,7 +427,7 @@ function validSite(site) {
   } catch (e) {
     errors.push(e);
   }
-  // console.log(site.location.coordinates);
+
   try {
     site.location.coordinates = validCoordinates(site.location.coordinates);
   } catch (e) {
@@ -509,7 +508,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.name) {
     if (updatedSite.name !== newSite.name) {
-      console.log("name");
       updatedCount += 1;
     }
     updatedSiteData.name = validSiteName(updatedSite.name);
@@ -519,7 +517,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.description) {
     if (compareArrays(updatedSite.description, newSite.description) === false) {
-      console.log("description");
       updatedCount += 1;
     }
     updatedSiteData.description = validSiteDescription(updatedSite.description);
@@ -530,7 +527,6 @@ function siteChanges(newSite, updatedSite) {
   if (updatedSite.location) {
     if (updatedSite.location.address) {
       if (updatedSite.location.address !== newSite.location.address) {
-        console.log("address");
         updatedCount += 1;
       }
       updatedLocation.address = validString(
@@ -543,7 +539,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.location.city) {
       if (updatedSite.location.city !== newSite.location.city) {
-        console.log("city");
         updatedCount += 1;
       }
       updatedLocation.city = validString(updatedSite.location.city, "CITY");
@@ -553,7 +548,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.location.state) {
       if (updatedSite.location.state !== newSite.location.state) {
-        console.log("state");
         updatedCount += 1;
       }
       updatedLocation.state = validState(updatedSite.location.state);
@@ -563,7 +557,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.location.zipCode) {
       if (updatedSite.location.zipCode !== newSite.location.zipCode) {
-        console.log("zipCode");
         updatedCount += 1;
       }
       updatedLocation.zipCode = validZipcode(updatedSite.location.zipCode);
@@ -578,7 +571,6 @@ function siteChanges(newSite, updatedSite) {
           newSite.location.coordinates
         ) === false
       ) {
-        console.log("coordinates");
         updatedCount += 1;
       }
       updatedLocation.coordinates = validCoordinates(
@@ -594,7 +586,6 @@ function siteChanges(newSite, updatedSite) {
   if (updatedSite.hours) {
     if (updatedSite.hours.day) {
       if (updatedSite.hours.day !== newSite.hours.day) {
-        console.log("day");
         updatedCount += 1;
       }
       updatedHours.day = validDays(updatedSite.hours.day);
@@ -604,7 +595,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.hours.time) {
       if (updatedSite.hours.time !== newSite.hours.time) {
-        console.log("time");
         updatedCount += 1;
       }
       updatedHours.time = validHours(updatedSite.hours.time);
@@ -617,7 +607,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.website) {
     if (updatedSite.website !== newSite.website) {
-      console.log("website");
       updatedCount += 1;
     }
     updatedSiteData.website = validWebsite(updatedSite.website);
@@ -627,7 +616,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.category) {
     if (updatedSite.category !== newSite.category) {
-      console.log("category");
       updatedCount += 1;
     }
     updatedSiteData.category = validString(updatedSite.category, "CATEGORY");
@@ -637,7 +625,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.borough) {
     if (updatedSite.borough !== newSite.borough) {
-      console.log("borough");
       updatedCount += 1;
     }
     updatedSiteData.borough = validBorough(updatedSite.borough);
@@ -647,7 +634,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.founded) {
     if (updatedSite.founded !== newSite.founded) {
-      console.log("founded");
       updatedCount += 1;
     }
     updatedSiteData.founded = validAge(updatedSite.founded.toString());
@@ -658,7 +644,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.image) {
     if (updatedSite.image !== newSite.image) {
-      console.log("image");
       updatedCount += 1;
     }
     updatedSiteData.image = validImage(updatedSite.image);

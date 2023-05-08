@@ -73,10 +73,8 @@ router.get("/:uid/approve/:id", async (req, res) => {
   } catch (e) {
     return res.status(400).json({ error: e });
   }
-  // console.log(id);
   try {
     const site = await sitesData.getWaitingSiteById(id);
-    // console.log(site);
     const newSite = await sitesData.createSite(
       site.name,
       site.description,
@@ -88,7 +86,6 @@ router.get("/:uid/approve/:id", async (req, res) => {
       site.founded,
       site.image
     );
-    // console.log(newSite);
     await sitesData.removeWaitingSite(id);
     return res.json(newSite);
   } catch (e) {
