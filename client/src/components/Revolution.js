@@ -17,7 +17,6 @@ function Revolution() {
                 setUser(user);
                 setName(user.displayName)
                 if(name !== ""){
-                    console.log(name); 
                     setLoadingUser(false);
                 }
             } else {
@@ -220,7 +219,6 @@ function Revolution() {
             ?<div>
                 {!loading && !loadingUser && 
                     <button onClick={(async (e) => {
-                        //console.log(sites)
                         try{
                             await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
                                 params: {

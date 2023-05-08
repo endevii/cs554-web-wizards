@@ -64,7 +64,6 @@ const Admin = (props) => {
       const res = await axios.get(
         "http://localhost:3001/admin/" + mongoUser.uid + "/approve/" + siteId
       );
-      console.log(res);
       window.location.reload();
     } catch (err) {
       alert(err.response.error.join("\n"));
@@ -76,7 +75,6 @@ const Admin = (props) => {
       const res = await axios.delete(
         "http://localhost:3001/admin/" + mongoUser.uid + "/reject/" + siteId
       );
-      console.log(res);
       window.location.reload();
     } catch (err) {
       alert(err.response.error.join("\n"));
@@ -210,6 +208,9 @@ const Admin = (props) => {
   }
 
   if (!waitingSites) {
+    if(mongoUser && !mongoUser.permissions.includes("admin")){
+      return <Navigate to="/" />
+    }
     return <div>Loading...</div>;
   }
 

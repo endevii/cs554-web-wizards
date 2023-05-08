@@ -26,8 +26,7 @@ export default function Login() {
         } else {
           let err = document.getElementById('error-message');
           err.innerHTML = 'Incorrect Email or Password';
-        }
-        console.log(error.code);
+        }   
       });
   };
 
