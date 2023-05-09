@@ -77,7 +77,7 @@ function IndividualSite() {
               </li>
             )}
             <li>
-              Find more information <Link to={siteData.website}>here</Link>
+              Find more information <Link to={siteData.website} target="_blank">here</Link>
             </li>
           </ul>
         </div>
@@ -94,10 +94,17 @@ function IndividualSite() {
             <h2>Reviews</h2>
             <ul id='reviewList'>
               {siteData.reviews.map((review) => (
-                <li key={review._id}>{review.userName} posted: {review.title} - {review.review} ({review.rating}/5)</li>
+                <li key={review._id}>
+                  <div className='review-li'>
+                    <p className='review-user'>{review.userName}</p>
+                    <p>Rating: {review.rating}/5 {" "}<span>{review.title}</span></p>
+                    <p>Reviewed on {review.date} {review.edited? "(edited)": ""}</p>
+                    <p>{review.review}</p><br/>
+                  </div>
+                </li>
               ))}
             </ul>
-            <button onClick={() => setButtonToggle(!buttonToggle)}>Post your own review</button>
+            <button className="review-tog" onClick={() => setButtonToggle(!buttonToggle)}>Post your own review {buttonToggle? "-": "+"}</button>
             {buttonToggle && <PostReview site={siteData} />}
           </div>
         ) : (
