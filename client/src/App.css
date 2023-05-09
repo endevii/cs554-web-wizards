@@ -504,15 +504,27 @@ p {
 
 #reviewList {
   list-style: none;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .review-li{
   display: flex;
   align-items: flex-start;
-  align-content: center;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
 
+.review-li span {
+  font-weight: 600;
+}
+.review-li p {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.review-user{
+  color:#c24646
 }
 
 #rating {

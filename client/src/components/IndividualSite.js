@@ -96,10 +96,10 @@ function IndividualSite() {
               {siteData.reviews.map((review) => (
                 <li key={review._id}>
                   <div className='review-li'>
-                    <span>{review.userName}</span><br/>
-                    <span>{review.rating}/5 {" "}{review.title}</span><br/>
-                    <span>Reviewed on {review.date} {review.edited? "(edited)": ""}</span><br/>
-                    <span>{review.review}</span><br/>
+                    <p className='review-user'>{review.userName}</p>
+                    <p>Rating: {review.rating}/5 {" "}<span>{review.title}</span></p>
+                    <p>Reviewed on {review.date} {review.edited? "(edited)": ""}</p>
+                    <p>{review.review}</p><br/>
                   </div>
                 </li>
               ))}

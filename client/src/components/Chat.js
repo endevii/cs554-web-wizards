@@ -68,7 +68,7 @@ export default function Chat({ thisRoom }) {
   };
 
   useEffect(() => {
-    if (chat.length > 0) {
+    if (chat.length > 0 && state.name) {
       const msgElem = document.getElementById("render-chat");
       msgElem.scrollTop = msgElem.scrollHeight;
     }
@@ -103,8 +103,12 @@ export default function Chat({ thisRoom }) {
           className="form"
           onSubmit={(e) => {
             e.preventDefault();
-            setState({ name: document.getElementById("username_input").value });
-            userjoin(document.getElementById("username_input").value, room);
+            if (document.getElementById("username_input").value) {
+              setState({
+                name: document.getElementById("username_input").value,
+              });
+              userjoin(document.getElementById("username_input").value, room);
+            }
           }}
         >
           <div className="chat-form-group">
