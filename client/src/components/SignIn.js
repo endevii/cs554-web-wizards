@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import '../App.css'
+import { useNavigate } from 'react-router-dom';
+import '../App.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ export default function Login() {
         } else {
           let err = document.getElementById('error-message');
           err.innerHTML = 'Incorrect Email or Password';
-        }   
+        }
       });
   };
 
@@ -34,8 +34,8 @@ export default function Login() {
     <div className='login-container'>
       <form className='form' onSubmit={handleSignIn}>
         <div className='form-body'>
-          <h2>Sign In</h2>
-          <h5 id='error-message' style={{ color: 'red' }}></h5>
+          <h1>Sign In</h1>
+          <h2 id='error-message' className='error'></h2>
           <div className='form-group'>
             <label>
               Email:
@@ -66,12 +66,17 @@ export default function Login() {
               />
             </label>
           </div>
-          <button type='submit'>Sign In</button>
+          <button className='btn btn-primary' type='submit'>
+            Sign In
+          </button>
         </div>
       </form>
       <br />
       <p>
-        Don't have an account? Sign up <Link to='/signup'>here</Link>
+        Don't have an account?{' '}
+        <Link to='/signup' style={{ color: '#0072ee' }}>
+          Sign up here
+        </Link>
       </p>
     </div>
   );

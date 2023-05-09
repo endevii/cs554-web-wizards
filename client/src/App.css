@@ -50,11 +50,11 @@
 }
 
 #navbar-custom {
-  background-color: #c24646;
+  background-color: #c65454;
 }
 
 #link-txt {
-  color: #f8f9fa;
+  color: white;
 }
 
 #link-txt:hover {
@@ -79,7 +79,7 @@
 .slide-div img {
   width: 100%;
   border-radius: 5px;
-  border-color: #c24646;
+  border-color: #c65454;
   border-style: solid;
 }
 
@@ -135,7 +135,7 @@
   width: 60px;
   color: white;
   background-color: #414c57a6;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .welcome-msg {
@@ -154,18 +154,18 @@
 .btn-out-red {
   background-color: #ffffff;
   border-radius: 3px;
-  color: #c24646;
+  color: #c34a4a;
   border: solid;
-  border-color: #c24646;
+  border-color: #c34a4a;
   padding: 5px;
 }
 
 .btn-out-red:hover {
-  background-color: #c24646;
+  background-color: #c34a4a;
   border-radius: 3px;
   color: #ffffff;
   border: solid;
-  border-color: #c24646;
+  border-color: #c34a4a;
   padding: 5px;
 }
 h1 {
@@ -223,7 +223,8 @@ p {
   font-size: 20px;
 }
 
-#username_input, #message {
+#username_input,
+#message {
   font-size: 20px;
 }
 
@@ -279,7 +280,7 @@ p {
 }
 
 .map-popup h1 {
-  color: #c24646;
+  color: #c65454;
   font-size: 14px;
   margin-top: 15px;
 }
@@ -297,7 +298,7 @@ p {
 
 .button {
   padding: 0.4rem 0.8rem;
-  background-color: #c24646;
+  background-color: #c34a4a;
   border-radius: 3px;
   color: #ffff;
   text-decoration: none !important;
@@ -329,7 +330,7 @@ p {
   background-color: #ffdcdc;
 }
 .itineraries-title {
-  color: #c24646;
+  color: #c65454;
   text-align: left;
   margin-left: 15%;
 }
@@ -407,7 +408,7 @@ p {
 }
 
 .hr-custom {
-  background-color: #c24646;
+  background-color: #c34a4a;
   width: 75%;
 }
 
@@ -451,7 +452,7 @@ p {
 }
 
 .link-itinerary {
-  color: #c24646;
+  color: #c55050;
 }
 
 #instructions {
@@ -476,7 +477,7 @@ p {
 }
 
 .btn-link {
-  background-color: #c24646;
+  background-color: #c34a4a;
   border-radius: 3px;
   color: #ffff;
   text-decoration: none !important;
@@ -509,7 +510,7 @@ p {
   margin-right: 100px;
 }
 
-.review-li{
+.review-li {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -524,8 +525,8 @@ p {
   text-align: left;
 }
 
-.review-user{
-  color:#c24646
+.review-user {
+  color: #c65454;
 }
 
 #rating {
@@ -536,7 +537,7 @@ p {
   background: none;
   border: none;
   font-size: x-large;
-  color: #c24646;
+  color: #c65454;
 }
 .review-tog:hover {
   background: none;
@@ -550,13 +551,13 @@ p {
 }
 
 red-div {
-  color: #c24646;
-  background-color: #c24646;
+  color: #c65454;
+  background-color: #c65454;
 }
 
 title-account {
   font-size: xx-large;
-  color: #c24646;
+  color: #c65454;
 }
 
 .account-header {
@@ -675,13 +676,13 @@ title-account {
 }
 
 .btn-close {
-  background-color: #c24646;
+  background-color: #c34a4a;
   color: #f8f9fa;
   margin: 10px;
 }
 
 .btn-close:hover {
-  background-color: #c24646;
+  background-color: #c34a4a;
   color: #282c34;
 }
 
@@ -689,4 +690,12 @@ title-account {
   width: fit-content;
   white-space: nowrap;
   margin-left: 5px;
+}
+
+.btn-primary {
+  background-color: #0072ee;
+}
+
+.error {
+  color: #ee0000;
 }

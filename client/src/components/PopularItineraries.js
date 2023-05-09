@@ -62,12 +62,9 @@ function PopularItineraries() {
     <div>
       <br />
       <h1 className='itinerary-title'>Popular Itineraries</h1>
-      <p>
-        Create your own itinerary{' '}
-        <Link className='link-itinerary' to='/createItinerary'>
-          here
-        </Link>
-      </p>
+      <Link className='link-itinerary' to='/createItinerary'>
+        Create your own itinerary here
+      </Link>
       <hr className='hr-custom' />
       <div className='itinerary-container'>
         <div className='imageOne'>
