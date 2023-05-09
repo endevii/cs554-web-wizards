@@ -25,8 +25,10 @@ const createSite = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.days);
-    timeOpen = helpers.validHours(hours.time);
+    //timeDay = helpers.validDays(hours.days);
+    //timeOpen = helpers.validHours(hours.time);
+    timeDay = hours.days;
+    timeOpen = hours.time;
 
     website = helpers.validWebsite(website);
 
@@ -43,10 +45,14 @@ const createSite = async (
 
     image = helpers.validImage(image);
 
-    im.identify(image, function (err, features) {
-      if (err) consolelog(err);
-      console.log(features);
+    /*im.identify(image, function (err, features) {
+      if (err) console.log(err);
+      console.log(features.filename);
     })
+    im.convert([image, '-resize', ], function (err, stdout) {
+      if (err) throw (err);
+      image = stdout;
+    })*/
 
     age = parseInt(age);
   } catch (e) {
