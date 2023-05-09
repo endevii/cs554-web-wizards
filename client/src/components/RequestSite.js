@@ -308,7 +308,7 @@ const RequestSite = () => {
           Please note that all fields are required. If you do not know the
           answer to a field, please enter "N/A".
         </p>
-        <p style={{ color: "red" }}>
+        <p style={{ color: "#ee0000" }}>
           Important: Time must be either 00:00 or 00. If the site is open 24 hrs
           a day, please enter 12 AM for both start and end times.
         </p>

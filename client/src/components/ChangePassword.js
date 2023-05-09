@@ -56,8 +56,8 @@ function ChangePassword() {
   if (user) {
     return (
       <div>
-        {matchPassword && <h4 className='error'>{matchPassword}</h4>}
-        <h2>Change Password</h2>
+        <h1>Change Password</h1>
+        {matchPassword && <h2 className='error'>{matchPassword}</h2>}
         <form onSubmit={handleSubmitForm}>
           <div className='form-group'>
             <label>
@@ -103,7 +103,9 @@ function ChangePassword() {
             </label>
           </div>
 
-          <button type='submit'>Change Password</button>
+          <button className='btn btn-primary' type='submit'>
+            Change Password
+          </button>
         </form>
         <br />
       </div>
