@@ -100,7 +100,7 @@ const RequestSite = () => {
   };
 
   const handleSoftReset = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setSiteName("");
     setSiteAddress("");
     setSiteCity("");
@@ -229,7 +229,7 @@ const RequestSite = () => {
     } else {
       let startday = siteDayStart.substring(0, 3);
       let endday = siteDayEnd.substring(0, 3);
-      let day = startday + "-" + endday;
+      let days = startday + "-" + endday;
       let starttime = siteTimeStart + siteTimeStartAP;
       let endtime = siteTimeEnd + siteTimeEndAP;
       let time = starttime + "-" + endtime;
@@ -245,7 +245,7 @@ const RequestSite = () => {
       };
 
       const hoursData = {
-        day: day,
+        days: days,
         time: time,
       };
 
