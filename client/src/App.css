@@ -160,7 +160,7 @@
   padding: 5px;
 }
 
-.btn-out-red:hover{
+.btn-out-red:hover {
   background-color: #c24646;
   border-radius: 3px;
   color: #ffffff;
@@ -218,7 +218,12 @@ p {
   grid-row: 8 / span 3;
 }
 
-.join-btn, .chat-btn {
+.join-btn,
+.chat-btn {
+  font-size: 20px;
+}
+
+#username_input, #message {
   font-size: 20px;
 }
 
@@ -232,13 +237,13 @@ p {
   color: #c24646;
 }
 
-.chat-log{
+.chat-log {
   margin-left: 15%;
   text-align: left;
 }
 
-.render-chat{
-  overflow:scroll;
+.render-chat {
+  overflow: scroll;
   height: 143px;
   background-color: #fff7f7;
 }
@@ -406,13 +411,13 @@ p {
   width: 75%;
 }
 
-.itinerary-title{
+.itinerary-title {
   text-align: left;
   margin-left: 15%;
 }
 
-.review-txt{
-  color:#282c34;
+.review-txt {
+  color: #282c34;
 }
 
 .resize {
@@ -491,6 +496,54 @@ p {
   width: 50%;
 }
 
+.post-review-div {
+  display: flex;
+  text-align: right;
+  justify-content: center;
+  font-size: 20px;
+}
+
+#reviewList {
+  list-style: none;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.review-li{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.review-li span {
+  font-weight: 600;
+}
+.review-li p {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.review-user{
+  color:#c24646
+}
+
+#rating {
+  margin-right: 100px;
+}
+
+.review-tog {
+  background: none;
+  border: none;
+  font-size: x-large;
+  color: #c24646;
+}
+.review-tog:hover {
+  background: none;
+  border: none;
+  font-size: x-large;
+  font-weight: 500;
+}
 .div-class {
   margin: auto;
   width: 50%;
@@ -508,9 +561,9 @@ title-account {
 
 .account-header {
   display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .account-settings {
@@ -602,17 +655,23 @@ title-account {
 .popup-edit {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
+  z-index: 20;
   text-align: left;
   align-items: center;
   justify-content: left;
   background-color: white;
   border: 1px solid black;
-  top: 70%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px;
   margin: 10px;
+  height: 70%;
+  overflow-y: scroll;
+  max-width: 800px;
+  min-width: 500px;
+  width: 100%;
 }
 
 .btn-close {

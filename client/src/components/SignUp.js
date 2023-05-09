@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { Link } from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from '../firebase.js';
-//import SocialSignUp from "./SocialSignUp.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -36,7 +35,6 @@ function SignUp() {
                     displayName: displayName.value
                 }).then (async () => {
                     const { data } = await axios.get("http://localhost:3001/adduser/" + userCredential.user.uid);
-                    console.log(data)
                     navigate("/")
                 })
             }).catch((error) => {

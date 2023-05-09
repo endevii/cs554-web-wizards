@@ -11,7 +11,6 @@ function validObjectID(id) {
 }
 
 function validString(str, type) {
-  // console.log(`validating ${str} of type ${type}...`);
   if (!str) throw `ERROR: STRING '${type}' IS REQUIRED`;
   if (typeof str !== "string") throw `ERROR: STRING '${type}' MUST BE A STRING`;
   if (str.trim().length === 0) throw `ERROR: STRING '${type}' CAN'T BE EMPTY`;
@@ -90,50 +89,81 @@ function validHours(str) {
 
   let splitStart = start.split(":");
   let splitEnd = end.split(":");
+  if (splitStart.length === 1) {
+    if (splitStart[0].length === 3) {
+      splitStart[0] = "0" + splitStart[0];
+    }
+  } else if (splitStart.length === 2) {
+    if (splitStart[0].length === 3) {
+      splitStart[0] = "0" + splitStart[0];
+    }
+  }
+
+  if (splitEnd.length === 1) {
+    if (splitEnd[0].length === 3) {
+      splitEnd[0] = "0" + splitEnd[0];
+    }
+  } else if (splitEnd.length === 2) {
+    if (splitEnd[0].length === 3) {
+      splitEnd[0] = "0" + splitEnd[0];
+    }
+  }
 
   if (splitStart.length == 2) {
-    if (splitStart[0].length !== 2 || splitStart[1].length !== 4)
+    if (
+      splitStart[0].length > 2 ||
+      splitStart[0].length < 1 ||
+      splitStart[1].length !== 4
+    )
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (
       isNaN(parseInt(splitStart[0])) ||
       isNaN(parseInt(splitStart[1].substring(0, 2)))
     )
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: START MUST BE A VALID NUMBER";
 
     if (
       splitStart[1].substring(2, 4) !== "AM" &&
       splitStart[1].substring(2, 4) !== "PM"
-    )
+    ) {
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+    }
 
     if (parseInt(splitStart[0]) > 12 || parseInt(splitStart[0]) < 1)
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: START MUST BE A VALID NUMBER BETWEEN 1 AND 12";
 
-    if (parseInt(splitStart[1].substring(0, 2)) > 59)
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+    if (
+      parseInt(splitStart[1].substring(0, 2)) > 59 ||
+      parseInt(splitStart[1].substring(0, 2)) < 0
+    )
+      throw "ERROR: START MUST HAVE MINUTES BETWEEN 0 AND 59";
   } else {
-    if (splitStart[0].length !== 4)
+    if (splitStart[0].length > 4 || splitStart[0].length < 3)
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (isNaN(parseInt(splitStart[0].substring(0, 2))))
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: START MUST BE A VALID NUMBER";
 
     if (
       splitStart[0].substring(2, 4) !== "AM" &&
       splitStart[0].substring(2, 4) !== "PM"
     )
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
-
     if (
       parseInt(splitStart[0].substring(0, 2)) > 12 ||
       parseInt(splitStart[0].substring(0, 2)) < 1
-    )
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+    ) {
+      throw "ERROR: START MUST BE A VALID NUMBER BETWEEN 1 AND 12";
+    }
   }
 
   if (splitEnd.length == 2) {
-    if (splitEnd[0].length !== 2 || splitEnd[1].length !== 4)
+    if (
+      splitEnd[0].length > 2 ||
+      splitEnd[0].length < 1 ||
+      splitEnd[1].length !== 4
+    )
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (
@@ -151,14 +181,17 @@ function validHours(str) {
     if (parseInt(splitEnd[0]) > 12 || parseInt(splitEnd[0]) < 1)
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
-    if (parseInt(splitEnd[1].substring(0, 2)) > 59)
+    if (
+      parseInt(splitEnd[1].substring(0, 2)) > 59 ||
+      parseInt(splitEnd[1].substring(0, 2)) < 0
+    )
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
   } else {
-    if (splitEnd[0].length !== 4)
+    if (splitEnd[0].length > 4 || splitEnd[0].length < 3)
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (isNaN(parseInt(splitEnd[0].substring(0, 2))))
-      throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: END MUST BE A VALID NUMBER";
 
     if (
       splitEnd[0].substring(2, 4) !== "AM" &&
@@ -170,7 +203,7 @@ function validHours(str) {
       parseInt(splitEnd[0].substring(0, 2)) > 12 ||
       parseInt(splitEnd[0].substring(0, 2)) < 1
     )
-      throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: END MUST BE A VALID NUMBER BETWEEN 1 AND 12";
   }
 
   // make sure that the start time is before the end time
@@ -239,7 +272,31 @@ function validHours(str) {
     }
   }
 
-  return str.trim();
+  if (splitStart[0].charAt(0) === "0") {
+    splitStart[0] = splitStart[0].substring(1, splitStart[0].length);
+  }
+
+  if (splitEnd[0].charAt(0) === "0") {
+    splitEnd[0] = splitEnd[0].substring(1, splitEnd[0].length);
+  }
+
+  let newStart;
+  if (splitStart.length == 2) {
+    newStart = splitStart[0] + ":" + splitStart[1];
+  } else {
+    newStart = splitStart[0];
+  }
+
+  let newEnd;
+  if (splitEnd.length == 2) {
+    newEnd = splitEnd[0] + ":" + splitEnd[1];
+  } else {
+    newEnd = splitEnd[0];
+  }
+
+  let newTime = newStart + "-" + newEnd;
+
+  return newTime.trim();
 }
 
 function validState(str) {
@@ -428,7 +485,7 @@ function validSite(site) {
   } catch (e) {
     errors.push(e);
   }
-  // console.log(site.location.coordinates);
+
   try {
     site.location.coordinates = validCoordinates(site.location.coordinates);
   } catch (e) {
@@ -509,7 +566,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.name) {
     if (updatedSite.name !== newSite.name) {
-      console.log("name");
       updatedCount += 1;
     }
     updatedSiteData.name = validSiteName(updatedSite.name);
@@ -519,7 +575,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.description) {
     if (compareArrays(updatedSite.description, newSite.description) === false) {
-      console.log("description");
       updatedCount += 1;
     }
     updatedSiteData.description = validSiteDescription(updatedSite.description);
@@ -530,7 +585,6 @@ function siteChanges(newSite, updatedSite) {
   if (updatedSite.location) {
     if (updatedSite.location.address) {
       if (updatedSite.location.address !== newSite.location.address) {
-        console.log("address");
         updatedCount += 1;
       }
       updatedLocation.address = validString(
@@ -543,7 +597,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.location.city) {
       if (updatedSite.location.city !== newSite.location.city) {
-        console.log("city");
         updatedCount += 1;
       }
       updatedLocation.city = validString(updatedSite.location.city, "CITY");
@@ -553,7 +606,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.location.state) {
       if (updatedSite.location.state !== newSite.location.state) {
-        console.log("state");
         updatedCount += 1;
       }
       updatedLocation.state = validState(updatedSite.location.state);
@@ -563,7 +615,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.location.zipCode) {
       if (updatedSite.location.zipCode !== newSite.location.zipCode) {
-        console.log("zipCode");
         updatedCount += 1;
       }
       updatedLocation.zipCode = validZipcode(updatedSite.location.zipCode);
@@ -578,7 +629,6 @@ function siteChanges(newSite, updatedSite) {
           newSite.location.coordinates
         ) === false
       ) {
-        console.log("coordinates");
         updatedCount += 1;
       }
       updatedLocation.coordinates = validCoordinates(
@@ -594,7 +644,6 @@ function siteChanges(newSite, updatedSite) {
   if (updatedSite.hours) {
     if (updatedSite.hours.day) {
       if (updatedSite.hours.day !== newSite.hours.day) {
-        console.log("day");
         updatedCount += 1;
       }
       updatedHours.day = validDays(updatedSite.hours.day);
@@ -604,7 +653,6 @@ function siteChanges(newSite, updatedSite) {
 
     if (updatedSite.hours.time) {
       if (updatedSite.hours.time !== newSite.hours.time) {
-        console.log("time");
         updatedCount += 1;
       }
       updatedHours.time = validHours(updatedSite.hours.time);
@@ -617,7 +665,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.website) {
     if (updatedSite.website !== newSite.website) {
-      console.log("website");
       updatedCount += 1;
     }
     updatedSiteData.website = validWebsite(updatedSite.website);
@@ -627,7 +674,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.category) {
     if (updatedSite.category !== newSite.category) {
-      console.log("category");
       updatedCount += 1;
     }
     updatedSiteData.category = validString(updatedSite.category, "CATEGORY");
@@ -637,7 +683,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.borough) {
     if (updatedSite.borough !== newSite.borough) {
-      console.log("borough");
       updatedCount += 1;
     }
     updatedSiteData.borough = validBorough(updatedSite.borough);
@@ -647,7 +692,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.founded) {
     if (updatedSite.founded !== newSite.founded) {
-      console.log("founded");
       updatedCount += 1;
     }
     updatedSiteData.founded = validAge(updatedSite.founded.toString());
@@ -658,7 +702,6 @@ function siteChanges(newSite, updatedSite) {
 
   if (updatedSite.image) {
     if (updatedSite.image !== newSite.image) {
-      console.log("image");
       updatedCount += 1;
     }
     updatedSiteData.image = validImage(updatedSite.image);

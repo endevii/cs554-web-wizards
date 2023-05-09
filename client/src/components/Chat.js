@@ -68,7 +68,7 @@ export default function Chat({ thisRoom }) {
   };
 
   useEffect(() => {
-    if (chat.length > 0) {
+    if (chat.length > 0 && state.name) {
       const msgElem = document.getElementById("render-chat");
       msgElem.scrollTop = msgElem.scrollHeight;
     }
@@ -78,7 +78,7 @@ export default function Chat({ thisRoom }) {
     <div>
       {state.name && room && (
         <div className="chat-card">
-          <h1>Chat Log for Room {room}</h1>
+          <h2>Chat Log for Room {room}</h2>
           <div className="render-chat" id="render-chat">
             {renderChat()}
           </div>
@@ -91,7 +91,7 @@ export default function Chat({ thisRoom }) {
                 variant="outlined"
                 label="Message"
               />
-              <button className="chat-btn">Send</button>
+              <button className="chat-btn btn-out-red">Send</button>
             </div>
           </form>
           <br />
@@ -103,8 +103,12 @@ export default function Chat({ thisRoom }) {
           className="form"
           onSubmit={(e) => {
             e.preventDefault();
-            setState({ name: document.getElementById("username_input").value });
-            userjoin(document.getElementById("username_input").value, room);
+            if (document.getElementById("username_input").value) {
+              setState({
+                name: document.getElementById("username_input").value,
+              });
+              userjoin(document.getElementById("username_input").value, room);
+            }
           }}
         >
           <div className="chat-form-group">
@@ -115,7 +119,7 @@ export default function Chat({ thisRoom }) {
             </label>
             <br />
           </div>
-          <button className="join-btn" type="submit">
+          <button className="join-btn btn-out-red" type="submit">
             {" "}
             Click to join
           </button>

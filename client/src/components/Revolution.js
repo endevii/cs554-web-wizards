@@ -15,10 +15,8 @@ function Revolution() {
         onAuthStateChanged(auth, (user) => {
             if(user){  
                 setUser(user);
-                //le.log(user);
                 setName(user.displayName)
                 if(name !== ""){
-                    console.log(name); 
                     setLoadingUser(false);
                 }
             } else {
@@ -98,10 +96,10 @@ function Revolution() {
             <h1 className='itinerary-stop-title'>Stop 1: Castle Clinton</h1>
             <div className='itinerary-container'>
                 <div className='stepImageOne'>
-                    <img className='resize-image' src='https://hipcamp-res.cloudinary.com/image/upload/c_fill,dpr_auto,f_auto,g_auto,h_480,q_60,w_720/v1541858037/park_images/poi/wyjpxrvewypjactillwt.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://hipcamp-res.cloudinary.com/image/upload/c_fill,dpr_auto,f_auto,g_auto,h_480,q_60,w_720/v1541858037/park_images/poi/wyjpxrvewypjactillwt.jpg' alt='Castle Clinton'/>
                 </div>
                 <div className='stepImageTwo'>
-                    <img className='resize-image' src='https://upload.wikimedia.org/wikipedia/commons/b/b7/Habs_castle_clinton.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://upload.wikimedia.org/wikipedia/commons/b/b7/Habs_castle_clinton.jpg' alt='Castle Clinton'/>
                 </div>
                 <div className='grid-item step-description'>
                 One of more than twelve forts built to defend the New York Harbor during the 
@@ -117,10 +115,10 @@ function Revolution() {
             <h1 className='itinerary-stop-title'>Stop 2: Bowling Green Park</h1>
             <div className='itinerary-container'>
                 <div className='stepImageThree'>
-                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/18836.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.nycgovparks.org/photo_gallery/full_size/18836.jpg' alt='Bowling Green Par'/>
                 </div>
                 <div className='stepImageFour'>
-                    <img className='resize-image' src='https://media.timeout.com/images/103574051/image.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://media.timeout.com/images/103574051/image.jpg' alt='Bowling Green Par'/>
                 </div>
                 <div className='grid-item step-description-two'>
                 Next, take a stroll through Bowling Green park, New York City’s oldest public 
@@ -137,10 +135,10 @@ function Revolution() {
             <h1 className='itinerary-stop-title'>Stop 3: Fraunces Tavern</h1>
             <div className='itinerary-container'>
                 <div className='stepImageOne'>
-                    <img className='resize-image' src='https://www.boweryboyshistory.com/wp-content/uploads/2011/03/Fraunces-Tavern-Top-Image.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.boweryboyshistory.com/wp-content/uploads/2011/03/Fraunces-Tavern-Top-Image.jpg' alt='Fraunces Tavern'/>
                 </div>
                 <div className='stepImageTwo'>
-                    <img className='resize-image' src='https://images.squarespace-cdn.com/content/v1/5fb7f0e362de545f21c96c33/1624892848547-PLOIS7WQ7QCE3KGCP6JO/Photo+May+21%2C+6+45+08+PM.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://images.squarespace-cdn.com/content/v1/5fb7f0e362de545f21c96c33/1624892848547-PLOIS7WQ7QCE3KGCP6JO/Photo+May+21%2C+6+45+08+PM.jpg' alt='Fraunces Tavern'/>
                 </div>
                 <div className='grid-item step-description'>
                 Our next stop will be Fraunces Tavern, the very tavern many founding fathers visited 
@@ -176,10 +174,10 @@ function Revolution() {
             <h1 className='itinerary-stop-title'>Stop 5: Trinity Church</h1>
             <div className='itinerary-container'>
                 <div className='stepImageOne'>
-                    <img className='resize-image' src='https://www.goodyclancy.com/wp-content/uploads/2014/05/Trinity-Church-1A_Aerial_Goody-Clancy-900x615.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.goodyclancy.com/wp-content/uploads/2014/05/Trinity-Church-1A_Aerial_Goody-Clancy-900x615.jpg' alt='Trinity Church'/>
                 </div>
                 <div className='stepImageTwo'>
-                    <img className='resize-image' src='https://www.mbbarch.com/wp-content/uploads/2022/11/2022CP05-0162-1920x1714.gif' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.mbbarch.com/wp-content/uploads/2022/11/2022CP05-0162-1920x1714.gif' alt='Trinity Church'/>
                 </div>
                 <div className='grid-item step-description'>
                 With the original structure having been destroyed in The Great Fire of New York, a fire 
@@ -197,10 +195,10 @@ function Revolution() {
             <h1 className='itinerary-stop-title'>Stop 6: Saint Paul’s Chapel</h1>
             <div className='itinerary-container'>
                 <div className='stepImageThree'>
-                    <img className='resize-image' src='https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/27/81/29.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/27/81/29.jpg' alt='Saint Paul’s Chapel'/>
                 </div>
                 <div className='stepImageFour'>
-                    <img className='resize-image' src='https://www.nycgo.com/images/venues/1833/st-pauls-church-yard-15__large.jpg' alt='federal hall'/>
+                    <img className='resize-image' src='https://www.nycgo.com/images/venues/1833/st-pauls-church-yard-15__large.jpg' alt='Saint Paul’s Chapel'/>
                 </div>
                 <div className='grid-item step-description-two'>
                 Next up is Saint Paul’s Chapel. Saint Paul’s Chapel, which was able to survive The Great Fire of 
@@ -221,7 +219,6 @@ function Revolution() {
             ?<div>
                 {!loading && !loadingUser && 
                     <button onClick={(async (e) => {
-                        //console.log(sites)
                         try{
                             await axios.get("http://localhost:3001/addItinerary/"+user.uid, {
                                 params: {
@@ -239,7 +236,6 @@ function Revolution() {
             :<div>
                 {!loading && !loadingUser && 
                     <button onClick={(async (e) => {
-                        //console.log(sites)
                         let id_array = [];
                         sites.forEach(site => {
                             id_array.push(site._id)

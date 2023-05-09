@@ -3,20 +3,28 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Chat from './Chat';
+import PostReview from './PostReview';
+import Error from './Error';
 
 function IndividualSite() {
   let { id } = useParams();
   const [currentSiteId] = useState(id);
   const [siteData, setSiteData] = useState(undefined);
   const [loading, setLoading] = useState(true);
+  const [buttonToggle, setButtonToggle] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getSite = async () => {
-      const { data } = await axios.get(
+      try{
+        const { data } = await axios.get(
         `http://localhost:3001/site/${currentSiteId}`
-      );
-      setSiteData(data);
-      setLoading(false);
+        );
+        setSiteData(data);
+        setLoading(false);
+      } catch(e) {
+        setError(e);
+      }
     };
     getSite();
   }, [currentSiteId]);
@@ -66,7 +74,7 @@ function IndividualSite() {
               {siteData.name} is open {siteData.hours.days} from{' '}
               {siteData.hours.time}
             </li>
-            {!siteData.reveiws ? (
+            {!siteData.reviews ? (
               <li>This location has yet to be reviewed by anyone</li>
             ) : (
               <li>
@@ -75,7 +83,7 @@ function IndividualSite() {
               </li>
             )}
             <li>
-              Find more information <Link to={siteData.website}>here</Link>
+              Find more information <Link to={siteData.website} target="_blank">here</Link>
             </li>
           </ul>
         </div>
@@ -90,7 +98,20 @@ function IndividualSite() {
         {uid ? (
           <div className='grid-item reviews'>
             <h2>Reviews</h2>
-            <ul id='reviewList'></ul>
+            <ul id='reviewList'>
+              {siteData.reviews.map((review) => (
+                <li key={review._id}>
+                  <div className='review-li'>
+                    <p className='review-user'>{review.userName}</p>
+                    <p>Rating: {review.rating}/5 {" "}<span>{review.title}</span></p>
+                    <p>Reviewed on {review.date} {review.edited? "(edited)": ""}</p>
+                    <p>{review.review}</p><br/>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <button className="review-tog" onClick={() => setButtonToggle(!buttonToggle)}>Post your own review {buttonToggle? "-": "+"}</button>
+            {buttonToggle && <PostReview site={siteData} />}
           </div>
         ) : (
           <div className='grid-item reviews'>Login to see reviews</div>
@@ -104,7 +125,9 @@ function IndividualSite() {
         )}
       </div>
     );
-  } else if (loading) {
+  } else if (error) {
+    return <Error />;
+  } else if(loading){
     return <div>Loading...</div>;
   }
 }

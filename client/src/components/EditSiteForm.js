@@ -293,29 +293,37 @@ const EditSiteForm = (props) => {
       errors.push("Please enter an end time AM/PM for the site.");
       document.getElementById("siteTimeEndAP").style.border = "1px solid red";
     }
-    if (errors.length > 0) {
+    if (errors.length === 19) {
+      errors.push("Must change atleast 1 field to update site.");
       alert(errors.join("\n"));
     } else {
-      let startday = siteDayStart.substring(0, 3);
-      let endday = siteDayEnd.substring(0, 3);
-      let day = startday + "-" + endday;
-      let starttime = siteTimeStart + siteTimeStartAP;
-      let endtime = siteTimeEnd + siteTimeEndAP;
-      let time = starttime + "-" + endtime;
+      let startday = siteDayStart ? siteDayStart.substring(0, 3) : null;
+      let endday = siteDayEnd ? siteDayEnd.substring(0, 3) : null;
+      let day = startday && endday ? startday + "-" + endday : null;
+      let starttime =
+        siteTimeStart && siteTimeStartAP
+          ? siteTimeStart + siteTimeStartAP
+          : null;
+      let endtime =
+        siteTimeEnd && siteTimeEndAP ? siteTimeEnd + siteTimeEndAP : null;
+      let time = starttime && endtime ? starttime + "-" + endtime : null;
 
-      let latLong = [parseFloat(siteLatitude), parseFloat(siteLongitude)];
+      let latLong =
+        siteLatitude && siteLongitude
+          ? [parseFloat(siteLatitude), parseFloat(siteLongitude)]
+          : null;
 
       const locationData = {
-        address: siteAddress,
-        city: siteCity,
-        state: siteState,
-        zipCode: siteZip,
-        coordinates: latLong,
+        address: siteAddress || null,
+        city: siteCity || null,
+        state: siteState || null,
+        zipCode: siteZip || null,
+        coordinates: latLong || null,
       };
 
       const hoursData = {
-        day: day,
-        time: time,
+        day: day || null,
+        time: time || null,
       };
 
       let descriptionFinal = siteDescription.split(".");
@@ -327,20 +335,33 @@ const EditSiteForm = (props) => {
         temp = temp + ".";
         return temp;
       });
-
+      if (descriptionFinal.length === 0) {
+        descriptionFinal = null;
+      }
+      // console.log({
+      //   name: siteName ? siteName : null,
+      //   description: descriptionFinal ? descriptionFinal : null,
+      //   image: siteImage ? siteImage : null,
+      //   borough: siteBorough ? siteBorough : null,
+      //   category: siteType ? siteType : null,
+      //   founded: siteFounded ? siteFounded : null,
+      //   website: siteWebsite ? siteWebsite : null,
+      //   location: locationData ? locationData : null,
+      //   hours: hoursData ? hoursData : null,
+      // });
       try {
         const { data } = await axios.patch(
           "http://localhost:3001/admin/" + user.uid + "/update/" + site._id,
           {
-            name: siteName,
-            description: descriptionFinal,
-            image: siteImage,
-            borough: siteBorough,
-            category: siteType,
-            founded: siteFounded,
-            website: siteWebsite,
-            location: locationData,
-            hours: hoursData,
+            name: siteName ? siteName : null,
+            description: descriptionFinal ? descriptionFinal : null,
+            image: siteImage ? siteImage : null,
+            borough: siteBorough ? siteBorough : null,
+            category: siteType ? siteType : null,
+            founded: siteFounded ? siteFounded : null,
+            website: siteWebsite ? siteWebsite : null,
+            location: locationData ? locationData : null,
+            hours: hoursData ? hoursData : null,
           },
           {
             headers: {
@@ -365,8 +386,8 @@ const EditSiteForm = (props) => {
           setNoUpdatesMade(true);
           alert("No updates were made.");
         } else {
-          console.log(err);
-          alert(err.message);
+          // console.log(err);
+          alert(err.response.data.error);
         }
       }
     }
@@ -375,7 +396,12 @@ const EditSiteForm = (props) => {
 
   return (
     <div>
-      <form className="form-rp" name="siteRequestForm" id="siteRequestForm">
+      <form
+        className="form-rp"
+        name="siteRequestForm"
+        id="siteRequestForm"
+        autoComplete="off"
+      >
         <div className="form-group">
           <div className="form-item">
             <label htmlFor="siteName">Name</label>
