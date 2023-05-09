@@ -55,7 +55,7 @@ const main = async () => {
     "https://assets.simpleviewinc.com/simpleview/image/fetch/q_75/https://assets.simpleviewinc.com/simpleview/image/upload/crm/newyorkstate/federal_hall_national_memorial_will_steacy_10-1-0_266537e1-b464-35bc-80595782be54ffa1.jpg"
   );
 
-  /*await siteFunctions.createSite(
+  await siteFunctions.createSite(
     "Fraunces Tavern",
     [
         "One of the oldest historical bars in NYC (built in 1719)",
@@ -80,7 +80,7 @@ const main = async () => {
     "Manhattan",
     1719,
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/7a/35/5a/facciata.jpg?w=1200&h=-1&s=1"
-  );*/
+  );
   await siteFunctions.createSite(
     "Empire State Building",
     [
@@ -179,7 +179,7 @@ const main = async () => {
     1988,
     "https://www.transartists.org/sites/default/files/address_photo/Screen%20Shot%202016-10-10%20at%2015.51.40.jpg"
   );
-  /*await siteFunctions.createSite(
+  await siteFunctions.createSite(
     "9/11 Memorial and Museum",
     [
         "Memorial for each of the Twin Towers with the names of the people who died engraved into them",
@@ -203,7 +203,7 @@ const main = async () => {
     "Manhattan",
     2014,
     "https://assets.simpleviewinc.com/simpleview/image/upload/crm/newyorkstate/9-11-memorial-03-marley-white_08304459-fd51-e9bc-1df612407cbe64fb.jpg",
-  );*/
+  );
   await siteFunctions.createSite(
     "Bowling Green Park",
     [
@@ -829,7 +829,7 @@ const main = async () => {
     1663,
     "https://seahistory.org/wp-content/uploads/fort-wadsworth.jpg"
   );
-  /*await siteFunctions.createSite(
+  await siteFunctions.createSite(
     "The Conference House",
     [
         "Built around 1680",
@@ -851,8 +851,8 @@ const main = async () => {
     "",
     "Staten Island",
     1680,
-    "https://upload.wikimedia.org/wikipedia/commons/7/7b/Conference-house-staten-island.jpg",
-  );*/
+    "https://www.ladykflo.com/wp-content/uploads/2019/11/conferencehouse.jpg",
+  );
   console.log("...");
   await siteFunctions.createSite(
     "The Alice Austen House and Museum",

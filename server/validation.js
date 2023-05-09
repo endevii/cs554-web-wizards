@@ -368,7 +368,7 @@ function validWebsite(str) {
   if (typeof str !== "string") throw "ERROR: WEBSITE MUST BE A STRING";
   if (str.trim().length === 0) throw "ERROR: WEBSITE CAN'T BE EMPTY STRING";
 
-  if (!isValidURL(str.trim())) throw "ERROR: WEBSITE MUST BE A VALID URL";
+  //if (!isValidURL(str.trim())) throw "ERROR: WEBSITE MUST BE A VALID URL";
 
   return str.trim();
 }

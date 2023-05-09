@@ -46,7 +46,7 @@ const createSite = async (
 
     image = helpers.validImage(image);
     const pathToImg = path.resolve("../client/public/img");
-    const nameValue = name.replaceAll(" ", "");
+    const nameValue = name.replaceAll(" ", "").replaceAll("/", "");
     try {
       await idownload.image({
         url: image,
@@ -75,7 +75,7 @@ const createSite = async (
   }
   const siteCollection = await sites();
   
-  const imgSrc = `${path.resolve("../client/public/img")}/${name.replaceAll(" ", "")}.jpg`;
+  const imgSrc = `${path.resolve("../client/public/img")}/${name.replaceAll(" ", "").replaceAll("/", "")}.jpg`;
   let newSite = {
     _id: new ObjectId().toString(),
     name: name,
