@@ -493,7 +493,7 @@ function validSite(site) {
   }
 
   try {
-    site.hours.day = validDays(site.hours.day);
+    site.hours.days = validDays(site.hours.days);
   } catch (e) {
     errors.push(e);
   }
