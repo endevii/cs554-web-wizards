@@ -91,7 +91,7 @@ function PostReview(props) {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button>Post</button>
+          <button className="btn-out-red">Post</button>
         </form>
       </div>
     );

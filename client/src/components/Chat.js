@@ -91,7 +91,7 @@ export default function Chat({ thisRoom }) {
                 variant="outlined"
                 label="Message"
               />
-              <button className="chat-btn">Send</button>
+              <button className="chat-btn btn-out-red">Send</button>
             </div>
           </form>
           <br />
@@ -115,7 +115,7 @@ export default function Chat({ thisRoom }) {
             </label>
             <br />
           </div>
-          <button className="join-btn" type="submit">
+          <button className="join-btn btn-out-red" type="submit">
             {" "}
             Click to join
           </button>

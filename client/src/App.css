@@ -502,8 +502,17 @@ p {
   font-size: 20px;
 }
 
-.post-review-div ul {
+#reviewList {
   list-style: none;
+}
+
+.review-li{
+  display: flex;
+  align-items: flex-start;
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+
 }
 
 #rating {
