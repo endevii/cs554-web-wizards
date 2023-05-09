@@ -160,7 +160,7 @@
   padding: 5px;
 }
 
-.btn-out-red:hover{
+.btn-out-red:hover {
   background-color: #c24646;
   border-radius: 3px;
   color: #ffffff;
@@ -218,7 +218,8 @@ p {
   grid-row: 8 / span 3;
 }
 
-.join-btn, .chat-btn {
+.join-btn,
+.chat-btn {
   font-size: 20px;
 }
 
@@ -232,13 +233,13 @@ p {
   color: #c24646;
 }
 
-.chat-log{
+.chat-log {
   margin-left: 15%;
   text-align: left;
 }
 
-.render-chat{
-  overflow:scroll;
+.render-chat {
+  overflow: scroll;
   height: 143px;
   background-color: #fff7f7;
 }
@@ -406,13 +407,13 @@ p {
   width: 75%;
 }
 
-.itinerary-title{
+.itinerary-title {
   text-align: left;
   margin-left: 15%;
 }
 
-.review-txt{
-  color:#282c34;
+.review-txt {
+  color: #282c34;
 }
 
 .resize {
@@ -508,9 +509,9 @@ title-account {
 
 .account-header {
   display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .account-settings {
@@ -602,17 +603,23 @@ title-account {
 .popup-edit {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
+  z-index: 20;
   text-align: left;
   align-items: center;
   justify-content: left;
   background-color: white;
   border: 1px solid black;
-  top: 70%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px;
   margin: 10px;
+  height: 70%;
+  overflow-y: scroll;
+  max-width: 800px;
+  min-width: 500px;
+  width: 100%;
 }
 
 .btn-close {

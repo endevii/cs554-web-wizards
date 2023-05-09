@@ -89,50 +89,81 @@ function validHours(str) {
 
   let splitStart = start.split(":");
   let splitEnd = end.split(":");
+  if (splitStart.length === 1) {
+    if (splitStart[0].length === 3) {
+      splitStart[0] = "0" + splitStart[0];
+    }
+  } else if (splitStart.length === 2) {
+    if (splitStart[0].length === 3) {
+      splitStart[0] = "0" + splitStart[0];
+    }
+  }
+
+  if (splitEnd.length === 1) {
+    if (splitEnd[0].length === 3) {
+      splitEnd[0] = "0" + splitEnd[0];
+    }
+  } else if (splitEnd.length === 2) {
+    if (splitEnd[0].length === 3) {
+      splitEnd[0] = "0" + splitEnd[0];
+    }
+  }
 
   if (splitStart.length == 2) {
-    if (splitStart[0].length !== 2 || splitStart[1].length !== 4)
+    if (
+      splitStart[0].length > 2 ||
+      splitStart[0].length < 1 ||
+      splitStart[1].length !== 4
+    )
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (
       isNaN(parseInt(splitStart[0])) ||
       isNaN(parseInt(splitStart[1].substring(0, 2)))
     )
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: START MUST BE A VALID NUMBER";
 
     if (
       splitStart[1].substring(2, 4) !== "AM" &&
       splitStart[1].substring(2, 4) !== "PM"
-    )
+    ) {
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+    }
 
     if (parseInt(splitStart[0]) > 12 || parseInt(splitStart[0]) < 1)
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: START MUST BE A VALID NUMBER BETWEEN 1 AND 12";
 
-    if (parseInt(splitStart[1].substring(0, 2)) > 59)
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+    if (
+      parseInt(splitStart[1].substring(0, 2)) > 59 ||
+      parseInt(splitStart[1].substring(0, 2)) < 0
+    )
+      throw "ERROR: START MUST HAVE MINUTES BETWEEN 0 AND 59";
   } else {
-    if (splitStart[0].length !== 4)
+    if (splitStart[0].length > 4 || splitStart[0].length < 3)
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (isNaN(parseInt(splitStart[0].substring(0, 2))))
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: START MUST BE A VALID NUMBER";
 
     if (
       splitStart[0].substring(2, 4) !== "AM" &&
       splitStart[0].substring(2, 4) !== "PM"
     )
       throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
-
     if (
       parseInt(splitStart[0].substring(0, 2)) > 12 ||
       parseInt(splitStart[0].substring(0, 2)) < 1
-    )
-      throw "ERROR: START MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+    ) {
+      throw "ERROR: START MUST BE A VALID NUMBER BETWEEN 1 AND 12";
+    }
   }
 
   if (splitEnd.length == 2) {
-    if (splitEnd[0].length !== 2 || splitEnd[1].length !== 4)
+    if (
+      splitEnd[0].length > 2 ||
+      splitEnd[0].length < 1 ||
+      splitEnd[1].length !== 4
+    )
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (
@@ -150,14 +181,17 @@ function validHours(str) {
     if (parseInt(splitEnd[0]) > 12 || parseInt(splitEnd[0]) < 1)
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
-    if (parseInt(splitEnd[1].substring(0, 2)) > 59)
+    if (
+      parseInt(splitEnd[1].substring(0, 2)) > 59 ||
+      parseInt(splitEnd[1].substring(0, 2)) < 0
+    )
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
   } else {
-    if (splitEnd[0].length !== 4)
+    if (splitEnd[0].length > 4 || splitEnd[0].length < 3)
       throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
 
     if (isNaN(parseInt(splitEnd[0].substring(0, 2))))
-      throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: END MUST BE A VALID NUMBER";
 
     if (
       splitEnd[0].substring(2, 4) !== "AM" &&
@@ -169,7 +203,7 @@ function validHours(str) {
       parseInt(splitEnd[0].substring(0, 2)) > 12 ||
       parseInt(splitEnd[0].substring(0, 2)) < 1
     )
-      throw "ERROR: END MUST BE IN THE FOLLOWING FORMAT: 00:00AM/PM 00AM/PM";
+      throw "ERROR: END MUST BE A VALID NUMBER BETWEEN 1 AND 12";
   }
 
   // make sure that the start time is before the end time
@@ -238,7 +272,31 @@ function validHours(str) {
     }
   }
 
-  return str.trim();
+  if (splitStart[0].charAt(0) === "0") {
+    splitStart[0] = splitStart[0].substring(1, splitStart[0].length);
+  }
+
+  if (splitEnd[0].charAt(0) === "0") {
+    splitEnd[0] = splitEnd[0].substring(1, splitEnd[0].length);
+  }
+
+  let newStart;
+  if (splitStart.length == 2) {
+    newStart = splitStart[0] + ":" + splitStart[1];
+  } else {
+    newStart = splitStart[0];
+  }
+
+  let newEnd;
+  if (splitEnd.length == 2) {
+    newEnd = splitEnd[0] + ":" + splitEnd[1];
+  } else {
+    newEnd = splitEnd[0];
+  }
+
+  let newTime = newStart + "-" + newEnd;
+
+  return newTime.trim();
 }
 
 function validState(str) {
