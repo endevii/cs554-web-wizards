@@ -28,10 +28,8 @@ const createSite = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    //timeDay = helpers.validDays(hours.days);
-    //timeOpen = helpers.validHours(hours.time);
-    timeDay = hours.days;
-    timeOpen = hours.time;
+    timeDay = helpers.validDays(hours.days);
+    timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
 
@@ -48,7 +46,6 @@ const createSite = async (
 
     image = helpers.validImage(image);
     const pathToImg = path.resolve("../client/public/img");
-    //console.log(pathToImg);
     const nameValue = name.replaceAll(" ", "");
     try {
       await idownload.image({
@@ -56,6 +53,7 @@ const createSite = async (
         dest: `${pathToImg}/${nameValue}.jpeg`,
       });
     } catch (e) {
+      console.log(name)
       console.log(e);
     }
     const dstFile = `${pathToImg}/${nameValue}.jpeg`;
@@ -63,9 +61,9 @@ const createSite = async (
       {
         srcPath: image,
         dstPath: dstFile,
-        width: 600,
-        height: 400,
-        quality: 92,
+        width: 350,
+        height: "250!",
+        quality: 75
       },
       function (err, stdout, stderr) {
         if (err) console.log(err);
@@ -76,6 +74,7 @@ const createSite = async (
     throw e;
   }
   const siteCollection = await sites();
+  
   const imgSrc = `${path.resolve("../client/public/img")}/${name.replaceAll(" ", "")}.jpg`;
   let newSite = {
     _id: new ObjectId().toString(),
