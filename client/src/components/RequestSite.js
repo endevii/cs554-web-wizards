@@ -100,7 +100,7 @@ const RequestSite = () => {
   };
 
   const handleSoftReset = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setSiteName("");
     setSiteAddress("");
     setSiteCity("");
