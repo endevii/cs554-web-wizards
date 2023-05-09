@@ -28,8 +28,10 @@ const createSite = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.day);
-    timeOpen = helpers.validHours(hours.time);
+    //timeDay = helpers.validDays(hours.days);
+    //timeOpen = helpers.validHours(hours.time);
+    timeDay = hours.days;
+    timeOpen = hours.time;
 
     website = helpers.validWebsite(website);
 
@@ -87,7 +89,7 @@ const createSite = async (
       coordinates: locCoords,
     },
     hours: {
-      day: timeDay,
+      days: timeDay,
       time: timeOpen,
     },
     website: website,
@@ -126,7 +128,7 @@ const createSiteToBeApproved = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.day);
+    timeDay = helpers.validDays(hours.days);
     timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
@@ -165,7 +167,7 @@ const createSiteToBeApproved = async (
       coordinates: locCoords,
     },
     hours: {
-      day: timeDay,
+      days: timeDay,
       time: timeOpen,
     },
     website: website,
