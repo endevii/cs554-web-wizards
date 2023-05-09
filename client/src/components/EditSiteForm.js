@@ -145,7 +145,7 @@ const EditSiteForm = (props) => {
     setSiteFounded(site.founded.toString());
     setSiteWebsite(site.website);
     let time = site.hours.time.split("-");
-    let days = site.hours.day.split("-");
+    let days = site.hours.days.split("-");
     let week = {
       Mon: "Monday",
       Tue: "Tuesday",
@@ -299,7 +299,7 @@ const EditSiteForm = (props) => {
     } else {
       let startday = siteDayStart ? siteDayStart.substring(0, 3) : null;
       let endday = siteDayEnd ? siteDayEnd.substring(0, 3) : null;
-      let day = startday && endday ? startday + "-" + endday : null;
+      let days = startday && endday ? startday + "-" + endday : null;
       let starttime =
         siteTimeStart && siteTimeStartAP
           ? siteTimeStart + siteTimeStartAP
@@ -322,7 +322,7 @@ const EditSiteForm = (props) => {
       };
 
       const hoursData = {
-        day: day || null,
+        days: days || null,
         time: time || null,
       };
 

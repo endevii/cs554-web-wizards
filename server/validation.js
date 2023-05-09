@@ -642,13 +642,13 @@ function siteChanges(newSite, updatedSite) {
   }
 
   if (updatedSite.hours) {
-    if (updatedSite.hours.day) {
-      if (updatedSite.hours.day !== newSite.hours.day) {
+    if (updatedSite.hours.days) {
+      if (updatedSite.hours.days !== newSite.hours.days) {
         updatedCount += 1;
       }
-      updatedHours.day = validDays(updatedSite.hours.day);
+      updatedHours.days = validDays(updatedSite.hours.days);
     } else {
-      updatedHours.day = newSite.hours.day;
+      updatedHours.days = newSite.hours.days;
     }
 
     if (updatedSite.hours.time) {
@@ -754,8 +754,8 @@ function checkToBeUpdated(site) {
   }
 
   if (site.hours) {
-    if (site.hours.day) {
-      updatedTime.day = validDays(site.hours.day);
+    if (site.hours.days) {
+      updatedTime.days = validDays(site.hours.days);
     }
 
     if (site.hours.time) {
