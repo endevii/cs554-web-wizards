@@ -3,6 +3,7 @@ const sites = mongoCollections.sites;
 const waitingSites = mongoCollections.waitingSites;
 const { ObjectId } = require("mongodb");
 const helpers = require("../validation");
+const im = require("imagemagick");
 
 const createSite = async (
   name,
@@ -24,7 +25,7 @@ const createSite = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.day);
+    timeDay = helpers.validDays(hours.days);
     timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
@@ -41,6 +42,11 @@ const createSite = async (
     age = helpers.validAge(age.toString());
 
     image = helpers.validImage(image);
+
+    im.identify(image, function (err, features) {
+      if (err) consolelog(err);
+      console.log(features);
+    })
 
     age = parseInt(age);
   } catch (e) {
@@ -59,7 +65,7 @@ const createSite = async (
       coordinates: locCoords,
     },
     hours: {
-      day: timeDay,
+      days: timeDay,
       time: timeOpen,
     },
     website: website,
@@ -98,7 +104,7 @@ const createSiteToBeApproved = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.day);
+    timeDay = helpers.validDays(hours.days);
     timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
@@ -137,7 +143,7 @@ const createSiteToBeApproved = async (
       coordinates: locCoords,
     },
     hours: {
-      day: timeDay,
+      days: timeDay,
       time: timeOpen,
     },
     website: website,

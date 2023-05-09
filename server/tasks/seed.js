@@ -1,6 +1,7 @@
 const dbConnection = require('../config/mongoConnection');
 const mongoCollections = require('../config/mongoCollections');
 const { ObjectId } = require('mongodb');
+const siteFunctions = require('../data/sites');
 
 const sites = mongoCollections.sites;
 
@@ -8,6 +9,33 @@ const main = async () => {
     const db = await dbConnection.dbConnection();
     await db.dropDatabase();
     const siteCollection = await sites();
+
+    await siteFunctions.createSite(
+        "Liberty Island",
+        [ 
+        "The site of the Statue of Liberty, a symbol of American ideals",
+        "The statue was a gift from the French people",
+        "Originally a bronze color, the statue eventually oxidized to become green, as it is known today"
+        ],
+        {
+        address: "Liberty Island", 
+        city: "New York", 
+        state: "New York", 
+        zipCode: "10004", 
+        coordinates: [-74.0444, 40.6891]
+        },
+        {
+            days: "Mon-Sun",
+            time:"10AM-12PM"
+        },
+        "https://www.nps.gov/stli/index.htm",
+        "",
+        "Manhattan",
+        1886,
+        "https://upload.wikimedia.org/wikipedia/commons/d/dd/Lady_Liberty_under_a_blue_sky_%28cropped%29.jpg"
+        )
+
+
 
     await siteCollection.insertMany([
         {
