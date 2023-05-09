@@ -5,7 +5,7 @@ function SearchSite(props) {
   return (
     <form
       id="searchForm"
-      method="POST "
+      method="POST"
       onSubmit={(e) => {
         e.preventDefault();
       }}

@@ -64,7 +64,7 @@ function Account() {
             />
           </div>
           <div className="grid-item step-description">
-            <ul id="description-list">
+            <ul className="description-list">
               {site.description.map((line) => (
                 <li key={line}>{line}</li>
               ))}

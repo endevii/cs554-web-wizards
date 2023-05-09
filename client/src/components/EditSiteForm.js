@@ -626,18 +626,10 @@ const EditSiteForm = (props) => {
               Submit
             </button>
 
-            <button
-              type="reset"
-              className="btn btn-primary"
-              onClick={handleReset}
-            >
+            <button className="btn btn-primary" onClick={handleReset}>
               Reset
             </button>
-            <button
-              type="fill"
-              className="btn btn-primary"
-              onClick={fillInData}
-            >
+            <button className="btn btn-primary" onClick={fillInData}>
               Fill
             </button>
           </div>
