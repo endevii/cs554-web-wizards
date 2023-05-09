@@ -60,18 +60,14 @@ function NavigationBar() {
             <div>
               {!userExists ? (
                 <div>
-                  <Link to="/signin">
-                    <button className="btn btn-log" type="submit">
-                      Login
-                    </button>
+                  <Link to="/signin" className="btn btn-log">
+                    Login
                   </Link>
                 </div>
               ) : (
                 <div>
-                  <Link to="/account">
-                    <button className="btn btn-log" type="submit">
-                      Account
-                    </button>
+                  <Link to="/account" className="btn btn-log">
+                    Account
                   </Link>
                 </div>
               )}

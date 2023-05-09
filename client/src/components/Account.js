@@ -55,7 +55,13 @@ function Account() {
         <h1 className="itinerary-stop-title">{site.name}</h1>
         <div className="itinerary-container">
           <div className="customImageItinerary">
-            <img className="resize-image" src={site.image} alt={site.name} />
+            <img
+              className="resize-image"
+              src={`/img/${site.name
+                .replaceAll(" ", "")
+                .replaceAll("/", "")}.jpeg`}
+              alt={site.name}
+            />
           </div>
           <div className="grid-item step-description">
             <ul id="description-list">
@@ -80,7 +86,8 @@ function Account() {
             return <div key={site._id}>{buildSiteCard(site)}</div>;
           })}
           {!loading && !loadingUser && (
-            <button className="btn-out-red"
+            <button
+              className="btn-out-red"
               onClick={async (e) => {
                 try {
                   const { data } = await axios.get(
@@ -127,7 +134,6 @@ function Account() {
             {user.displayName}'s Account
           </h1>
           <SignOutButton />
-          
         </div>
         <div className="account-settings">
           {mongoUser &&
@@ -137,10 +143,12 @@ function Account() {
                 Admin Page
               </Link>
             )}
-            <form action="/changepassword">
-              <button className="btn-out-red" type="submit">Change Password</button>
-            </form>
-          </div>
+          <form action="/changepassword">
+            <button className="btn-out-red" type="submit">
+              Change Password
+            </button>
+          </form>
+        </div>
         <br />
         <div>
           {mongoUser &&
@@ -196,7 +204,8 @@ function Account() {
                         </CardActionArea>
                         <CardContent>
                           <br />
-                          <button className="btn-out-red"
+                          <button
+                            className="btn-out-red"
                             onClick={async (e) => {
                               try {
                                 await axios.delete(
@@ -215,7 +224,8 @@ function Account() {
                           >
                             Delete
                           </button>
-                          <button className="btn-out-red"
+                          <button
+                            className="btn-out-red"
                             onClick={(e) => {
                               e.preventDefault();
                               clickHandler(review);
@@ -355,7 +365,9 @@ function Account() {
                               />
                               <br />
                               <br />
-                              <button className="btn-out-red" type="submit">Update</button>
+                              <button className="btn-out-red" type="submit">
+                                Update
+                              </button>
                             </form>
                           </CardContent>
                         </Collapse>

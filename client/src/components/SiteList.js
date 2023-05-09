@@ -228,7 +228,13 @@ function SiteList() {
         <Link to={"/site/" + site._id} style={{ color: "#0072ee" }}>
           <div className="card" key={site._id}>
             {site.image ? (
-              <img src={site.image} className="card-img-top" alt={site.name} />
+              <img
+                src={`/img/${site.name
+                  .replaceAll(" ", "")
+                  .replaceAll("/", "")}.jpeg`}
+                className="card-img-top"
+                alt={site.name}
+              />
             ) : (
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
