@@ -18,6 +18,7 @@ import CreateItinerary from "./components/CreateItinerary";
 import RequestSite from "./components/RequestSite";
 import Admin from "./components/Admin";
 import SignedUpRoute from "./components/SignedUpRoute";
+import Error from "./components/Error";
 
 function App() {
   return (
@@ -44,13 +45,13 @@ function App() {
             path="/chat"
             element={<Chat thisRoom={"Historical Site: "} />}
           />
-          <Route path="/*" element={<Home />} />
           <Route path="/map" element={<Map />} />
           <Route path="/site/:id" element={<IndividualSite />} />
           <Route path="/itineraries" element={<PopularItineraries />} />
           <Route path="/createItinerary" element={<CreateItinerary />} />
           <Route path="/requestSite" element={<RequestSite />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/*" element={<Error />} />
         </Routes>
       </div>
     </Router>

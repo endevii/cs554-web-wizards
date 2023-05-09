@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Chat from './Chat';
 import PostReview from './PostReview';
+import Error from './Error';
 
 function IndividualSite() {
   let { id } = useParams();
@@ -11,14 +12,19 @@ function IndividualSite() {
   const [siteData, setSiteData] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [buttonToggle, setButtonToggle] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getSite = async () => {
-      const { data } = await axios.get(
+      try{
+        const { data } = await axios.get(
         `http://localhost:3001/site/${currentSiteId}`
-      );
-      setSiteData(data);
-      setLoading(false);
+        );
+        setSiteData(data);
+        setLoading(false);
+      } catch(e) {
+        setError(e);
+      }
     };
     getSite();
   }, [currentSiteId]);
@@ -119,7 +125,9 @@ function IndividualSite() {
         )}
       </div>
     );
-  } else if (loading) {
+  } else if (error) {
+    return <Error />;
+  } else if(loading){
     return <div>Loading...</div>;
   }
 }
