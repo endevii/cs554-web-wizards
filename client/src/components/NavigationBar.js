@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 
 function NavigationBar() {
   const [userExists, setUserExists] = useState(false);
@@ -21,36 +21,36 @@ function NavigationBar() {
 
   return (
     <>
-      <nav className='navbar navbar-expand-lg navbar-light' id='navbar-custom'>
-        <a className='navbar-brand' href='/'>
+      <nav className="navbar navbar-expand-lg navbar-light" id="navbar-custom">
+        <a className="navbar-brand" style={{ color: "white" }} href="/">
           NYC Historical Sites
         </a>
 
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav mr-auto'>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/' id='link-txt'>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/" id="link-txt1">
                 Home
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/sites' id='link-txt'>
+            <li className="nav-item">
+              <Link className="nav-link" to="/sites" id="link-txt2">
                 Sites
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/map' id='link-txt'>
+            <li className="nav-item">
+              <Link className="nav-link" to="/map" id="link-txt3">
                 Map
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/itineraries' id='link-txt'>
+            <li className="nav-item">
+              <Link className="nav-link" to="/itineraries" id="link-txt4">
                 Itineraries
               </Link>
             </li>
             {!loading && userExists && (
-              <li className='nav-item'>
-                <Link className='nav-link' to='/requestSite' id='link-txt'>
+              <li className="nav-item">
+                <Link className="nav-link" to="/requestSite" id="link-txt5">
                   Request Site
                 </Link>
               </li>
@@ -60,22 +60,16 @@ function NavigationBar() {
             <div>
               {!userExists ? (
                 <div>
-                  <Link to='/signin'>
-                    <button
-                      className='btn btn-outline-light my-2 my-sm-0'
-                      type='submit'
-                      style={{ backgroundColor: '#c34a4a' }}>
+                  <Link to="/signin">
+                    <button className="btn btn-log" type="submit">
                       Login
                     </button>
                   </Link>
                 </div>
               ) : (
                 <div>
-                  <Link to='/account'>
-                    <button
-                      className='btn btn-outline-light my-2 my-sm-0'
-                      type='submit'
-                      style={{ backgroundColor: '#c34a4a' }}>
+                  <Link to="/account">
+                    <button className="btn btn-log" type="submit">
                       Account
                     </button>
                   </Link>
