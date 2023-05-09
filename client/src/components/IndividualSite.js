@@ -49,7 +49,7 @@ function IndividualSite() {
           </Link>
         </h1>
         <div className='grid-item image'>
-          <img src={siteData.image} className='card-img-top' alt='location' />
+          <img src={"/img/FederalHall.jpeg"} className='card-img-top' alt={siteData.name} />
         </div>
         <div className='grid-item address'>
           <h2>Location:</h2>

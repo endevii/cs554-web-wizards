@@ -3,6 +3,10 @@ const sites = mongoCollections.sites;
 const waitingSites = mongoCollections.waitingSites;
 const { ObjectId } = require("mongodb");
 const helpers = require("../validation");
+const fs = require("fs");
+const path = require("path");
+const im = require("imagemagick");
+const idownload = require("image-downloader");
 
 const createSite = async (
   name,
@@ -41,12 +45,36 @@ const createSite = async (
     age = helpers.validAge(age.toString());
 
     image = helpers.validImage(image);
-
+    const pathToImg = path.resolve("../client/public/img");
+    //console.log(pathToImg);
+    const nameValue = name.replaceAll(" ", "");
+    try {
+      await idownload.image({
+        url: image,
+        dest: `${pathToImg}/${nameValue}.jpeg`,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    const dstFile = `${pathToImg}/${nameValue}.jpeg`;
+    const imResize = im.resize(
+      {
+        srcPath: image,
+        dstPath: dstFile,
+        width: 600,
+        height: 400,
+        quality: 92,
+      },
+      function (err, stdout, stderr) {
+        if (err) console.log(err);
+      }
+    );
     age = parseInt(age);
   } catch (e) {
     throw e;
   }
   const siteCollection = await sites();
+  const imgSrc = `${path.resolve("../client/public/img")}/${name.replaceAll(" ", "")}.jpg`;
   let newSite = {
     _id: new ObjectId().toString(),
     name: name,
@@ -68,7 +96,7 @@ const createSite = async (
     founded: age,
     rating: 0,
     reviews: [],
-    image: image,
+    image: imgSrc,
   };
 
   const insertInfo = await siteCollection.insertOne(newSite);
