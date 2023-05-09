@@ -77,7 +77,7 @@ function IndividualSite() {
               </li>
             )}
             <li>
-              Find more information <Link to={siteData.website}>here</Link>
+              Find more information <Link to={siteData.website} target="_blank">here</Link>
             </li>
           </ul>
         </div>
