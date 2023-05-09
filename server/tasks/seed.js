@@ -8,31 +8,6 @@ const main = async () => {
     const db = await dbConnection.dbConnection();
     await db.dropDatabase();
     const siteCollection = await sites();
-    const insertNew = await data.sites.createSite(
-        "Federal Hall",
-           [
-                "Site where George Washington took his oath as the first president of the United States ", 
-                "Location of the first Congress and Supreme Court ",
-                "Includes multiple exhibits and visitors can take walking tours (Found on their website)"
-            ],
-            {
-                address: "26 Wall St",
-                city: "New York",
-                state: "New York",
-                zipCode: "10005",
-                coordinates: [-74.0102, 40.7074]
-            },
-           {
-                day: "Mon-Fri",
-                time: "09AM-05PM"
-            },
-         "https://federalhall.org/visit/walking-tours-america-begins-in-new-york/",
-         "",
-          "Manhattan",
-         1842,
-        'https://assets.simpleviewinc.com/simpleview/image/fetch/q_75/https://assets.simpleviewinc.com/simpleview/image/upload/crm/newyorkstate/federal_hall_national_memorial_will_steacy_10-1-0_266537e1-b464-35bc-80595782be54ffa1.jpg'
-       
-    )
 
     await siteCollection.insertMany([
         {
