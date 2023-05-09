@@ -222,6 +222,10 @@ p {
   font-size: 20px;
 }
 
+#username_input, #message {
+  font-size: 20px;
+}
+
 .chat-msg {
   display: flex;
   flex-direction: row;
@@ -491,6 +495,33 @@ p {
   width: 50%;
 }
 
+.post-review-div {
+  display: flex;
+  text-align: right;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.post-review-div ul {
+  list-style: none;
+}
+
+#rating {
+  margin-right: 100px;
+}
+
+.review-tog {
+  background: none;
+  border: none;
+  font-size: x-large;
+  color: #c24646;
+}
+.review-tog:hover {
+  background: none;
+  border: none;
+  font-size: x-large;
+  font-weight: 500;
+}
 .div-class {
   margin: auto;
   width: 50%;

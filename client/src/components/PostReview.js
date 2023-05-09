@@ -60,8 +60,8 @@ function PostReview(props) {
 
   if (!loading) {
     return (
-      <div className="App">
-        <form onSubmit={newReview}>
+      <div className="post-review-div">
+        <form onSubmit={(e)=>{e.preventDefault();newReview()}}>
           <label>
             Title:
             <input
@@ -71,6 +71,7 @@ function PostReview(props) {
               placeholder="Title your review"
             />
           </label>
+          <br/>
           <label>
             Review:
             <input
@@ -80,6 +81,7 @@ function PostReview(props) {
               placeholder="Review body"
             />
           </label>
+          <br/>
           <label>Rating:</label>
           <select onChange={(e) => handleChange(e)} id="rating" name="rating">
           <option value="0">-</option>
@@ -89,7 +91,7 @@ function PostReview(props) {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button>Post review</button>
+          <button>Post</button>
         </form>
       </div>
     );

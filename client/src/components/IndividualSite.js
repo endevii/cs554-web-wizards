@@ -97,7 +97,7 @@ function IndividualSite() {
                 <li key={review._id}>{review.userName} posted: {review.title} - {review.review} ({review.rating}/5)</li>
               ))}
             </ul>
-            <button onClick={() => setButtonToggle(!buttonToggle)}>Post your own review</button>
+            <button className="review-tog" onClick={() => setButtonToggle(!buttonToggle)}>Post your own review {buttonToggle? "-": "+"}</button>
             {buttonToggle && <PostReview site={siteData} />}
           </div>
         ) : (
