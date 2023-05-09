@@ -1,6 +1,10 @@
+const dbConnection = require('../config/mongoConnection');
 const siteFunctions = require("../data/sites");
 
 const main = async () => {
+    const db = await dbConnection.dbConnection();
+    await db.dropDatabase();
+
   await siteFunctions.createSite(
     "Liberty Island",
     [
@@ -1515,7 +1519,7 @@ const main = async () => {
   );
 
   console.log("Done seeding database");
-  return;
+  await dbConnection.closeConnection();
 };
 
 main().catch(console.log);
