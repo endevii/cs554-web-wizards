@@ -145,7 +145,7 @@ const Admin = (props) => {
           <div>
             <ul id="description-list">
               <li>Hours: {site.hours.time}</li>
-              <li>Days: {site.hours.day}</li>
+              <li>Days: {site.hours.days}</li>
             </ul>
           </div>
         </div>
@@ -208,8 +208,8 @@ const Admin = (props) => {
   }
 
   if (!waitingSites) {
-    if(mongoUser && !mongoUser.permissions.includes("admin")){
-      return <Navigate to="/" />
+    if (mongoUser && !mongoUser.permissions.includes("admin")) {
+      return <Navigate to="/" />;
     }
     return <div>Loading...</div>;
   }

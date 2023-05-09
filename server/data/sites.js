@@ -3,6 +3,10 @@ const sites = mongoCollections.sites;
 const waitingSites = mongoCollections.waitingSites;
 const { ObjectId } = require("mongodb");
 const helpers = require("../validation");
+const fs = require("fs");
+const path = require("path");
+const im = require("imagemagick");
+const idownload = require("image-downloader");
 
 const createSite = async (
   name,
@@ -24,7 +28,7 @@ const createSite = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.day);
+    timeDay = helpers.validDays(hours.days);
     timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
@@ -41,12 +45,37 @@ const createSite = async (
     age = helpers.validAge(age.toString());
 
     image = helpers.validImage(image);
-
+    const pathToImg = path.resolve("../client/public/img");
+    const nameValue = name.replaceAll(" ", "").replaceAll("/", "");
+    try {
+      await idownload.image({
+        url: image,
+        dest: `${pathToImg}/${nameValue}.jpeg`,
+      });
+    } catch (e) {
+      console.log(name)
+      console.log(e);
+    }
+    const dstFile = `${pathToImg}/${nameValue}.jpeg`;
+    const imResize = im.resize(
+      {
+        srcPath: image,
+        dstPath: dstFile,
+        width: 350,
+        height: "250!",
+        quality: 75
+      },
+      function (err, stdout, stderr) {
+        if (err) console.log(err);
+      }
+    );
     age = parseInt(age);
   } catch (e) {
     throw e;
   }
   const siteCollection = await sites();
+  
+  const imgSrc = `${path.resolve("../client/public/img")}/${name.replaceAll(" ", "").replaceAll("/", "")}.jpg`;
   let newSite = {
     _id: new ObjectId().toString(),
     name: name,
@@ -59,7 +88,7 @@ const createSite = async (
       coordinates: locCoords,
     },
     hours: {
-      day: timeDay,
+      days: timeDay,
       time: timeOpen,
     },
     website: website,
@@ -68,7 +97,7 @@ const createSite = async (
     founded: age,
     rating: 0,
     reviews: [],
-    image: image,
+    image: imgSrc,
   };
 
   const insertInfo = await siteCollection.insertOne(newSite);
@@ -98,7 +127,7 @@ const createSiteToBeApproved = async (
     locZip = helpers.validZipcode(location.zipCode);
     locCoords = helpers.validCoordinates(location.coordinates);
 
-    timeDay = helpers.validDays(hours.day);
+    timeDay = helpers.validDays(hours.days);
     timeOpen = helpers.validHours(hours.time);
 
     website = helpers.validWebsite(website);
@@ -137,7 +166,7 @@ const createSiteToBeApproved = async (
       coordinates: locCoords,
     },
     hours: {
-      day: timeDay,
+      days: timeDay,
       time: timeOpen,
     },
     website: website,

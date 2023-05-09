@@ -208,69 +208,69 @@ function validHours(str) {
 
   // make sure that the start time is before the end time
 
-  if (splitStart.length == 2) {
-    if (splitEnd.length == 2) {
-      if (
-        parseInt(splitStart[0]) > parseInt(splitEnd[0]) &&
-        splitStart[1][2] === splitEnd[1][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  // if (splitStart.length == 2) {
+  //   if (splitEnd.length == 2) {
+  //     if (
+  //       parseInt(splitStart[0]) > parseInt(splitEnd[0]) &&
+  //       splitStart[1][2] === splitEnd[1][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
 
-      if (
-        parseInt(splitStart[0]) === parseInt(splitEnd[0]) &&
-        parseInt(splitStart[1].substring(0, 2)) >=
-          parseInt(splitEnd[1].substring(0, 2)) &&
-        splitStart[1][2] === splitEnd[1][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
-    } else {
-      if (
-        parseInt(splitStart[0]) > parseInt(splitEnd[0].substring(0, 2)) &&
-        splitStart[1][2] === splitEnd[0][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  //     if (
+  //       parseInt(splitStart[0]) === parseInt(splitEnd[0]) &&
+  //       parseInt(splitStart[1].substring(0, 2)) >=
+  //         parseInt(splitEnd[1].substring(0, 2)) &&
+  //       splitStart[1][2] === splitEnd[1][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  //   } else {
+  //     if (
+  //       parseInt(splitStart[0]) > parseInt(splitEnd[0].substring(0, 2)) &&
+  //       splitStart[1][2] === splitEnd[0][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
 
-      if (
-        parseInt(splitStart[0]) === parseInt(splitEnd[0].substring(0, 2)) &&
-        parseInt(splitStart[1].substring(0, 2)) >=
-          parseInt(splitEnd[0].substring(2, 4)) &&
-        splitStart[1][2] === splitEnd[0][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
-    }
-  } else {
-    if (splitEnd.length == 2) {
-      if (
-        parseInt(splitStart[0].substring(0, 2)) > parseInt(splitEnd[0]) &&
-        splitStart[0][2] === splitEnd[1][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  //     if (
+  //       parseInt(splitStart[0]) === parseInt(splitEnd[0].substring(0, 2)) &&
+  //       parseInt(splitStart[1].substring(0, 2)) >=
+  //         parseInt(splitEnd[0].substring(2, 4)) &&
+  //       splitStart[1][2] === splitEnd[0][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  //   }
+  // } else {
+  //   if (splitEnd.length == 2) {
+  //     if (
+  //       parseInt(splitStart[0].substring(0, 2)) > parseInt(splitEnd[0]) &&
+  //       splitStart[0][2] === splitEnd[1][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
 
-      if (
-        parseInt(splitStart[0].substring(0, 2)) === parseInt(splitEnd[0]) &&
-        parseInt(splitStart[0].substring(2, 4)) >=
-          parseInt(splitEnd[1].substring(0, 2)) &&
-        splitStart[0][2] === splitEnd[1][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
-    } else {
-      if (
-        parseInt(splitStart[0].substring(0, 2)) >
-          parseInt(splitEnd[0].substring(0, 2)) &&
-        splitStart[0][2] === splitEnd[0][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  //     if (
+  //       parseInt(splitStart[0].substring(0, 2)) === parseInt(splitEnd[0]) &&
+  //       parseInt(splitStart[0].substring(2, 4)) >=
+  //         parseInt(splitEnd[1].substring(0, 2)) &&
+  //       splitStart[0][2] === splitEnd[1][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  //   } else {
+  //     if (
+  //       parseInt(splitStart[0].substring(0, 2)) >
+  //         parseInt(splitEnd[0].substring(0, 2)) &&
+  //       splitStart[0][2] === splitEnd[0][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
 
-      if (
-        parseInt(splitStart[0].substring(0, 2)) ===
-          parseInt(splitEnd[0].substring(0, 2)) &&
-        parseInt(splitStart[0].substring(2, 4)) >=
-          parseInt(splitEnd[0].substring(2, 4)) &&
-        splitStart[0][2] === splitEnd[0][2]
-      )
-        throw "ERROR: START TIME MUST BE BEFORE END TIME";
-    }
-  }
+  //     if (
+  //       parseInt(splitStart[0].substring(0, 2)) ===
+  //         parseInt(splitEnd[0].substring(0, 2)) &&
+  //       parseInt(splitStart[0].substring(2, 4)) >=
+  //         parseInt(splitEnd[0].substring(2, 4)) &&
+  //       splitStart[0][2] === splitEnd[0][2]
+  //     )
+  //       throw "ERROR: START TIME MUST BE BEFORE END TIME";
+  //   }
+  // }
 
   if (splitStart[0].charAt(0) === "0") {
     splitStart[0] = splitStart[0].substring(1, splitStart[0].length);
@@ -368,7 +368,7 @@ function validWebsite(str) {
   if (typeof str !== "string") throw "ERROR: WEBSITE MUST BE A STRING";
   if (str.trim().length === 0) throw "ERROR: WEBSITE CAN'T BE EMPTY STRING";
 
-  if (!isValidURL(str.trim())) throw "ERROR: WEBSITE MUST BE A VALID URL";
+  //if (!isValidURL(str.trim())) throw "ERROR: WEBSITE MUST BE A VALID URL";
 
   return str.trim();
 }
@@ -493,7 +493,7 @@ function validSite(site) {
   }
 
   try {
-    site.hours.day = validDays(site.hours.day);
+    site.hours.days = validDays(site.hours.days);
   } catch (e) {
     errors.push(e);
   }
@@ -642,13 +642,13 @@ function siteChanges(newSite, updatedSite) {
   }
 
   if (updatedSite.hours) {
-    if (updatedSite.hours.day) {
-      if (updatedSite.hours.day !== newSite.hours.day) {
+    if (updatedSite.hours.days) {
+      if (updatedSite.hours.days !== newSite.hours.days) {
         updatedCount += 1;
       }
-      updatedHours.day = validDays(updatedSite.hours.day);
+      updatedHours.days = validDays(updatedSite.hours.days);
     } else {
-      updatedHours.day = newSite.hours.day;
+      updatedHours.days = newSite.hours.days;
     }
 
     if (updatedSite.hours.time) {
@@ -754,8 +754,8 @@ function checkToBeUpdated(site) {
   }
 
   if (site.hours) {
-    if (site.hours.day) {
-      updatedTime.day = validDays(site.hours.day);
+    if (site.hours.days) {
+      updatedTime.days = validDays(site.hours.days);
     }
 
     if (site.hours.time) {

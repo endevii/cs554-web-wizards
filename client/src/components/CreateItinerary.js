@@ -235,7 +235,7 @@ function CreateItinerary() {
             <div>
                 <h1>Create Your Own Itinerary</h1>
                 <div className='create-itinerary-paragraph'>
-                    <p>Select the sites which you would like to visit on your trip to NYC! Then click the Load Itinerary button to see your itinerary generated in the ordeer in which you selected your sites.</p>
+                    <p>Select the sites which you would like to visit on your trip to NYC! Then click the Load Itinerary button to see your itinerary generated in the order in which you selected your sites.</p>
                 </div>
                 {user
                 ?<div><form>
