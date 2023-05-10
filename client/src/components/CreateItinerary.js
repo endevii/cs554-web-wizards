@@ -318,6 +318,7 @@ function CreateItinerary() {
                         href="http://localhost:3001/generatepdf/itinerary"
                         target="_blank"
                         rel="noreferrer"
+                        className="popup-link"
                       >
                         Pdf is ready to print/download
                       </a>
