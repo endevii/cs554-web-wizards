@@ -124,14 +124,14 @@ const Admin = (props) => {
             />
           </div>
           <div>
-            <ul id="description-list">
+            <ul className="description-list">
               {site.description.map((line) => (
                 <li key={line}>{line}</li>
               ))}
             </ul>
           </div>
           <div>
-            <ul id="description-list">
+            <ul className="description-list">
               <li>Address: {site.location.address}</li>
               <li>City: {site.location.city}</li>
               <li>State: {site.location.state}</li>
@@ -143,7 +143,7 @@ const Admin = (props) => {
             </ul>
           </div>
           <div>
-            <ul id="description-list">
+            <ul className="description-list">
               <li>Hours: {site.hours.time}</li>
               <li>Days: {site.hours.days}</li>
             </ul>

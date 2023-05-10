@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import Revolution from './Revolution';
-import Staten from './Staten';
-import BrooklynBattles from './BrooklynBattles';
-import { Link } from 'react-router-dom';
-import ReactDOMServer from 'react-dom/server';
-import axios from 'axios';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useState, useEffect } from "react";
+import Revolution from "./Revolution";
+import Staten from "./Staten";
+import BrooklynBattles from "./BrooklynBattles";
+import { Link } from "react-router-dom";
+import ReactDOMServer from "react-dom/server";
+import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function PopularItineraries() {
   const [revolution, setRevolution] = useState(false);
@@ -17,7 +17,7 @@ function PopularItineraries() {
   });
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   let auth = getAuth();
 
   useEffect(() => {
@@ -35,19 +35,19 @@ function PopularItineraries() {
 
   const generatePdf = async (component, name) => {
     try {
-      let { data } = await axios.post('http://localhost:3001/generatepdf', {
+      let { data } = await axios.post("http://localhost:3001/generatepdf", {
         input: component,
         name: name,
       });
-      if (data.msg === 'success') {
+      if (data.msg === "success") {
         setPdfReady((prev) => ({
           ...prev,
-          ...{ [name]: 'Pdf is ready to print/download' },
+          ...{ [name]: "Pdf is ready to print/download" },
         }));
       } else {
         setPdfReady((prev) => ({
           ...prev,
-          ...{ [name]: 'Please try again' },
+          ...{ [name]: "Please try again" },
         }));
       }
     } catch (e) {
@@ -61,27 +61,27 @@ function PopularItineraries() {
   return (
     <div>
       <br />
-      <h1 className='itinerary-title'>Popular Itineraries</h1>
-      <Link className='link-itinerary' to='/createItinerary'>
+      <h1 className="itinerary-title">Popular Itineraries</h1>
+      <Link className="link-itinerary" to="/createItinerary">
         Create your own itinerary here
       </Link>
-      <hr className='hr-custom' />
-      <div className='itinerary-container'>
-        <div className='imageOne'>
+      <hr className="hr-custom" />
+      <div className="itinerary-container">
+        <div className="imageOne">
           <img
-            className='resize'
-            src='https://www.eypae.com/sites/default/files/styles/866h/public/2020-12/NPS_FHNM_N5_web.jpg?itok=NWEui3tu'
-            alt='federal hall'
+            className="resize"
+            src="https://www.eypae.com/sites/default/files/styles/866h/public/2020-12/NPS_FHNM_N5_web.jpg?itok=NWEui3tu"
+            alt="federal hall"
           />
         </div>
-        <div className='imageTwo'>
+        <div className="imageTwo">
           <img
-            className='resize'
-            src='https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/7a/35/5a/facciata.jpg?w=1200&h=-1&s=1'
-            alt='federal hall'
+            className="resize"
+            src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/7a/35/5a/facciata.jpg?w=1200&h=-1&s=1"
+            alt="federal hall"
           />
         </div>
-        <div className='grid-item itinerary-description'>
+        <div className="grid-item itinerary-description">
           <h2>Manhattan Revolutionary Tour:</h2>
           Jump back in time a few hundred years and see New York city as the
           founding fathers of the United States did. On this walking tour of New
@@ -99,7 +99,8 @@ function PopularItineraries() {
             <button
               onClick={() => {
                 setRevolution(true);
-              }}>
+              }}
+            >
               More Information
             </button>
           ) : (
@@ -110,14 +111,15 @@ function PopularItineraries() {
                   ...prev,
                   ...{ revolution: false },
                 }));
-              }}>
+              }}
+            >
               Less Information
             </button>
           )}
         </div>
       ) : (
         <p>
-          <Link to='/signin'>Login</Link> to see more information
+          <Link to="/signin">Login</Link> to see more information
         </p>
       )}
       {revolution && (
@@ -125,19 +127,22 @@ function PopularItineraries() {
           onClick={() =>
             generatePdf(
               ReactDOMServer.renderToString(<Revolution />),
-              'revolution'
+              "revolution"
             )
-          }>
+          }
+        >
           Generate PDF
         </button>
       )}
-      {pdfReady.revolution === 'Pdf is ready to print/download' ? (
+      {pdfReady.revolution === "Pdf is ready to print/download" ? (
         <div>
           <br />
           <a
-            href='http://localhost:3001/generatepdf/revolution'
-            target='_blank'
-            rel='noreferrer'>
+            href="http://localhost:3001/generatepdf/revolution"
+            target="_blank"
+            rel="noreferrer"
+            className="popup-link"
+          >
             {pdfReady.revolution}
           </a>
         </div>
@@ -147,23 +152,23 @@ function PopularItineraries() {
       {revolution && <Revolution />}
       <br />
       <br />
-      <hr className='hr-custom' />
-      <div className='itinerary-container'>
-        <div className='imageThree'>
+      <hr className="hr-custom" />
+      <div className="itinerary-container">
+        <div className="imageThree">
           <img
-            className='resize'
-            src='https://www.statenislandmuseum.org/wp-content/uploads/2020/06/Staten-Island-Museum-at-Snug-Harbor-Exterior-A-High-Res-scaled.jpg'
-            alt='federal hall'
+            className="resize"
+            src="https://www.statenislandmuseum.org/wp-content/uploads/2020/06/Staten-Island-Museum-at-Snug-Harbor-Exterior-A-High-Res-scaled.jpg"
+            alt="federal hall"
           />
         </div>
-        <div className='imageFour'>
+        <div className="imageFour">
           <img
-            className='resize'
-            src='https://www.nycgo.com/images/articles/71129/historic-richmond-town-staten-island-nyc-photo-david-la-spina-003789-full-2__large.jpg'
-            alt='federal hall'
+            className="resize"
+            src="https://www.nycgo.com/images/articles/71129/historic-richmond-town-staten-island-nyc-photo-david-la-spina-003789-full-2__large.jpg"
+            alt="federal hall"
           />
         </div>
-        <div className='grid-item itinerary-description-two'>
+        <div className="grid-item itinerary-description-two">
           <h2>Historic Staten Island:</h2>
           This tour explores the vast history of Staten Island, New York. You’ll
           notice this tour has less stops, and that was a very conscious
@@ -182,7 +187,8 @@ function PopularItineraries() {
             <button
               onClick={() => {
                 setStaten(true);
-              }}>
+              }}
+            >
               More Information
             </button>
           ) : (
@@ -193,32 +199,36 @@ function PopularItineraries() {
                   ...prev,
                   ...{ staten: false },
                 }));
-              }}>
+              }}
+            >
               Less Information
             </button>
           )}
         </div>
       ) : (
         <p>
-          <Link to='/signin'>Login</Link> to see more information
+          <Link to="/signin">Login</Link> to see more information
         </p>
       )}
       {staten && (
         <button
           onClick={() =>
-            generatePdf(ReactDOMServer.renderToString(<Staten />), 'staten')
-          }>
+            generatePdf(ReactDOMServer.renderToString(<Staten />), "staten")
+          }
+        >
           Generate PDF
         </button>
       )}
-      {pdfReady.staten === 'Pdf is ready to print/download' ? (
+      {pdfReady.staten === "Pdf is ready to print/download" ? (
         <div>
           <br />
           <a
-            href='http://localhost:3001/generatepdf/staten'
-            target='_blank'
-            rel='noreferrer'>
-            Pdf ready to print/download
+            href="http://localhost:3001/generatepdf/staten"
+            target="_blank"
+            rel="noreferrer"
+            className="popup-link"
+          >
+            Pdf is ready to print/download
           </a>
         </div>
       ) : (
@@ -227,23 +237,23 @@ function PopularItineraries() {
       {staten && <Staten />}
       <br />
       <br />
-      <hr className='hr-custom' />
-      <div className='itinerary-container'>
-        <div className='imageOne'>
+      <hr className="hr-custom" />
+      <div className="itinerary-container">
+        <div className="imageOne">
           <img
-            className='resize'
-            src='https://www.nycgovparks.org/photo_gallery/full_size/10265.jpg'
-            alt='federal hall'
+            className="resize"
+            src="https://www.nycgovparks.org/photo_gallery/full_size/10265.jpg"
+            alt="federal hall"
           />
         </div>
-        <div className='imageTwo'>
+        <div className="imageTwo">
           <img
-            className='resize'
-            src='https://brooklyneagle.com/wp-content/uploads/2018/06/old-stone-house_1.jpg'
-            alt='federal hall'
+            className="resize"
+            src="https://brooklyneagle.com/wp-content/uploads/2018/06/old-stone-house_1.jpg"
+            alt="federal hall"
           />
         </div>
-        <div className='grid-item itinerary-description'>
+        <div className="grid-item itinerary-description">
           <h2>War Sites in Brooklyn:</h2>
           On this tour, you’ll be exploring the history of battles that took
           place in brooklyn throughout history. It will touch on battles from
@@ -263,7 +273,8 @@ function PopularItineraries() {
             <button
               onClick={() => {
                 setBattle(true);
-              }}>
+              }}
+            >
               More Information
             </button>
           ) : (
@@ -274,14 +285,15 @@ function PopularItineraries() {
                   ...prev,
                   ...{ battle: false },
                 }));
-              }}>
+              }}
+            >
               Less Information
             </button>
           )}
         </div>
       ) : (
         <p>
-          <Link to='/signin'>Login</Link> to see more information
+          <Link to="/signin">Login</Link> to see more information
         </p>
       )}
       {battle && (
@@ -289,9 +301,10 @@ function PopularItineraries() {
           onClick={() =>
             generatePdf(
               ReactDOMServer.renderToString(<BrooklynBattles />),
-              'battle'
+              "battle"
             )
-          }>
+          }
+        >
           Generate PDF
         </button>
       )}
@@ -299,17 +312,19 @@ function PopularItineraries() {
         <div>
           <br />
           <a
-            href='http://localhost:3001/generatepdf/battle'
-            target='_blank'
-            rel='noreferrer'>
-            Pdf ready to print/donwload
+            href="http://localhost:3001/generatepdf/battle"
+            target="_blank"
+            rel="noreferrer"
+            className="popup-link"
+          >
+            Pdf is ready to print/donwload
           </a>
         </div>
       )}
       {battle && <BrooklynBattles />}
       <br />
       <br />
-      <hr className='hr-custom' />
+      <hr className="hr-custom" />
     </div>
   );
 }

@@ -38,7 +38,7 @@ function SlideShow() {
   }, [currentSlideIndex, images]);
 
   /**
-   * Followed https://www.youtube.com/watch?v=hUTwhn4BIyM to implement auto sliding feature 
+   * Followed https://www.youtube.com/watch?v=hUTwhn4BIyM to implement auto sliding feature
    */
   useEffect(() => {
     if (timerRef.current) {
@@ -50,7 +50,7 @@ function SlideShow() {
 
     return () => clearTimeout(timerRef.current);
   }, [handleRightArrowClick]);
-  
+
   return (
     <div className="slide-show-div">
       <div className="slide-div">
@@ -59,7 +59,9 @@ function SlideShow() {
           alt={images[currentSlideIndex].name}
         ></img>
         <div className="img-title">
-          <h2 className="h2-txt">{images[currentSlideIndex].name}</h2>
+          <h2 className="h2-txt" style={{ color: "black" }}>
+            {images[currentSlideIndex].name}
+          </h2>
         </div>
         <div className="left-arrow">
           <button onClick={handleLeftArrowClick}>&#60;</button>
