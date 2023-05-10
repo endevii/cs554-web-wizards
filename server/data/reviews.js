@@ -3,7 +3,7 @@ const sites = mongoCollections.sites;
 const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
 const helpers = require("../validation");
-const siteFunctions = require('./sites');
+const siteFunctions = require("./sites");
 
 const createReview = async (
   siteId,
@@ -11,7 +11,7 @@ const createReview = async (
   userName,
   title,
   review,
-  rating,
+  rating
 ) => {
   siteId = helpers.validObjectID(siteId);
   rating = helpers.validRating(rating.toString());
@@ -22,8 +22,8 @@ const createReview = async (
   userName = helpers.validString(userName, "USER NAME");
 
   const userCollection = await users();
-  const user = await userCollection.findOne({uid: userId});
-  if(!user) throw "ERROR: USER NOT FOUND";
+  const user = await userCollection.findOne({ uid: userId });
+  if (!user) throw "ERROR: USER NOT FOUND";
 
   const siteCollection = await sites();
   const site = await siteCollection.findOne({ _id: siteId });
@@ -56,7 +56,7 @@ const createReview = async (
     date: dateString,
     edited: false,
     siteid: siteId,
-    siteName: name
+    siteName: name,
   };
 
   const updateInfo = await siteCollection.updateOne(
@@ -179,8 +179,8 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
   if (!site) throw "ERROR: SITE NOT FOUND";
 
   const userCollection = await users();
-  const user = await userCollection.findOne({uid: userId});
-  if(!user) throw "ERROR: USER NOT FOUND";
+  const user = await userCollection.findOne({ uid: userId });
+  if (!user) throw "ERROR: USER NOT FOUND";
 
   const reviews = site.reviews;
   let reviewToUpdate = null;
@@ -282,27 +282,27 @@ const updateReview = async (userId, siteId, reviewId, reviewObj) => {
     if (updateRating.modifiedCount === 0) {
       throw "ERROR: COULD NOT UPDATE RATING";
     }
-
-    let user_reviews = user.reviews;
-    let index = -1;
-    for(let i =0; i < user_reviews.length; i++){
-      if(user_reviews[i]._id === reviewId){
-        index = i;
-      }
+  }
+  let user_reviews = user.reviews;
+  let index = -1;
+  for (let i = 0; i < user_reviews.length; i++) {
+    if (user_reviews[i]._id === reviewId) {
+      index = i;
+      break;
     }
+  }
 
-    user_reviews[index].title = updatedReview.title;
-    user_reviews[index].rating = updatedReview.rating;
-    user_reviews[index].review = updatedReview.review;
-    user_reviews[index].edited = updatedReview.edited;
+  user_reviews[index].title = updatedReview.title;
+  user_reviews[index].rating = updatedReview.rating;
+  user_reviews[index].review = updatedReview.review;
+  user_reviews[index].edited = updatedReview.edited;
 
-    const updateUser = await userCollection.updateOne(
-      { uid: userId },
-      { $set: { reviews: user_reviews } }
-    );
-    if (updateUser.modifiedCount === 0) {
-      throw "ERROR: COULD NOT ADD REVIEW TO USER";
-    }
+  const updateUser = await userCollection.updateOne(
+    { uid: userId },
+    { $set: { reviews: user_reviews } }
+  );
+  if (updateUser.modifiedCount === 0) {
+    throw "ERROR: COULD NOT ADD REVIEW TO USER";
   }
   // get the updated site
   let updatedSite = await siteCollection.findOne({ _id: siteId });
@@ -328,19 +328,18 @@ const deleteReview = async (userId, siteId, reviewId) => {
   if (!site) throw "ERROR: SITE NOT FOUND";
 
   const userCollection = await users();
-  const user = await userCollection.findOne({uid: userId});
-  if(!user) throw "ERROR: USER NOT FOUND";
+  const user = await userCollection.findOne({ uid: userId });
+  if (!user) throw "ERROR: USER NOT FOUND";
 
   let user_reviews = user.reviews;
   let index = -1;
 
-  for(let i = 0; i < user_reviews.length; i++){
-    if(user_reviews[i]._id === reviewId){
+  for (let i = 0; i < user_reviews.length; i++) {
+    if (user_reviews[i]._id === reviewId) {
       index = i;
     }
   }
-  
-  if(index === -1){
+  if (index === -1) {
     throw "ERROR: USER HAS NOT SAVED REVIEW";
   }
 
