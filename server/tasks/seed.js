@@ -566,7 +566,7 @@ const main = async () => {
     "",
     "Brooklyn",
     1883,
-    "https://upload.wikimedia.org/wikipedia/commons/0/00/Brooklyn_Bridge_Manhattan.jpg"
+    "https://cdn.britannica.com/80/115080-050-46BE2B70/Brooklyn-Bridge-East-River-New-York-City.jpg"
   );
   await siteFunctions.createSite(
     "John Paul Jones Park",
@@ -1166,7 +1166,7 @@ const main = async () => {
     "",
     "Bronx",
     1899,
-    "https://upload.wikimedia.org/wikipedia/commons/7/7a/Bronx_Zoo_001.jpg"
+    "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_31/3401228/200731-bronx-zoo-mn-1000.jpg"
   );
   await siteFunctions.createSite(
     "Wave Hill",
