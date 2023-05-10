@@ -314,6 +314,16 @@ p {
   cursor: pointer;
 }
 
+.popup-link {
+  text-decoration: none;
+  color: #c55050;
+}
+
+.popup-link:hover {
+  text-decoration: none;
+  color: #282c34;
+}
+
 .map-popup h1 {
   color: #c65454;
   font-size: 14px;

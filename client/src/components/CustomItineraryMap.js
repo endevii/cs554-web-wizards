@@ -113,9 +113,9 @@ function CustomItineraryMap(props) {
               new mapboxgl.Popup()
                 .addClassName("map-popup")
                 .setHTML(
-                  `<a href='${"/site/" + markerData[i].id}'>${
-                    markerData[i].name
-                  }</a><p>${markerData[i].address}</p>`
+                  `<a class="popup-link" href='${
+                    "/site/" + markerData[i].id
+                  }'>${markerData[i].name}</a><p>${markerData[i].address}</p>`
                 )
             )
             .addTo(map.current);
