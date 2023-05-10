@@ -85,12 +85,15 @@ export default function Chat({ thisRoom }) {
           <form onSubmit={onMessageSubmit}>
             <h1>Messenger</h1>
             <div className="chat-msg">
-              <input
-                name="message"
-                id="message"
-                variant="outlined"
-                label="Message"
-              />
+              <label for="message" style={{ "font-size": "1.5rem" }}>
+                Message:
+                <input
+                  name="message"
+                  id="message"
+                  variant="outlined"
+                  label="Message"
+                />
+              </label>
               <button className="chat-btn btn-out-red">Send</button>
             </div>
           </form>

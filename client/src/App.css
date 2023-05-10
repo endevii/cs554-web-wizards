@@ -50,14 +50,49 @@
 }
 
 #navbar-custom {
-  background-color: #c24646;
+  background-color: #c55050;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
-#link-txt {
-  color: #f8f9fa;
+#link-txt1 {
+  color: white;
 }
 
-#link-txt:hover {
+#link-txt1:hover {
+  color: #414c57;
+}
+
+#link-txt2 {
+  color: white;
+}
+
+#link-txt2:hover {
+  color: #414c57;
+}
+
+#link-txt3 {
+  color: white;
+}
+
+#link-txt3:hover {
+  color: #414c57;
+}
+
+#link-txt4 {
+  color: white;
+}
+
+#link-txt4:hover {
+  color: #414c57;
+}
+
+#link-txt5 {
+  color: white;
+}
+
+#link-txt5:hover {
   color: #414c57;
 }
 
@@ -79,7 +114,7 @@
 .slide-div img {
   width: 100%;
   border-radius: 5px;
-  border-color: #c24646;
+  border-color: #c65454;
   border-style: solid;
 }
 
@@ -94,7 +129,7 @@
   width: fit-content;
   height: fit-content;
   margin: auto;
-  background-color: #282c3465;
+  background-color: #b5b6bb;
 }
 
 .img-title {
@@ -154,18 +189,18 @@
 .btn-out-red {
   background-color: #ffffff;
   border-radius: 3px;
-  color: #c24646;
+  color: #c34a4a;
   border: solid;
-  border-color: #c24646;
+  border-color: #c34a4a;
   padding: 5px;
 }
 
 .btn-out-red:hover {
-  background-color: #c24646;
+  background-color: #c34a4a;
   border-radius: 3px;
   color: #ffffff;
   border: solid;
-  border-color: #c24646;
+  border-color: #c34a4a;
   padding: 5px;
 }
 h1 {
@@ -223,7 +258,8 @@ p {
   font-size: 20px;
 }
 
-#username_input, #message {
+#username_input,
+#message {
   font-size: 20px;
 }
 
@@ -278,8 +314,18 @@ p {
   cursor: pointer;
 }
 
+.popup-link {
+  text-decoration: none;
+  color: #c55050;
+}
+
+.popup-link:hover {
+  text-decoration: none;
+  color: #282c34;
+}
+
 .map-popup h1 {
-  color: #c24646;
+  color: #c65454;
   font-size: 14px;
   margin-top: 15px;
 }
@@ -297,7 +343,7 @@ p {
 
 .button {
   padding: 0.4rem 0.8rem;
-  background-color: #c24646;
+  background-color: #c34a4a;
   border-radius: 3px;
   color: #ffff;
   text-decoration: none !important;
@@ -329,7 +375,7 @@ p {
   background-color: #ffdcdc;
 }
 .itineraries-title {
-  color: #c24646;
+  color: #c65454;
   text-align: left;
   margin-left: 15%;
 }
@@ -407,7 +453,7 @@ p {
 }
 
 .hr-custom {
-  background-color: #c24646;
+  background-color: #c34a4a;
   width: 75%;
 }
 
@@ -451,7 +497,7 @@ p {
 }
 
 .link-itinerary {
-  color: #c24646;
+  color: #c55050;
 }
 
 #instructions {
@@ -476,7 +522,7 @@ p {
 }
 
 .btn-link {
-  background-color: #c24646;
+  background-color: #c34a4a;
   border-radius: 3px;
   color: #ffff;
   text-decoration: none !important;
@@ -509,7 +555,7 @@ p {
   margin-right: 100px;
 }
 
-.review-li{
+.review-li {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -524,8 +570,8 @@ p {
   text-align: left;
 }
 
-.review-user{
-  color:#c24646
+.review-user {
+  color: #c55050;
 }
 
 #rating {
@@ -536,7 +582,7 @@ p {
   background: none;
   border: none;
   font-size: x-large;
-  color: #c24646;
+  color: #c65454;
 }
 .review-tog:hover {
   background: none;
@@ -550,13 +596,13 @@ p {
 }
 
 red-div {
-  color: #c24646;
-  background-color: #c24646;
+  color: #c65454;
+  background-color: #c65454;
 }
 
 title-account {
   font-size: xx-large;
-  color: #c24646;
+  color: #c65454;
 }
 
 .account-header {
@@ -674,14 +720,38 @@ title-account {
   width: 100%;
 }
 
+.web-link {
+  color: #c34a4a;
+  text-decoration: none;
+}
+
+.web-link:hover {
+  text-decoration: underline;
+  color: #282c34;
+}
+
+.btn-log {
+  background-color: #c34a4a;
+  outline: none;
+  color: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  padding: 5px 15px;
+}
+
+.btn-log:hover {
+  background-color: #ffffff;
+  color: #c34a4a;
+}
+
 .btn-close {
-  background-color: #c24646;
+  background-color: #c34a4a;
   color: #f8f9fa;
   margin: 10px;
 }
 
 .btn-close:hover {
-  background-color: #c24646;
+  background-color: #c34a4a;
   color: #282c34;
 }
 
@@ -689,4 +759,12 @@ title-account {
   width: fit-content;
   white-space: nowrap;
   margin-left: 5px;
+}
+
+.btn-primary {
+  background-color: #0072ee;
+}
+
+.error {
+  color: #ee0000;
 }

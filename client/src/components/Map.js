@@ -49,7 +49,9 @@ function Map() {
           new mapboxgl.Popup()
             .addClassName("map-popup")
             .setHTML(
-              `<a href='${'/site/'+markerData[i].id}'> ${markerData[i].name}</a><p>${markerData[i].address}</p>`
+              `<a class="popup-link" href='${"/site/" + markerData[i].id}'> ${
+                markerData[i].name
+              }</a><p>${markerData[i].address}</p>`
             )
         )
         .addTo(map.current);
@@ -62,7 +64,9 @@ function Map() {
       <div className="map">
         <div ref={mapContainer} className="map-container" />
       </div>
-      <p>Create your own itinerary <Link className='link-itinerary' to="/createItinerary">here</Link></p>
+      <Link className="link-itinerary" to="/createItinerary">
+        Create your own itinerary here
+      </Link>
     </>
   );
 }
