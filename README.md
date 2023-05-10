@@ -7,9 +7,11 @@ The goal of this project is to allow people to explore historical sites in NYC v
 ## To Get Started
 
 - Do `npm install` in both the `/client` and `/server` folders
+- Then make sure to download wkhtmltopdf [>Here<](https://wkhtmltopdf.org/downloads.html)
+- Also definately download ImageMagick [>Here<](https://imagemagick.org/script/download.php)
 - Next, while in the server folder, do `npm run seed`
   - Make sure your MongoDB server is running ahead of time.
-- Then make sure to download wkhtmltopdf [>Here<](https://wkhtmltopdf.org/downloads.html)
+  - It may take a while due to ImageMagick
 - Next run `npm start` in both folders
   - Would recommend the server first
 - Everything should be up and running as long as Mongo server is connected! Yay!
